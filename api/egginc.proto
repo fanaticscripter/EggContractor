@@ -97,12 +97,14 @@ enum EggType {
   UNIVERSE = 18;
   ENLIGHTENMENT = 19;
 
-  // Contract-only eggs. Incomplete.
+  // Contract-only eggs.
   CHOCOLATE = 100;
   EASTER = 101;
   WATERBALLOON = 102;
   FIREWORK = 103;
   PUMPKIN = 104;
+
+  // Placeholder for undiscovered eggs.
   UNKNOWN = 1000;
 }
 

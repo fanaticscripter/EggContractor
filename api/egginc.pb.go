@@ -49,13 +49,14 @@ const (
 	EggType_NEBULA         EggType = 17
 	EggType_UNIVERSE       EggType = 18
 	EggType_ENLIGHTENMENT  EggType = 19
-	// Contract-only eggs. Incomplete.
+	// Contract-only eggs.
 	EggType_CHOCOLATE    EggType = 100
 	EggType_EASTER       EggType = 101
 	EggType_WATERBALLOON EggType = 102
 	EggType_FIREWORK     EggType = 103
 	EggType_PUMPKIN      EggType = 104
-	EggType_UNKNOWN      EggType = 1000
+	// Placeholder for undiscovered eggs.
+	EggType_UNKNOWN EggType = 1000
 )
 
 // Enum value maps for EggType.
