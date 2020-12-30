@@ -5,9 +5,8 @@ option go_package = "github.com/fanaticscripter/EggContractor/api";
 // http://www.auxbrain.com/ei/first_contact
 message FirstContactRequestPayload {
   string player_id = 1;
-  int32 _2 = 2;  // unknown; example: 0, 26
-                 // maybe farm type (home 0, contract 26)?
-  int32 _3 = 3;  // unknown; example: 1
+  int32 client_version = 2;  // optional
+  int32 _3 = 3;              // unknown; example: 1
 }
 
 // Partially reverse engineered.

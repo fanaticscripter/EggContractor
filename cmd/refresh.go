@@ -26,7 +26,6 @@ var _refreshCommand = &cobra.Command{
 		now := time.Now()
 		resp, err := api.RequestFirstContact(&api.FirstContactRequestPayload{
 			PlayerId: playerId,
-			X2:       0,
 			X3:       1,
 		})
 		if err != nil {
