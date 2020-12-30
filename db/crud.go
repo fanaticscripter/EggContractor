@@ -27,7 +27,7 @@ func InsertContract(c *api.ContractProperties) error {
 		func(tx *sql.Tx) error {
 			if _, err := tx.Exec(`INSERT INTO contract(text_id, expiry_year, coop_allowed, props) VALUES(?, ?, ?, ?)
 				ON CONFLICT(text_id, expiry_year) DO UPDATE SET coop_allowed = excluded.coop_allowed, props = excluded.props`,
-				c.Id, expiryYear, c.CoopAllowed(), marshalledProps); err != nil {
+				c.Id, expiryYear, c.CoopAllowed, marshalledProps); err != nil {
 				return err
 			}
 			return nil
@@ -120,7 +120,7 @@ func GetCoopContracts() ([]*api.ContractProperties, error) {
 	}
 	coopContracts := make([]*api.ContractProperties, 0)
 	for _, c := range contracts {
-		if c.CoopAllowed() {
+		if c.CoopAllowed {
 			coopContracts = append(coopContracts, c)
 		}
 	}

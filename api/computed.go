@@ -50,10 +50,6 @@ func (c *Contract) CollectionDeadlineTime() time.Time {
 	return time.Time{}
 }
 
-func (c *ContractProperties) CoopAllowed() bool {
-	return c.MaxCoopSize > 1
-}
-
 func (c *ContractProperties) Duration() time.Duration {
 	return util.DoubleToDuration(c.DurationSeconds)
 }

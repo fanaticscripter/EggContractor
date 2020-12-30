@@ -98,8 +98,12 @@ enum EggType {
   ENLIGHTENMENT = 19;
 
   // Contract-only eggs. Incomplete.
+  CHOCOLATE = 100;
+  EASTER = 101;
   WATERBALLOON = 102;
+  FIREWORK = 103;
   PUMPKIN = 104;
+  UNKNOWN = 1000;
 }
 
 message Research {
@@ -143,17 +147,16 @@ message ContractProperties {
   }
   repeated Reward rewards = 3;  // seems always for elite
                                 // for standard rewards, check reward_tiers[1]
-  int32 _4 = 4;                 // unknown, maybe bool; example: 1
+  bool coop_allowed = 4;
   int32 max_coop_size = 5;
   double expiry_timestamp = 6;
   double duration_seconds = 7;  // total time to complete
   string name = 9;
   string description = 10;
-  int32 _11 = 11;   // unknown, maybe bool; example: 0
-  int32 _12 = 12;   // unknown, maybe bool; example: 0
-  double _13 = 13;  // unknown, maybe bool; example: 0
-  int32 _14 = 14;   // unknown; seems always 26 (except for xmas-trash "Quantum
-                    // Trash Bags", where it's 0), maybe farm type?
+  bool debug = 11;
+  int32 max_boosts = 12;
+  double max_soul_eggs = 13;
+  int32 min_client_version = 14;
   double token_interval = 15;  // token interval in minutes
   message RewardTier {
     repeated Reward rewards = 1;
