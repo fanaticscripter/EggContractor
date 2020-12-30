@@ -1,6 +1,6 @@
 # EggContractor
 
-[![Gallery](https://shields.io/badge/-gallery-blueviolet)](https://github.com/fanaticscripter/EggContracter/wiki/Gallery)
+[![Gallery](https://shields.io/badge/-gallery-blueviolet)](https://github.com/fanaticscripter/EggContractor/wiki/Gallery)
 
 EggContractor is a self-hosted contract monitoring web app + CLI client for [Egg, Inc.](https://en.wikipedia.org/wiki/Egg,_Inc.). It allows you to easily monitor all your contract progress, as well as peeking into prospective coops you may want to join.
 
@@ -29,7 +29,7 @@ Below are some semi-interactive demo pages (pre-rendered, with in-page interacti
 - Peeking a coop: [/peek/space-bots-2020/XXXXXXXXX/](https://egg-contractor-static-demo.netlify.app/peek/space-bots-2020/XXXXXXXXX/)
 - List of recently peeked coops: [/peeked/](https://egg-contractor-static-demo.netlify.app/peeked/)
 
-You can also find screenshots in the [gallery](https://github.com/fanaticscripter/EggContracter/wiki/Gallery).
+You can also find screenshots in the [gallery](https://github.com/fanaticscripter/EggContractor/wiki/Gallery).
 
 ## Comparison to egginc.mioi.io
 
