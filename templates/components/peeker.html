@@ -1,0 +1,38 @@
+{- /* The peeker template renders the coop peeking target selection form. Accepts a web.peekerPayload. */ -}
+{{define "peeker"}}
+  <div class="my-6 sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-gray-50 py-6 px-4 shadow sm:rounded-lg sm:px-10">
+      <form id="peeker" class="space-y-6">
+        <div>
+          <label for="contract-id" class="block text-sm font-medium text-gray-700">Contract ID</label>
+          <div class="mt-1 flex rounded-md shadow-sm">
+            <input id="contract-id" name="contract-id" type="text" list="contract-ids" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-none rounded-l-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm" value="{{.PresetContractId}}{{if .PresetContractName}} ({{.PresetContractName}}){{end}}">
+            <button id="clear-contract-id" type="button" class="-ml-px relative inline-flex items-center space-x-2 px-3 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-200 focus:outline-none">
+              <span>Clear</span>
+            </button>
+            <datalist id="contract-ids">
+              {{range .Contracts}}
+                <option value="{{.Id}} ({{.Name}})"></option>
+              {{end}}
+            </datalist>
+          </div>
+          <p class="mt-2 text-xs text-gray-500">Click on the input field to access the options dropdown, or paste/type directly. You need to clear the current selection to see all available options. Everything inside parentheses is ignored.</p>
+        </div>
+
+        <div>
+          <label for="coop-code" class="block text-sm font-medium text-gray-700">Coop Code</label>
+          <div class="mt-1">
+            <input id="coop-code" name="coop-code" type="text" required class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm" value="{{.PresetCode}}">
+          </div>
+        </div>
+
+        <div>
+          <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">Peek Coop</button>
+          <div class="mt-2 text-center text-sm text-gray-500">
+            Or view a list of <a href="/peeked/" target="_blank" class="text-blue-500 hover:text-blue-400">recently peeked coops</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{{end}}

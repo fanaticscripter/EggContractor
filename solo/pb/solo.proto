@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "github.com/fanaticscripter/EggContractor/solo/pb";
+
+message SoloContract {
+  string id = 1;
+  string name = 2;
+  bool is_elite = 3;
+  double ultimate_goal = 4;
+  double eggs_laid = 5;
+  double eggs_per_second = 6;
+  double seconds_until_production_deadline = 8;
+  double seconds_until_collection_deadline = 9;
+  double last_refreshed_timestamp = 10;
+}

@@ -1,0 +1,7 @@
+/.env
+/config.toml
+/data
+/EggContractor
+/logs
+/node_modules
+/public

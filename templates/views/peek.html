@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  {{template "head"}}
+  <body class="flex flex-col min-h-screen min-h-stretch">
+    {{template "nav"}}
+    <main class="flex-1 max-w-4xl w-full mx-auto">
+      {{template "banners" .}}
+      {{if not .RetrievalTime.IsZero}}
+        <div class="my-4 text-center text-sm text-gray-700">
+          Data retrieved: <time class="whitespace-nowrap">{{.RetrievalTime | fmtdatetime}}</time>
+        </div>
+      {{end}}
+      {{template "coop" .Coop}}
+      {{template "peeker" .Peeker}}
+    </main>
+    {{template "footer"}}
+    <script src="{{static "coop.js"}}"></script>
+    <script src="{{static "peeker.js"}}"></script>
+  </body>
+</html>

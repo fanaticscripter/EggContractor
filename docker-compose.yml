@@ -1,0 +1,44 @@
+version: "3"
+services:
+  app:
+    image: fanaticscripter/eggcontractor:latest
+    container_name: EggContractor
+    restart: always
+    environment:
+      # TZ should be set to the local timezone in .env; e.g. TZ=America/New_York
+      - TZ=${TZ}
+    ports:
+      # Use 0.0.0.0 only if you want to access the web app on the local network
+      # directly, without a reverse proxy layer. You may change the host port
+      # (the first port number) to another value.
+      - "0.0.0.0:8080:8080"
+    volumes:
+      # config.toml should set database.path to /data/data.db
+      - ./config.toml:/config.toml
+      - ./data:/data
+    labels:
+      ofelia.enabled: "true"
+      # Scheduling refreshes.
+      #
+      # Schedule syntax is documented at
+      # - https://github.com/mcuadros/ofelia
+      # - https://pkg.go.dev/github.com/robfig/cron@v1.2.0
+      # Note that if you use cron syntax, the syntax has been extended to add
+      # a second field at the beginning, so every minute would be "0 * * * * *"
+      # instead of "* * * * *", and so on.
+      ofelia.job-exec.refresh.schedule: "@every 2m"
+      ofelia.job-exec.refresh.user: 0
+      ofelia.job-exec.refresh.command: "/EggContractor refresh"
+      ofelia.job-exec.refresh.save-folder: /logs
+      ofelia.job-exec.refresh.save-only-on-error: true
+
+  ofelia:
+    image: mcuadros/ofelia:latest
+    container_name: EggContractor_sched
+    restart: always
+    depends_on:
+      - app
+    command: daemon --docker
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./logs:/logs

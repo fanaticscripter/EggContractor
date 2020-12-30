@@ -1,0 +1,41 @@
+{{- /* The status_label template implements a status label for solo/coop contracts.
+  Requires implementing .HasCompleted, .HasNoTimeLeft, and .IsOnTrackToFinish. */ -}}
+{{define "status_label"}}
+  {{if .HasCompleted}}
+  <div class="ml-4 mt-2 -mb-1 flex-shrink-0">
+    <span class="inline-flex items-center text-xs text-green-500 font-medium uppercase">
+      <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      Completed
+    </span>
+  </div>
+  {{else if .HasNoTimeLeft}}
+  <div class="ml-4 mt-2 -mb-1 flex-shrink-0">
+    <span class="inline-flex items-center text-xs text-red-500 font-medium uppercase">
+      <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      Out of time
+    </span>
+  </div>
+  {{else if .IsOnTrackToFinish}}
+  <div class="ml-4 mt-2 -mb-1 flex-shrink-0">
+    <span class="inline-flex items-center text-xs text-blue-500 font-medium uppercase">
+      <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+      On track
+    </span>
+  </div>
+  {{else}}
+  <div class="ml-4 mt-2 -mb-1 flex-shrink-0">
+    <span class="inline-flex items-center text-xs text-yellow-500 font-medium uppercase">
+      <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+      Not on track
+    </span>
+  </div>
+  {{end}}
+{{end}}

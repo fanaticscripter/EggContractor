@@ -1,0 +1,208 @@
+syntax = "proto3";
+
+option go_package = "github.com/fanaticscripter/EggContractor/api";
+
+// http://www.auxbrain.com/ei/first_contact
+message FirstContactRequestPayload {
+  string player_id = 1;
+  int32 _2 = 2;  // unknown; example: 0, 26
+                 // maybe farm type (home 0, contract 26)?
+  int32 _3 = 3;  // unknown; example: 1
+}
+
+// Partially reverse engineered.
+message FirstContact {
+  message Payload {
+    string player_id = 1;
+    string player_name = 2;
+
+    message Stats {
+      int32 drone_takedowns = 6;
+      int32 prestiges = 9;
+      int32 elite_drone_takedowns = 10;
+      int32 boosts_used = 13;
+    }
+    Stats stats = 6;
+
+    message Progress {
+      repeated EpicResearch epic_researches = 9;
+      repeated int64 max_farm_populations_reached = 18;  // One entry for
+                                                         // each egg type.
+      int32 prophecy_eggs = 23;
+      int32 num_daily_gifts_collected = 28;
+      message Boost {
+        string id = 1;
+        int32 count = 2;
+      }
+      repeated Boost boosts = 30;
+      double soul_eggs = 34;
+    }
+    Progress progress = 7;
+
+    repeated Farm farms = 12;
+
+    message Contracts {
+      repeated Contract active_contracts = 1;
+      repeated Contract past_contracts = 2;
+      repeated string contract_ids = 3;
+      repeated CoopStatus active_coop_statuses = 4;
+    }
+    Contracts contracts = 13;
+  }
+  Payload data = 1;
+}
+
+message Farm {
+  EggType egg_type = 1;
+  double prestige_earnings = 2;
+  double _3 = 3;          // on the same order of prestige_earnings but smaller,
+                          // not sure what it is; gift earnings maybe?
+  double last_saved = 5;  // epoch timestamp
+  int64 chicken_count = 6;
+  double eggs_laid = 9;
+  double eggs_paid_for = 10;  // the only difference with eggs_laid seems to be
+                              // that eggs_laid is not rounded, and this is
+                              // rounded down.
+  int32 silos_owned = 11;
+  repeated int32 habitat_types = 12;
+  repeated int64 habitat_populations = 13;
+  repeated int32 vehicle_types = 17;
+  repeated int32 train_lengths = 21;
+  repeated Research researches = 18;
+  string contract_id = 20;  // empty for home farm
+
+  // 22 is a list of active boosts
+}
+
+enum EggType {
+  INVALID_EGG = 0;  // proto3 requires first enum value to be 0.
+
+  EDIBLE = 1;
+  SUPERFOOD = 2;
+  MEDICAL = 3;
+  ROCKET_FUEL = 4;
+  SUPER_MATERIAL = 5;
+  FUSION = 6;
+  QUANTUM = 7;
+  IMMORTALITY = 8;
+  TACHYON = 9;
+  GRAVITON = 10;
+  DILITHIUM = 11;
+  PRODIGY = 12;
+  TERRAFORM = 13;
+  ANTIMATTER = 14;
+  DARK_MATTER = 15;
+  AI = 16;
+  NEBULA = 17;
+  UNIVERSE = 18;
+  ENLIGHTENMENT = 19;
+
+  // Contract-only eggs. Incomplete.
+  WATERBALLOON = 102;
+  PUMPKIN = 104;
+}
+
+message Research {
+  string id = 1;
+  int32 level = 2;
+}
+
+message EpicResearch {
+  string id = 1;
+  int32 level = 2;
+}
+
+message Contract {
+  ContractProperties props = 1;
+  string code = 2;
+  double started = 3;              // epoch timestamp
+  int32 _4 = 4;                    // unknown; example: 1
+  double production_deadline = 5;  // epoch timestamp
+  double completed_goal = 6;
+  int32 _7 = 7;                    // unknown; example: 1
+  double collection_deadline = 9;  // epoch timestamp
+                                   // 2 days after production deadline
+  int32 _10 = 10;                  // unknown; example: 10
+  double player_contribution = 11;
+  string player_id = 13;
+  int32 num_goals_completed = 14;
+  int32 _15 = 15;  // unknown; example: 1
+}
+
+// ContractProperties contains player/session-agnostic properties of a contract.
+message ContractProperties {
+  string id = 1;
+  EggType egg_type = 2;
+  message Reward {
+    int32 _1 = 1;
+    double goal = 2;
+    RewardType type = 3;
+    string name = 4;
+    double count = 5;
+    double _6 = 6;  // unknown; maybe a difficulty indicator?
+  }
+  repeated Reward rewards = 3;  // seems always for elite
+                                // for standard rewards, check reward_tiers[1]
+  int32 _4 = 4;                 // unknown, maybe bool; example: 1
+  int32 max_coop_size = 5;
+  double expiry_timestamp = 6;
+  double duration_seconds = 7;  // total time to complete
+  string name = 9;
+  string description = 10;
+  int32 _11 = 11;   // unknown, maybe bool; example: 0
+  int32 _12 = 12;   // unknown, maybe bool; example: 0
+  double _13 = 13;  // unknown, maybe bool; example: 0
+  int32 _14 = 14;   // unknown; seems always 26 (except for xmas-trash "Quantum
+                    // Trash Bags", where it's 0), maybe farm type?
+  double token_interval = 15;  // token interval in minutes
+  message RewardTier {
+    repeated Reward rewards = 1;
+  }
+  repeated RewardTier reward_tiers = 16;
+}
+
+enum RewardType {
+  INVALID_REWARD = 0;  // proto3 requires first enum value to be 0.
+
+  // Never encountered 1.
+  GOLDEN_EGG = 2;
+  SOUL_EGG = 3;
+  PROPHECY_EGG = 4;
+  EPIC_RESEARCH = 5;
+  PIGGY_GOLDEN_EGG = 6;
+  PIGGY_MULTIPLY = 7;  // e.g. xmas-trash "Quantum Trash Bag"
+                       // (type:7, name:"subtype", count:2)
+  PIGGY_LEVEL_UP = 8;
+  BOOST = 9;
+}
+
+// http://www.auxbrain.com/ei/coop_status
+message CoopStatusRequestPayload {
+  string contract_id = 1;
+  string code = 2;
+  string player_id = 3;
+}
+
+message CoopStatus {
+  string contract_id = 1;
+  double eggs_laid = 2;
+  string code = 3;
+  message Member {
+    string id = 1;
+    string name = 2;
+    double eggs_laid = 3;
+    int32 _4 = 4;  // unknown; example: 1
+    int32 _5 = 5;  // unknown; example: 1 or 2
+    double eggs_per_second = 6;
+    int32 _7 = 7;                   // unknown; example: 7
+    double earning_bonus_oom = 11;  // EB is 10^(earning_bonus_oom + 2)%
+    int32 tokens = 12;
+  }
+  repeated Member members = 4;
+  double seconds_until_production_deadline = 5;
+  int32 _6 = 6;  // unknown, maybe bool; example: 0
+  double seconds_until_collection_deadline = 7;
+  int32 _8 = 8;  // unknown, maybe bool; example: 0
+  string creator_id = 9;
+  int32 _10 = 10;  // unknown, maybe bool; example: 0
+}

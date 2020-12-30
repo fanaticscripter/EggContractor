@@ -1,0 +1,114 @@
+{{- /* The coop template renders a coop.CoopStatus, where the associated contract may be nil. */ -}}
+{{define "coop"}}
+  {{if .}}
+    {{$contract := .Contract}}
+    <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-4 sm:px-6 bg-gray-50">
+        <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+          <div class="ml-4 mt-2">
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              {{if $contract}}
+                {{$contract.Name}} ({{$contract.Id}})
+              {{else}}
+                {{.ContractId}}
+              {{end}}
+            </h2>
+          </div>
+          {{template "status_label" .}}
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Type</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{if .IsElite}}Elite{{else}}Standard{{end}}</dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Code</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.Code}}</dd>
+          </div>
+          {{if .Creator}}
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500">Created by</dt>
+              <dd class="mt-1 text-sm text-gray-900">{{.Creator.Name}}</dd>
+            </div>
+          {{end}}
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Players</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              {{if $contract}}
+                {{.Members | len}} / {{$contract.MaxCoopSize}}
+              {{else}}
+                {{.Members | len}}
+              {{end}}
+            </dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Eggs laid</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              {{if $contract}}
+                {{.EggsLaid | numfmt}} / {{$contract.UltimateGoal .IsElite | numfmtWhole}}
+              {{else}}
+                {{.EggsLaid | numfmt}}
+              {{end}}
+            </dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Hourly laying rate</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              {{if $contract}}
+                {{.EggsPerHour | numfmt}} current / {{.RequiredEggsPerHour $contract | numfmt}} required
+              {{else}}
+                {{.EggsPerHour | numfmt}}
+              {{end}}
+            </dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Time to complete</dt>
+            <dd class="mt-1 text-sm text-gray-900">
+              {{if $contract}}
+                {{.ExpectedDurationUntilFinish $contract | fmtduration}} expected / {{.DurationUntilProductionDeadline | fmtdurationGe0}} remaining
+              {{else}}
+                {{.DurationUntilProductionDeadline | fmtdurationGe0}} remaining
+              {{end}}
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      {{$members := members .}}
+      <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200">
+              <div class="CoopTable" data-members="{{json $members}}">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
+                      <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Laid<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
+                      <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Rate/hr<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
+                      <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">EB%<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
+                      <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tokens<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{range $index, $member := $members}}
+                      <tr class="{{if isodd $index}}bg-gray-50{{else}}bg-white{{end}}">
+                        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500" title="{{.Id}}">{{.Name}}</td>
+                        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EggsLaidStr}}</td>
+                        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EggsPerHourStr}}</td>
+                        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EarningBonusPercentageStr}}</td>
+                        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.Tokens}}</td>
+                      </tr>
+                    {{end}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{end}}
+{{end}}

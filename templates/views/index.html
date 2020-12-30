@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  {{template "head"}}
+  <body class="flex flex-col min-h-screen min-h-stretch">
+    {{template "nav"}}
+    <main class="flex-1 max-w-4xl w-full mx-auto">
+      {{template "banners" .}}
+      {{if not .RefreshTime.IsZero}}
+        <div class="my-4 text-center text-sm text-gray-700">
+          Data last refreshed:
+          <time class="whitespace-nowrap">{{.RefreshTime | fmtdatetime}} ({{.RefreshTime | reltime}})</time>
+        </div>
+      {{end}}
+      {{range .Solos}}{{template "solo" .}}{{end}}
+      {{range .Coops}}{{template "coop" .}}{{end}}
+      {{template "peeker" .Peeker}}
+      </main>
+    {{template "footer"}}
+    <script src="{{static "coop.js"}}"></script>
+    <script src="{{static "peeker.js"}}"></script>
+  </body>
+</html>

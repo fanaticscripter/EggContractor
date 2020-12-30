@@ -1,0 +1,48 @@
+{{- /* The solo template renders a solo.SoloContract, where the associated
+contract may be nil. Ideally we would display whether the "solo" contract allows
+coop, and the max coop size in that case -- since unfortunately coop contracts
+can always be soloed, and always start in a solo state before a coop is joined.
+However, I only thought of this after designing all the schema, writing all the
+code, and have accumulated a good number of states in my database. and I don't
+want to change a whole lot of code, and I want to do a protobuf schema migration
+with tons of stored messages even less. Therefore, we'll have to live with this
+indistinguishability in the UI. */ -}}
+{{define "solo"}} {{if .}}
+    <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg">
+      <div class="px-4 py-4 sm:px-6 bg-gray-50">
+        <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+          <div class="ml-4 mt-2">
+            <h2 class="text-lg leading-6 font-medium text-gray-900">
+              {{.GetName}} ({{.GetId}})
+            </h2>
+          </div>
+          {{template "status_label" .}}
+        </div>
+      </div>
+      <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
+        <dl class="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Type</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{if .GetIsElite}}Elite{{else}}Standard{{end}}</dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Eggs laid</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.GetEggsLaid | numfmt}} / {{.GetUltimateGoal | numfmtWhole}}</dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Hourly laying rate</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.GetEggsPerHour | numfmt}} current / {{.RequiredEggsPerHour | numfmt}} required</dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Time to complete</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.ExpectedDurationUntilFinish | fmtduration}} expected / {{.GetDurationUntilProductionDeadline | fmtdurationGe0}} remaining</dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Reported to server</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.GetLastRefreshedTime | fmtdatetime}} ({{.GetLastRefreshedTime | reltime}})</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  {{end}}
+{{end}}
