@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr v-for="(member, index) in sortedMembers" :key="member.id" :class="index % 2 === 1 ? 'bg-gray-50' : 'bg-white'">
-        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500" :title="member.id">{{ member.name }}</td>
+        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500" :class="{ 'CoopTable__member--snoozing': !member.isActive }" :title="member.id">{{ member.name }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsLaidStr }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsPerHourStr }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.earningBonusPercentageStr }}</td>

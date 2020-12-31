@@ -1,5 +1,6 @@
 module.exports = api => ({
   plugins: [
+    require("postcss-import"),
     require("tailwindcss"),
     require("autoprefixer"),
     ...(api.env === "production"

@@ -21,6 +21,7 @@ type coopMemberPayload struct {
 	EarningBonusPercentage    float64 `json:"earningBonusPercentage"`
 	EarningBonusPercentageStr string  `json:"earningBonusPercentageStr"`
 	Tokens                    int32   `json:"tokens"`
+	IsActive                  bool    `json:"isActive"`
 }
 
 type peekerPayload struct {
@@ -41,6 +42,7 @@ func newCoopMemberPayload(m *api.CoopStatus_Member) *coopMemberPayload {
 		EarningBonusPercentage:    m.EarningBonusPercentage(),
 		EarningBonusPercentageStr: util.Numfmt(m.EarningBonusPercentage()),
 		Tokens:                    m.Tokens,
+		IsActive:                  m.Active,
 	}
 }
 

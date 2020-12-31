@@ -95,7 +95,7 @@
                   <tbody>
                     {{range $index, $member := $members}}
                       <tr class="{{if isodd $index}}bg-gray-50{{else}}bg-white{{end}}">
-                        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500" title="{{.Id}}">{{.Name}}</td>
+                        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500 {{if not .IsActive}}CoopTable__member--snoozing{{end}}" title="{{.Id}}">{{.Name}}</td>
                         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EggsLaidStr}}</td>
                         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EggsPerHourStr}}</td>
                         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EarningBonusPercentageStr}}</td>

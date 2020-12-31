@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "components/CoopTable.css";
+
 html {
     height: 100vh;
     height: -webkit-fill-available;
