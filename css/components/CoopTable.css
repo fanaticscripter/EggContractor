@@ -1,0 +1,6 @@
+.CoopTable__member--snoozing:after {
+    content: "zZ";
+    margin-left: 1px;
+    vertical-align: super;
+    font-size: 0.75em;
+}

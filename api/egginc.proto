@@ -195,8 +195,9 @@ message CoopStatus {
     string id = 1;
     string name = 2;
     double eggs_laid = 3;
-    int32 _4 = 4;  // unknown; example: 1
-    int32 _5 = 5;  // unknown; example: 1 or 2
+    bool active = 4;  // "snoozers" who haven't reported in in 24 hours
+                      // have this field set to false
+    int32 _5 = 5;     // unknown; example: 1 or 2
     double eggs_per_second = 6;
     int32 _7 = 7;                   // unknown; example: 7
     double earning_bonus_oom = 11;  // EB is 10^(earning_bonus_oom + 2)%
