@@ -2,7 +2,6 @@
   <table class="min-w-full divide-y divide-gray-200">
     <thead class="bg-gray-50">
       <tr>
-        <!-- <th scope="col" class="px-6 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Player</th> -->
         <th v-for="label in labels" :key="label.sortBy" @click="sortBy = label.sortBy" scope="col" class="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" :class="label.name === 'Player' ? 'text-left' : 'text-center'">
           {{ label.name }}
           <!-- Use visibility for the arrow so that column widths don't change when sorting a different column. -->
