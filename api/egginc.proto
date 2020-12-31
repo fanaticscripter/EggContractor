@@ -17,16 +17,26 @@ message FirstContact {
 
     message Stats {
       int32 drone_takedowns = 6;
+      repeated double farm_eggs_laid = 8;   // One entry for
+                                            // each egg type.
       int32 prestiges = 9;
       int32 elite_drone_takedowns = 10;
+      int32 piggy_level = 11;
       int32 boosts_used = 13;
     }
     Stats stats = 6;
 
     message Progress {
+      int32 lifefime_golden_eggs = 2;
+      int32 lifetime_golden_eggs_spent = 3;
+      double prestige_earnings = 5;
+      double lifetime_earnings = 6;
+      int32 piggy_bank = 7;
       repeated EpicResearch epic_researches = 9;
       repeated int64 max_farm_populations_reached = 18;  // One entry for
                                                          // each egg type.
+      repeated int32 trophy_level = 19;                   // One entry for
+                                                          // each egg type.
       int32 prophecy_eggs = 23;
       int32 num_daily_gifts_collected = 28;
       message Boost {
