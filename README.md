@@ -37,13 +37,13 @@ Advantages:
 
 - **No rate limiting**, obviously.
 
-- **All the info about all your contracts (solos & coops) is right on the home page**. Even the coop "peeker" widget is right there. **No clicking around**.
+- **All the info about all your active contracts (solos & coops) is right on the home page**. Even the coop "peeker" widget is right there. **No clicking around**.
 
 - **Sort coop members by EB, egg laying rate, etc.** Very handy.
 
 - View a list of coops you recently "peeked". [Demo page](https://egg-contractor-static-demo.netlify.app/peeked/).
 
-- **Stats are routinely retrieved in the background** (frequency easily configurable) and **stored in a database.** So you can travel back in time to view your contract statuses in the past (implemented), or even plot how everyone's doing, or project the actual number of eggs laid by taking into account how long each coop member has been offline (not implemented).
+- **Stats are routinely retrieved in the background** (frequency easily configurable) and **stored in a database.** So you can travel back in time to view your contract statuses in the past (implemented), or even plot how everyone's been doing, or project the actual number of eggs laid by taking into account how long each coop member has been offline (not implemented).
 
 Disadvantages:
 
@@ -55,7 +55,7 @@ Disadvantages:
 
 ## Installation & deployment
 
-`docker-compose` is the recommended method of deployment. Sorry k8s fans.
+docker-compose is the recommended method of deployment. Sorry k8s fans.
 
 `docker-compose.yml`:
 
@@ -137,7 +137,7 @@ $ docker-compose up
 
 ### Nginx reverse proxying
 
-In case you need help with putting nginx in front of for SSL termination and stuff, here's my nginx config:
+In case you need help putting nginx in front for SSL termination and stuff, here's my nginx config:
 
 ```nginx
 server {
@@ -210,7 +210,7 @@ Use "EggContractor [command] --help" for more information about a command.
 
 Use `help` on individual subcommands to learn more about them.
 
-If you're running the docker-compose set up, you need to use
+If you're running the docker-compose setup, you need to use
 
     docker exec EggContractor /EggContractor [command]
 
