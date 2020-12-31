@@ -1,5 +1,7 @@
 # EggContractor
 
+[![Build status](https://github.com/fanaticscripter/EggContractor/workflows/build/badge.svg)](https://github.com/fanaticscripter/EggContractor/actions)
+[![Docker pulls](https://img.shields.io/docker/pulls/fanaticscripter/eggcontractor)](https://hub.docker.com/r/fanaticscripter/eggcontractor)
 [![Gallery](https://shields.io/badge/-gallery-blueviolet)](https://github.com/fanaticscripter/EggContractor/wiki/Gallery)
 
 EggContractor is a self-hosted contract monitoring web app + CLI client for [Egg, Inc.](https://en.wikipedia.org/wiki/Egg,_Inc.). It allows you to easily monitor all your contract progress, as well as peeking into prospective coops you may want to join.
