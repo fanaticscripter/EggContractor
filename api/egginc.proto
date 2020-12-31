@@ -35,8 +35,8 @@ message FirstContact {
       repeated EpicResearch epic_researches = 9;
       repeated int64 max_farm_populations_reached = 18;  // One entry for
                                                          // each egg type.
-      repeated int32 trophy_level = 19;                   // One entry for
-                                                          // each egg type.
+      repeated int32 farm_trophy_level = 19;             // One entry for
+                                                         // each egg type.
       int32 prophecy_eggs = 23;
       int32 num_daily_gifts_collected = 28;
       message Boost {
