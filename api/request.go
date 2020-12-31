@@ -28,9 +28,11 @@ func Request(endpoint string, reqMsg proto.Message, respMsg proto.Message) error
 	if err != nil {
 		return errors.Wrapf(err, "marshaling payload %+v for %s", reqMsg, apiUrl)
 	}
-	log.Infof("POST %s: %+v", apiUrl, reqMsg)
 	enc := base64.StdEncoding
-	resp, err := _client.PostForm(apiUrl, url.Values{"data": {enc.EncodeToString(reqBin)}})
+	reqDataEncoded := enc.EncodeToString(reqBin)
+	log.Infof("POST %s: %+v", apiUrl, reqMsg)
+	log.Debugf("POST %s data=%s", apiUrl, reqDataEncoded)
+	resp, err := _client.PostForm(apiUrl, url.Values{"data": {reqDataEncoded}})
 	if err != nil {
 		return errors.Wrapf(err, "POST %s", apiUrl)
 	}
