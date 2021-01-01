@@ -21,6 +21,7 @@ RUN CGO_ENABLED=1 GOOS=linux go build -a -ldflags '-linkmode external -extldflag
 FROM scratch
 WORKDIR /
 COPY --from=builder /src/EggContractor /
+COPY --from=builder /src/migrations /migrations
 COPY --from=builder /src/static /static
 COPY --from=builder /src/templates /templates
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo

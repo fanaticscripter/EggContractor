@@ -6,6 +6,7 @@
 !/css
 !/db
 !/js
+!/migrations
 !/solo
 !/static
 /static/*
