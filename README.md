@@ -192,6 +192,7 @@ Available Commands:
   config          Print current configurations
   config-template Print a config file template
   contracts       Print a list of current and past contracts
+  events          Print current and past events
   help            Help about any command
   peek            Peek at a coop
   peeked          Print list of recently peeked coops

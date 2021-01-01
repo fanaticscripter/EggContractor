@@ -12,6 +12,8 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
+const ClientVersion = 26
+
 const _apiPrefix = "http://www.auxbrain.com/ei"
 
 var _client *http.Client
@@ -68,6 +70,18 @@ func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, er
 func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
 	resp := &CoopStatus{}
 	err := Request("/coop_status", payload, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func RequestPeriodicals(payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
+	if payload.ClientVersion == 0 {
+		payload.ClientVersion = ClientVersion
+	}
+	resp := &Periodicals{}
+	err := Request("/get_periodicals", payload, resp)
 	if err != nil {
 		return nil, err
 	}
