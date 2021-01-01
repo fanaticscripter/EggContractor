@@ -15,6 +15,18 @@ message FirstContact {
     string player_id = 1;
     string player_name = 2;
 
+    message Settings {
+      int32 sfx = 1;
+      int32 music = 2;
+      int32 notifications = 6;
+      int32 low_performance = 10;
+      int32 advertising = 14;
+      int32 developer_analytics_1 = 22; // Both toggle together
+      int32 developer_analytics_2 = 23;
+      double backup_date = 24;          // epoch timestamp
+    }
+    Settings settings = 4;
+
     message Stats {
       int32 drone_takedowns = 6;
       repeated double farm_eggs_laid = 8;  // One entry for each egg type.
