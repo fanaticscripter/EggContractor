@@ -22,12 +22,15 @@ var _refreshCommand = &cobra.Command{
 	Args:    cobra.NoArgs,
 	PreRunE: subcommandPreRunE,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		eventsDone := make(chan bool)
 		go func() {
 			_, err := refreshEvents()
 			if err != nil {
 				log.Error(err)
 			}
+			eventsDone <- true
 		}()
+		defer func() { <-eventsDone }()
 
 		playerId := _config.Player.Id
 		now := time.Now()
