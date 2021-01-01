@@ -17,8 +17,7 @@ message FirstContact {
 
     message Stats {
       int32 drone_takedowns = 6;
-      repeated double farm_eggs_laid = 8;   // One entry for
-                                            // each egg type.
+      repeated double farm_eggs_laid = 8;  // One entry for each egg type.
       int32 prestiges = 9;
       int32 elite_drone_takedowns = 10;
       int32 piggy_level = 11;
@@ -35,7 +34,7 @@ message FirstContact {
       repeated EpicResearch epic_researches = 9;
       repeated int64 max_farm_populations_reached = 18;  // One entry for
                                                          // each egg type.
-      repeated int32 farm_trophy_level = 19;             // One entry for
+      repeated TrophyType farm_trophy_level = 19;        // One entry for
                                                          // each egg type.
       int32 prophecy_eggs = 23;
       int32 num_daily_gifts_collected = 28;
@@ -115,6 +114,15 @@ enum EggType {
 
   // Placeholder for undiscovered eggs.
   UNKNOWN = 1000;
+}
+
+enum TrophyType {
+  NO_TROPHY = 0;
+  BRONZE = 1;
+  SILVER = 2;
+  GOLD = 3;
+  PLATINUM = 4;
+  DIAMOND = 5;
 }
 
 message Research {
