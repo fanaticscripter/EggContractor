@@ -3,7 +3,9 @@ const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = {
   entry: {
+    app: "./js/app.js",
     coop: "./js/coop.js",
+    events: "./js/events.js",
     peeker: "./js/peeker.js",
   },
   module: {

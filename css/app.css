@@ -3,6 +3,7 @@
 @import "tailwindcss/utilities";
 
 @import "components/CoopTable.css";
+@import "components/EventTable.css";
 
 html {
     height: 100vh;

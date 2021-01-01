@@ -83,6 +83,7 @@ func Serve(opts ServerOptions) {
 	e.GET("/", indexHandler)
 	e.GET("/peek/:contractId/:code/", peekHandler)
 	e.GET("/peeked/", peekedHandler)
+	e.GET("/events/", eventsHandler)
 
 	staticDir := _prodStaticDir
 	staticCacheControlHeader := _prodStaticCacheControlHeader
@@ -133,9 +134,13 @@ func loadTemplates(opts ServerOptions) *Template {
 	}
 	return &Template{
 		templates: template.Must(template.New("").Funcs(template.FuncMap{
+			"fmtcountdown":   util.FormatCountdown,
+			"fmtdate":        util.FormatDate,
+			"fmtdatecasual":  util.FormatDateCasual,
 			"fmtdatetime":    util.FormatDatetime,
 			"fmtduration":    util.FormatDuration,
 			"fmtdurationGe0": util.FormatDurationNonNegative,
+			"fmttimecasual":  util.FormatTimeCasual,
 			"increment":      func(x int) int { return x + 1 },
 			"iseven":         func(x int) bool { return x%2 == 0 },
 			"islastindex":    func(index int, length int) bool { return index == length-1 },

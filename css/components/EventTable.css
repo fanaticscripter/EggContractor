@@ -1,0 +1,7 @@
+.EventTable__event--active {
+    @apply text-green-500;
+}
+
+.EventTable__event--expired {
+    @apply text-gray-500;
+}
