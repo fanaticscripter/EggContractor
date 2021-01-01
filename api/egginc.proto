@@ -229,3 +229,43 @@ message CoopStatus {
   string creator_id = 9;
   int32 _10 = 10;  // unknown, maybe bool; example: 0
 }
+
+// http://www.auxbrain.com/ei/get_periodicals
+message GetPeriodicalsRequestPayload {
+  string player_id = 1;
+  int32 _2 = 2;   // unknown, maybe bool; example: 1
+  int32 _3 = 3;   // unknown, maybe bool; example: 0
+  double _4 = 4;  // Number of seconds since <milestone>, not sure what yet;
+                  // E.g. at the time of writing (2020-12-31), the milestone
+                  // is 2020-12-20T02:14:29+08:00 for me.
+  double _5 = 5;  // Number of seconds since <milestone>, probably the last
+                  // prestige. E.g. at the time of writing (2020-12-31), the
+                  // milestone is 2020-12-28T00:16:45+08:00 for me.
+  double earning_bonus = 8;
+  int32 client_version = 10;
+  int32 _11 = 11;  // unknown, maybe bool; example: 0
+}
+
+message Periodicals {
+  string _1 = 1;  // always empty in my experience
+  message Events {
+    repeated Event events = 1;
+  }
+  Events events = 2;
+  message Contracts {
+    repeated ContractProperties contracts = 1;
+    double response_timestamp = 2;  // epoch seconds; as to why the hell the
+                                    // response timestamp is nested in such an
+                                    // awkward position, I have no damn clue.
+  }
+  Contracts contracts = 3;
+}
+
+message Event {
+  string id = 1;
+  double seconds_remaining = 2;
+  string event_type = 3;
+  double multiplier = 4;  // For discount events, this is the final price
+                          // multiplier, e.g. 0.3 for 70% off research.
+  string message = 5;
+}
