@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  {{template "head"}}
+  <body class="flex flex-col min-h-screen min-h-stretch">
+    {{template "nav"}}
+    <main class="flex-1 max-w-4xl w-full mx-auto">
+      {{template "banners" .}}
+      <h1 class="my-4 text-center text-lg leading-6 font-medium text-gray-900">Recorded event history</h1>
+      <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div class="shadow overflow-hidden border-b border-gray-200">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Started</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Details</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Duration</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Countdown</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{- $prev_date := "" -}}
+                  {{- $date := "" -}}
+                  {{range $index, $event := .Events}}
+                    {{- $date = .FirstSeenTime | fmtdate -}}
+                    <tr class="{{if .HasTimeLeft}}EventTable__event--active{{else}}EventTable__event--expired{{end}} {{if isodd $index}}bg-gray-50{{else}}bg-white{{end}}" data-expires="{{.ExpiryTime.Unix}}">
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm">
+                        {{if ne $date $prev_date}}{{.FirstSeenTime | fmtdatecasual}}{{end}}
+                      </td>
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{.FirstSeenTime | fmttimecasual}}</td>
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{.EventType}}</td>
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm font-medium">{{.UnhypedMessage}}</td>
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{.Duration | fmtduration}}</td>
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{if .HasTimeLeft}}{{.TimeLeft | fmtcountdown}}{{else}}-{{end}}</td>
+                    </tr>
+                    {{- $prev_date = $date -}}
+                  {{end}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {{template "footer"}}
+    <script src="{{static "events.js"}}"></script>
+  </body>
+</html>

@@ -402,6 +402,63 @@ func GetPeekedGroupedByContract(since time.Time) (contractIds []string, groups m
 	return contractIds, groups, nil
 }
 
+func InsertEvent(seen time.Time, e *api.Event) error {
+	action := fmt.Sprintf("insert event %s (%s)", e.Id, e.Message)
+	seenTimestamp := util.TimeToDouble(seen)
+	expiryTimestamp := seenTimestamp + e.SecondsRemaining
+	return transact(
+		action,
+		func(tx *sql.Tx) error {
+			_, err := tx.Exec(`INSERT INTO event(
+				id, event_type, multiplier, message, first_seen_timestamp, last_seen_timestamp, expiry_timestamp
+			) VALUES(?, ?, ?, ?, ?, ?, ?)
+			ON CONFLICT(id) DO UPDATE SET
+				event_type = excluded.event_type,
+				multiplier = excluded.multiplier,
+				message = excluded.message,
+				first_seen_timestamp = min(first_seen_timestamp, excluded.first_seen_timestamp),
+				last_seen_timestamp = max(last_seen_timestamp, excluded.last_seen_timestamp),
+				expiry_timestamp = excluded.expiry_timestamp`,
+				e.Id, e.EventType, e.Multiplier, e.Message, seenTimestamp, seenTimestamp, expiryTimestamp)
+			if err != nil {
+				return err
+			}
+			return nil
+		})
+}
+
+func GetEvents() (events []*Event, err error) {
+	action := "retrieve recorded events"
+	events = make([]*Event, 0)
+	err = transact(
+		action,
+		func(tx *sql.Tx) error {
+			rows, err := tx.Query(`SELECT
+				id, event_type, multiplier, message, first_seen_timestamp, last_seen_timestamp, expiry_timestamp
+				FROM event
+				ORDER BY first_seen_timestamp DESC`)
+			if err != nil {
+				return err
+			}
+			defer rows.Close()
+			for rows.Next() {
+				var firstSeenTimestamp, lastSeenTimestamp, expiryTimestamp float64
+				e := &Event{}
+				if err := rows.Scan(&e.Id, &e.EventType, &e.Multiplier, &e.Message,
+					&firstSeenTimestamp, &lastSeenTimestamp, &expiryTimestamp); err != nil {
+					return err
+				}
+				e.FirstSeenTime = util.DoubleToTime(firstSeenTimestamp)
+				e.LastSeenTime = util.DoubleToTime(lastSeenTimestamp)
+				e.ExpiryTime = util.DoubleToTime(expiryTimestamp)
+				events = append(events, e)
+			}
+			return nil
+		},
+	)
+	return
+}
+
 func transact(description string, txFunc func(*sql.Tx) error) (err error) {
 	tx, err := _db.Begin()
 	if err != nil {

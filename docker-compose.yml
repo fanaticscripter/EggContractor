@@ -31,6 +31,7 @@ services:
       ofelia.job-exec.refresh.command: "/EggContractor refresh"
       ofelia.job-exec.refresh.save-folder: /logs
       ofelia.job-exec.refresh.save-only-on-error: true
+    build: .
 
   ofelia:
     image: mcuadros/ofelia:latest

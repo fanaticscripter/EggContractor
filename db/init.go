@@ -99,7 +99,17 @@ CREATE TABLE IF NOT EXISTS peeked (
 	mean_eb_percentage REAL NOT NULL,
 	UNIQUE(contract_id, code)
 );
-CREATE INDEX IF NOT EXISTS peeked_contract_id_code ON peeked(contract_id, code);`
+CREATE INDEX IF NOT EXISTS peeked_contract_id_code ON peeked(contract_id, code);
+
+CREATE TABLE IF NOT EXISTS event (
+	id TEXT PRIMARY KEY,
+	event_type TEXT NOT NULL,
+	multiplier REAL NOT NULL,
+	message TEXT NOT NULL,
+	first_seen_timestamp REAL NOT NULL,
+	last_seen_timestamp REAL NOT NULL,
+	expiry_timestamp REAL NOT NULL
+);`
 
 func InitDB(conf *config.Config) error {
 	var err error

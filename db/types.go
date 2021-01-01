@@ -2,6 +2,7 @@ package db
 
 import (
 	"math"
+	"strings"
 	"time"
 
 	"github.com/fanaticscripter/EggContractor/coop"
@@ -19,6 +20,16 @@ type Peeked struct {
 	TimeLeft                   time.Duration
 	MaxEarningBonusPercentage  float64
 	MeanEarningBonusPercentage float64
+}
+
+type Event struct {
+	Id            string
+	EventType     string
+	Multiplier    float64
+	Message       string
+	FirstSeenTime time.Time
+	LastSeenTime  time.Time
+	ExpiryTime    time.Time
 }
 
 func NewPeeked(c *coop.CoopStatus, peekedAt time.Time) *Peeked {
@@ -64,4 +75,20 @@ func (p *Peeked) IsOnTrackToFinish() bool {
 		return true
 	}
 	return p.EggsPerHour >= p.RequiredEggsPerHour
+}
+
+func (e *Event) Duration() time.Duration {
+	return e.ExpiryTime.Sub(e.FirstSeenTime)
+}
+
+func (e *Event) UnhypedMessage() string {
+	return strings.ToLower(strings.TrimRight(e.Message, "!"))
+}
+
+func (e *Event) HasTimeLeft() bool {
+	return e.ExpiryTime.After(time.Now())
+}
+
+func (e *Event) TimeLeft() time.Duration {
+	return time.Until(e.ExpiryTime)
 }
