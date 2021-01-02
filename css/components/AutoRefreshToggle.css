@@ -1,0 +1,15 @@
+#AutoRefreshToggle > .AutoRefreshToggle__bar {
+  @apply bg-gray-200;
+}
+
+#AutoRefreshToggle.AutoRefreshToggle--on > .AutoRefreshToggle__bar {
+  @apply bg-green-400;
+}
+
+#AutoRefreshToggle > .AutoRefreshToggle__slider {
+  @apply translate-x-0;
+}
+
+#AutoRefreshToggle.AutoRefreshToggle--on > .AutoRefreshToggle__slider {
+  @apply translate-x-5;
+}

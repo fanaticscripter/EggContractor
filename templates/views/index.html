@@ -5,12 +5,15 @@
     {{template "nav"}}
     <main class="flex-1 max-w-4xl w-full mx-auto">
       {{template "banners" .}}
-      {{if not .RefreshTime.IsZero}}
-        <div class="mx-4 my-4 text-center text-sm text-gray-700">
-          Data last refreshed:
-          <time class="whitespace-nowrap">{{.RefreshTime | fmtdatetime}} ({{.RefreshTime | reltime}})</time>
-        </div>
-      {{end}}
+      <div class="mx-4 my-4 text-center text-sm text-gray-700">
+        {{if not .RefreshTime.IsZero}}
+          <div>
+            Data last refreshed:
+            <time class="whitespace-nowrap">{{.RefreshTime | fmtdatetime}} ({{.RefreshTime | reltime}})</time>
+          </div>
+        {{end}}
+        {{template "auto_refresh_toggle"}}
+      </div>
       {{range .Solos}}{{template "solo" .}}{{end}}
       {{range .Coops}}{{template "coop" .}}{{end}}
       {{template "peeker" .Peeker}}

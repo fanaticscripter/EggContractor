@@ -1,0 +1,10 @@
+{{define "auto_refresh_toggle"}}
+  <div class="flex items-center justify-center mt-2">
+    <span class="mr-2">Auto refresh</span>
+    <button id="AutoRefreshToggle" type="button" class="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+      <span class="sr-only">Toggle auto refresh</span>
+      <span aria-hidden="true" class="AutoRefreshToggle__bar absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200"></span>
+      <span aria-hidden="true" class="AutoRefreshToggle__slider absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full bg-white shadow transform ring-0 transition-transform ease-in-out duration-200"></span>
+    </button>
+  </div>
+{{end}}
