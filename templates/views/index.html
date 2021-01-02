@@ -6,7 +6,7 @@
     <main class="flex-1 max-w-4xl w-full mx-auto">
       {{template "banners" .}}
       {{if not .RefreshTime.IsZero}}
-        <div class="my-4 text-center text-sm text-gray-700">
+        <div class="mx-4 my-4 text-center text-sm text-gray-700">
           Data last refreshed:
           <time class="whitespace-nowrap">{{.RefreshTime | fmtdatetime}} ({{.RefreshTime | reltime}})</time>
         </div>
