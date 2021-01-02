@@ -60,10 +60,7 @@ var _refreshCommand = &cobra.Command{
 		}
 
 		solos := solo.GetActiveSoloContracts(resp)
-		coopStatuses := resp.Data.Contracts.ActiveCoopStatuses
-		if len(solos) == 0 && len(coopStatuses) == 0 {
-			fmt.Println(util.MsgNoActiveContracts)
-		}
+		unfilteredCoopStatuses := resp.Data.Contracts.ActiveCoopStatuses
 
 		for _, c := range solos {
 			c.Display()
@@ -72,6 +69,23 @@ var _refreshCommand = &cobra.Command{
 				log.Error(err)
 				nonFatalErrorOccurred = true
 			}
+		}
+
+		// Sometimes outdated, completed contracts are still included in
+		// ActiveCoopStatuses, possibly due to a serverside bug, so we have to
+		// exclude them. See issue #9 (on my private GitLab) for an example of
+		// this.
+		coopStatuses := make([]*api.CoopStatus, 0)
+		for _, c := range unfilteredCoopStatuses {
+			if c.DurationUntilCollectionDeadline() < -24*time.Hour {
+				// At least one day past collection deadline.
+				continue
+			}
+			coopStatuses = append(coopStatuses, c)
+		}
+
+		if len(solos) == 0 && len(coopStatuses) == 0 {
+			fmt.Println(util.MsgNoActiveContracts)
 		}
 
 		type result struct {
