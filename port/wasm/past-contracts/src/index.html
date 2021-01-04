@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="apple-touch-icon-precomposed" href="/static/favicon-180.png">
+    <title>EggContractor</title>
+    <link rel="stylesheet" href="@@app.css@@">
+  </head>
+  <body>
+    <main class="flex-1 max-w-5xl w-full mx-auto">
+      <h1 class="mx-4 my-4 text-center text-lg leading-6 font-medium text-gray-900">Past contracts viewer</h1>
+      <div id="app" class="my-4">
+        <div class="flex items-center justify-center">
+          <svg class="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Loading program...
+        </div>
+      </div>
+      <div class="mx-4 my-4 xl:mx-0 text-xs">
+        <p>Disclaimer: This page is hosted by <a href="https://www.netlify.com/" target="_blank" rel="noopener">netlify.com</a> and interacts with Egg, Inc.'s server to display data. Technically, the traffic between this page and the Egg, Inc. server is mediated through <a href="https://cors-anywhere.herokuapp.com/" target="_blank" rel="noopener">cors-anywhere.herokuapp.com</a>, another public service, due to browser restrictions preventing direct connectivity. No other server is involved. Therefore, the author does not control any server in the chain, and your data and interactions on this page are confidential as far as the author is concerned (although, to be fair, all the data is effectively public anyway if you ever participated in a contract advertised in a public venue). cors-anywhere.herokuapp.com may impose rate limits on your server requests, or cause major delays outside the control of the author.</p>
+        <p>Source code: <a href="" class="text-blue-500 break-words">https://github.com/fanaticscripter/EggContractor/tree/master/port/wasm/past-contracts/</a></p>
+      </div>
+    </main>
+    <script src="wasm_exec.js"></script>
+		<script src="@@app.js@@"></script>
+  </body>
+</html>

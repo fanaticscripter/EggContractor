@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"runtime"
 	"time"
 
 	"github.com/pkg/errors"
@@ -14,13 +15,20 @@ import (
 
 const ClientVersion = 26
 
-const _apiPrefix = "http://www.auxbrain.com/ei"
+var _apiPrefix = "http://www.auxbrain.com/ei"
 
 var _client *http.Client
 
 func init() {
+	timeout := 5 * time.Second
+	if runtime.GOOS == "js" && runtime.GOARCH == "wasm" {
+		// Use CORS proxy in the browser setting.
+		_apiPrefix = "https://cors-anywhere.herokuapp.com/http://www.auxbrain.com/ei"
+		// cors-anywhere may respond very slowly.
+		timeout = 20 * time.Second
+	}
 	_client = &http.Client{
-		Timeout: 5 * time.Second,
+		Timeout: timeout,
 	}
 }
 
