@@ -23,7 +23,7 @@ func init() {
 	timeout := 5 * time.Second
 	if runtime.GOOS == "js" && runtime.GOARCH == "wasm" {
 		// Use CORS proxy in the browser setting.
-		_apiPrefix = "https://cors-anywhere.herokuapp.com/http://www.auxbrain.com/ei"
+		_apiPrefix = "https://wasmegg.zw.workers.dev/?url=http://www.auxbrain.com/ei"
 		// cors-anywhere may respond very slowly.
 		timeout = 20 * time.Second
 	}
