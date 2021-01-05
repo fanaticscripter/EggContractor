@@ -50,7 +50,7 @@ jobs:
       - name: Deploy
         uses: netlify/actions/cli@master
         with:
-          args: deploy --dir=port/wasm/dist
+          args: deploy --dir=port/wasm/dist --prod
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WASM_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
