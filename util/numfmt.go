@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"strconv"
+	"strings"
 )
 
 type Unit struct {
@@ -61,16 +62,16 @@ func init() {
 }
 
 func Numfmt(x float64) string {
-	return numfmt(x, 3)
+	return numfmt(x, 3, false)
 }
 
 func NumfmtWhole(x float64) string {
-	return numfmt(x, 0)
+	return numfmt(x, 2, true)
 }
 
-func numfmt(x float64, decimalDigits uint) string {
+func numfmt(x float64, decimalDigits uint, trimTrailingZeros bool) string {
 	if x < 0 {
-		return "-" + numfmt(-x, decimalDigits)
+		return "-" + numfmt(-x, decimalDigits, trimTrailingZeros)
 	}
 	if x == 0 {
 		return "0"
@@ -86,6 +87,10 @@ func numfmt(x float64, decimalDigits uint) string {
 		oomFloor = _maxOoM
 	}
 	principal := x / math.Pow10(oomFloor)
-	format := "%." + strconv.Itoa(int(decimalDigits)) + "f%s"
-	return fmt.Sprintf(format, principal, _oomMap[oomFloor])
+	numpart := fmt.Sprintf("%."+strconv.Itoa(int(decimalDigits))+"f", principal)
+	if trimTrailingZeros {
+		numpart = strings.TrimRight(numpart, "0")
+		numpart = strings.TrimRight(numpart, ".")
+	}
+	return numpart + _oomMap[oomFloor]
 }
