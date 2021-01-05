@@ -32,7 +32,7 @@
                       </td>
                       <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{.FirstSeenTime | fmttimecasual}}</td>
                       <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{.EventType}}</td>
-                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm font-medium">{{.UnhypedMessage}}</td>
+                      <td class="px-6 py-1 whitespace-nowrap text-center text-sm font-medium" title={{.Id}}>{{.UnhypedMessage}}</td>
                       <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{.Duration | fmtduration}}</td>
                       <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{if .HasTimeLeft}}{{.TimeLeft | fmtcountdown}}{{else}}-{{end}}</td>
                     </tr>
