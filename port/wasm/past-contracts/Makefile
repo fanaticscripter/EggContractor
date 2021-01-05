@@ -1,8 +1,11 @@
 MAKEFLAGS += -j4
 
-.PHONY: all dist html wasm webpack postcss clean serve
+.PHONY: all init dist html wasm webpack postcss clean serve
 
 all: dist
+
+init:
+	yarn install
 
 dist: html
 	../_tools/build.py dist
