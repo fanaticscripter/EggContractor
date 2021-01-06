@@ -3,7 +3,6 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"sort"
 	"time"
 
 	"github.com/pkg/errors"
@@ -91,7 +90,8 @@ func GetContracts() ([]*api.ContractProperties, error) {
 	err := transact(
 		action,
 		func(tx *sql.Tx) error {
-			rows, err := tx.Query("SELECT props FROM contract")
+			rows, err := tx.Query(`SELECT props FROM contract
+				ORDER BY first_seen_timestamp DESC NULLS LAST, expiry_timestamp DESC;`)
 			if err != nil {
 				return err
 			}
@@ -113,9 +113,6 @@ func GetContracts() ([]*api.ContractProperties, error) {
 	if err != nil {
 		return nil, err
 	}
-	sort.SliceStable(contracts, func(i, j int) bool {
-		return contracts[i].ExpiryTime().After(contracts[j].ExpiryTime())
-	})
 	return contracts, nil
 }
 
