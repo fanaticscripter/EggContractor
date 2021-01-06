@@ -46,7 +46,7 @@ var _refreshCommand = &cobra.Command{
 
 		contracts := resp.Data.AllContractProperties()
 		for _, c := range contracts {
-			err = db.InsertContract(c)
+			err = db.InsertContract(now, c)
 			if err != nil {
 				log.Error(err)
 				nonFatalErrorOccurred = true

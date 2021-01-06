@@ -17,7 +17,7 @@ import (
 	"github.com/fanaticscripter/EggContractor/config"
 )
 
-const _schemaVersion = 1
+const _schemaVersion = 2
 
 var (
 	_db         *sql.DB

@@ -15,7 +15,7 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
-func InsertContract(c *api.ContractProperties) error {
+func InsertContract(now time.Time, c *api.ContractProperties) error {
 	action := fmt.Sprintf("insert contract %s into database", c.Id)
 	marshalledProps, err := proto.Marshal(c)
 	if err != nil {
@@ -25,9 +25,9 @@ func InsertContract(c *api.ContractProperties) error {
 	return transact(
 		action,
 		func(tx *sql.Tx) error {
-			if _, err := tx.Exec(`INSERT INTO contract(text_id, expiry_year, coop_allowed, props) VALUES(?, ?, ?, ?)
+			if _, err := tx.Exec(`INSERT INTO contract(text_id, expiry_year, coop_allowed, props, first_seen_timestamp) VALUES(?, ?, ?, ?, ?)
 				ON CONFLICT(text_id, expiry_year) DO UPDATE SET coop_allowed = excluded.coop_allowed, props = excluded.props`,
-				c.Id, expiryYear, c.CoopAllowed, marshalledProps); err != nil {
+				c.Id, expiryYear, c.CoopAllowed, marshalledProps, util.TimeToDouble(now)); err != nil {
 				return err
 			}
 			return nil
