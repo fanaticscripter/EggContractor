@@ -4,12 +4,10 @@ import (
 	"fmt"
 	"os"
 	"text/tabwriter"
-	"time"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/db"
 	"github.com/fanaticscripter/EggContractor/util"
 )
@@ -23,7 +21,7 @@ var (
 		PreRunE: subcommandPreRunE,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if !_eventsNoRefresh {
-				activeEvents, err := refreshEvents()
+				activeEvents, _, err := refreshPeriodicals()
 				if err != nil {
 					log.Error(err)
 				}
@@ -90,27 +88,4 @@ var (
 func init() {
 	_rootCmd.AddCommand(_eventsCommand)
 	_eventsCommand.Flags().BoolVarP(&_eventsNoRefresh, "no-refresh", "n", false, "do not refresh current events")
-}
-
-func refreshEvents() (active []*api.Event, err error) {
-	now := time.Now()
-	p, err := api.RequestPeriodicals(&api.GetPeriodicalsRequestPayload{
-		PlayerId:     _config.Player.Id,
-		X2:           1,
-		EarningBonus: 1e12, // Use a reasonably large EB just in case
-	})
-	if err != nil {
-		return
-	}
-	active = p.Events.Events
-	seen := now
-	if p.Contracts.ResponseTimestamp != 0 {
-		seen = util.DoubleToTime(p.Contracts.ResponseTimestamp)
-	}
-	for _, e := range active {
-		if err := db.InsertEvent(seen, e); err != nil {
-			log.Error(err)
-		}
-	}
-	return
 }

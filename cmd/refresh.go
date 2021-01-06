@@ -24,7 +24,7 @@ var _refreshCommand = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		eventsDone := make(chan bool)
 		go func() {
-			_, err := refreshEvents()
+			_, _, err := refreshPeriodicals()
 			if err != nil {
 				log.Error(err)
 			}
@@ -155,4 +155,33 @@ var _refreshCommand = &cobra.Command{
 
 func init() {
 	_rootCmd.AddCommand(_refreshCommand)
+}
+
+func refreshPeriodicals() (activeEvents []*api.Event, activeContracts []*api.ContractProperties, err error) {
+	now := time.Now()
+	p, err := api.RequestPeriodicals(&api.GetPeriodicalsRequestPayload{
+		PlayerId:     _config.Player.Id,
+		X2:           1,
+		EarningBonus: 1e12, // Use a reasonably large EB just in case
+	})
+	if err != nil {
+		return
+	}
+	activeEvents = p.Events.Events
+	activeContracts = p.Contracts.Contracts
+	seen := now
+	if p.Contracts.ResponseTimestamp != 0 {
+		seen = util.DoubleToTime(p.Contracts.ResponseTimestamp)
+	}
+	for _, e := range activeEvents {
+		if err := db.InsertEvent(seen, e); err != nil {
+			log.Error(err)
+		}
+	}
+	for _, c := range activeContracts {
+		if err := db.InsertContract(seen, c); err != nil {
+			log.Error(err)
+		}
+	}
+	return
 }
