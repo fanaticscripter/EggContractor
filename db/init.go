@@ -6,18 +6,12 @@ import (
 	"path/filepath"
 	"sync"
 
-	"github.com/golang-migrate/migrate/v4"
-	"github.com/golang-migrate/migrate/v4/database"
-	"github.com/golang-migrate/migrate/v4/database/sqlite3"
-	_ "github.com/golang-migrate/migrate/v4/source/file"
 	_ "github.com/mattn/go-sqlite3"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 
 	"github.com/fanaticscripter/EggContractor/config"
 )
-
-const _schemaVersion = 2
 
 var (
 	_db         *sql.DB
@@ -37,26 +31,15 @@ func InitDB(conf *config.Config) error {
 			return
 		}
 
+		err = runMigrations(dbPath)
+		if err != nil {
+			err = errors.Wrapf(err, "error occurred during schema migrations")
+			return
+		}
+
 		_db, err = sql.Open("sqlite3", dbPath+"?_foreign_keys=on&_journal_mode=WAL")
 		if err != nil {
 			err = errors.Wrapf(err, "failed to open SQLite3 database %#v", dbPath)
-			return
-		}
-		var driver database.Driver
-		driver, err = sqlite3.WithInstance(_db, &sqlite3.Config{})
-		if err != nil {
-			err = errors.Wrap(err, "failed to initialize migrations driver")
-			return
-		}
-		var m *migrate.Migrate
-		m, err = migrate.NewWithDatabaseInstance("file://migrations", "sqlite3", driver)
-		if err != nil {
-			err = errors.Wrap(err, "failed to initialize schema migrator")
-			return
-		}
-		err = m.Migrate(_schemaVersion)
-		if err != nil && err != migrate.ErrNoChange {
-			err = errors.Wrapf(err, "failed to migrate schemas in database %#v", dbPath)
 			return
 		}
 		err = nil

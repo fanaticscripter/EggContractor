@@ -25,9 +25,15 @@ func InsertContract(now time.Time, c *api.ContractProperties) error {
 	return transact(
 		action,
 		func(tx *sql.Tx) error {
-			if _, err := tx.Exec(`INSERT INTO contract(text_id, expiry_year, coop_allowed, props, first_seen_timestamp) VALUES(?, ?, ?, ?, ?)
-				ON CONFLICT(text_id, expiry_year) DO UPDATE SET coop_allowed = excluded.coop_allowed, props = excluded.props`,
-				c.Id, expiryYear, c.CoopAllowed, marshalledProps, util.TimeToDouble(now)); err != nil {
+			if _, err := tx.Exec(`INSERT INTO
+				contract(text_id, expiry_year, coop_allowed, props, first_seen_timestamp, expiry_timestamp)
+				VALUES(?, ?, ?, ?, ?, ?)
+				ON CONFLICT(text_id, expiry_year)
+				DO UPDATE SET
+					coop_allowed = excluded.coop_allowed,
+					props = excluded.props,
+					expiry_timestamp = excluded.expiry_timestamp`,
+				c.Id, expiryYear, c.CoopAllowed, marshalledProps, util.TimeToDouble(now), c.ExpiryTimestamp); err != nil {
 				return err
 			}
 			return nil
