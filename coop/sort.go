@@ -1,22 +1,26 @@
-package api
+package coop
 
-import "sort"
+import (
+	"sort"
 
-type By func(m1, m2 *CoopStatus_Member) bool
+	"github.com/fanaticscripter/EggContractor/api"
+)
 
-var ByEggsLaid = By(func(m1, m2 *CoopStatus_Member) bool {
+type By func(m1, m2 *api.CoopStatus_Member) bool
+
+var ByEggsLaid = By(func(m1, m2 *api.CoopStatus_Member) bool {
 	return m1.EggsLaid > m2.EggsLaid
 })
 
-var ByLayingRate = By(func(m1, m2 *CoopStatus_Member) bool {
+var ByLayingRate = By(func(m1, m2 *api.CoopStatus_Member) bool {
 	return m1.EggsPerSecond > m2.EggsPerSecond
 })
 
-var ByEarningBonus = By(func(m1, m2 *CoopStatus_Member) bool {
+var ByEarningBonus = By(func(m1, m2 *api.CoopStatus_Member) bool {
 	return m1.EarningBonusOom > m2.EarningBonusOom
 })
 
-func (by By) Sort(members []*CoopStatus_Member) {
+func (by By) Sort(members []*api.CoopStatus_Member) {
 	sort.Stable(&memberSorter{
 		members: members,
 		by:      by,
@@ -24,7 +28,7 @@ func (by By) Sort(members []*CoopStatus_Member) {
 }
 
 type memberSorter struct {
-	members []*CoopStatus_Member
+	members []*api.CoopStatus_Member
 	by      By
 }
 

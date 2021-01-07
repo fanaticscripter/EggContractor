@@ -8,14 +8,14 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/config"
+	"github.com/fanaticscripter/EggContractor/coop"
 	"github.com/fanaticscripter/EggContractor/db"
 )
 
 type sortBy struct {
 	name string
-	by   api.By
+	by   coop.By
 }
 
 func (by sortBy) String() string {
@@ -31,17 +31,17 @@ func (by *sortBy) Set(s string) error {
 	case "total":
 		fallthrough
 	case "laied":
-		by.by = api.ByEggsLaid
+		by.by = coop.ByEggsLaid
 
 	case "laying_rate":
 		fallthrough
 	case "rate":
-		by.by = api.ByLayingRate
+		by.by = coop.ByLayingRate
 
 	case "earning_bonus":
 		fallthrough
 	case "eb":
-		by.by = api.ByEarningBonus
+		by.by = coop.ByEarningBonus
 
 	default:
 		return fmt.Errorf("unrecognized sorting criterion %#v", s)
@@ -69,7 +69,7 @@ func init() {
 
 	_sortBy = sortBy{
 		name: "eggs_laid",
-		by:   api.ByEggsLaid,
+		by:   coop.ByEggsLaid,
 	}
 	_rootCmd.PersistentFlags().VarP(&_sortBy, "sort", "s",
 		"sort coop members by one of the following criteria: 'eggs_laid' (aliases: 'contribution', 'total', 'laid'), 'laying_rate' (alias: 'rate'), or 'earning_bonus' (alias: 'eb')")

@@ -42,7 +42,3 @@ func (c *CoopStatus) IsOnTrackToFinish() bool {
 	}
 	return c.EggsPerHour() >= c.RequiredEggsPerHour(c.Contract)
 }
-
-func (c *CoopStatus) Display(sortBy api.By) {
-	c.CoopStatus.Display(sortBy, c.Contract)
-}

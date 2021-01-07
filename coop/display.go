@@ -1,4 +1,4 @@
-package api
+package coop
 
 import (
 	"fmt"
@@ -6,13 +6,15 @@ import (
 	"strconv"
 	"text/tabwriter"
 
+	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
 // Display prints a formatted report about the coop's current status.
 // contract is optional, and without it, the goal, expected time to complete
 // etc. cannot be calculated.
-func (c *CoopStatus) Display(sortBy By, contract *ContractProperties) {
+func (c *CoopStatus) Display(sortBy By) {
+	contract := c.Contract
 	if contract != nil {
 		fmt.Printf("%s (%s)\n", contract.Name, c.ContractId)
 	} else {
@@ -57,7 +59,7 @@ func (c *CoopStatus) Display(sortBy By, contract *ContractProperties) {
 	w.Flush()
 	fmt.Println()
 
-	members := make([]*CoopStatus_Member, len(c.Members))
+	members := make([]*api.CoopStatus_Member, len(c.Members))
 	copy(members, c.Members)
 	sortBy.Sort(members)
 	table := [][]string{
