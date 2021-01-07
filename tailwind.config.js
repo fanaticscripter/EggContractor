@@ -6,6 +6,9 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {
+      cursor: {
+        help: "help",
+      },
       minHeight: {
         // min-h-stretch fixes 100vh != actual viewport height issue in iOS Safari.
         // autoprefixer should expand stretch to -webkit-fill-available for Chrome/Safari.

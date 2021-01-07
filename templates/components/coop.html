@@ -2,6 +2,7 @@
 {{define "coop"}}
   {{if .}}
     {{$coop := .}}
+    {{$showoffline := hasactivitystats $coop}}
     {{$contract := .Contract}}
     <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-4 sm:px-6 bg-gray-50">
@@ -54,6 +55,14 @@
               {{end}}
             </dd>
           </div>
+          {{if $showoffline}}
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500 cursor-help" title="Confirmed eggs laid, plus the expected numbers accrued by each member in their offline time assuming last recorded rate. Offline time is capped at 30hr.">Eggs laid, offline-adjusted</dt>
+              <dd class="mt-1 text-sm text-gray-900">
+                  {{.OfflineAdjustedEggsLaid | numfmt}}
+              </dd>
+            </div>
+          {{end}}
           <div class="sm:col-span-1">
             <dt class="text-sm font-medium text-gray-500">Hourly laying rate</dt>
             <dd class="mt-1 text-sm text-gray-900">
@@ -78,7 +87,6 @@
       </div>
 
       {{$members := members .}}
-      {{$showoffline := hasactivitystats $coop}}
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">

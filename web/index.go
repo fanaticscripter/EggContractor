@@ -94,3 +94,7 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		Peeker:      peeker,
 	}
 }
+
+func (c *CoopStatus) OfflineAdjustedEggsLaid() float64 {
+	return c.GetOfflineAdjustedEggsLaid(c.Activities)
+}
