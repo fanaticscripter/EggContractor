@@ -81,7 +81,7 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 		if activities != nil {
 			activity, ok := activities[m.Id]
 			if ok {
-				offline := util.FormatDurationHHMM(activity.OfflineTime)
+				offline := util.FormatDurationHM(activity.OfflineTime)
 				if activity.NoActivityRecorded {
 					offline = "\u2265" + offline
 				}
