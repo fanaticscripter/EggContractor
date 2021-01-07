@@ -16,7 +16,7 @@ import (
 	"github.com/fanaticscripter/EggContractor/api"
 )
 
-const _schemaVersion = 3
+const _schemaVersion = 4
 
 func runMigrations(dbPath string) (err error) {
 	sql.Register("sqlite3_with_migration_funcs", &sqlite3.SQLiteDriver{
