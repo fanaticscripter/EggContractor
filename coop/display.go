@@ -44,6 +44,10 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 			util.Numfmt(c.EggsLaid), util.NumfmtWhole(contract.UltimateGoal(c.IsElite())))
 	}
 	fmt.Fprintf(w, "Eggs laid:\t%s\n", eggsLaidField)
+	if len(activities) > 0 {
+		offlineAdjustedEggsLaidField := util.Numfmt(c.GetOfflineAdjustedEggsLaid(activities))
+		fmt.Fprintf(w, "Eggs laid, offline-adjusted:\t%s\n", offlineAdjustedEggsLaidField)
+	}
 	layingRateField := util.Numfmt(c.EggsPerHour())
 	if contract != nil {
 		layingRateField = fmt.Sprintf("%s current / %s required",
@@ -61,7 +65,6 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 	w.Flush()
 	fmt.Println()
 
-	// TODO: offline-adjusted eggs laid
 	members := make([]*api.CoopStatus_Member, len(c.Members))
 	copy(members, c.Members)
 	sortBy.Sort(members)
@@ -69,7 +72,7 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 		{"Player", "Laid", "Rate/hr", "EB%", "Tokens"},
 		{"------", "----", "-------", "---", "------"},
 	}
-	if activities != nil {
+	if len(activities) > 0 {
 		table[0] = append(table[0], "Offline")
 		table[1] = append(table[1], "-------")
 	}
@@ -78,7 +81,7 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 			m.Name, util.Numfmt(m.EggsLaid), util.Numfmt(m.EggsPerHour()),
 			util.Numfmt(m.EarningBonusPercentage()), strconv.Itoa(int(m.Tokens)),
 		}
-		if activities != nil {
+		if len(activities) > 0 {
 			activity, ok := activities[m.Id]
 			if ok {
 				offline := util.FormatDurationHM(activity.OfflineTime)
@@ -94,7 +97,7 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 	}
 	table = append(table, table[1])
 	summaryRow := []string{"Total", util.Numfmt(c.EggsLaid), util.Numfmt(c.EggsPerHour()), "", ""}
-	if activities != nil {
+	if len(activities) > 0 {
 		summaryRow = append(summaryRow, "")
 	}
 	table = append(table, summaryRow)
