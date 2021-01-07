@@ -24,7 +24,7 @@ Note that reverse engineered API protobufs are independently available at [api/e
 
 ## Demo
 
-Below are some semi-interactive demo pages (pre-rendered, with in-page interactivity, but inter-page interactivity is likely broken):
+Below are some semi-interactive demo pages (pre-rendered, with in-page interactivity, but inter-page interactivity is likely broken). Note that the demo pages were captured from the MVP version of EggContractor, hence somewhat outdated; since then a number of major features have been implemented; for instance, offline timer for each coop member, and projection of eggs laid based on that.
 
 - Home page: [/](https://egg-contractor-static-demo.netlify.app/)
 - Home page with time travel (state at a certain timestamp in the past): [/?by=1608802500](https://egg-contractor-static-demo.netlify.app/?by=1608802500)
@@ -45,7 +45,7 @@ Advantages:
 
 - View a list of coops you recently "peeked". [Demo page](https://egg-contractor-static-demo.netlify.app/peeked/).
 
-- **Stats are routinely retrieved in the background** (frequency easily configurable) and **stored in a database.** So you can travel back in time to view your contract statuses in the past (implemented), or even plot how everyone's been doing, or project the actual number of eggs laid by taking into account how long each coop member has been offline (not implemented).
+- **Stats are routinely retrieved in the background** (frequency easily configurable) and **stored in a database.** So you can project the actual number of eggs laid by taking into account how long each coop member has been offline (implemented), travel back in time to view your contract statuses in the past (implemented), or plot every player's progress.
 
 Disadvantages:
 
