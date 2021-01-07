@@ -21,9 +21,12 @@ def wasm_handler(args):
     env = os.environ.copy()
     env["GOOS"] = "js"
     env["GOARCH"] = "wasm"
-    print("go build -o dist/app.wasm")
-    subprocess.check_call(["go", "build", "-o", "dist/app.wasm"], env=env)
+    print("go build -ldflags='-s -w' -o dist/app.wasm")
+    subprocess.check_call(
+        ["go", "build", "-ldflags=-s -w", "-o", "dist/app.wasm"], env=env
+    )
     path_with_hash_suffix = add_hash_suffix(pathlib.Path("dist/app.wasm"))
+    print(f"{path_with_hash_suffix}: {path_with_hash_suffix.stat().st_size:,} bytes")
     with open("dist/manifest.wasm.json", "w") as fp:
         fp.write(json.dumps({"app.wasm": path_with_hash_suffix.name}, indent=2))
 
