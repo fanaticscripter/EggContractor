@@ -304,6 +304,91 @@ func GetSoloAndCoopStatusesFromRefresh(byThisTime time.Time) (
 	return
 }
 
+func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
+	activities map[string]*coop.CoopMemberActivity,
+	err error,
+) {
+	action := fmt.Sprintf("retrieve member last seen times for coop (%s, %s)", c.ContractId, c.Code)
+	numMembers := len(c.Members)
+	unaccountedForMembers := make(map[string]*api.CoopStatus_Member, numMembers)
+	for _, m := range c.Members {
+		unaccountedForMembers[m.Id] = m
+	}
+	activities = make(map[string]*coop.CoopMemberActivity, numMembers)
+	err = transact(
+		action,
+		func(tx *sql.Tx) error {
+			row := tx.QueryRow(`SELECT coop.id FROM coop
+				INNER JOIN contract ON coop.contract_id = contract.id
+				WHERE contract.text_id = ? AND coop.code = ?`, c.ContractId, c.Code)
+			var coopId int64
+			if err := row.Scan(&coopId); err != nil {
+				return err
+			}
+
+			pageSize := 60
+			offset := 0
+			lastStatusUpdateTime := refreshTime
+			for len(unaccountedForMembers) > 0 {
+				rows, err := tx.Query(`SELECT timestamp, status FROM coop_status
+					WHERE coop_status.coop_id = ? AND timestamp < ?
+					ORDER BY timestamp DESC LIMIT ? OFFSET ?`,
+					coopId, util.TimeToDouble(refreshTime), pageSize, offset)
+				if err != nil {
+					return err
+				}
+				defer rows.Close()
+				numRows := 0
+				for rows.Next() {
+					numRows++
+					var timestamp float64
+					var marshalledStatus []byte
+					if err := rows.Scan(&timestamp, &marshalledStatus); err != nil {
+						return err
+					}
+					status := &api.CoopStatus{}
+					if err := proto.Unmarshal(marshalledStatus, status); err != nil {
+						return err
+					}
+					for _, m := range status.Members {
+						mm, exists := unaccountedForMembers[m.Id]
+						if !exists {
+							continue
+						}
+						if mm.EggsLaid != m.EggsLaid {
+							activities[m.Id] = &coop.CoopMemberActivity{
+								PlayerId:         mm.Id,
+								PlayerName:       mm.Name,
+								LastUpdateTime:   lastStatusUpdateTime,
+								OfflineTime:      refreshTime.Sub(lastStatusUpdateTime),
+								EggsPerHourSince: mm.EggsPerHour(),
+							}
+							delete(unaccountedForMembers, m.Id)
+						}
+					}
+					lastStatusUpdateTime = util.DoubleToTime(timestamp)
+				}
+				if numRows < pageSize {
+					break
+				}
+				offset += pageSize
+			}
+			for _, m := range unaccountedForMembers {
+				activities[m.Id] = &coop.CoopMemberActivity{
+					PlayerId:           m.Id,
+					PlayerName:         m.Name,
+					LastUpdateTime:     lastStatusUpdateTime,
+					OfflineTime:        refreshTime.Sub(lastStatusUpdateTime),
+					EggsPerHourSince:   m.EggsPerHour(),
+					NoActivityRecorded: true,
+				}
+			}
+			return nil
+		},
+	)
+	return
+}
+
 func InsertPeeked(p *Peeked) error {
 	action := fmt.Sprintf("insert peeked coop (%s, %s)", p.ContractId, p.Code)
 	return transact(

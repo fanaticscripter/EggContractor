@@ -139,7 +139,15 @@ var _refreshCommand = &cobra.Command{
 				nonFatalErrorOccurred = true
 				continue
 			}
-			coop.WrapCoopStatusWithContractList(res.status, contracts).Display(_sortBy.by)
+			wrapped := coop.WrapCoopStatusWithContractList(res.status, contracts)
+			activities, err := db.GetCoopMemberActivityStats(wrapped, res.timestamp)
+			if err != nil {
+				log.Error(err)
+				nonFatalErrorOccurred = true
+				wrapped.Display(_sortBy.by, nil)
+			} else {
+				wrapped.Display(_sortBy.by, activities)
+			}
 			if err := db.InsertCoopStatus(res.timestamp, refreshId, res.status); err != nil {
 				log.Error(err)
 				nonFatalErrorOccurred = true

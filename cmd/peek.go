@@ -36,7 +36,7 @@ var _peekCommand = &cobra.Command{
 			log.Warnf("contract %s not found in database, try using the refresh subcommand to populate the contract table",
 				contractId)
 		}
-		wrapped.Display(_sortBy.by)
+		wrapped.Display(_sortBy.by, nil)
 
 		err = db.InsertPeeked(db.NewPeeked(wrapped, now))
 		if err != nil {

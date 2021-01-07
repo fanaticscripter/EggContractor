@@ -70,6 +70,19 @@ func FormatDuration(d time.Duration) string {
 	return fmt.Sprintf("%dd%dh%dm", dd, hh, mm)
 }
 
+func FormatDurationHHMM(d time.Duration) string {
+	if d < 0 {
+		return "-" + FormatDurationHHMM(-d)
+	}
+	if d == InfDuration {
+		return "forever"
+	}
+	hh := d / time.Hour
+	d -= hh * time.Hour
+	mm := d / time.Minute
+	return fmt.Sprintf("%02d:%02d", hh, mm)
+}
+
 func FormatCountdown(d time.Duration) string {
 	if d < 0 {
 		return "0:00:00"

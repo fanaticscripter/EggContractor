@@ -38,7 +38,18 @@ This command does not touch the network, only the database.`,
 			solo.Display()
 		}
 		for _, coop := range coops {
-			coop.Display(_sortBy.by)
+			// Apparently GetCoopMemberActivityStats is not in the same
+			// transaction as GetSoloAndCoopStatusesFromRefresh, or as each
+			// other, so not technically correct. But in reality it's good
+			// enough, and is easier for this programmer to code without more
+			// refactoring.
+			activities, err := db.GetCoopMemberActivityStats(coop, timestamp)
+			if err != nil {
+				log.Error(err)
+				coop.Display(_sortBy.by, nil)
+			} else {
+				coop.Display(_sortBy.by, activities)
+			}
 		}
 		return nil
 	},

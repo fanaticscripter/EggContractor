@@ -13,7 +13,9 @@ import (
 // Display prints a formatted report about the coop's current status.
 // contract is optional, and without it, the goal, expected time to complete
 // etc. cannot be calculated.
-func (c *CoopStatus) Display(sortBy By) {
+// activities is also optional, and if passed, an additional offline timer
+// column is displayed.
+func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivity) {
 	contract := c.Contract
 	if contract != nil {
 		fmt.Printf("%s (%s)\n", contract.Name, c.ContractId)
@@ -59,6 +61,7 @@ func (c *CoopStatus) Display(sortBy By) {
 	w.Flush()
 	fmt.Println()
 
+	// TODO: offline-adjusted eggs laid
 	members := make([]*api.CoopStatus_Member, len(c.Members))
 	copy(members, c.Members)
 	sortBy.Sort(members)
@@ -66,14 +69,35 @@ func (c *CoopStatus) Display(sortBy By) {
 		{"Player", "Laid", "Rate/hr", "EB%", "Tokens"},
 		{"------", "----", "-------", "---", "------"},
 	}
+	if activities != nil {
+		table[0] = append(table[0], "Offline")
+		table[1] = append(table[1], "-------")
+	}
 	for _, m := range members {
-		table = append(table, []string{
+		row := []string{
 			m.Name, util.Numfmt(m.EggsLaid), util.Numfmt(m.EggsPerHour()),
 			util.Numfmt(m.EarningBonusPercentage()), strconv.Itoa(int(m.Tokens)),
-		})
+		}
+		if activities != nil {
+			activity, ok := activities[m.Id]
+			if ok {
+				offline := util.FormatDurationHHMM(activity.OfflineTime)
+				if activity.NoActivityRecorded {
+					offline = "\u2265" + offline
+				}
+				row = append(row, offline)
+			} else {
+				row = append(row, "")
+			}
+		}
+		table = append(table, row)
 	}
 	table = append(table, table[1])
-	table = append(table, []string{"Total", util.Numfmt(c.EggsLaid), util.Numfmt(c.EggsPerHour()), "", ""})
+	summaryRow := []string{"Total", util.Numfmt(c.EggsLaid), util.Numfmt(c.EggsPerHour()), "", ""}
+	if activities != nil {
+		summaryRow = append(summaryRow, "")
+	}
+	table = append(table, summaryRow)
 	util.PrintTable(table)
 	fmt.Println()
 }
