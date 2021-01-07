@@ -6,10 +6,14 @@ import (
 	"github.com/pkg/errors"
 
 	"github.com/fanaticscripter/EggContractor/api"
-	"github.com/fanaticscripter/EggContractor/coop"
 	"github.com/fanaticscripter/EggContractor/db"
 	"github.com/fanaticscripter/EggContractor/util"
 )
+
+// Interface that accomodates api.CoopStatus, coop.CoopStatus, and web.CoopStatus.
+type getMembers interface {
+	GetMembers() []*api.CoopStatus_Member
+}
 
 type coopMemberPayload struct {
 	Id                        string  `json:"id"`
@@ -22,6 +26,8 @@ type coopMemberPayload struct {
 	EarningBonusPercentageStr string  `json:"earningBonusPercentageStr"`
 	Tokens                    int32   `json:"tokens"`
 	IsActive                  bool    `json:"isActive"`
+	OfflineSeconds            float64 `json:"offlineSeconds"`
+	OfflineTimeStr            string  `json:"offlineTimeStr"`
 }
 
 type peekerPayload struct {
@@ -46,12 +52,35 @@ func newCoopMemberPayload(m *api.CoopStatus_Member) *coopMemberPayload {
 	}
 }
 
-func getMemberPayloads(c *coop.CoopStatus) []*coopMemberPayload {
-	payloads := make([]*coopMemberPayload, len(c.Members))
-	for i, m := range c.Members {
+func getMemberPayloads(c getMembers) []*coopMemberPayload {
+	payloads := make([]*coopMemberPayload, len(c.GetMembers()))
+	for i, m := range c.GetMembers() {
 		payloads[i] = newCoopMemberPayload(m)
 	}
+	cc, ok := c.(*CoopStatus)
+	if ok && cc.Activities != nil {
+		for i, m := range c.GetMembers() {
+			activity, ok := cc.Activities[m.Id]
+			if ok {
+				payloads[i].OfflineSeconds = activity.OfflineTime.Seconds()
+				offlineTimeStr := util.FormatDurationHM(activity.OfflineTime)
+				if activity.NoActivityRecorded {
+					offlineTimeStr = "\u2265 " + offlineTimeStr
+				}
+				payloads[i].OfflineTimeStr = offlineTimeStr
+			}
+		}
+	}
 	return payloads
+}
+
+// Tests whether the coop has associated activity stats.
+func hasActivityStats(c getMembers) bool {
+	cc, ok := c.(*CoopStatus)
+	if !ok {
+		return false
+	}
+	return cc.Activities != nil
 }
 
 // On error, returns a payload with the passed in presets and no contracts.

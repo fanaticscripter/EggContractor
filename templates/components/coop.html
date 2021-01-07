@@ -1,6 +1,7 @@
-{{- /* The coop template renders a coop.CoopStatus, where the associated contract may be nil. */ -}}
+{{- /* The coop template renders a coop.CoopStatus or web.CoopStatus, where the associated contract may be nil. */ -}}
 {{define "coop"}}
   {{if .}}
+    {{$coop := .}}
     {{$contract := .Contract}}
     <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg">
       <div class="px-4 py-4 sm:px-6 bg-gray-50">
@@ -77,6 +78,7 @@
       </div>
 
       {{$members := members .}}
+      {{$showoffline := hasactivitystats $coop}}
       <div class="flex flex-col">
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -90,6 +92,7 @@
                       <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Rate/hr<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
                       <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">EB%<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
                       <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tokens<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>
+                      {{if $showoffline}}<th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Offline<span class="inline-block w-0 text-gray-400 invisible">&nbsp;&#x25BC;</span></th>{{end}}
                     </tr>
                   </thead>
                   <tbody>
@@ -100,6 +103,7 @@
                         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EggsPerHourStr}}</td>
                         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.EarningBonusPercentageStr}}</td>
                         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.Tokens}}</td>
+                        {{if $showoffline}}<td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{.OfflineTimeStr}}</td>{{end}}
                       </tr>
                     {{end}}
                   </tbody>

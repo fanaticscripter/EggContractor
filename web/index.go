@@ -19,9 +19,14 @@ type indexPayload struct {
 
 	RefreshTime time.Time
 	Solos       []*solo.SoloContract
-	Coops       []*coop.CoopStatus
+	Coops       []*CoopStatus
 
 	Peeker *peekerPayload
+}
+
+type CoopStatus struct {
+	*coop.CoopStatus
+	Activities map[string]*coop.CoopMemberActivity
 }
 
 // GET /?by=<timestamp>
@@ -55,6 +60,19 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		warnings = append(warnings, util.MsgNoActiveContracts)
 	}
 
+	wrappedCoops := make([]*CoopStatus, len(coops))
+	for i, c := range coops {
+		activities, err := db.GetCoopMemberActivityStats(c, timestamp)
+		if err != nil {
+			errs = append(errs, err)
+			activities = nil
+		}
+		wrappedCoops[i] = &CoopStatus{
+			CoopStatus: c,
+			Activities: activities,
+		}
+	}
+
 	contractIds := make([]string, 0)
 	for _, c := range solos {
 		contractIds = append(contractIds, c.GetId())
@@ -72,7 +90,7 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		Warnings:    warnings,
 		RefreshTime: timestamp,
 		Solos:       solos,
-		Coops:       coops,
+		Coops:       wrappedCoops,
 		Peeker:      peeker,
 	}
 }
