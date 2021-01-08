@@ -218,7 +218,7 @@ func notifyNewContract(c *api.ContractProperties) {
 		// Notification system not initialized.
 		return
 	}
-	if time.Now().After(c.ExpiryTime()) {
+	if time.Now().After(c.ExpiryTime()) || c.Id == "first-contract" {
 		return
 	}
 	n, err := notify.NewContractNotification(c)
