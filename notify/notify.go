@@ -39,6 +39,7 @@ func NotificationWorker(conf config.NotificationConfig, notifications <-chan Not
 				wg.Done()
 			}(n, m)
 		}
+		time.Sleep(250 * time.Millisecond)
 	}
 	wg.Wait()
 }
