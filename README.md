@@ -47,6 +47,8 @@ Advantages:
 
 - **Stats are routinely retrieved in the background** (frequency easily configurable) and **stored in a database.** So you can project the actual number of eggs laid by taking into account how long each coop member has been offline (implemented), travel back in time to view your contract statuses in the past (implemented), or plot every player's progress.
 
+- Send you push notifications (via [Pushover](https://pushover.net/)) when new contracts come online.
+
 Disadvantages:
 
 - Frontend fanciness in general. I didn't bother to invest time into the frontend, so no pretty little pictures, no progress bars, and no dark theme (kind of a shame, not hard to add though). Hopefully you can still easily pick out whatever info you need from my UI.
