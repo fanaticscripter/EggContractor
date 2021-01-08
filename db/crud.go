@@ -14,16 +14,35 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
-func InsertContract(now time.Time, c *api.ContractProperties) error {
+// InsertContract upserts the contract into the database. If checkExistence is
+// true, perform an additional query beforehand to determine whether the
+// contract already exists in the database, and if so, set exists to true in the
+// return values. If checkExistence is false, then exists in the return values
+// is meaningless.
+func InsertContract(now time.Time, c *api.ContractProperties, checkExistence bool) (exists bool, err error) {
 	action := fmt.Sprintf("insert contract %s into database", c.Id)
 	marshalledProps, err := proto.Marshal(c)
 	if err != nil {
-		return errors.Wrap(err, action)
+		err = errors.Wrap(err, action)
+		return
 	}
 	expiryYear := c.ExpiryTime().Year()
-	return transact(
+	err = transact(
 		action,
 		func(tx *sql.Tx) error {
+			if checkExistence {
+				row := tx.QueryRow(`SELECT id FROM contract WHERE text_id = ? AND expiry_year = ?`, c.Id, expiryYear)
+				var rowid int64
+				err := row.Scan(&rowid)
+				switch {
+				case err == sql.ErrNoRows:
+					// Contract doesn't exist
+				case err != nil:
+					return err
+				default:
+					exists = true
+				}
+			}
 			if _, err := tx.Exec(`INSERT INTO
 				contract(text_id, expiry_year, coop_allowed, props, first_seen_timestamp, expiry_timestamp)
 				VALUES(?, ?, ?, ?, ?, ?)
@@ -38,6 +57,7 @@ func InsertContract(now time.Time, c *api.ContractProperties) error {
 			return nil
 		},
 	)
+	return
 }
 
 // expiryYear is optional. When left unspecified, the latest iteration is

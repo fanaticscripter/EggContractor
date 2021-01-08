@@ -12,9 +12,12 @@ import (
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/coop"
 	"github.com/fanaticscripter/EggContractor/db"
+	"github.com/fanaticscripter/EggContractor/notify"
 	"github.com/fanaticscripter/EggContractor/solo"
 	"github.com/fanaticscripter/EggContractor/util"
 )
+
+var _notifications chan notify.Notification
 
 var _refreshCommand = &cobra.Command{
 	Use:     "refresh",
@@ -22,15 +25,26 @@ var _refreshCommand = &cobra.Command{
 	Args:    cobra.NoArgs,
 	PreRunE: subcommandPreRunE,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		eventsDone := make(chan bool)
+		notificationsDone := make(chan bool)
+		_notifications = make(chan notify.Notification, 4)
+		go func() {
+			notify.NotificationWorker(_config.Notification, _notifications)
+			notificationsDone <- true
+		}()
+		defer func() {
+			close(_notifications)
+			<-notificationsDone
+		}()
+
+		periodicalsDone := make(chan bool)
 		go func() {
 			_, _, err := refreshPeriodicals()
 			if err != nil {
 				log.Error(err)
 			}
-			eventsDone <- true
+			periodicalsDone <- true
 		}()
-		defer func() { <-eventsDone }()
+		defer func() { <-periodicalsDone }()
 
 		playerId := _config.Player.Id
 		now := time.Now()
@@ -46,10 +60,12 @@ var _refreshCommand = &cobra.Command{
 
 		contracts := resp.Data.AllContractProperties()
 		for _, c := range contracts {
-			err = db.InsertContract(now, c)
+			exists, err := db.InsertContract(now, c, true /* checkExistence */)
 			if err != nil {
 				log.Error(err)
 				nonFatalErrorOccurred = true
+			} else if !exists {
+				notifyNewContract(c)
 			}
 		}
 
@@ -187,9 +203,28 @@ func refreshPeriodicals() (activeEvents []*api.Event, activeContracts []*api.Con
 		}
 	}
 	for _, c := range activeContracts {
-		if err := db.InsertContract(seen, c); err != nil {
+		exists, err := db.InsertContract(seen, c, true /* checkExistence */)
+		if err != nil {
 			log.Error(err)
+		} else if !exists {
+			notifyNewContract(c)
 		}
 	}
 	return
+}
+
+func notifyNewContract(c *api.ContractProperties) {
+	if _notifications == nil {
+		// Notification system not initialized.
+		return
+	}
+	if time.Now().After(c.ExpiryTime()) {
+		return
+	}
+	n, err := notify.NewContractNotification(c)
+	if err != nil {
+		log.Error(err)
+	} else {
+		_notifications <- n
+	}
 }
