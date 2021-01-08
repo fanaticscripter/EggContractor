@@ -259,7 +259,10 @@ message GetPeriodicalsRequestPayload {
 }
 
 message Periodicals {
-  string _1 = 1;  // always empty in my experience
+  message Sales {
+    repeated Sale sales = 1;
+  }
+  Sales sales = 1;
   message Events {
     repeated Event events = 1;
   }
@@ -271,6 +274,14 @@ message Periodicals {
                                     // awkward position, I have no damn clue.
   }
   Contracts contracts = 3;
+}
+
+message Sale {
+  string sale_type = 1;  // Example: "piggy_break"
+  double seconds_remaining = 2;
+  string sale_amount = 3;  // Example: "40%"; no equivalent numeric field
+  string id = 4;           // Example: "gametime-piggy-sale"
+                           // I'm not actually sure this is an ID
 }
 
 message Event {
