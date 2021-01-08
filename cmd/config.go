@@ -28,6 +28,9 @@ var _configCommand = &cobra.Command{
 		fmt.Fprintf(w, "config file:\t%s\n", viper.ConfigFileUsed())
 		fmt.Fprintf(w, "player.id:\t%s\n", _config.Player.Id)
 		fmt.Fprintf(w, "database.path:\t%s\n", _config.Database.Path)
+		fmt.Fprintf(w, "notification.pushover.on:\t%t\n", _config.Notification.Pushover.On)
+		fmt.Fprintf(w, "notification.pushover.api_key:\t%s\n", _config.Notification.Pushover.APIKey)
+		fmt.Fprintf(w, "notification.pushover.user_key:\t%s\n", _config.Notification.Pushover.UserKey)
 		w.Flush()
 		return nil
 	},

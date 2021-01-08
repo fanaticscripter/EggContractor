@@ -128,6 +128,23 @@ id = "G:1234567890"
 
 [database]
 path = "/data/data.db"
+
+[notification]
+  [notification.pushover]
+  # notification.pushover.on, optional.
+  #
+  # If true, turn on notifications through Pushover; in that case, api_key and
+  # user_key below are required.
+  #
+  # Default is false.
+  #on = true
+
+  # See https://pushover.net/api#registration.
+  #api_key = "azGDORePK8gMaC0QOYAMyEEuzJnyUi"
+
+  # See https://pushover.net/api#identifiers. A group key, or a comma-delimited
+  # list of user keys may be used here instead.
+  #user_key = "uQiRzpo4DXghDmr9QzzfQu27cmVRsG"
 ```
 
 `.env`:
