@@ -37,7 +37,7 @@ func InitDB(conf *config.Config) error {
 			return
 		}
 
-		_db, err = sql.Open("sqlite3", dbPath+"?_foreign_keys=on&_journal_mode=WAL")
+		_db, err = sql.Open("sqlite3", dbPath+"?_foreign_keys=on&_journal_mode=WAL&_busy_timeout=10")
 		if err != nil {
 			err = errors.Wrapf(err, "failed to open SQLite3 database %#v", dbPath)
 			return
