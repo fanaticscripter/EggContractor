@@ -342,7 +342,12 @@ func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
 				INNER JOIN contract ON coop.contract_id = contract.id
 				WHERE contract.text_id = ? AND coop.code = ?`, c.ContractId, c.Code)
 			var coopId int64
-			if err := row.Scan(&coopId); err != nil {
+			err := row.Scan(&coopId)
+			switch {
+			case err == sql.ErrNoRows:
+				// First time seeing this coop.
+				return nil
+			case err != nil:
 				return err
 			}
 
