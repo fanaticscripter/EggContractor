@@ -19,7 +19,10 @@ import (
 )
 
 type localConfig struct {
-	Database   config.DatabaseConfig
+	Database config.DatabaseConfig
+	Export   struct {
+		CSVPath string `mapstructure:"csv_path"`
+	}
 	Aggregator struct {
 		PlayerIdBlacklist []string `mapstructure:"player_id_blacklist"`
 		KnownContractIds  []string `mapstructure:"known_contract_ids"`
@@ -49,6 +52,10 @@ Config file (defaults to config.toml):
   [database]
   # Path for contracts database. Required.
   path = "data/contracts.db"
+
+  [export]
+  # Path for exported CSV database.
+  csv_path = "data/contracts.csv"
 
   [aggregator]
   # A list of user IDs blacklisted for unreliable contract information, e.g. for
@@ -140,6 +147,12 @@ LoopPlayerIdSet:
 	}
 
 	printStillMissingContracts()
+
+	csvpath := _config.Export.CSVPath
+	if csvpath != "" {
+		log.Infof("dumping contracts into %#v", csvpath)
+		dumpContractDBToCSV(csvpath)
+	}
 }
 
 func loadConfig(cfgFile string) error {
