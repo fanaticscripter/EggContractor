@@ -38,7 +38,7 @@ var _contractsCommand = &cobra.Command{
 			table = append(table, []string{
 				c.Id, c.Name, c.EggType.Display(),
 				util.NumfmtWhole(c.UltimateGoal(true)),
-				fmt.Sprintf("%.0fd", c.Duration().Hours()/24),
+				util.FormatDurationWhole(c.Duration()),
 				fmt.Sprintf("%d", c.MaxCoopSize),
 				fmt.Sprintf("%.0fm", c.TokenInterval),
 				util.FormatDate(c.ExpiryTime()),

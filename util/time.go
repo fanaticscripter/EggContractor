@@ -70,6 +70,22 @@ func FormatDuration(d time.Duration) string {
 	return fmt.Sprintf("%dd%dh%dm", dd, hh, mm)
 }
 
+func FormatDurationWhole(d time.Duration) string {
+	if d < 0 {
+		return "-" + FormatDurationWhole(-d)
+	}
+	if d == InfDuration {
+		return "forever"
+	}
+	if d <= 3570*time.Second /* 59.5min */ {
+		return fmt.Sprintf("%.0fm", math.Round(d.Minutes()))
+	}
+	if d <= 1410*time.Minute /* 23.5hr */ {
+		return fmt.Sprintf("%.0fh", math.Round(d.Hours()))
+	}
+	return fmt.Sprintf("%.0fd", math.Round(d.Hours()/24))
+}
+
 func FormatDurationHM(d time.Duration) string {
 	if d < 0 {
 		return "-" + FormatDurationHM(-d)
