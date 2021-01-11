@@ -50,7 +50,8 @@ func InsertContract(now time.Time, c *api.ContractProperties, checkExistence boo
 				DO UPDATE SET
 					coop_allowed = excluded.coop_allowed,
 					props = excluded.props,
-					expiry_timestamp = excluded.expiry_timestamp`,
+					expiry_timestamp = excluded.expiry_timestamp
+				WHERE excluded.expiry_timestamp < expiry_timestamp`,
 				c.Id, expiryYear, c.CoopAllowed, marshalledProps, util.TimeToDouble(now), c.ExpiryTimestamp); err != nil {
 				return err
 			}
