@@ -1,3 +1,4 @@
 /ContractAggregator
 /config.toml
-/data
+/data/*
+!/data/contracts.csv
