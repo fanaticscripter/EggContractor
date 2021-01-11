@@ -55,6 +55,9 @@ var _refreshCommand = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		if resp.Data == nil || resp.Data.PlayerId == "" {
+			return fmt.Errorf("invalid /first_contact response for player %#v: %+v", playerId, resp)
+		}
 
 		nonFatalErrorOccurred := false
 
