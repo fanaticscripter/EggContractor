@@ -107,7 +107,7 @@ func subcommandPreRunE(cmd *cobra.Command, args []string) error {
 	if err := initConfig(); err != nil {
 		return err
 	}
-	if err := db.InitDB(_config); err != nil {
+	if err := db.InitDB(_config.Database); err != nil {
 		return err
 	}
 	return nil

@@ -18,10 +18,10 @@ var (
 	_initDBOnce sync.Once
 )
 
-func InitDB(conf *config.Config) error {
+func InitDB(conf config.DatabaseConfig) error {
 	var err error
 	_initDBOnce.Do(func() {
-		dbPath := conf.Database.Path
+		dbPath := conf.Path
 		log.Debugf("database path: %s", dbPath)
 
 		parentDir := filepath.Dir(dbPath)
