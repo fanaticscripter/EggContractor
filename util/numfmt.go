@@ -82,6 +82,11 @@ func numfmt(x float64, decimalDigits uint, trimTrailingZeros bool) string {
 		return fmt.Sprintf("%.0f", x)
 	}
 	oomFloor := int(oom)
+	if oom+1e-9 >= float64(oomFloor+1) {
+		// Fix problem of 1q being displayed as 1000T, 1N displayed as 1000o, etc,
+		// where the floor is one integer down due to floating point imprecision.
+		oomFloor += 1
+	}
 	oomFloor -= oomFloor % 3
 	if oomFloor > _maxOoM {
 		oomFloor = _maxOoM
