@@ -56,13 +56,17 @@ const (
 const _defaultDatabasePath = "~/.local/share/" + ProgName + "/data.db"
 
 type Config struct {
-	Player struct {
-		Id string
-	}
-	Database struct {
-		Path string
-	}
+	Player       PlayerConfig
+	Database     DatabaseConfig
 	Notification NotificationConfig
+}
+
+type PlayerConfig struct {
+	Id string
+}
+
+type DatabaseConfig struct {
+	Path string
 }
 
 type NotificationConfig struct {
