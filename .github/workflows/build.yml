@@ -55,3 +55,18 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WASM_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         if: github.ref == 'refs/heads/master'
+
+  ContractAggregator:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: misc/ContractAggregator
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15'
+      - name: Build
+        run: |
+          make
