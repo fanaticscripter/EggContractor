@@ -150,6 +150,15 @@ func GetCoopContracts() ([]*api.ContractProperties, error) {
 	return coopContracts, nil
 }
 
+func GetContractCount() (int, error) {
+	var count int
+	err := _db.QueryRow("SELECT COUNT(*) FROM contract").Scan(&count)
+	if err != nil {
+		return 0, errors.Wrap(err, "retrieve contract count")
+	}
+	return count, nil
+}
+
 func InsertRefresh(timestamp time.Time) (refreshId int64, err error) {
 	err = transact(
 		"insert to table refresh",
