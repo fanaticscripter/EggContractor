@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr v-for="(member, index) in sortedMembers" :key="member.id" :class="index % 2 === 1 ? 'bg-gray-50' : 'bg-white'">
-        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500" :class="{ 'CoopTable__member--snoozing': !member.isActive }" :title="member.id">{{ member.name }}</td>
+        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500 hover:text-gray-400 cursor-pointer" :class="{ 'CoopTable__member--snoozing': !member.isActive }" :title="`${member.id} (click to copy)`" @click="copy(member.id, `Copied ID of ${member.name}`)">{{ member.name }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsLaidStr }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsPerHourStr }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.earningBonusPercentageStr }}</td>
@@ -22,9 +22,14 @@
       </tr>
     </tbody>
   </table>
+  <transition name="fade">
+    <div v-show="popupShow" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded text-sm text-green-500 bg-white bg-opacity-80">{{ popupMessage }}</div>
+  </transition>
 </template>
 
 <script>
+import copyTextToClipboard from 'copy-text-to-clipboard';
+
 export default {
   props: {
     members: Array,
@@ -41,6 +46,9 @@ export default {
         { sortBy: "offlineSeconds", name: "Offline" },
       ],
       sortBy: "eggsLaid",
+      popupTimeoutId: null,
+      popupShow: false,
+      popupMessage: "",
     };
   },
 
@@ -63,5 +71,34 @@ export default {
       });
     },
   },
+
+  methods: {
+    copy (s, msg) {
+      copyTextToClipboard(s);
+      this.popupMessage = msg;
+      this.popupShow = true;
+      if (this.popupTimeoutId !== null) {
+        clearTimeout(this.popupTimeoutId);
+      }
+      this.popupTimeoutId = setTimeout(() => {
+        this.popupShow = false;
+      }, 3000);
+    }
+  }
 };
 </script>
+
+<style scoped>
+  .fade-enter-active {
+    transition: opacity 0.1s ease;
+  }
+
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+</style>
