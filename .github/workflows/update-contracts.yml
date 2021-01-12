@@ -1,0 +1,42 @@
+name: update contracts
+on:
+  push:
+  pull_request_target:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 * * * *'
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: misc/ContractAggregator
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '^1.15'
+      - name: Build
+        run: |
+          make
+      - name: Create config file
+        run: |
+          cat >config.toml <<'EOF'
+          [database]
+          path = "data/contracts.db"
+          [export]
+          csv_path = "data/contracts.csv"
+          EOF
+      - name: Update contracts
+        run: |
+          ./ContractAggregator --bootstrap-csv
+      - name: Commit and push changes
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'actions@github.com'
+          git add data
+          git diff --cached --quiet || git commit -m 'misc/ContractAggregator: update contracts (from GitHub Actions)'
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
