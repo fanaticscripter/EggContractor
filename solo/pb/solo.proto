@@ -11,5 +11,5 @@ message SoloContract {
   double eggs_per_second = 6;
   double seconds_until_production_deadline = 8;
   double seconds_until_collection_deadline = 9;
-  double last_refreshed_timestamp = 10;
+  double server_refresh_timestamp = 10;
 }

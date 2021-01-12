@@ -14,6 +14,6 @@ func (c *SoloContract) GetDurationUntilCollectionDeadline() time.Duration {
 	return util.DoubleToDuration(c.SecondsUntilCollectionDeadline)
 }
 
-func (c *SoloContract) GetLastRefreshedTime() time.Time {
-	return util.DoubleToTime(c.LastRefreshedTimestamp)
+func (c *SoloContract) GetServerRefreshTime() time.Time {
+	return util.DoubleToTime(c.ServerRefreshTimestamp)
 }

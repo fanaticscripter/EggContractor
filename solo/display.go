@@ -30,8 +30,8 @@ func (c *SoloContract) Display(now time.Time) {
 	fmt.Fprintf(w, "Time to complete, offline-adjusted:\t%s\n",
 		util.FormatDuration(c.GetOfflineAdjustedExpectedDurationUntilFinish(now)))
 	fmt.Fprintf(w, "Reported to server:\t%s (%s)\n",
-		util.FormatDatetime(c.GetLastRefreshedTime()),
-		humanize.Time(c.GetLastRefreshedTime()))
+		util.FormatDatetime(c.GetServerRefreshTime()),
+		humanize.Time(c.GetServerRefreshTime()))
 	w.Flush()
 	fmt.Println()
 }

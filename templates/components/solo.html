@@ -47,7 +47,7 @@ indistinguishability in the UI. */ -}}
           </div>
           <div class="sm:col-span-1">
             <dt class="text-sm font-medium text-gray-500">Reported to server</dt>
-            <dd class="mt-1 text-sm text-gray-900">{{.GetLastRefreshedTime | fmtdatetime}} ({{.GetLastRefreshedTime | reltime}})</dd>
+            <dd class="mt-1 text-sm text-gray-900">{{.GetServerRefreshTime | fmtdatetime}} ({{.GetServerRefreshTime | reltime}})</dd>
           </div>
         </dl>
       </div>

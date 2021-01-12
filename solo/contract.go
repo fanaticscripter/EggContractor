@@ -35,7 +35,7 @@ type BaseSoloContract interface {
 	GetEggsPerSecond() float64
 	GetDurationUntilProductionDeadline() time.Duration
 	GetDurationUntilCollectionDeadline() time.Duration
-	GetLastRefreshedTime() time.Time
+	GetServerRefreshTime() time.Time
 }
 
 type SoloContract struct {
@@ -50,7 +50,7 @@ func (c *SoloContract) GetEggsPerHour() float64 {
 // amount laid during offline time (duration between last server refresh and
 // specified client refresh), which is capped at 30hr.
 func (c *SoloContract) GetOfflineAdjustedEggsLaid(clientRefreshTime time.Time) float64 {
-	offlineHours := clientRefreshTime.Sub(c.GetLastRefreshedTime()).Hours()
+	offlineHours := clientRefreshTime.Sub(c.GetServerRefreshTime()).Hours()
 	if offlineHours > 30 {
 		offlineHours = 30
 	}
@@ -82,7 +82,7 @@ func (c *SoloContract) ExpectedDurationUntilFinish() time.Duration {
 // finish minus the offline duration (duration between last server refresh and
 // specified client refresh), capped at 30hr.
 func (c *SoloContract) GetOfflineAdjustedExpectedDurationUntilFinish(clientRefreshTime time.Time) time.Duration {
-	offline := clientRefreshTime.Sub(c.GetLastRefreshedTime())
+	offline := clientRefreshTime.Sub(c.GetServerRefreshTime())
 	if offline > 30*time.Hour {
 		offline = 30 * time.Hour
 	}
@@ -106,7 +106,7 @@ func (c *SoloContract) ToPBSoloContract() *pb.SoloContract {
 		EggsPerSecond:                  c.GetEggsPerSecond(),
 		SecondsUntilProductionDeadline: c.GetDurationUntilProductionDeadline().Seconds(),
 		SecondsUntilCollectionDeadline: c.GetDurationUntilCollectionDeadline().Seconds(),
-		LastRefreshedTimestamp:         util.TimeToDouble(c.GetLastRefreshedTime()),
+		ServerRefreshTimestamp:         util.TimeToDouble(c.GetServerRefreshTime()),
 	}
 }
 
@@ -199,6 +199,6 @@ func (c *soloContract) GetDurationUntilCollectionDeadline() time.Duration {
 	return time.Until(c.Contract.CollectionDeadlineTime())
 }
 
-func (c *soloContract) GetLastRefreshedTime() time.Time {
+func (c *soloContract) GetServerRefreshTime() time.Time {
 	return c.Farm.LastSavedTime()
 }
