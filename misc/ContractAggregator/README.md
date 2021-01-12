@@ -64,6 +64,7 @@ The columns:
 - **Offering (Estimated)**: estimated date (UTC) when the contract was unveiled; estimation strategy: expiry minus 3 weeks for originals; expiry minus 1 week for leggacies;
 - **Expiry**: earliest expiry timestamp (UTC) we've witnessed accross scraped players; may not be accurate, especially for early contracts in 2018;
 - **Egg**: egg type, self-explanatory;
+- **Egg Value**: self-explanatory;
 - **Duration**: time to complete the contract;
 - **Size**: max coop size, N/A when coop not-allowed;
 - **Token**: token interval, N/A when boost tokens weren't a thing yet;
