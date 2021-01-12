@@ -172,6 +172,30 @@ func getContractsFromDB() ([]*contract, error) {
 	return wrappedContracts, nil
 }
 
+func populateDBWithContracts(contracts []*api.ContractProperties) error {
+	now := time.Now()
+	for _, c := range contracts {
+		_, err := db.InsertContract(now, c, false /* checkExistence */)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func decodeB64Protobuf(s string) (*api.ContractProperties, error) {
+	protob, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+	contract := &api.ContractProperties{}
+	err = proto.Unmarshal(protob, contract)
+	if err != nil {
+		return nil, err
+	}
+	return contract, nil
+}
+
 func extend(s []string, length int) []string {
 	for len(s) < length {
 		s = append(s, "")

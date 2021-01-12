@@ -37,6 +37,7 @@ func init() {
 
 func main() {
 	var cfgFile string
+	var bootstrapFromCSV bool
 
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, `Usage: %s <identifier> ...
@@ -73,6 +74,7 @@ Flags:
 		flag.PrintDefaults()
 	}
 	flag.StringVar(&cfgFile, "config", "config.toml", "config file")
+	flag.BoolVar(&bootstrapFromCSV, "bootstrap-csv", false, "bootstrap from previously exported CSV file")
 	flag.Parse()
 	identifiers := flag.Args()
 
@@ -87,6 +89,20 @@ Flags:
 	err = db.InitDB(_config.Database)
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	if bootstrapFromCSV {
+		if _config.Export.CSVPath == "" {
+			log.Fatalf("%s: export.csv_path is not set", cfgFile)
+		}
+		contracts, err := getContractsFromCSV(_config.Export.CSVPath)
+		if err != nil {
+			log.Fatalf("failed to load contracts from CSV file: %s", err)
+		}
+		err = populateDBWithContracts(contracts)
+		if err != nil {
+			log.Fatalf("failed to populate database: %s", err)
+		}
 	}
 
 	beforeCount, err := db.GetContractCount()

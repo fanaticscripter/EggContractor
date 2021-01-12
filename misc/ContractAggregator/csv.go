@@ -3,11 +3,14 @@ package main
 import (
 	"encoding/csv"
 	"fmt"
+	"io"
 	"os"
 	"time"
 
+	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 
+	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
@@ -141,4 +144,34 @@ func dumpContractDBToCSV(csvpath string) {
 	if err := w.Error(); err != nil {
 		log.Errorf("error flushing records to %#v: %s", csvpath, err)
 	}
+}
+
+func getContractsFromCSV(csvpath string) ([]*api.ContractProperties, error) {
+	f, err := os.Open(csvpath)
+	if err != nil {
+		return nil, errors.Wrapf(err, "error opening %#v", csvpath)
+	}
+	r := csv.NewReader(f)
+	contracts := make([]*api.ContractProperties, 0)
+	headerSkipped := false
+	for {
+		record, err := r.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			return contracts, errors.Wrapf(err, "error reading %#v", csvpath)
+		}
+		if !headerSkipped {
+			headerSkipped = true
+			continue
+		}
+		b64proto := record[len(record)-1]
+		contract, err := decodeB64Protobuf(b64proto)
+		if err != nil {
+			return contracts, errors.Wrapf(err, "error decoding %#v for contract %#v", b64proto, record[0])
+		}
+		contracts = append(contracts, contract)
+	}
+	return contracts, nil
 }

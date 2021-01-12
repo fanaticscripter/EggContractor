@@ -47,6 +47,8 @@ $ ./ContractAggregator G:1234567890 U:5716bdf11cdfc4769e19cef4a2c7b669b ion-prod
 
 The program would then scan for players (not stored) and contract properties (including from current periodicals), store them in the database when found, and eventually generate a CSV export.
 
+There's also a `--bootstrap-csv` flag that first populates the database from previously exported CSV archive.
+
 ## Published data
 
 Latest data is available at [data/contracts.csv](data/contracts.csv).
