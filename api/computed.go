@@ -241,5 +241,8 @@ func (e EggType) ValueDisplay() string {
 	if value >= 1e6 {
 		return util.NumfmtWhole(value)
 	}
-	return fmt.Sprintf("%f", value)
+	s := fmt.Sprintf("%f", value)
+	s = strings.TrimRight(s, "0")
+	s = strings.TrimRight(s, ".")
+	return s
 }
