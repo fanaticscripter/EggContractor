@@ -107,7 +107,7 @@ Flags:
 
 	beforeCount, err := db.GetContractCount()
 	if err != nil {
-		log.Error(err)
+		logError(err)
 		beforeCount = -1
 	}
 
@@ -126,7 +126,7 @@ Flags:
 					playerIdSet[id] = struct{}{}
 				}
 			} else {
-				log.Errorf("unrecognized coop identifier %#v (should be of the form contract-id@coop-code)", identifier)
+				logErrorf("unrecognized coop identifier %#v (should be of the form contract-id@coop-code)", identifier)
 			}
 		} else {
 			// identifier is a player ID
@@ -156,7 +156,7 @@ LoopPlayerIdSet:
 
 	afterCount, err := db.GetContractCount()
 	if err != nil {
-		log.Error(err)
+		logError(err)
 	} else {
 		if beforeCount >= 0 {
 			log.Infof("%d contracts currently in database, an increase of %d", afterCount, afterCount-beforeCount)
@@ -171,6 +171,10 @@ LoopPlayerIdSet:
 	if csvpath != "" {
 		log.Infof("dumping contracts into %#v", csvpath)
 		dumpContractDBToCSV(csvpath)
+	}
+
+	if _errored {
+		log.Exit(1)
 	}
 }
 
@@ -192,7 +196,7 @@ func getPlayerIdsFromCoop(contractId, code string) []string {
 		Code:       code,
 	})
 	if err != nil {
-		log.Errorf("error scraping coop %s#%s: %s", contractId, code, err)
+		logErrorf("error scraping coop %s#%s: %s", contractId, code, err)
 		return nil
 	}
 	playerIds := make([]string, 0)
@@ -208,11 +212,11 @@ func getAndRecordPlayerContracts(playerId string) {
 		X3:       1,
 	})
 	if err != nil {
-		log.Error(err)
+		logError(err)
 		return
 	}
 	if resp.Data == nil || resp.Data.PlayerId == "" {
-		log.Errorf("invalid response for player %#v", playerId)
+		logErrorf("invalid response for player %#v", playerId)
 		return
 	}
 	recordContracts(resp.Data.AllContractProperties())
@@ -225,7 +229,7 @@ func getAndRecordActiveContracts() {
 		EarningBonus: 1e12,
 	})
 	if err != nil {
-		log.Error(err)
+		logError(err)
 		return
 	}
 	recordContracts(resp.Contracts.Contracts)
@@ -236,7 +240,7 @@ func recordContracts(contracts []*api.ContractProperties) {
 	for _, c := range contracts {
 		exists, err := db.InsertContract(now, c, true /* checkExistence */)
 		if err != nil {
-			log.Error(err)
+			logError(err)
 		} else if !exists {
 			log.Infof("inserted new contract \"%s\" (%s)", c.Name, c.Id)
 		}
@@ -251,7 +255,7 @@ func printStillMissingContracts() {
 	have := make(map[string]int)
 	contracts, err := db.GetContracts()
 	if err != nil {
-		log.Error(err)
+		logError(err)
 		return
 	}
 	for _, c := range contracts {

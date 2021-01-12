@@ -8,7 +8,6 @@ import (
 	"time"
 
 	"github.com/pkg/errors"
-	log "github.com/sirupsen/logrus"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
@@ -17,12 +16,12 @@ import (
 func dumpContractDBToCSV(csvpath string) {
 	contracts, err := getContractsFromDB()
 	if err != nil {
-		log.Error(err)
+		logError(err)
 		return
 	}
 	f, err := os.Create(csvpath)
 	if err != nil {
-		log.Errorf("error creating %#v: %s", csvpath, err)
+		logErrorf("error creating %#v: %s", csvpath, err)
 	}
 	w := csv.NewWriter(f)
 	if err := w.Write([]string{
@@ -53,7 +52,7 @@ func dumpContractDBToCSV(csvpath string) {
 		"JSON",
 		"Protobuf (base64)",
 	}); err != nil {
-		log.Errorf("error writing header to %#v: %s", csvpath, err)
+		logErrorf("error writing header to %#v: %s", csvpath, err)
 	}
 	for _, c := range contracts {
 		offeringTime := c.EstimatedOfferingTime().In(time.UTC).Format("2006-01-02Z")
@@ -103,12 +102,12 @@ func dumpContractDBToCSV(csvpath string) {
 		}
 		jsonb, err := c.JSON()
 		if err != nil {
-			log.Errorf("error serializing contract %s to JSON: %s", c.Id, err)
+			logErrorf("error serializing contract %s to JSON: %s", c.Id, err)
 			continue
 		}
 		protob, err := c.B64Protobuf()
 		if err != nil {
-			log.Errorf("error serializing contract %s to base64-encoded protobuf: %s", c.Id, err)
+			logErrorf("error serializing contract %s to base64-encoded protobuf: %s", c.Id, err)
 			continue
 		}
 		if err := w.Write([]string{
@@ -139,12 +138,12 @@ func dumpContractDBToCSV(csvpath string) {
 			string(jsonb),
 			string(protob),
 		}); err != nil {
-			log.Errorf("error writing record to %#v: %s", csvpath, err)
+			logErrorf("error writing record to %#v: %s", csvpath, err)
 		}
 	}
 	w.Flush()
 	if err := w.Error(); err != nil {
-		log.Errorf("error flushing records to %#v: %s", csvpath, err)
+		logErrorf("error flushing records to %#v: %s", csvpath, err)
 	}
 }
 
