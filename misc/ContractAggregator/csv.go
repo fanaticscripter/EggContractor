@@ -66,8 +66,8 @@ func dumpContractDBToCSV(csvpath string) {
 			maxCoopSize = fmt.Sprintf("%d", c.MaxCoopSize)
 		}
 		tokenInterval := "-"
-		if c.TokenInterval != 0 {
-			tokenInterval = fmt.Sprintf("%.0fm", c.TokenInterval)
+		if c.TokenIntervalMinutes != 0 {
+			tokenInterval = fmt.Sprintf("%.0fm", c.TokenIntervalMinutes)
 		}
 		stdGoals := c.StandardGoalsStr()
 		eltGoals := c.EliteGoalsStr()

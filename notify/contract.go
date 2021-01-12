@@ -22,7 +22,7 @@ const _contractMessageTextTmpl = `
 Egg: <b>{{.EggType.Display}}</b>
 Max coop size: <b>{{.MaxCoopSize}}</b>
 Time to complete: <b>{{.Duration | days}}d</b>
-Token interval: <b>{{.TokenInterval}}m</b>
+Token interval: <b>{{.TokenIntervalMinutes}}m</b>
 Expires: <b>{{.ExpiryTime | fmtdate}}</b>
 
 {{if eq (.RewardTiers | len) 2 -}}

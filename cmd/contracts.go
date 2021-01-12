@@ -40,7 +40,7 @@ var _contractsCommand = &cobra.Command{
 				util.NumfmtWhole(c.UltimateGoal(true)),
 				util.FormatDurationWhole(c.Duration()),
 				fmt.Sprintf("%d", c.MaxCoopSize),
-				fmt.Sprintf("%.0fm", c.TokenInterval),
+				fmt.Sprintf("%.0fm", c.TokenIntervalMinutes),
 				util.FormatDate(c.ExpiryTime()),
 			})
 		}
