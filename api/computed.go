@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"math"
 	"strings"
 	"time"
@@ -174,4 +175,71 @@ func (e EggType) Display() string {
 	default:
 		return strings.Title(strings.ReplaceAll(strings.ToLower(e.String()), "_", " "))
 	}
+}
+
+func (e EggType) Value() float64 {
+	switch e {
+	case EggType_EDIBLE:
+		return 0.1
+	case EggType_SUPERFOOD:
+		return 1.25
+	case EggType_MEDICAL:
+		return 6.25
+	case EggType_ROCKET_FUEL:
+		return 30
+	case EggType_SUPER_MATERIAL:
+		return 150
+	case EggType_FUSION:
+		return 700
+	case EggType_QUANTUM:
+		return 3_000
+	case EggType_IMMORTALITY:
+		return 12_500
+	case EggType_TACHYON:
+		return 50_000
+	case EggType_GRAVITON:
+		return 175_000
+	case EggType_DILITHIUM:
+		return 525_000
+	case EggType_PRODIGY:
+		return 1_500_000
+	case EggType_TERRAFORM:
+		return 10_000_000
+	case EggType_ANTIMATTER:
+		return 1e9
+	case EggType_DARK_MATTER:
+		return 1e11
+	case EggType_AI:
+		return 1e12
+	case EggType_NEBULA:
+		return 1.5e13
+	case EggType_UNIVERSE:
+		return 1e14
+	case EggType_ENLIGHTENMENT:
+		return 1e-7
+	// Contract-only eggs.
+	case EggType_CHOCOLATE:
+		return 5
+	case EggType_EASTER:
+		return 0.05
+	case EggType_WATERBALLOON:
+		return 0.1
+	case EggType_FIREWORK:
+		return 4.99
+	case EggType_PUMPKIN:
+		return 0.99
+	default:
+		return 0
+	}
+}
+
+func (e EggType) ValueDisplay() string {
+	if e == EggType_ENLIGHTENMENT {
+		return "0.00"
+	}
+	value := e.Value()
+	if value >= 1e6 {
+		return util.NumfmtWhole(value)
+	}
+	return fmt.Sprintf("%f", value)
 }
