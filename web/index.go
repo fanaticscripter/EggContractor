@@ -18,10 +18,15 @@ type indexPayload struct {
 	Warnings []string
 
 	RefreshTime time.Time
-	Solos       []*solo.SoloContract
+	Solos       []*SoloStatus
 	Coops       []*CoopStatus
 
 	Peeker *peekerPayload
+}
+
+type SoloStatus struct {
+	*solo.SoloContract
+	ClientRefreshTime time.Time
 }
 
 type CoopStatus struct {
@@ -60,6 +65,14 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		warnings = append(warnings, util.MsgNoActiveContracts)
 	}
 
+	wrappedSolos := make([]*SoloStatus, len(solos))
+	for i, s := range solos {
+		wrappedSolos[i] = &SoloStatus{
+			SoloContract:      s,
+			ClientRefreshTime: timestamp,
+		}
+	}
+
 	wrappedCoops := make([]*CoopStatus, len(coops))
 	for i, c := range coops {
 		activities, err := db.GetCoopMemberActivityStats(c, timestamp)
@@ -89,10 +102,18 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		Errors:      errs,
 		Warnings:    warnings,
 		RefreshTime: timestamp,
-		Solos:       solos,
+		Solos:       wrappedSolos,
 		Coops:       wrappedCoops,
 		Peeker:      peeker,
 	}
+}
+
+func (s *SoloStatus) OfflineAdjustedEggsLaid() float64 {
+	return s.GetOfflineAdjustedEggsLaid(s.ClientRefreshTime)
+}
+
+func (s *SoloStatus) OfflineAdjustedExpectedDurationUntilFinish() time.Duration {
+	return s.GetOfflineAdjustedExpectedDurationUntilFinish(s.ClientRefreshTime)
 }
 
 func (c *CoopStatus) OfflineAdjustedEggsLaid() float64 {

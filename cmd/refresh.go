@@ -82,7 +82,7 @@ var _refreshCommand = &cobra.Command{
 		unfilteredCoopStatuses := resp.Data.Contracts.ActiveCoopStatuses
 
 		for _, c := range solos {
-			c.Display()
+			c.Display(now)
 			err := db.InsertSoloStatus(now, refreshId, c)
 			if err != nil {
 				log.Error(err)

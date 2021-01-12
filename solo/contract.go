@@ -46,6 +46,17 @@ func (c *SoloContract) GetEggsPerHour() float64 {
 	return c.GetEggsPerSecond() * 3600
 }
 
+// GetOfflineAdjustedEggsLaid returns server-reported EggsLaid plus expected
+// amount laid during offline time (duration between last server refresh and
+// specified client refresh), which is capped at 30hr.
+func (c *SoloContract) GetOfflineAdjustedEggsLaid(clientRefreshTime time.Time) float64 {
+	offlineHours := clientRefreshTime.Sub(c.GetLastRefreshedTime()).Hours()
+	if offlineHours > 30 {
+		offlineHours = 30
+	}
+	return c.GetEggsLaid() + c.GetEggsPerHour()*offlineHours
+}
+
 func (c *SoloContract) RequiredEggsPerHour() float64 {
 	eggsToLay := c.GetUltimateGoal() - c.GetEggsLaid()
 	hoursLeft := c.GetDurationUntilProductionDeadline().Hours()
@@ -65,6 +76,24 @@ func (c *SoloContract) ExpectedDurationUntilFinish() time.Duration {
 	} else {
 		return util.DoubleToDuration(eggsToLay / c.GetEggsPerSecond())
 	}
+}
+
+// GetOfflineAdjustedExpectedDurationUntilFinish returns expected duration until
+// finish minus the offline duration (duration between last server refresh and
+// specified client refresh), capped at 30hr.
+func (c *SoloContract) GetOfflineAdjustedExpectedDurationUntilFinish(clientRefreshTime time.Time) time.Duration {
+	offline := clientRefreshTime.Sub(c.GetLastRefreshedTime())
+	if offline > 30*time.Hour {
+		offline = 30 * time.Hour
+	}
+	expected := c.ExpectedDurationUntilFinish()
+	if expected == util.InfDuration {
+		return util.InfDuration
+	}
+	if expected <= offline {
+		return 0
+	}
+	return expected - offline
 }
 
 func (c *SoloContract) ToPBSoloContract() *pb.SoloContract {

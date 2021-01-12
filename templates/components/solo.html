@@ -1,4 +1,4 @@
-{{- /* The solo template renders a solo.SoloContract, where the associated
+{{- /* The solo template renders a web.SoloStatus, where the associated
 contract may be nil. Ideally we would display whether the "solo" contract allows
 coop, and the max coop size in that case -- since unfortunately coop contracts
 can always be soloed, and always start in a solo state before a coop is joined.
@@ -30,12 +30,20 @@ indistinguishability in the UI. */ -}}
             <dd class="mt-1 text-sm text-gray-900">{{.GetEggsLaid | numfmt}} / {{.GetUltimateGoal | numfmtWhole}}</dd>
           </div>
           <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Eggs laid, offline-adjusted</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.OfflineAdjustedEggsLaid | numfmt}}</dd>
+          </div>
+          <div class="sm:col-span-1">
             <dt class="text-sm font-medium text-gray-500">Hourly laying rate</dt>
             <dd class="mt-1 text-sm text-gray-900">{{.GetEggsPerHour | numfmt}} current / {{.RequiredEggsPerHour | numfmt}} required</dd>
           </div>
           <div class="sm:col-span-1">
             <dt class="text-sm font-medium text-gray-500">Time to complete</dt>
             <dd class="mt-1 text-sm text-gray-900">{{.ExpectedDurationUntilFinish | fmtduration}} expected / {{.GetDurationUntilProductionDeadline | fmtdurationGe0}} remaining</dd>
+          </div>
+          <div class="sm:col-span-1">
+            <dt class="text-sm font-medium text-gray-500">Time to complete, offline-adjusted</dt>
+            <dd class="mt-1 text-sm text-gray-900">{{.OfflineAdjustedExpectedDurationUntilFinish | fmtduration}}</dd>
           </div>
           <div class="sm:col-span-1">
             <dt class="text-sm font-medium text-gray-500">Reported to server</dt>
