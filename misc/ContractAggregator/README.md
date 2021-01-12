@@ -70,7 +70,9 @@ The columns:
 - **Elt#1,2,3**: elite tier goals; N/A for older contracts without tiers;
 - **Elt Rate/hr**: required egg laying rate to complete the final goal on elite tier;
 - **#PE**: number of prophecy eggs at stake;
+- **Std PE Goal**: goal for prophecy egg(s) reward on standard tier;
 - **Std PE Rate/hr**: required egg laying rate to acquire prophecy egg(s) reward on standard tier;
+- **Elt PE Goal**: goal for prophecy egg(s) reward on elite tier;
 - **Elt PE Rate/hr**: required egg laying rate to acquire prophecy egg(s) reward on elite tier;
 - **JSON**: JSON serialization of `api.ContractProperties` (see `api/egginc.pb.go`);
 - **Protobuf (base64)**: base64-encoded Protobuf serialization of the `ContractProperties` message (see `api/egginc.proto`).

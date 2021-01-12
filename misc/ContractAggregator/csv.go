@@ -42,7 +42,9 @@ func dumpContractDBToCSV(csvpath string) {
 		"Elt#3",
 		"Elt Rate/hr",
 		"#PE",
+		"Std PE Goal",
 		"Std PE Rate/hr",
+		"Elt PE Goal",
 		"Elt PE Rate/hr",
 		"JSON",
 		"Protobuf (base64)",
@@ -79,6 +81,14 @@ func dumpContractDBToCSV(csvpath string) {
 		peCnt := c.ProphecyEggCount()
 		stdPEGoal := c.StandardProphecyEggGoal()
 		eltPEGoal := c.EliteProphecyEggGoal()
+		stdPEGoalStr := ""
+		eltPEGoalStr := ""
+		if stdPEGoal > 0 {
+			stdPEGoalStr = util.NumfmtWhole(stdPEGoal)
+		}
+		if eltPEGoal > 0 {
+			eltPEGoalStr = util.NumfmtWhole(eltPEGoal)
+		}
 		stdPERate := ""
 		eltPERate := ""
 		if stdPEGoal > 0 {
@@ -117,7 +127,9 @@ func dumpContractDBToCSV(csvpath string) {
 			eltGoals[2],
 			eltRate,
 			fmt.Sprintf("%d", peCnt),
+			stdPEGoalStr,
 			stdPERate,
+			eltPEGoalStr,
 			eltPERate,
 			string(jsonb),
 			string(protob),
