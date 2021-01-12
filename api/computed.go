@@ -242,7 +242,11 @@ func (e EggType) ValueDisplay() string {
 		return util.NumfmtWhole(value)
 	}
 	s := fmt.Sprintf("%f", value)
-	s = strings.TrimRight(s, "0")
-	s = strings.TrimRight(s, ".")
+	if strings.Contains(s, ".") {
+		// Trim unnecessary trailing zeros, and possibly also the decimal point
+		// if the number turns out to be an integer.
+		s = strings.TrimRight(s, "0")
+		s = strings.TrimRight(s, ".")
+	}
 	return s
 }

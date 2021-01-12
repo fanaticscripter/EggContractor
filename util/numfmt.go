@@ -93,7 +93,7 @@ func numfmt(x float64, decimalDigits uint, trimTrailingZeros bool) string {
 	}
 	principal := x / math.Pow10(oomFloor)
 	numpart := fmt.Sprintf("%."+strconv.Itoa(int(decimalDigits))+"f", principal)
-	if trimTrailingZeros {
+	if trimTrailingZeros && strings.Contains(numpart, ".") {
 		numpart = strings.TrimRight(numpart, "0")
 		numpart = strings.TrimRight(numpart, ".")
 	}
