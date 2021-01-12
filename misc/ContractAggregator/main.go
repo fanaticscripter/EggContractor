@@ -41,8 +41,8 @@ func main() {
 	flag.Usage = func() {
 		fmt.Fprintf(os.Stderr, `Usage: %s <identifier> ...
 
-Scrapes player info to gather contract properties. Players are either directly
-specified or scraped from coops.
+Scrapes player info and active periodicals to gather contract properties.
+Players are either directly specified or scraped from coops.
 
 Each identifier either identifies a player or a coop. A player is identified by
 player ID; a coop is identified as contract-id@coop-code.
@@ -135,6 +135,9 @@ LoopPlayerIdSet:
 		getAndRecordPlayerContracts(playerId)
 	}
 
+	log.Info("scraping currently active contracts")
+	getAndRecordActiveContracts()
+
 	afterCount, err := db.GetContractCount()
 	if err != nil {
 		log.Error(err)
@@ -184,7 +187,6 @@ func getPlayerIdsFromCoop(contractId, code string) []string {
 }
 
 func getAndRecordPlayerContracts(playerId string) {
-	now := time.Now()
 	resp, err := api.RequestFirstContact(&api.FirstContactRequestPayload{
 		PlayerId: playerId,
 		X3:       1,
@@ -197,7 +199,24 @@ func getAndRecordPlayerContracts(playerId string) {
 		log.Errorf("invalid response for player %#v", playerId)
 		return
 	}
-	contracts := resp.Data.AllContractProperties()
+	recordContracts(resp.Data.AllContractProperties())
+}
+
+func getAndRecordActiveContracts() {
+	resp, err := api.RequestPeriodicals(&api.GetPeriodicalsRequestPayload{
+		PlayerId:     "G:1234567890",
+		X2:           1,
+		EarningBonus: 1e12,
+	})
+	if err != nil {
+		log.Error(err)
+		return
+	}
+	recordContracts(resp.Contracts.Contracts)
+}
+
+func recordContracts(contracts []*api.ContractProperties) {
+	now := time.Now()
 	for _, c := range contracts {
 		exists, err := db.InsertContract(now, c, true /* checkExistence */)
 		if err != nil {

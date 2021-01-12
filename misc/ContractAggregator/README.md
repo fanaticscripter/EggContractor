@@ -12,7 +12,7 @@ This module implements an aggregator for all Egg, Inc. contracts that ever exist
 
 ## Mechanism
 
-API response for `/first_contact` corresponding to each player only references contracts attempted by that player (moreover, leggacy attempts supercede original attempts). API response for `/get_periodicals` only references currently active events. Both are unsuitable for the stated goal in isolation, but the latter is hopeless (unless we get ahold of an archive) while the former could be pieced together by looking at multiple players. How do we find players? Well, we either know them directly, or we can harvest loads of them from publicly advertised coops.
+API response for `/first_contact` corresponding to each player only references contracts attempted by that player (moreover, leggacy attempts supercede original attempts). API response for `/get_periodicals` only references currently active events. Both are unsuitable for the stated goal in isolation, but the latter is hopeless (unless we get ahold of an archive) while the former could be pieced together by looking at multiple players. How do we find players? Well, we either know them directly, or we can harvest loads of them from publicly advertised coops. Once we have a complete archive, `/get_periodicals` can take over and add new contracts on a schedule.
 
 ## Invocation
 
@@ -45,7 +45,7 @@ known_contract_ids = []
 $ ./ContractAggregator G:1234567890 U:5716bdf11cdfc4769e19cef4a2c7b669b ion-production-2021:fake-code xmas-trash:fake-code"
 ```
 
-The program would then scan for players (not stored) and contract properties, storing them in the database when found, and eventually generate a CSV export.
+The program would then scan for players (not stored) and contract properties (including from current periodicals), store them in the database when found, and eventually generate a CSV export.
 
 ## Published data
 
