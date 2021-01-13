@@ -240,6 +240,21 @@ message CoopStatus {
   int32 _8 = 8;  // unknown, maybe bool; example: 0
   string creator_id = 9;
   int32 _10 = 10;  // unknown, maybe bool; example: 0
+  message TokenGift {
+    string gifter_id = 1;
+    int32 tokens = 2;
+    string gifter_name = 3;
+  }
+  // token_gifts is only available if player_id is specified in
+  // CoopStatusRequestPayload, and only gifts for the requested player are
+  // returned.
+  //
+  // WARNING: gifts are only returned once, meaning that if you intercept a
+  // response carrying gifts without feeding it to the game, the gifts would
+  // simply vanish from game state unless you MITM /coop_status and edit the
+  // response (which is also an obvious cheating vector to bypass the chore of
+  // token griding).
+  repeated TokenGift token_gifts = 11;
 }
 
 // http://www.auxbrain.com/ei/get_periodicals
