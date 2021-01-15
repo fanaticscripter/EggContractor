@@ -77,13 +77,25 @@ func FormatDurationWhole(d time.Duration) string {
 	if d == InfDuration {
 		return "forever"
 	}
-	if d <= 3570*time.Second /* 59.5min */ {
-		return fmt.Sprintf("%.0fm", math.Round(d.Minutes()))
+	if d == 0 {
+		return "0m"
 	}
-	if d <= 1410*time.Minute /* 23.5hr */ {
-		return fmt.Sprintf("%.0fh", math.Round(d.Hours()))
+	dd := d / (24 * time.Hour)
+	d -= dd * 24 * time.Hour
+	hh := d / time.Hour
+	d -= hh * time.Hour
+	mm := d / time.Minute
+	s := ""
+	if dd > 0 {
+		s += fmt.Sprintf("%dd", dd)
 	}
-	return fmt.Sprintf("%.0fd", math.Round(d.Hours()/24))
+	if hh > 0 {
+		s += fmt.Sprintf("%dh", hh)
+	}
+	if mm > 0 {
+		s += fmt.Sprintf("%dm", mm)
+	}
+	return s
 }
 
 func FormatDurationHM(d time.Duration) string {
