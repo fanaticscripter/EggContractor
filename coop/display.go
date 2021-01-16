@@ -11,10 +11,8 @@ import (
 )
 
 // Display prints a formatted report about the coop's current status.
-// contract is optional, and without it, the goal, expected time to complete
-// etc. cannot be calculated.
-// activities is also optional, and if passed, an additional offline timer
-// column is displayed.
+// activities is optional, and if passed, offline-adjusted eggs laid and time to
+// complete, as well as an additional offline timer column, are displayed.
 func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivity) {
 	contract := c.Contract
 	if contract != nil {
@@ -62,6 +60,10 @@ func (c *CoopStatus) Display(sortBy By, activities map[string]*CoopMemberActivit
 			util.FormatDurationNonNegative(c.DurationUntilProductionDeadline()))
 	}
 	fmt.Fprintf(w, "Time to complete:\t%s\n", timeToCompleteField)
+	if contract != nil && len(activities) > 0 {
+		fmt.Fprintf(w, "Time to complete, offline-adjusted:\t%s\n",
+			util.FormatDuration(c.GetOfflineAdjustedExpectedDurationUntilFinish(activities)))
+	}
 	w.Flush()
 	fmt.Println()
 

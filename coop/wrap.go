@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/util"
 )
 
 // CoopStatus wraps api.CoopStatus and the corresponding api.ContractProperties.
@@ -64,4 +65,18 @@ func (c *CoopStatus) GetOfflineAdjustedEggsLaid(activities map[string]*CoopMembe
 		eggs += offlineTime.Hours() * activity.EggsPerHourSince
 	}
 	return eggs
+}
+
+// GetOfflineAdjustedExpectedDurationUntilFinish returns expected duration until
+// finish assuming offline-adjusted eggs laid instead of confirmed eggs laid.
+func (c *CoopStatus) GetOfflineAdjustedExpectedDurationUntilFinish(activities map[string]*CoopMemberActivity) time.Duration {
+	eggsLaid := c.GetOfflineAdjustedEggsLaid(activities)
+	eggsToLay := c.Contract.UltimateGoal(c.IsElite()) - eggsLaid
+	if eggsToLay <= 0 {
+		return 0
+	} else if c.EggsPerSecond() <= 0 {
+		return util.InfDuration // Forever
+	} else {
+		return util.DoubleToDuration(eggsToLay / c.EggsPerSecond())
+	}
 }
