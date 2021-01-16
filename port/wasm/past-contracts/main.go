@@ -48,10 +48,10 @@ func retrievePastContracts(playerId string) *result {
 		Name                    string `json:"name"`
 		Date                    string `json:"date"`
 		Code                    string `json:"code"`
-		Goals                   string `json:"goals"`
+		GoalsInfo               string `json:"goalsInfo"`
 		Incomplete              bool   `json:"incomplete"`
 		HasProphecyEgg          bool   `json:"hasProphecyEgg"`
-		ProphecyEgg             string `json:"prophecyEgg"`
+		ProphecyEggInfo         string `json:"prophecyEggInfo"`
 		ProphecyEggNotCollected bool   `json:"prophecyEggNotCollected"`
 	}
 
@@ -86,7 +86,7 @@ func retrievePastContracts(playerId string) *result {
 			}
 		}
 
-		goalsField := fmt.Sprintf("%d/%d", c.NumGoalsCompleted, totalGoals)
+		goalsInfo := fmt.Sprintf("%d/%d", c.NumGoalsCompleted, totalGoals)
 		incomplete := numGoalsCompleted < totalGoals
 
 		var prophecyEggIndex int
@@ -97,10 +97,10 @@ func retrievePastContracts(playerId string) *result {
 			}
 		}
 		hasProphecyEgg := prophecyEggIndex > 0
-		var prophecyEggField string
+		var prophecyEggInfo string
 		var prophecyEggNotCollected bool
 		if prophecyEggIndex > 0 {
-			prophecyEggField = fmt.Sprintf("%s #%d", contractType, prophecyEggIndex)
+			prophecyEggInfo = fmt.Sprintf("%s #%d", contractType, prophecyEggIndex)
 			prophecyEggNotCollected = numGoalsCompleted < prophecyEggIndex
 		}
 
@@ -109,10 +109,10 @@ func retrievePastContracts(playerId string) *result {
 			Name:                    c.Props.Name,
 			Date:                    util.FormatDate(c.StartedTime()),
 			Code:                    c.Code,
-			Goals:                   goalsField,
+			GoalsInfo:               goalsInfo,
 			Incomplete:              incomplete,
 			HasProphecyEgg:          hasProphecyEgg,
-			ProphecyEgg:             prophecyEggField,
+			ProphecyEggInfo:         prophecyEggInfo,
 			ProphecyEggNotCollected: prophecyEggNotCollected,
 		})
 	}

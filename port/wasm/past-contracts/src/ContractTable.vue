@@ -68,8 +68,8 @@
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{ contract.date }}</td>
                   <td class="px-6 py-1 max-w-column truncate text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.code, `Copied code '${contract.code}'`)">{{ contract.code }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goals }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEgg }}</td>
+                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goalsInfo }}</td>
+                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEggInfo }}</td>
                 </tr>
               </template>
             </tbody>
