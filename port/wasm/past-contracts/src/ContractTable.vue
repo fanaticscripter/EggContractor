@@ -62,8 +62,8 @@
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">PE</th>
             </thead>
             <tbody>
-              <template v-for="(contract, index) in contracts" :key="contract.id">
-                <tr v-if="(!hideCompleted || contract.incomplete) && (!hideNoPE || contract.prophecyEggCount > 0)" :class="[index % 2 === 1 ? 'bg-gray-50' : 'bg-white', contract.prophecyEggNotCollected ? 'text-red-500' : contract.incomplete ? 'text-yellow-500' : 'text-gray-500']">
+              <template v-for="contract in taggedContracts" :key="contract.id">
+                <tr v-show="!contract.hidden" :class="[contract.fgClass, contract.bgClass]">
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.id, `Copied ID '${contract.id}'`)">{{ contract.id }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{ contract.date }}</td>
@@ -110,6 +110,27 @@ export default {
       popupMessage: "",
     };
   },
+  computed: {
+    taggedContracts() {
+      const contracts = JSON.parse(JSON.stringify(this.contracts));
+      let visibleIndex = 0;
+      for (const contract of contracts) {
+        contract.fgClass = contract.prophecyEggNotCollected
+          ? "text-red-500"
+          : contract.incomplete
+          ? "text-yellow-500"
+          : "text-gray-500";
+        contract.hidden = this.shouldHideContract(contract);
+        if (!contract.hidden) {
+          contract.bgClass = visibleIndex % 2 === 1 ? "bg-gray-50" : "bg-white";
+          visibleIndex++;
+        } else {
+          contract.bgClass = "bg-white";
+        }
+      }
+      return contracts;
+    },
+  },
   methods: {
     copy(s, msg) {
       copyTextToClipboard(s);
@@ -122,8 +143,16 @@ export default {
         this.popupShow = false;
       }, 3000);
     },
+
+    shouldHideContract(contract) {
+      return (
+        (this.hideCompleted && !contract.incomplete) ||
+        (this.hideNoPE && contract.prophecyEggCount === 0)
+      );
+    },
   },
 };
+
 </script>
 
 <style scoped>
