@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
 	"syscall/js"
 
 	log "github.com/sirupsen/logrus"
@@ -50,8 +51,8 @@ func retrievePastContracts(playerId string) *result {
 		Code                    string `json:"code"`
 		GoalsInfo               string `json:"goalsInfo"`
 		Incomplete              bool   `json:"incomplete"`
-		HasProphecyEgg          bool   `json:"hasProphecyEgg"`
 		ProphecyEggInfo         string `json:"prophecyEggInfo"`
+		ProphecyEggCount        int    `json:"prophecyEggCount"`
 		ProphecyEggNotCollected bool   `json:"prophecyEggNotCollected"`
 	}
 
@@ -90,17 +91,21 @@ func retrievePastContracts(playerId string) *result {
 		incomplete := numGoalsCompleted < totalGoals
 
 		var prophecyEggIndex int
+		var prophecyEggCount int
 		for i, r := range rewards {
 			if r.Type == api.RewardType_PROPHECY_EGG {
 				prophecyEggIndex = i + 1
+				prophecyEggCount = int(math.Round(r.Count))
 				break
 			}
 		}
-		hasProphecyEgg := prophecyEggIndex > 0
 		var prophecyEggInfo string
 		var prophecyEggNotCollected bool
 		if prophecyEggIndex > 0 {
 			prophecyEggInfo = fmt.Sprintf("%s #%d", contractType, prophecyEggIndex)
+			if prophecyEggCount > 1 {
+				prophecyEggInfo += fmt.Sprintf(" (%d)", prophecyEggCount)
+			}
 			prophecyEggNotCollected = numGoalsCompleted < prophecyEggIndex
 		}
 
@@ -111,8 +116,8 @@ func retrievePastContracts(playerId string) *result {
 			Code:                    c.Code,
 			GoalsInfo:               goalsInfo,
 			Incomplete:              incomplete,
-			HasProphecyEgg:          hasProphecyEgg,
 			ProphecyEggInfo:         prophecyEggInfo,
+			ProphecyEggCount:        prophecyEggCount,
 			ProphecyEggNotCollected: prophecyEggNotCollected,
 		})
 	}

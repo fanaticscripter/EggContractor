@@ -63,7 +63,7 @@
             </thead>
             <tbody>
               <template v-for="(contract, index) in contracts" :key="contract.id">
-                <tr v-if="(!hideCompleted || contract.incomplete) && (!hideNoPE || contract.hasProphecyEgg)" :class="[index % 2 === 1 ? 'bg-gray-50' : 'bg-white', contract.prophecyEggNotCollected ? 'text-red-500' : contract.incomplete ? 'text-yellow-500' : 'text-gray-500']">
+                <tr v-if="(!hideCompleted || contract.incomplete) && (!hideNoPE || contract.prophecyEggCount > 0)" :class="[index % 2 === 1 ? 'bg-gray-50' : 'bg-white', contract.prophecyEggNotCollected ? 'text-red-500' : contract.incomplete ? 'text-yellow-500' : 'text-gray-500']">
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.id, `Copied ID '${contract.id}'`)">{{ contract.id }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{ contract.date }}</td>
@@ -84,7 +84,7 @@
     <ul class="list-disc">
       <li>The contracts listed are past contracts the player has attempted. The ones never seen nor attempted cannot be retrieved. Consult a complete contract list to find out which ones were missed.</li>
       <li>The "Date" column shows the date on which the player started the respective contract farm.</li>
-      <li>The "PE" column indicates which reward of the contract, if any, was a prophecy egg. The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at that time).</li>
+      <li>The "PE" column indicates which reward of the contract, if any, was one or more prophecy eggs (the number of prophecy eggs is noted in parentheses if it's more than 1). The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at the time, if they did make an attempt).</li>
       <li>You may <strong class="font-semibold">click on a contract ID or a coop code to copy it</strong>.</li>
     </ul>
   </div>
