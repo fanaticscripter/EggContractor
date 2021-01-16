@@ -1,4 +1,34 @@
 <template>
+  <div class="flex justify-center my-3">
+    <div class="px-3 py-2 border rounded-md shadow space-y-0.5">
+      <div class="flex justify-center mb-1 text-sm font-medium text-gray-900">Color coding</div>
+      <div class="relative flex items-start">
+        <span class="flex items-center text-green-500">
+          <svg viewBox="-32 -32 576 576" class="h-4"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>
+        </span>
+        <span class="ml-2 text-xs text-gray-600">Never attempted</span>
+      </div>
+      <div class="relative flex items-start">
+        <span class="flex items-center h-4 text-red-500">
+          <svg viewBox="-32 -32 576 576" class="h-4"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>
+        </span>
+        <span class="ml-2 text-xs text-gray-600">Attempted, failed to collect prophecy egg(s)</span>
+      </div>
+      <div class="relative flex items-start">
+        <span class="flex items-center h-4 text-yellow-500">
+          <svg viewBox="-32 -32 576 576" class="h-4"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>
+        </span>
+        <span class="ml-2 text-xs text-gray-600">Attempted, failed to complete all goals</span>
+      </div>
+      <div class="relative flex items-start">
+        <span class="flex items-center h-4 text-gray-500">
+          <svg viewBox="-32 -32 576 576" class="h-4"><path fill="currentColor" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path></svg>
+        </span>
+        <span class="ml-2 text-xs text-gray-600">Completed</span>
+      </div>
+    </div>
+  </div>
+
   <div class="my-3">
     <div class="relative flex items-start justify-center">
       <div class="flex items-center h-5">
@@ -29,8 +59,6 @@
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">code</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">#Goals</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">PE</th>
-              <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Incomplete</th>
-              <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase" title="failed to obtain prophecy egg reward">Uncollected</th>
             </thead>
             <tbody>
               <template v-for="(contract, index) in contracts" :key="contract.id">
@@ -40,8 +68,6 @@
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.code }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goals }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEgg }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.incomplete ? "\u25CF" : "" }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEggNotCollected ? "\u25CF" : "" }}</td>
                 </tr>
               </template>
             </tbody>
@@ -56,7 +82,6 @@
     <ul class="list-disc">
       <li>The contracts listed are past contracts the player has attempted. The ones never seen nor attempted cannot be retrieved. Consult a complete contract list to find out which ones were missed.</li>
       <li>The "PE" column indicates which reward of the contract, if any, was a prophecy egg. The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at that time).</li>
-      <li>The "uncollected" column indicates whether there's a prophecy egg reward associated with this contract that the player wasn't able to collect.</li>
     </ul>
   </div>
 </template>
