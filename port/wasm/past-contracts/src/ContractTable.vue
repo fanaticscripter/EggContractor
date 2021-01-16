@@ -64,10 +64,10 @@
             <tbody>
               <template v-for="(contract, index) in contracts" :key="contract.id">
                 <tr v-if="(!hideCompleted || contract.incomplete) && (!hideNoPE || contract.hasProphecyEgg)" :class="[index % 2 === 1 ? 'bg-gray-50' : 'bg-white', contract.prophecyEggNotCollected ? 'text-red-500' : contract.incomplete ? 'text-yellow-500' : 'text-gray-500']">
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.id }}</td>
+                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.id, `Copied ID '${contract.id}'`)">{{ contract.id }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.date }}</td>
-                  <td class="px-6 py-1 max-w-column truncate text-center text-sm">{{ contract.code }}</td>
+                  <td class="px-6 py-1 max-w-column truncate text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.code, `Copied code '${contract.code}'`)">{{ contract.code }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goals }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEgg }}</td>
                 </tr>
@@ -85,11 +85,18 @@
       <li>The contracts listed are past contracts the player has attempted. The ones never seen nor attempted cannot be retrieved. Consult a complete contract list to find out which ones were missed.</li>
       <li>The "Date" column shows the date on which the player started the respective contract farm.</li>
       <li>The "PE" column indicates which reward of the contract, if any, was a prophecy egg. The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at that time).</li>
+      <li>You may <strong class="font-semibold">click on a contract ID or a coop code to copy it</strong>.</li>
     </ul>
   </div>
+
+  <transition name="fade">
+    <div v-show="popupShow" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded text-sm text-green-500 bg-white bg-opacity-80">{{ popupMessage }}</div>
+  </transition>
 </template>
 
 <script>
+import copyTextToClipboard from 'copy-text-to-clipboard';
+
 export default {
   props: {
     contracts: Array,
@@ -98,7 +105,38 @@ export default {
     return {
       hideCompleted: false,
       hideNoPE: false,
+      popupTimeoutId: null,
+      popupShow: false,
+      popupMessage: "",
     };
   },
-}
+  methods: {
+    copy(s, msg) {
+      copyTextToClipboard(s);
+      this.popupMessage = msg;
+      this.popupShow = true;
+      if (this.popupTimeoutId !== null) {
+        clearTimeout(this.popupTimeoutId);
+      }
+      this.popupTimeoutId = setTimeout(() => {
+        this.popupShow = false;
+      }, 3000);
+    },
+  },
+};
 </script>
+
+<style scoped>
+  .fade-enter-active {
+    transition: opacity 0.1s ease;
+  }
+
+  .fade-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+</style>
