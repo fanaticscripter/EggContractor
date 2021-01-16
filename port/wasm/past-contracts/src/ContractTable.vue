@@ -66,7 +66,7 @@
                 <tr v-if="(!hideCompleted || contract.incomplete) && (!hideNoPE || contract.hasProphecyEgg)" :class="[index % 2 === 1 ? 'bg-gray-50' : 'bg-white', contract.prophecyEggNotCollected ? 'text-red-500' : contract.incomplete ? 'text-yellow-500' : 'text-gray-500']">
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.id, `Copied ID '${contract.id}'`)">{{ contract.id }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.date }}</td>
+                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{ contract.date }}</td>
                   <td class="px-6 py-1 max-w-column truncate text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.code, `Copied code '${contract.code}'`)">{{ contract.code }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goals }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEgg }}</td>
