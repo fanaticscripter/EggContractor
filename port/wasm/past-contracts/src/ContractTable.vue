@@ -56,6 +56,7 @@
             <thead class="bg-gray-50">
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">ID</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Name</th>
+              <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Date</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">code</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">#Goals</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">PE</th>
@@ -65,6 +66,7 @@
                 <tr v-if="(!hideCompleted || contract.incomplete) && (!hideNoPE || contract.hasProphecyEgg)" :class="[index % 2 === 1 ? 'bg-gray-50' : 'bg-white', contract.prophecyEggNotCollected ? 'text-red-500' : contract.incomplete ? 'text-yellow-500' : 'text-gray-500']">
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.id }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
+                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.date }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.code }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goals }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEgg }}</td>
@@ -81,6 +83,7 @@
     Notes:
     <ul class="list-disc">
       <li>The contracts listed are past contracts the player has attempted. The ones never seen nor attempted cannot be retrieved. Consult a complete contract list to find out which ones were missed.</li>
+      <li>The "Date" column shows the date on which the player started the respective contract farm.</li>
       <li>The "PE" column indicates which reward of the contract, if any, was a prophecy egg. The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at that time).</li>
     </ul>
   </div>

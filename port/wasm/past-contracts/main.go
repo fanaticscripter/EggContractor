@@ -46,6 +46,7 @@ func retrievePastContracts(playerId string) *result {
 	type contract struct {
 		Id                      string `json:"id"`
 		Name                    string `json:"name"`
+		Date                    string `json:"date"`
 		Code                    string `json:"code"`
 		Goals                   string `json:"goals"`
 		Incomplete              bool   `json:"incomplete"`
@@ -106,6 +107,7 @@ func retrievePastContracts(playerId string) *result {
 		contracts = append(contracts, contract{
 			Id:                      c.Props.Id,
 			Name:                    c.Props.Name,
+			Date:                    util.FormatDate(c.StartedTime()),
 			Code:                    c.Code,
 			Goals:                   goalsField,
 			Incomplete:              incomplete,
