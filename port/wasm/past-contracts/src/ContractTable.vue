@@ -67,7 +67,7 @@
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.id }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.date }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.code }}</td>
+                  <td class="px-6 py-1 max-w-column truncate text-center text-sm">{{ contract.code }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goals }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.prophecyEgg }}</td>
                 </tr>

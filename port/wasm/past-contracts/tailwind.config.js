@@ -4,9 +4,16 @@ module.exports = {
     "src/*.vue",
   ],
   darkMode: false,
+  theme: {
+    extend: {
+      maxWidth: {
+        column: "12rem",
+      }
+    }
+  },
   variants: {
     extend: {
-      opacity: ['disabled'],
+      opacity: ["disabled"],
     }
   },
   plugins: [
