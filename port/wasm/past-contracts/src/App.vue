@@ -1,27 +1,29 @@
 <template>
   <form
-    class="m-4 text-center sm:flex sm:items-center sm:justify-center"
+    class="sm:mx-auto sm:max-w-xs sm:w-full m-4 space-y-3"
     @submit.prevent="loadContractTable"
   >
-    <div class="max-w-xs w-full">
+    <div>
       <label for="email" class="sr-only">Player ID</label>
       <input
         type="text"
         name="playerId"
         id="playerId"
         v-model="playerId"
-        class="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-300 rounded-md"
+        class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
         placeholder="Player ID"
       />
     </div>
-    <button
-      type="submit"
-      class="mt-3 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm disabled:opacity-50"
-      :class="{ 'cursor-not-allowed': submitDisabled }"
-      :disabled="submitDisabled"
-    >
-      Load
-    </button>
+    <div>
+      <button
+        type="submit"
+        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+        :class="{ 'cursor-not-allowed': submitDisabled }"
+        :disabled="submitDisabled"
+      >
+        Load Contracts
+      </button>
+    </div>
   </form>
 
   <template v-if="!playerIdSubmitted">
@@ -123,9 +125,7 @@ export default {
       return this.playerId.trim() === "" || this.contractsLoading;
     },
     truncatedError() {
-      return this.error.length <= 500
-        ? this.error
-        : `${this.error.substr(0, 497)}...`;
+      return this.error.length <= 500 ? this.error : `${this.error.substr(0, 497)}...`;
     },
   },
   methods: {
