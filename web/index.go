@@ -119,3 +119,7 @@ func (s *SoloStatus) OfflineAdjustedExpectedDurationUntilFinish() time.Duration 
 func (c *CoopStatus) OfflineAdjustedEggsLaid() float64 {
 	return c.GetOfflineAdjustedEggsLaid(c.Activities)
 }
+
+func (c *CoopStatus) OfflineAdjustedExpectedDurationUntilFinish() time.Duration {
+	return c.GetOfflineAdjustedExpectedDurationUntilFinish(c.Activities)
+}

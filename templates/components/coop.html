@@ -83,6 +83,14 @@
               {{end}}
             </dd>
           </div>
+          {{if and $contract $showoffline}}
+            <div class="sm:col-span-1">
+              <dt class="text-sm font-medium text-gray-500 cursor-help" title="Confirmed eggs laid, plus the expected numbers accrued by each member in their offline time assuming last recorded rate. Offline time is capped at 30hr.">Time to complete, offline-adjusted</dt>
+              <dd class="mt-1 text-sm text-gray-900">
+                  {{.OfflineAdjustedExpectedDurationUntilFinish | fmtduration}}
+              </dd>
+            </div>
+          {{end}}
         </dl>
       </div>
 
