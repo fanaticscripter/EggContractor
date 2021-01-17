@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import datetime
 import hashlib
 import json
 import os
@@ -35,6 +36,7 @@ def html_handler(args):
     manifest = read_manifests()
     with srcdir.joinpath("index.html").open() as fp:
         content = fp.read()
+    content = content.replace("@@BUILD_NUMBER@@", get_build_number())
     for src, dst in manifest.items():
         content = content.replace(f"@@{src}@@", dst)
     with distdir.joinpath("index.html").open("w") as fp:
@@ -77,6 +79,25 @@ def read_manifests():
         with f.open() as fp:
             manifest.update(json.load(fp))
     return manifest
+
+
+def get_build_number():
+    date = datetime.datetime.utcnow().strftime("%Y%m%d")
+    try:
+        commit = subprocess.check_output(
+            ["git", "rev-parse", "--short=8", "HEAD"], text=True
+        ).strip()
+    except subprocess.CalledProcessError:
+        commit = "snapshot"
+    dirty = False
+    if commit != "snapshot":
+        status = subprocess.check_output(
+            ["git", "status", "--short"], text=True
+        ).strip()
+        if status:
+            dirty = True
+    dirty_indicator = "*" if dirty else ""
+    return f"{date}.{commit}{dirty_indicator}"
 
 
 def main():
