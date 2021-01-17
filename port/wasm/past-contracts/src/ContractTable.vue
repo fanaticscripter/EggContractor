@@ -4,6 +4,12 @@
     <div class="text-sm">Prophecy eggs collected: <strong class="font-semibold">{{ collectedPEs }}/{{ totalPEs }}</strong></div>
   </div>
 
+  <div class="sm:mx-auto sm:max-w-xs sm:w-full mx-4 my-3">
+    <a class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 disabled:opacity-50" :href="csvBlobURL" download="past-contracts.csv">
+      Export as CSV
+    </a>
+  </div>
+
   <div class="flex justify-center my-3">
     <div class="px-3 py-2 border rounded-md shadow space-y-0.5">
       <div class="flex justify-center mb-1 text-sm font-medium text-gray-900">Color coding</div>
@@ -116,6 +122,7 @@ import copyTextToClipboard from 'copy-text-to-clipboard';
 export default {
   props: {
     contracts: Array,
+    csvdata: String,
   },
   data() {
     return {
@@ -125,6 +132,7 @@ export default {
       popupTimeoutId: null,
       popupShow: false,
       popupMessage: "",
+      csvBlobURL: window.URL.createObjectURL(new Blob([this.csvdata], {type: "text/csv"})),
     };
   },
   computed: {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/base64"
 	"encoding/csv"
@@ -240,7 +241,34 @@ func retrieveContractList(playerId string) *result {
 		})
 	}
 
-	return dataResult(contracts)
+	// Prepare CSV export.
+	var b bytes.Buffer
+	w := csv.NewWriter(&b)
+	_ = w.Write([]string{
+		"ID", "Name", "Date", "Code", "Goals", "PE", "Attempted", "Completed", "PE Uncollected",
+	})
+	for _, c := range contracts {
+		_ = w.Write([]string{
+			c.Id,
+			c.Name,
+			c.Date,
+			c.Code,
+			c.GoalsInfo,
+			c.ProphecyEggInfo,
+			fmt.Sprintf("%t", c.Attempted),
+			fmt.Sprintf("%t", !c.Incomplete),
+			fmt.Sprintf("%t", c.ProphecyEggNotCollected),
+		})
+	}
+	w.Flush()
+
+	return dataResult(struct {
+		Contracts []contractSummary `json:"contracts"`
+		CSV       string            `json:"csv"`
+	}{
+		Contracts: contracts,
+		CSV:       b.String(),
+	})
 }
 
 // Retrieve a list of all historical contracts from contracts.csv.

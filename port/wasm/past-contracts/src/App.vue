@@ -76,7 +76,7 @@
     </div>
   </template>
   <template v-else>
-    <contract-table :contracts="contracts"></contract-table>
+    <contract-table :contracts="contracts" :csvdata="csvdata"></contract-table>
   </template>
 </template>
 
@@ -139,7 +139,9 @@ export default {
       this.contractsLoading = true;
       this.error = "";
       try {
-        this.contracts = await this.retrievePastContracts(playerId);
+        const { contracts, csv: csvdata } = await this.retrievePastContracts(playerId);
+        this.contracts = contracts;
+        this.csvdata = csvdata;
         this.contractsLoading = false;
         this.error = null;
       } catch (err) {
