@@ -31,12 +31,22 @@ jobs:
       - name: Update contracts
         run: |
           ./ContractAggregator --bootstrap-csv
-      - name: Commit and push changes
+      - name: Commit, push changes, and possibly trigger new build
         run: |
           git config user.name 'github-actions'
           git config user.email 'actions@github.com'
           git add data
-          git diff --cached --quiet || git commit -m 'misc/ContractAggregator: update contracts (from GitHub Actions)'
-          git push
+          git diff --cached --quiet || {
+            git commit -m 'misc/ContractAggregator: update contracts (from GitHub Actions)'
+            git push
+            # Use a separate personal access token since the token included doesn't seem to trigger
+            # anything, although the response (HTTP 204) looks all right.
+            curl -fsS -D- \
+              -X POST \
+              -H 'Authorization: Bearer ${{ secrets.WORKFLOW_DISPATCH_TOKEN }}' \
+              -H 'Accept: application/vnd.github.v3+json' \
+              https://api.github.com/repos/${{ github.repository }}/actions/workflows/build.yml/dispatches \
+              -d '{"ref": "'${GITHUB_REF##*/}'"}'
+          }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
