@@ -73,7 +73,7 @@
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Name</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Date</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">code</th>
-              <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">#Goals</th>
+              <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Goals</th>
               <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">PE</th>
             </thead>
             <tbody>
