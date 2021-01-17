@@ -49,6 +49,7 @@ def dist_handler(args):
     finaldest.mkdir(parents=True, exist_ok=True)
     copylist = ["index.html", "wasm_exec.js"]
     copylist.extend(read_manifests().values())
+    copylist.extend(args.additional_assets)
     copylist = [distdir / f for f in copylist]
     print(f"cp {' '.join(str(f) for f in copylist)} {finaldest}")
     for f in copylist:
@@ -91,6 +92,12 @@ def main():
 
     dist_parser = subparsers.add_parser("dist")
     dist_parser.set_defaults(handler=dist_handler)
+    dist_parser.add_argument(
+        "--additional",
+        dest="additional_assets",
+        action="append",
+        help="relative paths of additional assets to copy into dist",
+    )
 
     args = parser.parse_args()
     args.handler(args)
