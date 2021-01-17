@@ -86,7 +86,7 @@
               <template v-for="contract in taggedContracts" :key="contract.id">
                 <tr v-show="!contract.hidden" :class="[contract.fgClass, contract.bgClass]">
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.id, `Copied ID '${contract.id}'`)">{{ contract.id }}</td>
-                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.name }}</td>
+                  <td class="px-6 py-1 whitespace-nowrap text-center text-sm"><a :class="[contract.fgHoverClass]" :href="wikiLink(contract)" target="_blank">{{ contract.name }}</a></td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm tabular-nums">{{ contract.date }}</td>
                   <td class="px-6 py-1 max-w-column truncate text-center text-sm cursor-pointer" title="click to copy" @click="copy(contract.code, `Copied code '${contract.code}'`)">{{ contract.code }}</td>
                   <td class="px-6 py-1 whitespace-nowrap text-center text-sm">{{ contract.goalsInfo }}</td>
@@ -107,7 +107,7 @@
       <li>For contracts with multiple incarnations, i.e. original run and leggacy run(s), only one incarnation is listed. If the player has attempted the contract, the last attempted incarnation is shown; otherwise, the latest incarnation is shown.</li>
       <li>The "Date" column shows the date on which the player last started a contract farm for the contract, or the estimated date the contract was offered (which may not be accurate) if it was never attempted.</li>
       <li>The "PE" column indicates which reward of the contract, if any, was one or more prophecy eggs (the number of prophecy eggs is noted in parentheses if it's more than 1). The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at the time, if they did make an attempt).</li>
-      <li>You may <strong class="font-semibold">click on a contract ID or a coop code to copy it</strong>.</li>
+      <li>You may <strong class="font-semibold">click on a contract ID or a coop code to copy it</strong>. To find more details about a contract, you may <strong class="font-semibold">click on the name of the contract</strong> which should take you to its wiki page, or <strong class="font-semibold">refer to the <a href="https://github.com/fanaticscripter/EggContractor/blob/master/misc/ContractAggregator/data/contracts.csv" class="text-blue-500" target="_blank">full contract archive</a></strong> compiled by the author (raw CSV version <a href="contracts.csv" class="text-blue-500" target="_blank">here</a>).</li>
     </ul>
   </div>
 
@@ -163,6 +163,13 @@ export default {
           : contract.incomplete
           ? "text-yellow-500"
           : "text-gray-500";
+        contract.fgHoverClass = !contract.attempted
+          ? "hover:text-green-400"
+          : contract.prophecyEggNotCollected
+          ? "hover:text-red-400"
+          : contract.incomplete
+          ? "hover:text-yellow-400"
+          : "hover:text-gray-400";
         contract.hidden = this.shouldHideContract(contract);
         if (!contract.hidden) {
           contract.bgClass = visibleIndex % 2 === 1 ? "bg-gray-50" : "bg-white";
@@ -194,6 +201,11 @@ export default {
         (this.hideNoPE && contract.prophecyEggCount === 0)
       );
     },
+
+    wikiLink(contract) {
+      const underscoredName = contract.name.replace(/^LEGG?ACY: /, "").replace(" ", "_");
+      return `https://egg-inc.fandom.com/wiki/Contracts/${encodeURIComponent(underscoredName)}`;
+    }
   },
 };
 </script>
