@@ -24,6 +24,7 @@ postcss:
 	yarn postcss --env=production src/app.css -o dist/app.css
 
 dist/contracts.csv: ../../../misc/ContractAggregator/data/contracts.csv
+	mkdir -p dist
 	cp -f ../../../misc/ContractAggregator/data/contracts.csv dist
 
 clean:
