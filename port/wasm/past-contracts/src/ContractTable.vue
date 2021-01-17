@@ -1,4 +1,9 @@
 <template>
+  <div class="my-3 text-center">
+    <div class="text-sm">Contracts completed: <strong class="font-semibold">{{ completedContractCount }}/{{ totalContractCount }}</strong></div>
+    <div class="text-sm">Prophecy eggs collected: <strong class="font-semibold">{{ collectedPEs }}/{{ totalPEs }}</strong></div>
+  </div>
+
   <div class="flex justify-center my-3">
     <div class="px-3 py-2 border rounded-md shadow space-y-0.5">
       <div class="flex justify-center mb-1 text-sm font-medium text-gray-900">Color coding</div>
@@ -123,6 +128,22 @@ export default {
     };
   },
   computed: {
+    totalContractCount() {
+      return this.contracts.length;
+    },
+    completedContractCount() {
+      return this.contracts.filter(contract => !contract.incomplete).length;
+    },
+    totalPEs() {
+      return this.contracts.reduce((total, contract) => total + contract.prophecyEggCount, 0);
+    },
+    collectedPEs() {
+      return this.contracts.reduce(
+        (total, contract) =>
+          total + contract.prophecyEggCount * (contract.prophecyEggNotCollected ? 0 : 1),
+        0
+      );
+    },
     taggedContracts() {
       const contracts = JSON.parse(JSON.stringify(this.contracts));
       let visibleIndex = 0;
@@ -167,7 +188,6 @@ export default {
     },
   },
 };
-
 </script>
 
 <style scoped>
