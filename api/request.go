@@ -1,6 +1,7 @@
 package api
 
 import (
+	"context"
 	"encoding/base64"
 	"io/ioutil"
 	"net/http"
@@ -10,6 +11,7 @@ import (
 
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
+	"golang.org/x/net/context/ctxhttp"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -30,6 +32,10 @@ func init() {
 }
 
 func Request(endpoint string, reqMsg proto.Message, respMsg proto.Message) error {
+	return RequestWithContext(context.Background(), endpoint, reqMsg, respMsg)
+}
+
+func RequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message) error {
 	apiUrl := _apiPrefix + endpoint
 	reqBin, err := proto.Marshal(reqMsg)
 	if err != nil {
@@ -39,7 +45,7 @@ func Request(endpoint string, reqMsg proto.Message, respMsg proto.Message) error
 	reqDataEncoded := enc.EncodeToString(reqBin)
 	log.Infof("POST %s: %+v", apiUrl, reqMsg)
 	log.Debugf("POST %s data=%s", apiUrl, reqDataEncoded)
-	resp, err := _client.PostForm(apiUrl, url.Values{"data": {reqDataEncoded}})
+	resp, err := ctxhttp.PostForm(ctx, _client, apiUrl, url.Values{"data": {reqDataEncoded}})
 	if err != nil {
 		return errors.Wrapf(err, "POST %s", apiUrl)
 	}
@@ -64,8 +70,12 @@ func Request(endpoint string, reqMsg proto.Message, respMsg proto.Message) error
 }
 
 func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, error) {
+	return RequestFirstContactWithContext(context.Background(), payload)
+}
+
+func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRequestPayload) (*FirstContact, error) {
 	resp := &FirstContact{}
-	err := Request("/first_contact", payload, resp)
+	err := RequestWithContext(ctx, "/first_contact", payload, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +83,12 @@ func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, er
 }
 
 func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
+	return RequestCoopStatusWithContext(context.Background(), payload)
+}
+
+func RequestCoopStatusWithContext(ctx context.Context, payload *CoopStatusRequestPayload) (*CoopStatus, error) {
 	resp := &CoopStatus{}
-	err := Request("/coop_status", payload, resp)
+	err := RequestWithContext(ctx, "/coop_status", payload, resp)
 	if err != nil {
 		return nil, err
 	}
@@ -82,11 +96,15 @@ func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
 }
 
 func RequestPeriodicals(payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
+	return RequestPeriodicalsWithContext(context.Background(), payload)
+}
+
+func RequestPeriodicalsWithContext(ctx context.Context, payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
 	if payload.ClientVersion == 0 {
 		payload.ClientVersion = ClientVersion
 	}
 	resp := &Periodicals{}
-	err := Request("/get_periodicals", payload, resp)
+	err := RequestWithContext(ctx, "/get_periodicals", payload, resp)
 	if err != nil {
 		return nil, err
 	}
