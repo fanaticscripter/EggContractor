@@ -29,21 +29,31 @@
     </div>
   </div>
 
-  <div class="my-3">
-    <div class="relative flex items-start justify-center">
-      <div class="flex items-center h-5">
-        <input id="hideCompleted" name="hideCompleted" v-model="hideCompleted" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
+  <div class="flex justify-center my-3">
+    <div class="space-y-0.5">
+      <div class="relative flex items-start">
+        <div class="flex items-center h-5">
+          <input id="hideUnattempted" name="hideUnattempted" v-model="hideUnattempted" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
+        </div>
+        <div class="ml-2 text-sm">
+          <label for="hideUnattempted" class="text-gray-600">Hide unattempted contracts</label>
+        </div>
       </div>
-      <div class="ml-2 text-sm">
-        <label for="hideCompleted" class="text-gray-600">Hide completed contracts</label>
+      <div class="relative flex items-start">
+        <div class="flex items-center h-5">
+          <input id="hideCompleted" name="hideCompleted" v-model="hideCompleted" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
+        </div>
+        <div class="ml-2 text-sm">
+          <label for="hideCompleted" class="text-gray-600">Hide completed contracts</label>
+        </div>
       </div>
-    </div>
-    <div class="relative flex items-start justify-center">
-      <div class="flex items-center h-5">
-        <input id="hideNoPE" name="hideNoPE" v-model="hideNoPE" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
-      </div>
-      <div class="ml-2 text-sm">
-        <label for="hideNoPE" class="text-gray-600">Hide contracts without prophecy egg reward</label>
+      <div class="relative flex items-start">
+        <div class="flex items-center h-5">
+          <input id="hideNoPE" name="hideNoPE" v-model="hideNoPE" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-600 border-gray-300 rounded">
+        </div>
+        <div class="ml-2 text-sm">
+          <label for="hideNoPE" class="text-gray-600">Hide contracts without prophecy egg reward</label>
+        </div>
       </div>
     </div>
   </div>
@@ -82,8 +92,9 @@
   <div class="mx-4 my-4 xl:mx-0 text-xs">
     Notes:
     <ul class="list-disc">
-      <li>The contracts listed are past contracts the player has attempted. The ones never seen nor attempted cannot be retrieved. Consult a complete contract list to find out which ones were missed.</li>
-      <li>The "Date" column shows the date on which the player started the respective contract farm.</li>
+      <li>Contracts currently being worked on show up as never attempted. This is expected.</li>
+      <li>For contracts with multiple incarnations, i.e. original run and leggacy run(s), only one incarnation is listed. If the player has attempted the contract, the last attempted incarnation is shown; otherwise, the latest incarnation is shown.</li>
+      <li>The "Date" column shows the date on which the player last started a contract farm for the contract, or the estimated date the contract was offered (which may not be accurate) if it was never attempted.</li>
       <li>The "PE" column indicates which reward of the contract, if any, was one or more prophecy eggs (the number of prophecy eggs is noted in parentheses if it's more than 1). The column is blank if there's no PE associated with the contract. Otherwise, for older contracts without standard/elite tiers, this column should look like "#2", meaning the second reward being a PE; for newer contracts with tiers, this column should look like "std #3", meaning the third reward of standard tier being a PE, or "elt #2", meaning the second reward of elite tier being a PE. The tier shown is the tier the player last attempted the contract on, with the exception that if the player completed none of the goals then the tier shown defaults to elite (since in that case it's harder to tell which tier the player was on at the time, if they did make an attempt).</li>
       <li>You may <strong class="font-semibold">click on a contract ID or a coop code to copy it</strong>.</li>
     </ul>
@@ -103,6 +114,7 @@ export default {
   },
   data() {
     return {
+      hideUnattempted: false,
       hideCompleted: false,
       hideNoPE: false,
       popupTimeoutId: null,
@@ -115,7 +127,9 @@ export default {
       const contracts = JSON.parse(JSON.stringify(this.contracts));
       let visibleIndex = 0;
       for (const contract of contracts) {
-        contract.fgClass = contract.prophecyEggNotCollected
+        contract.fgClass = !contract.attempted
+          ? "text-green-500"
+          : contract.prophecyEggNotCollected
           ? "text-red-500"
           : contract.incomplete
           ? "text-yellow-500"
@@ -146,6 +160,7 @@ export default {
 
     shouldHideContract(contract) {
       return (
+        (this.hideUnattempted && !contract.attempted) ||
         (this.hideCompleted && !contract.incomplete) ||
         (this.hideNoPE && contract.prophecyEggCount === 0)
       );
