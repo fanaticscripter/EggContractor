@@ -3,5 +3,5 @@
 /data
 /EggContractor
 /logs
-/node_modules
 /public
+node_modules
