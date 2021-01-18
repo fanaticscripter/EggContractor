@@ -31,7 +31,7 @@
     }
 
     const savedSetting = localStorage[key];
-    if (savedSetting) {
+    if (savedSetting === "true") {
       toggleAutoRefresh();
     }
     autoRefreshToggle.addEventListener("click", toggleAutoRefresh);
