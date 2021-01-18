@@ -168,14 +168,6 @@ message Contract {
 message ContractProperties {
   string id = 1;
   EggType egg_type = 2;
-  message Reward {
-    int32 _1 = 1;
-    double goal = 2;
-    RewardType type = 3;
-    string name = 4;
-    double count = 5;
-    double _6 = 6;  // unknown; maybe a difficulty indicator?
-  }
   repeated Reward rewards = 3;  // seems always for elite
                                 // for standard rewards, check reward_tiers[1]
   bool coop_allowed = 4;
@@ -193,6 +185,15 @@ message ContractProperties {
     repeated Reward rewards = 1;
   }
   repeated RewardTier reward_tiers = 16;
+}
+
+message Reward {
+  int32 _1 = 1;
+  double goal = 2;
+  RewardType type = 3;
+  string name = 4;
+  double count = 5;
+  double _6 = 6;  // unknown; maybe a difficulty indicator?
 }
 
 enum RewardType {

@@ -51,7 +51,7 @@ type ContractNotification struct {
 func init() {
 	_contractMessageTmpl = template.Must(template.New("").Funcs(template.FuncMap{
 		"days":        func(d time.Duration) int { return int(d.Hours() / 24) },
-		"finalgoal":   func(r []*api.ContractProperties_Reward) float64 { return r[len(r)-1].Goal },
+		"finalgoal":   func(r []*api.Reward) float64 { return r[len(r)-1].Goal },
 		"hourlyrate":  func(goal float64, d time.Duration) float64 { return goal / d.Hours() },
 		"fmtdate":     util.FormatDate,
 		"numfmt":      util.Numfmt,

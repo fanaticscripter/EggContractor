@@ -117,7 +117,7 @@ func retrieveContractList(playerId string) *result {
 
 		numGoalsCompleted := int(c.NumGoalsCompleted)
 		totalGoals := len(c.Props.Rewards)
-		var rewards []*api.ContractProperties_Reward
+		var rewards []*api.Reward
 
 		var contractType string
 		if len(c.Props.RewardTiers) == 0 {
@@ -197,7 +197,7 @@ func retrieveContractList(playerId string) *result {
 		c := unattemptedContracts[i]
 
 		var contractType string
-		var rewards []*api.ContractProperties_Reward
+		var rewards []*api.Reward
 		if len(c.RewardTiers) == 0 {
 			rewards = c.Rewards
 		} else {

@@ -40,14 +40,14 @@ func (c *contract) EstimatedOfferingTime() time.Time {
 	}
 }
 
-func (c *contract) StandardRewards() []*api.ContractProperties_Reward {
+func (c *contract) StandardRewards() []*api.Reward {
 	if len(c.RewardTiers) >= 2 {
 		return c.RewardTiers[1].Rewards
 	}
 	return c.Rewards
 }
 
-func (c *contract) EliteRewards() []*api.ContractProperties_Reward {
+func (c *contract) EliteRewards() []*api.Reward {
 	if len(c.RewardTiers) >= 2 {
 		return c.RewardTiers[0].Rewards
 	}
