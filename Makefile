@@ -5,6 +5,7 @@ MAKEFLAGS += -j4
 all: go webpack postcss
 
 dev: go webpack-dev postcss-dev
+	rm -f public/egginc public/egginc-extras
 	ln -sf ../static/egginc public/egginc
 	ln -sf ../static/egginc-extras public/egginc-extras
 
