@@ -31,6 +31,7 @@ type BaseSoloContract interface {
 	GetId() string
 	GetName() string
 	GetIsElite() bool
+	GetEggType() api.EggType
 	GetUltimateGoal() float64
 	GetRewards() []*api.Reward
 	GetEggsLaid() float64
@@ -103,6 +104,7 @@ func (c *SoloContract) ToPBSoloContract() *pb.SoloContract {
 		Id:                             c.GetId(),
 		Name:                           c.GetName(),
 		IsElite:                        c.GetIsElite(),
+		EggType:                        c.GetEggType(),
 		UltimateGoal:                   c.GetUltimateGoal(),
 		Rewards:                        c.GetRewards(),
 		EggsLaid:                       c.GetEggsLaid(),
@@ -187,6 +189,10 @@ func (c *soloContract) GetName() string {
 
 func (c *soloContract) GetIsElite() bool {
 	return c.Player.EarningBonus() >= api.EliteEarningBonusThreshold
+}
+
+func (c *soloContract) GetEggType() api.EggType {
+	return c.Contract.Props.EggType
 }
 
 func (c *soloContract) GetUltimateGoal() float64 {

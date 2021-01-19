@@ -8,6 +8,7 @@ message SoloContract {
   string id = 1;
   string name = 2;
   bool is_elite = 3;
+  EggType egg_type = 12;
   double ultimate_goal = 4;
   repeated Reward rewards = 11;
   double eggs_laid = 5;

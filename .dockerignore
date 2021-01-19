@@ -14,10 +14,9 @@
 /static/*
 !/static/egginc
 /static/egginc/*
+!/static/egginc/egg_*.png
 !/static/egginc/b_icon_*.png
 !/static/egginc/r_icon_*.png
-!/static/egginc/egg_soul.png
-!/static/egginc/egg_of_prophecy.png
 !/static/egginc-extras
 /static/egginc-extras/*
 !/static/egginc-extras/*.png
