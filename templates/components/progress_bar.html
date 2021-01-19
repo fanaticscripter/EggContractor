@@ -1,13 +1,13 @@
 {{- /* The coop template renders a contract.ProgressInfo */ -}}
 {{define "progress_bar"}}
   <div class="h-8 relative">
-    <div class="h-3 relative top-2.5 rounded-full overflow-hidden" title="{{numfmt .EggsLaid}} {{if .ProjectedEggsLaid}}(projected {{numfmt .ProjectedEggsLaid}}){{end}} / {{numfmtWhole .UltimateGoal}}">
+    <div class="h-3 relative top-2.5 rounded-full overflow-hidden" title="{{numfmt .EggsLaid}} {{if .ProjectedEggsLaid}}(projected {{numfmt .ProjectedEggsLaid}}){{end}} / {{numfmtWhole .UltimateGoal}}" data-tooltip>
       <div class="w-full h-full bg-gray-200 absolute"></div>
       <div class="h-full bg-green-300 absolute rounded-full" style="width: {{fmtpercent .ProjectedPercentageCompleted 3 | css}}"></div>
       <div class="h-full bg-green-500 absolute rounded-full" style="width: {{fmtpercent .PercentageCompleted 3 | css}}"></div>
     </div>
     {{range .Rewards}}
-      <img class="h-8 absolute top-0 transform -translate-x-1/2" style="left: {{fmtpercent .PercentageOfUltimateGoal 3 | css}}" src="{{iconpath .Reward | static}}" title="{{numfmtWhole .Goal}}, {{fmtpercent .PercentageCompleted 1}} completed">
+      <img class="h-8 absolute top-0 transform -translate-x-1/2" style="left: {{fmtpercent .PercentageOfUltimateGoal 3 | css}}" src="{{iconpath .Reward | static}}" title="{{numfmtWhole .Goal}}, {{fmtpercent .PercentageCompleted 1}} completed" data-tooltip>
     {{end}}
   </div>
 {{end}}

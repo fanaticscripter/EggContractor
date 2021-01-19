@@ -20,6 +20,7 @@
     "@tailwindcss/forms": "^0.2.1",
     "copy-text-to-clipboard": "^2.2.0",
     "tailwindcss": "^2.0.2",
+    "tippy.js": "^6.2.7",
     "vue": "^3.0.4"
   }
 }
