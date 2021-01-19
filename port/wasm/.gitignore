@@ -1,1 +1,3 @@
-dist
+dist/*
+!/dist/_headers
+!/dist/favicon.ico

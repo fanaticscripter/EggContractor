@@ -1,0 +1,8 @@
+/past-contracts/app.*.css
+  cache-control: public,max-age=2592000,immutable
+
+/past-contracts/app.*.js
+  cache-control: public,max-age=2592000,immutable
+
+/past-contracts/app.*.wasm
+  cache-control: public,max-age=2592000,immutable
