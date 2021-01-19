@@ -1,0 +1,1 @@
+For some reason, a few key icons can't be found (as least not in PNG form) in the Egg, Inc. v1.12.13 Android apk I downloaded from online. I ended up stealing these from egginc.mioi.io and putting them in this extras directory.

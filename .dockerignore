@@ -2,6 +2,7 @@
 !/api
 !/cmd
 !/config
+!/contract
 !/coop
 !/css
 !/db
@@ -11,6 +12,15 @@
 !/solo
 !/static
 /static/*
+!/static/egginc
+/static/egginc/*
+!/static/egginc/b_icon_*.png
+!/static/egginc/r_icon_*.png
+!/static/egginc/egg_soul.png
+!/static/egginc/egg_of_prophecy.png
+!/static/egginc-extras
+/static/egginc-extras/*
+!/static/egginc-extras/*.png
 !/static/favicon.ico
 !/static/favicon-180.png
 !/templates

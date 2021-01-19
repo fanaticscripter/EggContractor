@@ -99,3 +99,13 @@ func numfmt(x float64, decimalDigits uint, trimTrailingZeros bool) string {
 	}
 	return numpart + _oomMap[oomFloor]
 }
+
+func FormatPercentage(x float64, decimalDigits uint) string {
+	if x <= 0 {
+		return "0%"
+	}
+	if x >= 100 {
+		return "100%"
+	}
+	return fmt.Sprintf("%."+strconv.Itoa(int(decimalDigits))+"f%%", x)
+}

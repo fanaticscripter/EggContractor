@@ -16,6 +16,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/dustin/go-humanize"
+	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
@@ -26,7 +27,10 @@ const (
 	_prodStaticCacheControlHeader = "max-age=2592000"
 )
 
-var _staticMap map[string]string
+var (
+	_staticMap   map[string]string
+	_iconPathSet map[string]struct{}
+)
 
 type ServerOptions struct {
 	BindAddr string
@@ -46,6 +50,9 @@ func Serve(opts ServerOptions) {
 		if err := preloadStaticManifests(); err != nil {
 			log.Fatal(err)
 		}
+	}
+	if err := preloadIcons(); err != nil {
+		log.Fatal(err)
 	}
 
 	e := echo.New()
@@ -127,6 +134,18 @@ func preloadStaticManifests() error {
 	return nil
 }
 
+func preloadIcons() error {
+	_iconPathSet = make(map[string]struct{})
+	iconPaths, _ := filepath.Glob("static/egginc/*.png")
+	additional, _ := filepath.Glob("static/egginc-extras/*.png")
+	iconPaths = append(iconPaths, additional...)
+	for _, p := range iconPaths {
+		rp := strings.TrimPrefix(p, "static/")
+		_iconPathSet[rp] = struct{}{}
+	}
+	return nil
+}
+
 func loadTemplates(opts ServerOptions) *Template {
 	staticAssetURL := prodStaticAssetURL
 	if opts.Dev {
@@ -134,6 +153,7 @@ func loadTemplates(opts ServerOptions) *Template {
 	}
 	return &Template{
 		templates: template.Must(template.New("").Funcs(template.FuncMap{
+			"css":              func(s string) template.CSS { return template.CSS(s) },
 			"fmtcountdown":     util.FormatCountdown,
 			"fmtdate":          util.FormatDate,
 			"fmtdatecasual":    util.FormatDateCasual,
@@ -141,7 +161,9 @@ func loadTemplates(opts ServerOptions) *Template {
 			"fmtduration":      util.FormatDuration,
 			"fmtdurationGe0":   util.FormatDurationNonNegative,
 			"fmttimecasual":    util.FormatTimeCasual,
+			"fmtpercent":       util.FormatPercentage,
 			"hasactivitystats": hasActivityStats,
+			"iconpath":         rewardIconPath,
 			"increment":        func(x int) int { return x + 1 },
 			"iseven":           func(x int) bool { return x%2 == 0 },
 			"islastindex":      func(index int, length int) bool { return index == length-1 },
@@ -166,4 +188,31 @@ func prodStaticAssetURL(pth string) string {
 		return path.Join("/static", realpath)
 	}
 	return path.Join("/static", pth)
+}
+
+func rewardIconPath(r *api.Reward) string {
+	var path string
+	switch r.Type {
+	case api.RewardType_GOLDEN_EGG:
+		path = "egginc-extras/icon_golden_egg.png"
+	case api.RewardType_SOUL_EGG:
+		path = "egginc/egg_soul.png"
+	case api.RewardType_PROPHECY_EGG:
+		path = "egginc/egg_of_prophecy.png"
+	case api.RewardType_EPIC_RESEARCH:
+		path = "egginc/r_icon_" + r.Name + ".png"
+	case api.RewardType_PIGGY_GOLDEN_EGG:
+		path = "egginc-extras/icon_piggy_golden_egg.png"
+	case api.RewardType_PIGGY_MULTIPLY:
+		path = "egginc-extras/icon_piggy_multiply.png"
+	case api.RewardType_PIGGY_LEVEL_UP:
+		path = "egginc-extras/icon_piggy_level_up.png"
+	case api.RewardType_BOOST:
+		path = "egginc/b_icon_" + r.Name + ".png"
+	}
+	_, ok := _iconPathSet[path]
+	if ok {
+		return path
+	}
+	return "egginc/icon_help.png"
 }

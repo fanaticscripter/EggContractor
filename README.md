@@ -24,7 +24,7 @@ Note that reverse engineered API protobufs are independently available at [api/e
 
 ## Demo
 
-Below are some semi-interactive demo pages (pre-rendered, with in-page interactivity, but inter-page interactivity is likely broken). Note that the demo pages were captured from the MVP version of EggContractor, hence somewhat outdated; since then a number of major features have been implemented; for instance, offline timer for each coop member, and projection of eggs laid based on that.
+Below are some semi-interactive demo pages (pre-rendered, with in-page interactivity, but inter-page interactivity is likely broken). Note that the demo pages were captured from the MVP version of EggContractor, hence somewhat outdated; since then a number of major features have been implemented; for instance, contract progress bars, offline timer for each coop member, and projection of eggs laid based on that.
 
 - Home page: [/](https://egg-contractor-static-demo.netlify.app/)
 - Home page with time travel (state at a certain timestamp in the past): [/?by=1608802500](https://egg-contractor-static-demo.netlify.app/?by=1608802500)
@@ -51,7 +51,7 @@ Advantages:
 
 Disadvantages:
 
-- Frontend fanciness in general. I didn't bother to invest time into the frontend, so no pretty little pictures, no progress bars, and no dark theme (kind of a shame, not hard to add though). Hopefully you can still easily pick out whatever info you need from my UI.
+- <s>Frontend fanciness in general. I didn't bother to invest time into the frontend, so no pretty little pictures, no progress bars, and no dark theme (kind of a shame, not hard to add though). Hopefully you can still easily pick out whatever info you need from my UI.</s> EggContractor now has fancy progress bars too!
 
 - No home farm info. I don't need a separate web app to learn about my home farm, so not much of a disadvantage actually.
 

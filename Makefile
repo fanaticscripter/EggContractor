@@ -5,13 +5,15 @@ MAKEFLAGS += -j4
 all: go webpack postcss
 
 dev: go webpack-dev postcss-dev
+	ln -sf ../static/egginc public/egginc
+	ln -sf ../static/egginc-extras public/egginc-extras
 
 go: protobuf
 	go build
 
 protobuf:
-	protoc --go_out=paths=source_relative:. api/egginc.proto
-	protoc --go_out=paths=source_relative:. solo/pb/solo.proto
+	protoc --proto_path=. --go_out=paths=source_relative:. api/egginc.proto
+	protoc --proto_path=. --go_out=paths=source_relative:. solo/pb/solo.proto
 	gofumpt -w api/egginc.pb.go solo/pb/solo.pb.go
 
 webpack:

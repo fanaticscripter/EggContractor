@@ -59,30 +59,31 @@ func (c *ContractProperties) ExpiryTime() time.Time {
 	return util.DoubleToTime(c.ExpiryTimestamp)
 }
 
+func (c *ContractProperties) EliteRewards() []*Reward {
+	if len(c.RewardTiers) == 0 {
+		return c.Rewards
+	}
+	return c.RewardTiers[0].Rewards
+}
+
+func (c *ContractProperties) StandardRewards() []*Reward {
+	if len(c.RewardTiers) == 0 {
+		return c.Rewards
+	}
+	return c.RewardTiers[1].Rewards
+}
+
 func (c *ContractProperties) UltimateGoal(isElite bool) float64 {
-	ultimateGoals := make([]float64, 0, 3)
-	if len(c.Rewards) > 0 {
-		ultimateGoals = append(ultimateGoals, c.Rewards[len(c.Rewards)-1].Goal)
-	}
-	for _, t := range c.RewardTiers {
-		if len(t.Rewards) > 0 {
-			ultimateGoals = append(ultimateGoals, t.Rewards[len(t.Rewards)-1].Goal)
-		}
-	}
-	var min, max float64
-	for i, g := range ultimateGoals {
-		if g > max {
-			max = g
-		}
-		if i == 0 || g < min {
-			min = g
-		}
-	}
+	var rewards []*Reward
 	if isElite {
-		return max
+		rewards = c.EliteRewards()
 	} else {
-		return min
+		rewards = c.StandardRewards()
 	}
+	if len(rewards) == 0 {
+		return 0
+	}
+	return rewards[len(rewards)-1].Goal
 }
 
 func (f *Farm) LastSavedTime() time.Time {

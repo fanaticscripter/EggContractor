@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/contract"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
@@ -79,4 +80,21 @@ func (c *CoopStatus) GetOfflineAdjustedExpectedDurationUntilFinish(activities ma
 	} else {
 		return util.DoubleToDuration(eggsToLay / c.EggsPerSecond())
 	}
+}
+
+func (c *CoopStatus) ProgressInfo() *contract.ProgressInfo {
+	return c.ProgressInfoWithProjection(0)
+}
+
+func (c *CoopStatus) ProgressInfoWithProjection(projectedEggsLaid float64) *contract.ProgressInfo {
+	if c.Contract == nil {
+		return nil
+	}
+	var rewards []*api.Reward
+	if c.IsElite() {
+		rewards = c.Contract.EliteRewards()
+	} else {
+		rewards = c.Contract.StandardRewards()
+	}
+	return contract.NewProgressInfo(rewards, c.EggsLaid, projectedEggsLaid)
 }

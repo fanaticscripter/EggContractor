@@ -7,6 +7,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 
+	"github.com/fanaticscripter/EggContractor/contract"
 	"github.com/fanaticscripter/EggContractor/coop"
 	"github.com/fanaticscripter/EggContractor/db"
 	"github.com/fanaticscripter/EggContractor/solo"
@@ -116,10 +117,18 @@ func (s *SoloStatus) OfflineAdjustedExpectedDurationUntilFinish() time.Duration 
 	return s.GetOfflineAdjustedExpectedDurationUntilFinish(s.ClientRefreshTime)
 }
 
+func (s *SoloStatus) ProgressInfo() *contract.ProgressInfo {
+	return s.SoloContract.ProgressInfoWithProjection(s.OfflineAdjustedEggsLaid())
+}
+
 func (c *CoopStatus) OfflineAdjustedEggsLaid() float64 {
 	return c.GetOfflineAdjustedEggsLaid(c.Activities)
 }
 
 func (c *CoopStatus) OfflineAdjustedExpectedDurationUntilFinish() time.Duration {
 	return c.GetOfflineAdjustedExpectedDurationUntilFinish(c.Activities)
+}
+
+func (c *CoopStatus) ProgressInfo() *contract.ProgressInfo {
+	return c.CoopStatus.ProgressInfoWithProjection(c.OfflineAdjustedEggsLaid())
 }

@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/contract"
 	"github.com/fanaticscripter/EggContractor/solo/pb"
 	"github.com/fanaticscripter/EggContractor/util"
 )
@@ -31,6 +32,7 @@ type BaseSoloContract interface {
 	GetName() string
 	GetIsElite() bool
 	GetUltimateGoal() float64
+	GetRewards() []*api.Reward
 	GetEggsLaid() float64
 	GetEggsPerSecond() float64
 	GetDurationUntilProductionDeadline() time.Duration
@@ -102,6 +104,7 @@ func (c *SoloContract) ToPBSoloContract() *pb.SoloContract {
 		Name:                           c.GetName(),
 		IsElite:                        c.GetIsElite(),
 		UltimateGoal:                   c.GetUltimateGoal(),
+		Rewards:                        c.GetRewards(),
 		EggsLaid:                       c.GetEggsLaid(),
 		EggsPerSecond:                  c.GetEggsPerSecond(),
 		SecondsUntilProductionDeadline: c.GetDurationUntilProductionDeadline().Seconds(),
@@ -120,6 +123,14 @@ func (c *SoloContract) HasNoTimeLeft() bool {
 
 func (c *SoloContract) IsOnTrackToFinish() bool {
 	return c.GetEggsPerHour() >= c.RequiredEggsPerHour()
+}
+
+func (c *SoloContract) ProgressInfo() *contract.ProgressInfo {
+	return c.ProgressInfoWithProjection(0)
+}
+
+func (c *SoloContract) ProgressInfoWithProjection(projectedEggsLaid float64) *contract.ProgressInfo {
+	return contract.NewProgressInfo(c.GetRewards(), c.GetEggsLaid(), projectedEggsLaid)
 }
 
 type soloContract struct {
@@ -180,6 +191,14 @@ func (c *soloContract) GetIsElite() bool {
 
 func (c *soloContract) GetUltimateGoal() float64 {
 	return c.Contract.Props.UltimateGoal(c.GetIsElite())
+}
+
+func (c *soloContract) GetRewards() []*api.Reward {
+	if c.GetIsElite() {
+		return c.Contract.Props.EliteRewards()
+	} else {
+		return c.Contract.Props.StandardRewards()
+	}
 }
 
 func (c *soloContract) GetEggsLaid() float64 {
