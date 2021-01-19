@@ -1,13 +1,16 @@
+// Loosely adapted from https://developers.cloudflare.com/workers/examples/cors-header-proxy.
 async function handleRequest(request) {
   const url = new URL(request.url);
   let proxiedURL = url.searchParams.get("url");
   let requestOrigin = request.headers.get("Origin");
 
   if (proxiedURL == null) {
-    return new Response(null, {
-      status: 400,
-      statusText: "Bad Request",
-    });
+    // If not requesting a URL through the url param, proxy the corresponding
+    // path at https://wasmegg.netlify.app.
+    url.host = "wasmegg.netlify.app";
+    request = new Request(url.toString(), request);
+    request.headers.set("Origin", url.origin);
+    return await fetch(request);
   }
 
   let proxiedOrigin = new URL(proxiedURL).origin;
