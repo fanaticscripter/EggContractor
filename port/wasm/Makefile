@@ -1,4 +1,4 @@
-MAKEFLAGS += -j4
+MAKEFLAGS ?= -j4
 
 .PHONY: all init artifact-list init-artifact-list past-contracts init-past-contracts
 

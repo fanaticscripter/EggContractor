@@ -43,7 +43,7 @@ jobs:
           python-version: '3.x'
       - name: Initialize dependencies
         run: |
-          make init
+          make init -j1
       - name: Build
         run: |
           make
