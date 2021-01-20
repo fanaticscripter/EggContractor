@@ -49,13 +49,19 @@ def dist_handler(args):
         shutil.rmtree(finaldest)
     print(f"mkdir -p {finaldest}")
     finaldest.mkdir(parents=True, exist_ok=True)
-    copylist = ["index.html", "wasm_exec.js"]
+    copylist = ["index.html"]
+    if (distdir / "wasm_exec.js").exists():
+        copylist.append("wasm_exec.js")
     copylist.extend(read_manifests().values())
-    copylist.extend(args.additional_assets)
+    if args.additional_assets:
+        copylist.extend(args.additional_assets)
     copylist = [distdir / f for f in copylist]
-    print(f"cp {' '.join(str(f) for f in copylist)} {finaldest}")
+    print(f"cp -r {' '.join(str(f) for f in copylist)} {finaldest}")
     for f in copylist:
-        shutil.copy(f, finaldest)
+        if f.is_dir():
+            shutil.copytree(f, finaldest / f.name)
+        else:
+            shutil.copy(f, finaldest)
 
 
 def add_hash_suffix(path):
