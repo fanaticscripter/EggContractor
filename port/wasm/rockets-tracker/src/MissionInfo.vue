@@ -89,7 +89,7 @@
       Notes:
       <ul class="list-disc">
         <li>Launched active missions are counted in mission statistics; fueling active missions are not.</li>
-        <li>There might be a dalay between your local mission state updates and server state pulled by this site.</li>
+        <li>There might be a delay between your local mission state updates and server state pulled by this site.</li>
       </ul>
     </div>
   </div>
