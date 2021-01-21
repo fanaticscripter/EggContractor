@@ -259,3 +259,48 @@ func (e EggType) ValueDisplay() string {
 func (m *MissionInfo) StartTime() time.Time {
 	return util.DoubleToTime(m.StartTimeDerived)
 }
+
+func (s MissionInfo_Spaceship) Name() string {
+	switch s {
+	case MissionInfo_CHICKEN_ONE:
+		return "Chicken One"
+	case MissionInfo_CHICKEN_NINE:
+		return "Chicken Nine"
+	case MissionInfo_CHICKEN_HEAVY:
+		return "Chicken Heavy"
+	case MissionInfo_BCR:
+		return "BCR"
+	case MissionInfo_MILLENIUM_CHICKEN:
+		return "Quintillion Chicken"
+	case MissionInfo_CORELLIHEN_CORVETTE:
+		return "Corellihen Corvette"
+	case MissionInfo_GALEGGTICA:
+		return "Galeggtica"
+	case MissionInfo_CHICKFIANT:
+		return "Chickfiant"
+	case MissionInfo_VOYEGGER:
+		return "Voyegger"
+	case MissionInfo_HENERPRISE:
+		return "Henerprise"
+	}
+	return "Unknown"
+}
+
+func (s MissionInfo_Status) Display() string {
+	lower := strings.ReplaceAll(strings.ToLower(s.String()), "_", " ")
+	return strings.ToUpper(lower[:1]) + lower[1:]
+}
+
+func (d MissionInfo_DurationType) Display() string {
+	switch d {
+	case MissionInfo_TUTORIAL:
+		return "Tutorial"
+	case MissionInfo_SHORT:
+		return "Short"
+	case MissionInfo_LONG:
+		return "Standard"
+	case MissionInfo_EPIC:
+		return "Extended"
+	}
+	return "Unknown"
+}

@@ -1,3 +1,12 @@
+/rockets-tracker/app.*.css
+  cache-control: public,max-age=2592000,immutable
+
+/rockets-tracker/app.*.js
+  cache-control: public,max-age=2592000,immutable
+
+/rockets-tracker/app.*.wasm
+  cache-control: public,max-age=2592000,immutable
+
 /past-contracts/app.*.css
   cache-control: public,max-age=2592000,immutable
 
