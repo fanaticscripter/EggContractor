@@ -273,7 +273,7 @@ func (s MissionInfo_Spaceship) Name() string {
 	case MissionInfo_MILLENIUM_CHICKEN:
 		return "Quintillion Chicken"
 	case MissionInfo_CORELLIHEN_CORVETTE:
-		return "Corellihen Corvette"
+		return "Cornish-Hen Corvette"
 	case MissionInfo_GALEGGTICA:
 		return "Galeggtica"
 	case MissionInfo_CHICKFIANT:
