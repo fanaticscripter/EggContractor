@@ -208,14 +208,13 @@ func getPlayerIdsFromCoop(contractId, code string) []string {
 
 func getAndRecordPlayerContracts(playerId string) {
 	resp, err := api.RequestFirstContact(&api.FirstContactRequestPayload{
-		PlayerId: playerId,
-		X3:       1,
+		EiUserId: playerId,
 	})
 	if err != nil {
 		logError(err)
 		return
 	}
-	if resp.Data == nil || resp.Data.PlayerId == "" {
+	if resp.Data == nil || resp.Data.EiUserId == "" {
 		logErrorf("invalid response for player %#v", playerId)
 		return
 	}
@@ -224,9 +223,8 @@ func getAndRecordPlayerContracts(playerId string) {
 
 func getAndRecordActiveContracts() {
 	resp, err := api.RequestPeriodicals(&api.GetPeriodicalsRequestPayload{
-		PlayerId:     "G:1234567890",
-		X2:           1,
-		EarningBonus: 1e12,
+		UserId:   "EI1234567890123456",
+		SoulEggs: 1e12,
 	})
 	if err != nil {
 		logError(err)

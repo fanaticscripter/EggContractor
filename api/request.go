@@ -9,22 +9,26 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context/ctxhttp"
 	"google.golang.org/protobuf/proto"
 )
 
-const ClientVersion = 26
+const (
+	ClientVersion = 27
+	AppVersion    = "1.20.0"
+)
 
-var _apiPrefix = "http://www.auxbrain.com/ei"
+var _apiPrefix = "http://afx-2-dot-auxbrainhome.appspot.com"
 
 var _client *http.Client
 
 func init() {
 	if runtime.GOOS == "js" && runtime.GOARCH == "wasm" {
 		// Use CORS proxy in the browser setting.
-		_apiPrefix = "https://wasmegg.zw.workers.dev/?url=http://www.auxbrain.com/ei"
+		_apiPrefix = "https://wasmegg.zw.workers.dev/?url=http://afx-2-dot-auxbrainhome.appspot.com"
 	}
 	_client = &http.Client{
 		Timeout: 5 * time.Second,
@@ -74,12 +78,18 @@ func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, er
 }
 
 func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRequestPayload) (*FirstContact, error) {
-	resp := &FirstContact{}
-	err := RequestWithContext(ctx, "/first_contact", payload, resp)
+	if payload.ClientVersion == 0 {
+		payload.ClientVersion = ClientVersion
+	}
+	if payload.DeviceId == "" {
+		payload.DeviceId = uuid.New().String()
+	}
+	resp := &FirstContactResponsePayload{}
+	err := RequestWithContext(ctx, "/ei/first_contact", payload, resp)
 	if err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return resp.Payload, nil
 }
 
 func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
@@ -87,12 +97,12 @@ func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
 }
 
 func RequestCoopStatusWithContext(ctx context.Context, payload *CoopStatusRequestPayload) (*CoopStatus, error) {
-	resp := &CoopStatus{}
-	err := RequestWithContext(ctx, "/coop_status", payload, resp)
+	resp := &CoopStatusResponsePayload{}
+	err := RequestWithContext(ctx, "/ei/coop_status", payload, resp)
 	if err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return resp.Status, nil
 }
 
 func RequestPeriodicals(payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
@@ -100,13 +110,13 @@ func RequestPeriodicals(payload *GetPeriodicalsRequestPayload) (*Periodicals, er
 }
 
 func RequestPeriodicalsWithContext(ctx context.Context, payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
-	if payload.ClientVersion == 0 {
-		payload.ClientVersion = ClientVersion
+	if payload.CurrentClientVersion == 0 {
+		payload.CurrentClientVersion = ClientVersion
 	}
-	resp := &Periodicals{}
-	err := RequestWithContext(ctx, "/get_periodicals", payload, resp)
+	resp := &GetPeriodicalsResponsePayload{}
+	err := RequestWithContext(ctx, "/ei/get_periodicals", payload, resp)
 	if err != nil {
 		return nil, err
 	}
-	return resp, nil
+	return resp.Periodicals, nil
 }

@@ -20,10 +20,14 @@ const (
 # player.id, required.
 #
 # Your unique player ID. To view your player ID, go to Main Menu -> Settings ->
-# Privacy & Data, and the ID should be in the bottom left corner. On iOS (at
-# least when signed in via Game Center) this would be of the format G:1234567890.
-# Copy the string verbatim for this field.
-#id = "G:1234567890"
+# Privacy & Data, and the ID should be in the bottom left corner.
+#id = "EI1234567890123456"
+
+# player.device_id, optional.
+#
+# A UUID. Cannot be obtained from UI, must be scraped from API requests. If not
+# specified, a random UUID would be used instead, with unknown caveats.
+#divice_id = "880684B9-756B-451D-944D-48D3453822B7"
 
 [database]
 # database.path, optional.
@@ -62,7 +66,8 @@ type Config struct {
 }
 
 type PlayerConfig struct {
-	Id string
+	Id       string
+	DeviceId string `mapstructure:"device_id"`
 }
 
 type DatabaseConfig struct {

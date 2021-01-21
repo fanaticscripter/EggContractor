@@ -14,7 +14,10 @@ async function handleRequest(request) {
   }
 
   let proxiedOrigin = new URL(proxiedURL).origin;
-  if (proxiedOrigin !== "http://www.auxbrain.com") {
+  if (
+    proxiedOrigin !== "http://www.auxbrain.com" &&
+    proxiedOrigin !== "http://afx-2-dot-auxbrainhome.appspot.com"
+  ) {
     return new Response(null, {
       status: 403,
       statusText: "Forbidden",
@@ -22,7 +25,7 @@ async function handleRequest(request) {
   }
 
   request = new Request(proxiedURL, request);
-  request.headers.set("Origin", "http://www.auxbrain.com");
+  request.headers.set("Origin", proxiedOrigin);
   let response = await fetch(request);
 
   // Recreate the response and set CORS headers.

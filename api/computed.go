@@ -14,6 +14,10 @@ import (
 // my personal experience. But it's hard to confirm.
 const EliteEarningBonusThreshold = 1e11
 
+func (f *FirstContact_Payload) ApproxTime() time.Time {
+	return util.DoubleToTime(f.ApproxTimestamp)
+}
+
 func (f *FirstContact_Payload) AllContractProperties() []*ContractProperties {
 	s := make([]*ContractProperties, 0)
 	for _, c := range f.Contracts.ActiveContracts {
@@ -250,4 +254,8 @@ func (e EggType) ValueDisplay() string {
 		s = strings.TrimRight(s, ".")
 	}
 	return s
+}
+
+func (m *MissionInfo) StartTime() time.Time {
+	return util.DoubleToTime(m.StartTimeDerived)
 }

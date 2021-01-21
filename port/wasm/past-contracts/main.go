@@ -64,8 +64,7 @@ func retrieveContractList(playerId string) *result {
 		var err error
 		fc, err = api.RequestFirstContactWithContext(ctx,
 			&api.FirstContactRequestPayload{
-				PlayerId: playerId,
-				X3:       1,
+				EiUserId: playerId,
 			})
 		if err != nil {
 			errs <- err

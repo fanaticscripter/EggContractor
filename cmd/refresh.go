@@ -47,15 +47,16 @@ var _refreshCommand = &cobra.Command{
 		defer func() { <-periodicalsDone }()
 
 		playerId := _config.Player.Id
+		deviceId := _config.Player.DeviceId
 		now := time.Now()
 		resp, err := api.RequestFirstContact(&api.FirstContactRequestPayload{
-			PlayerId: playerId,
-			X3:       1,
+			EiUserId: playerId,
+			DeviceId: deviceId,
 		})
 		if err != nil {
 			return err
 		}
-		if resp.Data == nil || resp.Data.PlayerId == "" {
+		if resp.Data == nil || resp.Data.EiUserId == "" {
 			return fmt.Errorf("invalid /first_contact response for player %#v: %+v", playerId, resp)
 		}
 
@@ -187,9 +188,8 @@ func init() {
 func refreshPeriodicals() (activeEvents []*api.Event, activeContracts []*api.ContractProperties, err error) {
 	now := time.Now()
 	p, err := api.RequestPeriodicals(&api.GetPeriodicalsRequestPayload{
-		PlayerId:     _config.Player.Id,
-		X2:           1,
-		EarningBonus: 1e12, // Use a reasonably large EB just in case
+		UserId:   _config.Player.Id,
+		SoulEggs: 1e12, // Use a reasonably large SE count just in case
 	})
 	if err != nil {
 		return

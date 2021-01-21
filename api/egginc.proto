@@ -4,16 +4,49 @@ option go_package = "github.com/fanaticscripter/EggContractor/api";
 
 // http://www.auxbrain.com/ei/first_contact
 message FirstContactRequestPayload {
-  string player_id = 1;
-  int32 client_version = 2;  // optional
-  int32 _3 = 3;              // unknown; example: 1
+  BasicRequestInfo rinfo = 8;
+  string ei_user_id = 4;
+  string user_id = 1;  // old style user ID, now game_services_id;
+                       // using this seens to cause API response to return a
+                       // pre-artifact backup; don't set post-artifact.
+  string game_services_id = 7;  // old style user ID, e.g. G:1234567890
+  string device_id = 5;         // A UUID
+  string username = 6;
+  uint32 client_version = 2;
+  Platform platform = 3;
+}
+
+message BasicRequestInfo {
+  string ei_user_id = 1;
+  uint32 client_version = 2;
+  string version = 3;
+  string build = 4;
+  string platform = 5;
+}
+
+enum Platform {
+  INVALID_PLATFORM = 0;  // proto3 requires first enum value to be 0.
+  IOS = 1;
+  DROID = 2;
+}
+
+message FirstContactResponsePayload {
+  FirstContact payload = 1;
+  string _2 = 2;  // unknown, a hex string possibly denoting a request ID
 }
 
 // Partially reverse engineered.
 message FirstContact {
   message Payload {
-    string player_id = 1;
-    string player_name = 2;
+    string user_id = 1;
+    string ei_user_id = 18;
+    string game_services_id = 16;
+    string device_id = 17;
+    string user_name = 2;
+    double approx_timestamp = 3;
+    uint32 version = 21;
+    bool force_offer_backup = 20;
+    bool force_backup = 22;
 
     message Settings {
       int32 sfx = 1;
@@ -68,6 +101,8 @@ message FirstContact {
       repeated CoopStatus active_coop_statuses = 4;
     }
     Contracts contracts = 13;
+
+    ArtifactsDB artifacts_db = 15;
   }
   Payload data = 1;
 }
@@ -211,11 +246,197 @@ enum RewardType {
   BOOST = 9;
 }
 
+message ArtifactsDB {
+  repeated ArtifactInventoryItem inventory_items = 1;
+  uint64 item_sequence = 2;
+  repeated InventorySlot inventory_slots = 3;
+
+  message ActiveArtifactSlot {
+    bool occupied = 1;
+    uint64 item_id = 2;
+  }
+  repeated ActiveArtifactSlot active_artifacts = 7;
+
+  message ActiveArtifactSet {
+    repeated ActiveArtifactSlot slots = 1;
+  }
+  repeated ActiveArtifactSet active_artifact_sets = 11;
+
+  repeated ArtifactSpec discovered_artifacts = 8;
+
+  message CraftableArtifact {
+    ArtifactSpec spec = 1;
+    bool seen = 2;
+    uint32 count = 3;
+  }
+  repeated CraftableArtifact craftable_artifacts = 9;
+
+  repeated CraftableArtifact crafting_counts = 10;
+  repeated MissionInfo mission_infos = 4;
+  repeated MissionInfo mission_archive = 5;
+}
+
+message ArtifactSpec {
+  enum Name {
+    LUNAR_TOTEM = 0;
+    NEODYMIUM_MEDALLION = 3;
+    BEAK_OF_MIDAS = 4;
+    LIGHT_OF_EGGENDIL = 5;
+    DEMETERS_NECKLACE = 6;
+    VIAL_MARTIAN_DUST = 7;
+    ORNATE_GUSSET = 8;
+    THE_CHALICE = 9;
+    BOOK_OF_BASAN = 10;
+    PHOENIX_FEATHER = 11;
+    TUNGSTEN_ANKH = 12;
+    AURELIAN_BROOCH = 21;
+    CARVED_RAINSTICK = 22;
+    PUZZLE_CUBE = 23;
+    QUANTUM_METRONOME = 24;
+    SHIP_IN_A_BOTTLE = 25;
+    TACHYON_DEFLECTOR = 26;
+    INTERSTELLAR_COMPASS = 27;
+    DILITHIUM_MONOCLE = 28;
+    TITANIUM_ACTUATOR = 29;
+    MERCURYS_LENS = 30;
+    TACHYON_STONE = 1;
+    DILITHIUM_STONE = 31;
+    SHELL_STONE = 32;
+    LUNAR_STONE = 33;
+    SOUL_STONE = 34;
+    PROPHECY_STONE = 39;
+    QUANTUM_STONE = 36;
+    TERRA_STONE = 37;
+    LIFE_STONE = 38;
+    CLARITY_STONE = 40;
+    EXTRATERRESTRIAL_ALUMINUM = 13;
+    ANCIENT_TUNGSTEN = 14;
+    SPACE_ROCKS = 15;
+    ALIEN_WOOD = 16;
+    GOLD_METEORITE = 17;
+    TAU_CETI_GEODE = 18;
+    CENTAURIAN_STEEL = 19;
+    ERIDANI_FEATHER = 20;
+    DRONE_PARTS = 35;
+    CELESTIAL_BRONZE = 41;
+    LALANDE_HIDE = 42;
+    SOLAR_TITANIUM = 43;
+    TACHYON_STONE_FRAGMENT = 2;
+    DILITHIUM_STONE_FRAGMENT = 44;
+    SHELL_STONE_FRAGMENT = 45;
+    LUNAR_STONE_FRAGMENT = 46;
+    SOUL_STONE_FRAGMENT = 47;
+    PROPHECY_STONE_FRAGMENT = 48;
+    QUANTUM_STONE_FRAGMENT = 49;
+    TERRA_STONE_FRAGMENT = 50;
+    LIFE_STONE_FRAGMENT = 51;
+    CLARITY_STONE_FRAGMENT = 52;
+    UNKNOWN = 10000;
+  }
+  Name name = 1;
+
+  enum Level {
+    INFERIOR = 0;
+    LESSER = 1;
+    NORMAL = 2;
+    GREATER = 3;
+    SUPERIOR = 4;
+  }
+  Level level = 2;
+
+  enum Rarity {
+    COMMON = 0;
+    RARE = 1;
+    EPIC = 2;
+    LEGENDARY = 3;
+  }
+  Rarity rarity = 3;
+
+  EggType egg = 4;
+
+  enum Type {
+    ARTIFACT = 0;
+    STONE = 1;
+    INGREDIENT = 2;
+    STONE_INGREDIENT = 3;
+  }
+}
+
+message ArtifactInventoryItem {
+  uint64 item_id = 1;
+  CompleteArtifact artifact = 2;
+  double quantity = 3;
+  string server_id = 4;
+}
+
+message CompleteArtifact {
+  ArtifactSpec spec = 1;
+  repeated ArtifactSpec stones = 2;
+}
+
+message InventorySlot {
+  bool occupied = 1;
+  uint32 item_id = 2;
+}
+
+message MissionInfo {
+  enum Spaceship {
+    CHICKEN_ONE = 0;
+    CHICKEN_NINE = 1;
+    CHICKEN_HEAVY = 2;
+    BCR = 3;
+    MILLENIUM_CHICKEN = 4;
+    CORELLIHEN_CORVETTE = 5;
+    GALEGGTICA = 6;
+    CHICKFIANT = 7;
+    VOYEGGER = 8;
+    HENERPRISE = 9;
+  }
+  Spaceship ship = 1;
+
+  enum Status {
+    FUELING = 0;
+    PREPARE_TO_LAUNCH = 5;
+    EXPLORING = 10;
+    RETURNED = 15;
+    ANALYZING = 16;
+    COMPLETE = 20;
+    ARCHIVED = 25;
+  }
+  Status status = 2;
+
+  enum DurationType {
+    SHORT = 0;
+    LONG = 1;
+    EPIC = 2;
+    TUTORIAL = 3;
+  }
+  DurationType duration_type = 3;
+
+  message Fuel {
+    EggType egg = 1;
+    double amount = 2;
+  }
+  repeated Fuel fuel = 4;
+
+  double duration_seconds = 5;
+  double seconds_remaining = 6;
+  string identifier = 7;
+  double start_time_derived = 8;
+  uint32 capacity = 9;
+  string mission_log = 10;
+}
+
 // http://www.auxbrain.com/ei/coop_status
 message CoopStatusRequestPayload {
   string contract_id = 1;
   string code = 2;
   string player_id = 3;
+}
+
+message CoopStatusResponsePayload {
+  CoopStatus status = 1;
+  string _2 = 2;  // unknown, a hex string possibly denoting a request ID
 }
 
 message CoopStatus {
@@ -260,18 +481,21 @@ message CoopStatus {
 
 // http://www.auxbrain.com/ei/get_periodicals
 message GetPeriodicalsRequestPayload {
-  string player_id = 1;
-  int32 _2 = 2;   // unknown, maybe bool; example: 1
-  int32 _3 = 3;   // unknown, maybe bool; example: 0
-  double _4 = 4;  // Number of seconds since <milestone>, not sure what yet;
-                  // E.g. at the time of writing (2020-12-31), the milestone
-                  // is 2020-12-20T02:14:29+08:00 for me.
-  double _5 = 5;  // Number of seconds since <milestone>, probably the last
-                  // prestige. E.g. at the time of writing (2020-12-31), the
-                  // milestone is 2020-12-28T00:16:45+08:00 for me.
-  double earning_bonus = 8;
-  int32 client_version = 10;
-  int32 _11 = 11;  // unknown, maybe bool; example: 0
+  string user_id = 1;
+  bool piggy_full = 2;
+  bool piggy_found_full = 3;
+  double seconds_full_realtime = 4;
+  double seconds_full_gametime = 5;
+  uint32 lost_increments = 7;
+  double soul_eggs = 8;
+  uint32 current_client_version = 10;
+  bool debug = 11;
+  BasicRequestInfo rinfo = 12;
+}
+
+message GetPeriodicalsResponsePayload {
+  Periodicals periodicals = 1;
+  string _2 = 2;  // unknown, a hex string possibly denoting a request ID
 }
 
 message Periodicals {
