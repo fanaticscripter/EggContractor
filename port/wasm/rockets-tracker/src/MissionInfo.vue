@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="activeMissions && activeMissions.length > 0" class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 mx-4 xl:mx-0 my-4">
+  <ul v-if="activeMissions && activeMissions.length > 0" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 mx-4 lg:mx-0 my-4" :class="[activeMissions.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3']">
     <li v-for="(mission, index) in activeMissions" :key="index" class="col-span-1 flex flex-col text-center bg-gray-50 rounded-2xl shadow-lg divide-y divide-gray-200">
       <div class="flex-1 flex flex-col p-6">
         <div class="w-36 h-36 flex-shrink-0 mx-auto relative" :class="[durationTypeFgClass(mission.durationTypeDisplay)]">
