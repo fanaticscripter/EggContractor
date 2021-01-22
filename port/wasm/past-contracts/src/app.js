@@ -1,4 +1,9 @@
 import { createApp } from "vue";
+
+import VueTippy from "vue-tippy";
+import "tippy.js/dist/tippy.css";
+import "tippy.js/themes/translucent.css";
+
 import App from "./App.vue";
 
 (async function () {
@@ -34,5 +39,9 @@ import App from "./App.vue";
     return payload;
   }
 
-  createApp(App, { retrievePastContracts }).mount("#app");
+  const app = createApp(App, { retrievePastContracts });
+  app.use(VueTippy, {
+    defaultProps: { theme: "translucent" },
+  });
+  app.mount("#app");
 })();
