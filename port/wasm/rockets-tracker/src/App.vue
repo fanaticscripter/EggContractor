@@ -1,8 +1,5 @@
 <template>
-  <form
-    class="sm:mx-auto sm:max-w-xs sm:w-full m-4 space-y-3"
-    @submit.prevent="loadMissions"
-  >
+  <form class="sm:mx-auto sm:max-w-xs sm:w-full m-4 space-y-3" @submit.prevent="loadMissions">
     <div>
       <label for="email" class="sr-only">Player ID</label>
       <input
@@ -13,6 +10,24 @@
         class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
         placeholder="Player ID"
       />
+      <div class="text-center">
+        <span class="mt-2 inline-flex items-center space-x-1" id="email-description" v-tippy="{ content: 'The ID asked for here is the unique ID used by Egg, Inc.\'s server to identify your account. You can find in game screen -> nine dots menu -> Settings -> Privacy & Data, at the very bottom. It should look like EI1234567890123456. Your old game services ID prior to the Artifact Update does not work here. Also note that the ID is case-sensitive.' }">
+          <svg
+            class="h-4 w-4 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <span class="text-xs text-gray-500">Where do I find my ID?</span>
+        </span>
+      </div>
     </div>
     <div>
       <button
@@ -76,7 +91,11 @@
     </div>
   </template>
   <template v-else>
-    <mission-info :activeMissions="activeMissions" :missionStats="missionStats" :unlockProgress="unlockProgress"></mission-info>
+    <mission-info
+      :activeMissions="activeMissions"
+      :missionStats="missionStats"
+      :unlockProgress="unlockProgress"
+    ></mission-info>
   </template>
 </template>
 
@@ -141,7 +160,9 @@ export default {
       this.loading = true;
       this.error = "";
       try {
-        const { activeMissions, missionStats, unlockProgress } = await this.retrieveMissions(playerId);
+        const { activeMissions, missionStats, unlockProgress } = await this.retrieveMissions(
+          playerId
+        );
         this.activeMissions = activeMissions;
         this.missionStats = missionStats;
         this.unlockProgress = unlockProgress;
