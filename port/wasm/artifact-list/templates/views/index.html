@@ -1,3 +1,28 @@
+{{- define "artifact_list" -}}
+<ul class="my-4 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+  {{range .}}
+    {{$artifact := .}}
+    <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
+      <div class="w-full flex items-center justify-between px-6 py-4 space-x-4">
+        <div class="flex-1 truncate">
+          <div class="flex items-center space-x-3">
+            <h3 class="text-gray-900 text-sm font-medium truncate" title="{{.Effect}}">{{.Name}}</h3>
+          </div>
+          <p class="mt-1 text-gray-500 text-xs truncate" title="{{.Effect}}">{{.Effect}}</p>
+          <div class="mt-2">
+            {{range $idx, $levelname := .LevelNames}}
+              <div class="flex items-center space-x-2">
+                {{with afxiconpath $artifact $idx}}<a href="{{.}}" target="_blank"><img class="h-12 w-12" src="{{.}}" alt=""></a>{{end}}
+                <div class="text-xs text-gray-700">{{.}}</div>
+              </div>
+            {{end}}
+          </div>
+        </div>
+      </div>
+    </li>
+  {{end}}
+</ul>
+{{- end -}}
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,31 +38,19 @@
     <meta property="og:description" content="Egg, Inc. Artifact list">
     <link rel="stylesheet" href="@@app.css@@">
   </head>
-  <body class="bg-gray-100 py-8">
+  <body class="bg-gray-100 py-4">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {{range .}}
-          {{$artifact := .}}
-          <li class="col-span-1 bg-white rounded-lg shadow divide-y divide-gray-200">
-            <div class="w-full flex items-center justify-between px-6 py-4 space-x-4">
-              <div class="flex-1 truncate">
-                <div class="flex items-center space-x-3">
-                  <h3 class="text-gray-900 text-sm font-medium truncate">{{.Name}}</h3>
-                </div>
-                <p class="mt-1 text-gray-500 text-xs truncate">{{.Effect}}</p>
-                <div class="mt-2">
-                  {{range $idx, $levelname := .LevelNames}}
-                    <div class="flex items-center space-x-2">
-                      {{with afxiconpath $artifact $idx}}<a href="{{.}}" target="_blank"><img class="h-12 w-12" src="{{.}}" alt=""></a>{{end}}
-                      <div class="text-xs text-gray-700">{{.}}</div>
-                    </div>
-                  {{end}}
-                </div>
-              </div>
-            </div>
-          </li>
-        {{end}}
-      </ul>
+      <h2 class="mb-4 text-md leading-6 font-medium text-gray-900">Artifacts</h2>
+      {{template "artifact_list" .Artifacts}}
+      <h2 class="mb-4 text-md leading-6 font-medium text-gray-900">Stones & stone fragments</h2>
+      {{template "artifact_list" .Stones}}
+      <h2 class="mb-4 text-md leading-6 font-medium text-gray-900">Ingredients</h2>
+      {{template "artifact_list" .Ingredients}}
+      <header class="mb-4 space-y-1">
+        <h2 class="text-md leading-6 font-medium text-gray-900">Unconfirmed ingredients</h2>
+        <p class="text-xs text-gray-500">Unconfirmed ingredients are ones that have an ID as well as icons in game files, but don't appear to have associated name strings, meaing they probably aren't being used for now, but this is only a hypothesis.</p>
+      </header>
+      {{template "artifact_list" .UnconfirmedIngredients}}
     </div>
   </body>
 </html>
