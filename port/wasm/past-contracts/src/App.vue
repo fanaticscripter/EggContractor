@@ -1,5 +1,5 @@
 <template>
-  <form class="sm:mx-auto sm:max-w-xs sm:w-full m-4 space-y-3" @submit.prevent="loadContractTable">
+  <form class="sm:mx-auto sm:max-w-xs sm:w-full m-4 space-y-1" @submit.prevent="loadContractTable">
     <div>
       <label for="email" class="sr-only">Player ID</label>
       <input
