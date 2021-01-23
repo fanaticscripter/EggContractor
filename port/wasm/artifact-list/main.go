@@ -108,7 +108,7 @@ var _artifacts = []artifactClass{
 	{
 		Id:         "ship_in_a_bottle",
 		Name:       "Ship in a bottle",
-		Effect:     "Increase co-op mates earings",
+		Effect:     "Increase co-op mates earnings",
 		LevelNames: []string{"Regular", "Detailed", "Complex", "Eggquisite"},
 	},
 	{
