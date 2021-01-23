@@ -10,6 +10,8 @@ import (
 	"io"
 	"math"
 	"net/http"
+	"regexp"
+	"strings"
 	"sync"
 	"syscall/js"
 	"time"
@@ -23,7 +25,10 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
-var _client *http.Client
+var (
+	_client          *http.Client
+	_playerIdPattern = regexp.MustCompile(`(?i)^EI\d+$`)
+)
 
 type contract struct {
 	*api.ContractProperties
@@ -51,7 +56,20 @@ func errorResult(err error) *result {
 	}
 }
 
+func sanitizePlayerId(playerId string) (string, error) {
+	if _playerIdPattern.MatchString(playerId) {
+		return strings.ToUpper(playerId), nil
+	}
+	return "", fmt.Errorf("ID %v is not in the form EI1234567890123456; please consult \"Where do I find my ID?\"", playerId)
+}
+
 func retrieveContractList(playerId string) *result {
+	sanitized, err := sanitizePlayerId(playerId)
+	if err != nil {
+		return errorResult(err)
+	}
+	playerId = sanitized
+
 	ctx, cancel := context.WithCancel(context.Background())
 	errs := make(chan error, 2)
 	var wg sync.WaitGroup
