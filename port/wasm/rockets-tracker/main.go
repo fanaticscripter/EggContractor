@@ -2,10 +2,15 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"regexp"
+	"strings"
 	"syscall/js"
 
 	"github.com/fanaticscripter/EggContractor/api"
 )
+
+var _playerIdPattern = regexp.MustCompile(`(?i)^EI\d+$`)
 
 type result struct {
 	Successful bool        `json:"successful"`
@@ -27,7 +32,20 @@ func errorResult(err error) *result {
 	}
 }
 
+func sanitizePlayerId(playerId string) (string, error) {
+	if _playerIdPattern.MatchString(playerId) {
+		return strings.ToUpper(playerId), nil
+	}
+	return "", fmt.Errorf("ID %v is not in the form EI1234567890123456; please consult \"Where do I find my ID?\"", playerId)
+}
+
 func retrieveMissions(playerId string) *result {
+	sanitized, err := sanitizePlayerId(playerId)
+	if err != nil {
+		return errorResult(err)
+	}
+	playerId = sanitized
+
 	fc, err := api.RequestFirstContact(&api.FirstContactRequestPayload{
 		EiUserId: playerId,
 	})
