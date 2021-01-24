@@ -866,7 +866,7 @@ func (MissionInfo_DurationType) EnumDescriptor() ([]byte, []int) {
 	return file_api_egginc_proto_rawDescGZIP(), []int{15, 2}
 }
 
-// http://www.auxbrain.com/ei/first_contact
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/first_contact
 type FirstContactRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1057,7 +1057,7 @@ type FirstContactResponsePayload struct {
 	unknownFields protoimpl.UnknownFields
 
 	Payload *FirstContact `protobuf:"bytes,1,opt,name=payload,proto3" json:"payload,omitempty"`
-	X2      string        `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a hex string possibly denoting a request ID
+	X2      string        `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a 256-bit signature/MAC
 }
 
 func (x *FirstContactResponsePayload) Reset() {
@@ -2300,7 +2300,7 @@ func (x *MissionInfo) GetMissionLog() string {
 	return ""
 }
 
-// http://www.auxbrain.com/ei/coop_status
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/coop_status
 type CoopStatusRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2370,7 +2370,7 @@ type CoopStatusResponsePayload struct {
 	unknownFields protoimpl.UnknownFields
 
 	Status *CoopStatus `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
-	X2     string      `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a hex string possibly denoting a request ID
+	X2     string      `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a 256-bit signature/MAC
 }
 
 func (x *CoopStatusResponsePayload) Reset() {
@@ -2555,7 +2555,7 @@ func (x *CoopStatus) GetTokenGifts() []*CoopStatus_TokenGift {
 	return nil
 }
 
-// http://www.auxbrain.com/ei/get_periodicals
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_periodicals
 type GetPeriodicalsRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2681,7 +2681,7 @@ type GetPeriodicalsResponsePayload struct {
 	unknownFields protoimpl.UnknownFields
 
 	Periodicals *Periodicals `protobuf:"bytes,1,opt,name=periodicals,proto3" json:"periodicals,omitempty"`
-	X2          string       `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a hex string possibly denoting a request ID
+	X2          string       `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a 256-bit signature/MAC
 }
 
 func (x *GetPeriodicalsResponsePayload) Reset() {
@@ -2944,6 +2944,172 @@ func (x *Event) GetMessage() string {
 	return ""
 }
 
+// http://afx-2-dot-auxbrainhome.appspot.com/ei_afx/config
+type ArtifactsConfigurationRequestPayload struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Rinfo         *BasicRequestInfo `protobuf:"bytes,2,opt,name=rinfo,proto3" json:"rinfo,omitempty"`
+	ClientVersion uint32            `protobuf:"varint,1,opt,name=client_version,json=clientVersion,proto3" json:"client_version,omitempty"`
+}
+
+func (x *ArtifactsConfigurationRequestPayload) Reset() {
+	*x = ArtifactsConfigurationRequestPayload{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_egginc_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArtifactsConfigurationRequestPayload) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtifactsConfigurationRequestPayload) ProtoMessage() {}
+
+func (x *ArtifactsConfigurationRequestPayload) ProtoReflect() protoreflect.Message {
+	mi := &file_api_egginc_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtifactsConfigurationRequestPayload.ProtoReflect.Descriptor instead.
+func (*ArtifactsConfigurationRequestPayload) Descriptor() ([]byte, []int) {
+	return file_api_egginc_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *ArtifactsConfigurationRequestPayload) GetRinfo() *BasicRequestInfo {
+	if x != nil {
+		return x.Rinfo
+	}
+	return nil
+}
+
+func (x *ArtifactsConfigurationRequestPayload) GetClientVersion() uint32 {
+	if x != nil {
+		return x.ClientVersion
+	}
+	return 0
+}
+
+type ArtifactsConfigurationResponsePayload struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Config *ArtifactsConfigurationResponse `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	X2     string                          `protobuf:"bytes,2,opt,name=_2,json=2,proto3" json:"_2,omitempty"` // unknown, a 256-bit signature/MAC
+}
+
+func (x *ArtifactsConfigurationResponsePayload) Reset() {
+	*x = ArtifactsConfigurationResponsePayload{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_egginc_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArtifactsConfigurationResponsePayload) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtifactsConfigurationResponsePayload) ProtoMessage() {}
+
+func (x *ArtifactsConfigurationResponsePayload) ProtoReflect() protoreflect.Message {
+	mi := &file_api_egginc_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtifactsConfigurationResponsePayload.ProtoReflect.Descriptor instead.
+func (*ArtifactsConfigurationResponsePayload) Descriptor() ([]byte, []int) {
+	return file_api_egginc_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *ArtifactsConfigurationResponsePayload) GetConfig() *ArtifactsConfigurationResponse {
+	if x != nil {
+		return x.Config
+	}
+	return nil
+}
+
+func (x *ArtifactsConfigurationResponsePayload) GetX2() string {
+	if x != nil {
+		return x.X2
+	}
+	return ""
+}
+
+type ArtifactsConfigurationResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	MissionParameters  []*ArtifactsConfigurationResponse_MissionParameters  `protobuf:"bytes,1,rep,name=mission_parameters,json=missionParameters,proto3" json:"mission_parameters,omitempty"`
+	ArtifactParameters []*ArtifactsConfigurationResponse_ArtifactParameters `protobuf:"bytes,2,rep,name=artifact_parameters,json=artifactParameters,proto3" json:"artifact_parameters,omitempty"`
+}
+
+func (x *ArtifactsConfigurationResponse) Reset() {
+	*x = ArtifactsConfigurationResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_egginc_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArtifactsConfigurationResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtifactsConfigurationResponse) ProtoMessage() {}
+
+func (x *ArtifactsConfigurationResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_egginc_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtifactsConfigurationResponse.ProtoReflect.Descriptor instead.
+func (*ArtifactsConfigurationResponse) Descriptor() ([]byte, []int) {
+	return file_api_egginc_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *ArtifactsConfigurationResponse) GetMissionParameters() []*ArtifactsConfigurationResponse_MissionParameters {
+	if x != nil {
+		return x.MissionParameters
+	}
+	return nil
+}
+
+func (x *ArtifactsConfigurationResponse) GetArtifactParameters() []*ArtifactsConfigurationResponse_ArtifactParameters {
+	if x != nil {
+		return x.ArtifactParameters
+	}
+	return nil
+}
+
 type FirstContact_Payload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2969,7 +3135,7 @@ type FirstContact_Payload struct {
 func (x *FirstContact_Payload) Reset() {
 	*x = FirstContact_Payload{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[24]
+		mi := &file_api_egginc_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2982,7 +3148,7 @@ func (x *FirstContact_Payload) String() string {
 func (*FirstContact_Payload) ProtoMessage() {}
 
 func (x *FirstContact_Payload) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[24]
+	mi := &file_api_egginc_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3121,7 +3287,7 @@ type FirstContact_Payload_Settings struct {
 func (x *FirstContact_Payload_Settings) Reset() {
 	*x = FirstContact_Payload_Settings{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[25]
+		mi := &file_api_egginc_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3134,7 +3300,7 @@ func (x *FirstContact_Payload_Settings) String() string {
 func (*FirstContact_Payload_Settings) ProtoMessage() {}
 
 func (x *FirstContact_Payload_Settings) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[25]
+	mi := &file_api_egginc_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3222,7 +3388,7 @@ type FirstContact_Payload_Stats struct {
 func (x *FirstContact_Payload_Stats) Reset() {
 	*x = FirstContact_Payload_Stats{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[26]
+		mi := &file_api_egginc_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3235,7 +3401,7 @@ func (x *FirstContact_Payload_Stats) String() string {
 func (*FirstContact_Payload_Stats) ProtoMessage() {}
 
 func (x *FirstContact_Payload_Stats) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[26]
+	mi := &file_api_egginc_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3317,7 +3483,7 @@ type FirstContact_Payload_Progress struct {
 func (x *FirstContact_Payload_Progress) Reset() {
 	*x = FirstContact_Payload_Progress{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[27]
+		mi := &file_api_egginc_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3330,7 +3496,7 @@ func (x *FirstContact_Payload_Progress) String() string {
 func (*FirstContact_Payload_Progress) ProtoMessage() {}
 
 func (x *FirstContact_Payload_Progress) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[27]
+	mi := &file_api_egginc_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3444,7 +3610,7 @@ type FirstContact_Payload_Contracts struct {
 func (x *FirstContact_Payload_Contracts) Reset() {
 	*x = FirstContact_Payload_Contracts{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[28]
+		mi := &file_api_egginc_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3457,7 +3623,7 @@ func (x *FirstContact_Payload_Contracts) String() string {
 func (*FirstContact_Payload_Contracts) ProtoMessage() {}
 
 func (x *FirstContact_Payload_Contracts) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[28]
+	mi := &file_api_egginc_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3513,7 +3679,7 @@ type FirstContact_Payload_Progress_Boost struct {
 func (x *FirstContact_Payload_Progress_Boost) Reset() {
 	*x = FirstContact_Payload_Progress_Boost{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[29]
+		mi := &file_api_egginc_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3526,7 +3692,7 @@ func (x *FirstContact_Payload_Progress_Boost) String() string {
 func (*FirstContact_Payload_Progress_Boost) ProtoMessage() {}
 
 func (x *FirstContact_Payload_Progress_Boost) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[29]
+	mi := &file_api_egginc_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3567,7 +3733,7 @@ type ContractProperties_RewardTier struct {
 func (x *ContractProperties_RewardTier) Reset() {
 	*x = ContractProperties_RewardTier{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[30]
+		mi := &file_api_egginc_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3580,7 +3746,7 @@ func (x *ContractProperties_RewardTier) String() string {
 func (*ContractProperties_RewardTier) ProtoMessage() {}
 
 func (x *ContractProperties_RewardTier) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[30]
+	mi := &file_api_egginc_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3615,7 +3781,7 @@ type ArtifactsDB_ActiveArtifactSlot struct {
 func (x *ArtifactsDB_ActiveArtifactSlot) Reset() {
 	*x = ArtifactsDB_ActiveArtifactSlot{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[31]
+		mi := &file_api_egginc_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3628,7 +3794,7 @@ func (x *ArtifactsDB_ActiveArtifactSlot) String() string {
 func (*ArtifactsDB_ActiveArtifactSlot) ProtoMessage() {}
 
 func (x *ArtifactsDB_ActiveArtifactSlot) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[31]
+	mi := &file_api_egginc_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3669,7 +3835,7 @@ type ArtifactsDB_ActiveArtifactSet struct {
 func (x *ArtifactsDB_ActiveArtifactSet) Reset() {
 	*x = ArtifactsDB_ActiveArtifactSet{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[32]
+		mi := &file_api_egginc_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3682,7 +3848,7 @@ func (x *ArtifactsDB_ActiveArtifactSet) String() string {
 func (*ArtifactsDB_ActiveArtifactSet) ProtoMessage() {}
 
 func (x *ArtifactsDB_ActiveArtifactSet) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[32]
+	mi := &file_api_egginc_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3718,7 +3884,7 @@ type ArtifactsDB_CraftableArtifact struct {
 func (x *ArtifactsDB_CraftableArtifact) Reset() {
 	*x = ArtifactsDB_CraftableArtifact{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[33]
+		mi := &file_api_egginc_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3731,7 +3897,7 @@ func (x *ArtifactsDB_CraftableArtifact) String() string {
 func (*ArtifactsDB_CraftableArtifact) ProtoMessage() {}
 
 func (x *ArtifactsDB_CraftableArtifact) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[33]
+	mi := &file_api_egginc_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3780,7 +3946,7 @@ type MissionInfo_Fuel struct {
 func (x *MissionInfo_Fuel) Reset() {
 	*x = MissionInfo_Fuel{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[34]
+		mi := &file_api_egginc_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3793,7 +3959,7 @@ func (x *MissionInfo_Fuel) String() string {
 func (*MissionInfo_Fuel) ProtoMessage() {}
 
 func (x *MissionInfo_Fuel) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[34]
+	mi := &file_api_egginc_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3843,7 +4009,7 @@ type CoopStatus_Member struct {
 func (x *CoopStatus_Member) Reset() {
 	*x = CoopStatus_Member{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[35]
+		mi := &file_api_egginc_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3856,7 +4022,7 @@ func (x *CoopStatus_Member) String() string {
 func (*CoopStatus_Member) ProtoMessage() {}
 
 func (x *CoopStatus_Member) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[35]
+	mi := &file_api_egginc_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3948,7 +4114,7 @@ type CoopStatus_TokenGift struct {
 func (x *CoopStatus_TokenGift) Reset() {
 	*x = CoopStatus_TokenGift{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[36]
+		mi := &file_api_egginc_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3961,7 +4127,7 @@ func (x *CoopStatus_TokenGift) String() string {
 func (*CoopStatus_TokenGift) ProtoMessage() {}
 
 func (x *CoopStatus_TokenGift) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[36]
+	mi := &file_api_egginc_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4009,7 +4175,7 @@ type Periodicals_Sales struct {
 func (x *Periodicals_Sales) Reset() {
 	*x = Periodicals_Sales{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[37]
+		mi := &file_api_egginc_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4022,7 +4188,7 @@ func (x *Periodicals_Sales) String() string {
 func (*Periodicals_Sales) ProtoMessage() {}
 
 func (x *Periodicals_Sales) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[37]
+	mi := &file_api_egginc_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4056,7 +4222,7 @@ type Periodicals_Events struct {
 func (x *Periodicals_Events) Reset() {
 	*x = Periodicals_Events{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[38]
+		mi := &file_api_egginc_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4069,7 +4235,7 @@ func (x *Periodicals_Events) String() string {
 func (*Periodicals_Events) ProtoMessage() {}
 
 func (x *Periodicals_Events) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[38]
+	mi := &file_api_egginc_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4104,7 +4270,7 @@ type Periodicals_Contracts struct {
 func (x *Periodicals_Contracts) Reset() {
 	*x = Periodicals_Contracts{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_egginc_proto_msgTypes[39]
+		mi := &file_api_egginc_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4117,7 +4283,7 @@ func (x *Periodicals_Contracts) String() string {
 func (*Periodicals_Contracts) ProtoMessage() {}
 
 func (x *Periodicals_Contracts) ProtoReflect() protoreflect.Message {
-	mi := &file_api_egginc_proto_msgTypes[39]
+	mi := &file_api_egginc_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4143,6 +4309,259 @@ func (x *Periodicals_Contracts) GetContracts() []*ContractProperties {
 func (x *Periodicals_Contracts) GetResponseTimestamp() float64 {
 	if x != nil {
 		return x.ResponseTimestamp
+	}
+	return 0
+}
+
+type ArtifactsConfigurationResponse_MissionParameters struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Ship                MissionInfo_Spaceship                                        `protobuf:"varint,1,opt,name=ship,proto3,enum=MissionInfo_Spaceship" json:"ship,omitempty"`
+	Durations           []*ArtifactsConfigurationResponse_MissionParameters_Duration `protobuf:"bytes,3,rep,name=durations,proto3" json:"durations,omitempty"`
+	Capacity_DEPRECATED uint32                                                       `protobuf:"varint,2,opt,name=capacity_DEPRECATED,json=capacityDEPRECATED,proto3" json:"capacity_DEPRECATED,omitempty"`
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters) Reset() {
+	*x = ArtifactsConfigurationResponse_MissionParameters{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_egginc_proto_msgTypes[43]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtifactsConfigurationResponse_MissionParameters) ProtoMessage() {}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters) ProtoReflect() protoreflect.Message {
+	mi := &file_api_egginc_proto_msgTypes[43]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtifactsConfigurationResponse_MissionParameters.ProtoReflect.Descriptor instead.
+func (*ArtifactsConfigurationResponse_MissionParameters) Descriptor() ([]byte, []int) {
+	return file_api_egginc_proto_rawDescGZIP(), []int{26, 0}
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters) GetShip() MissionInfo_Spaceship {
+	if x != nil {
+		return x.Ship
+	}
+	return MissionInfo_CHICKEN_ONE
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters) GetDurations() []*ArtifactsConfigurationResponse_MissionParameters_Duration {
+	if x != nil {
+		return x.Durations
+	}
+	return nil
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters) GetCapacity_DEPRECATED() uint32 {
+	if x != nil {
+		return x.Capacity_DEPRECATED
+	}
+	return 0
+}
+
+type ArtifactsConfigurationResponse_ArtifactParameters struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Spec                *ArtifactSpec `protobuf:"bytes,1,opt,name=spec,proto3" json:"spec,omitempty"`
+	BaseQuality         float64       `protobuf:"fixed64,2,opt,name=base_quality,json=baseQuality,proto3" json:"base_quality,omitempty"`
+	OddsMultiplier      float64       `protobuf:"fixed64,4,opt,name=odds_multiplier,json=oddsMultiplier,proto3" json:"odds_multiplier,omitempty"`
+	Value               float64       `protobuf:"fixed64,3,opt,name=value,proto3" json:"value,omitempty"`
+	CraftingPrice       float64       `protobuf:"fixed64,5,opt,name=crafting_price,json=craftingPrice,proto3" json:"crafting_price,omitempty"`
+	CraftingPriceLow    float64       `protobuf:"fixed64,6,opt,name=crafting_price_low,json=craftingPriceLow,proto3" json:"crafting_price_low,omitempty"`
+	CraftingPriceDomain uint32        `protobuf:"varint,7,opt,name=crafting_price_domain,json=craftingPriceDomain,proto3" json:"crafting_price_domain,omitempty"`
+	CraftingPriceCurve  float64       `protobuf:"fixed64,8,opt,name=crafting_price_curve,json=craftingPriceCurve,proto3" json:"crafting_price_curve,omitempty"`
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) Reset() {
+	*x = ArtifactsConfigurationResponse_ArtifactParameters{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_egginc_proto_msgTypes[44]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtifactsConfigurationResponse_ArtifactParameters) ProtoMessage() {}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) ProtoReflect() protoreflect.Message {
+	mi := &file_api_egginc_proto_msgTypes[44]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtifactsConfigurationResponse_ArtifactParameters.ProtoReflect.Descriptor instead.
+func (*ArtifactsConfigurationResponse_ArtifactParameters) Descriptor() ([]byte, []int) {
+	return file_api_egginc_proto_rawDescGZIP(), []int{26, 1}
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetSpec() *ArtifactSpec {
+	if x != nil {
+		return x.Spec
+	}
+	return nil
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetBaseQuality() float64 {
+	if x != nil {
+		return x.BaseQuality
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetOddsMultiplier() float64 {
+	if x != nil {
+		return x.OddsMultiplier
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetValue() float64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetCraftingPrice() float64 {
+	if x != nil {
+		return x.CraftingPrice
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetCraftingPriceLow() float64 {
+	if x != nil {
+		return x.CraftingPriceLow
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetCraftingPriceDomain() uint32 {
+	if x != nil {
+		return x.CraftingPriceDomain
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_ArtifactParameters) GetCraftingPriceCurve() float64 {
+	if x != nil {
+		return x.CraftingPriceCurve
+	}
+	return 0
+}
+
+type ArtifactsConfigurationResponse_MissionParameters_Duration struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	DurationType MissionInfo_DurationType `protobuf:"varint,1,opt,name=duration_type,json=durationType,proto3,enum=MissionInfo_DurationType" json:"duration_type,omitempty"`
+	Seconds      float64                  `protobuf:"fixed64,2,opt,name=seconds,proto3" json:"seconds,omitempty"`
+	Quality      float32                  `protobuf:"fixed32,3,opt,name=quality,proto3" json:"quality,omitempty"`
+	MinQuality   float32                  `protobuf:"fixed32,4,opt,name=min_quality,json=minQuality,proto3" json:"min_quality,omitempty"`
+	MaxQuality   float32                  `protobuf:"fixed32,5,opt,name=max_quality,json=maxQuality,proto3" json:"max_quality,omitempty"`
+	Capacity     uint32                   `protobuf:"varint,6,opt,name=capacity,proto3" json:"capacity,omitempty"`
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) Reset() {
+	*x = ArtifactsConfigurationResponse_MissionParameters_Duration{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_egginc_proto_msgTypes[45]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ArtifactsConfigurationResponse_MissionParameters_Duration) ProtoMessage() {}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) ProtoReflect() protoreflect.Message {
+	mi := &file_api_egginc_proto_msgTypes[45]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ArtifactsConfigurationResponse_MissionParameters_Duration.ProtoReflect.Descriptor instead.
+func (*ArtifactsConfigurationResponse_MissionParameters_Duration) Descriptor() ([]byte, []int) {
+	return file_api_egginc_proto_rawDescGZIP(), []int{26, 0, 0}
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) GetDurationType() MissionInfo_DurationType {
+	if x != nil {
+		return x.DurationType
+	}
+	return MissionInfo_SHORT
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) GetSeconds() float64 {
+	if x != nil {
+		return x.Seconds
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) GetQuality() float32 {
+	if x != nil {
+		return x.Quality
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) GetMinQuality() float32 {
+	if x != nil {
+		return x.MinQuality
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) GetMaxQuality() float32 {
+	if x != nil {
+		return x.MaxQuality
+	}
+	return 0
+}
+
+func (x *ArtifactsConfigurationResponse_MissionParameters_Duration) GetCapacity() uint32 {
+	if x != nil {
+		return x.Capacity
 	}
 	return 0
 }
@@ -4789,55 +5208,132 @@ var file_api_egginc_proto_rawDesc = []byte{
 	0x1e, 0x0a, 0x0a, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72, 0x18, 0x04, 0x20,
 	0x01, 0x28, 0x01, 0x52, 0x0a, 0x6d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72, 0x12,
 	0x18, 0x0a, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2a, 0x34, 0x0a, 0x08, 0x50, 0x6c, 0x61,
-	0x74, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x14, 0x0a, 0x10, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44,
-	0x5f, 0x50, 0x4c, 0x41, 0x54, 0x46, 0x4f, 0x52, 0x4d, 0x10, 0x00, 0x12, 0x07, 0x0a, 0x03, 0x49,
-	0x4f, 0x53, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x44, 0x52, 0x4f, 0x49, 0x44, 0x10, 0x02, 0x2a,
-	0x83, 0x03, 0x0a, 0x07, 0x45, 0x67, 0x67, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x49,
-	0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x5f, 0x45, 0x47, 0x47, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06,
-	0x45, 0x44, 0x49, 0x42, 0x4c, 0x45, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x53, 0x55, 0x50, 0x45,
-	0x52, 0x46, 0x4f, 0x4f, 0x44, 0x10, 0x02, 0x12, 0x0b, 0x0a, 0x07, 0x4d, 0x45, 0x44, 0x49, 0x43,
-	0x41, 0x4c, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x52, 0x4f, 0x43, 0x4b, 0x45, 0x54, 0x5f, 0x46,
-	0x55, 0x45, 0x4c, 0x10, 0x04, 0x12, 0x12, 0x0a, 0x0e, 0x53, 0x55, 0x50, 0x45, 0x52, 0x5f, 0x4d,
-	0x41, 0x54, 0x45, 0x52, 0x49, 0x41, 0x4c, 0x10, 0x05, 0x12, 0x0a, 0x0a, 0x06, 0x46, 0x55, 0x53,
-	0x49, 0x4f, 0x4e, 0x10, 0x06, 0x12, 0x0b, 0x0a, 0x07, 0x51, 0x55, 0x41, 0x4e, 0x54, 0x55, 0x4d,
-	0x10, 0x07, 0x12, 0x0f, 0x0a, 0x0b, 0x49, 0x4d, 0x4d, 0x4f, 0x52, 0x54, 0x41, 0x4c, 0x49, 0x54,
-	0x59, 0x10, 0x08, 0x12, 0x0b, 0x0a, 0x07, 0x54, 0x41, 0x43, 0x48, 0x59, 0x4f, 0x4e, 0x10, 0x09,
-	0x12, 0x0c, 0x0a, 0x08, 0x47, 0x52, 0x41, 0x56, 0x49, 0x54, 0x4f, 0x4e, 0x10, 0x0a, 0x12, 0x0d,
-	0x0a, 0x09, 0x44, 0x49, 0x4c, 0x49, 0x54, 0x48, 0x49, 0x55, 0x4d, 0x10, 0x0b, 0x12, 0x0b, 0x0a,
-	0x07, 0x50, 0x52, 0x4f, 0x44, 0x49, 0x47, 0x59, 0x10, 0x0c, 0x12, 0x0d, 0x0a, 0x09, 0x54, 0x45,
-	0x52, 0x52, 0x41, 0x46, 0x4f, 0x52, 0x4d, 0x10, 0x0d, 0x12, 0x0e, 0x0a, 0x0a, 0x41, 0x4e, 0x54,
-	0x49, 0x4d, 0x41, 0x54, 0x54, 0x45, 0x52, 0x10, 0x0e, 0x12, 0x0f, 0x0a, 0x0b, 0x44, 0x41, 0x52,
-	0x4b, 0x5f, 0x4d, 0x41, 0x54, 0x54, 0x45, 0x52, 0x10, 0x0f, 0x12, 0x06, 0x0a, 0x02, 0x41, 0x49,
-	0x10, 0x10, 0x12, 0x0a, 0x0a, 0x06, 0x4e, 0x45, 0x42, 0x55, 0x4c, 0x41, 0x10, 0x11, 0x12, 0x0c,
-	0x0a, 0x08, 0x55, 0x4e, 0x49, 0x56, 0x45, 0x52, 0x53, 0x45, 0x10, 0x12, 0x12, 0x11, 0x0a, 0x0d,
-	0x45, 0x4e, 0x4c, 0x49, 0x47, 0x48, 0x54, 0x45, 0x4e, 0x4d, 0x45, 0x4e, 0x54, 0x10, 0x13, 0x12,
-	0x0d, 0x0a, 0x09, 0x43, 0x48, 0x4f, 0x43, 0x4f, 0x4c, 0x41, 0x54, 0x45, 0x10, 0x64, 0x12, 0x0a,
-	0x0a, 0x06, 0x45, 0x41, 0x53, 0x54, 0x45, 0x52, 0x10, 0x65, 0x12, 0x10, 0x0a, 0x0c, 0x57, 0x41,
-	0x54, 0x45, 0x52, 0x42, 0x41, 0x4c, 0x4c, 0x4f, 0x4f, 0x4e, 0x10, 0x66, 0x12, 0x0c, 0x0a, 0x08,
-	0x46, 0x49, 0x52, 0x45, 0x57, 0x4f, 0x52, 0x4b, 0x10, 0x67, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x55,
-	0x4d, 0x50, 0x4b, 0x49, 0x4e, 0x10, 0x68, 0x12, 0x0c, 0x0a, 0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f,
-	0x57, 0x4e, 0x10, 0xe8, 0x07, 0x2a, 0x58, 0x0a, 0x0a, 0x54, 0x72, 0x6f, 0x70, 0x68, 0x79, 0x54,
-	0x79, 0x70, 0x65, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f, 0x5f, 0x54, 0x52, 0x4f, 0x50, 0x48, 0x59,
-	0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x42, 0x52, 0x4f, 0x4e, 0x5a, 0x45, 0x10, 0x01, 0x12, 0x0a,
-	0x0a, 0x06, 0x53, 0x49, 0x4c, 0x56, 0x45, 0x52, 0x10, 0x02, 0x12, 0x08, 0x0a, 0x04, 0x47, 0x4f,
-	0x4c, 0x44, 0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x50, 0x4c, 0x41, 0x54, 0x49, 0x4e, 0x55, 0x4d,
-	0x10, 0x04, 0x12, 0x0b, 0x0a, 0x07, 0x44, 0x49, 0x41, 0x4d, 0x4f, 0x4e, 0x44, 0x10, 0x05, 0x2a,
-	0xac, 0x01, 0x0a, 0x0a, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12, 0x12,
-	0x0a, 0x0e, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x5f, 0x52, 0x45, 0x57, 0x41, 0x52, 0x44,
-	0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x47, 0x4f, 0x4c, 0x44, 0x45, 0x4e, 0x5f, 0x45, 0x47, 0x47,
-	0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x53, 0x4f, 0x55, 0x4c, 0x5f, 0x45, 0x47, 0x47, 0x10, 0x03,
-	0x12, 0x10, 0x0a, 0x0c, 0x50, 0x52, 0x4f, 0x50, 0x48, 0x45, 0x43, 0x59, 0x5f, 0x45, 0x47, 0x47,
-	0x10, 0x04, 0x12, 0x11, 0x0a, 0x0d, 0x45, 0x50, 0x49, 0x43, 0x5f, 0x52, 0x45, 0x53, 0x45, 0x41,
-	0x52, 0x43, 0x48, 0x10, 0x05, 0x12, 0x14, 0x0a, 0x10, 0x50, 0x49, 0x47, 0x47, 0x59, 0x5f, 0x47,
-	0x4f, 0x4c, 0x44, 0x45, 0x4e, 0x5f, 0x45, 0x47, 0x47, 0x10, 0x06, 0x12, 0x12, 0x0a, 0x0e, 0x50,
-	0x49, 0x47, 0x47, 0x59, 0x5f, 0x4d, 0x55, 0x4c, 0x54, 0x49, 0x50, 0x4c, 0x59, 0x10, 0x07, 0x12,
-	0x12, 0x0a, 0x0e, 0x50, 0x49, 0x47, 0x47, 0x59, 0x5f, 0x4c, 0x45, 0x56, 0x45, 0x4c, 0x5f, 0x55,
-	0x50, 0x10, 0x08, 0x12, 0x09, 0x0a, 0x05, 0x42, 0x4f, 0x4f, 0x53, 0x54, 0x10, 0x09, 0x42, 0x2e,
-	0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x66, 0x61, 0x6e,
-	0x61, 0x74, 0x69, 0x63, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x65, 0x72, 0x2f, 0x45, 0x67, 0x67,
-	0x43, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x6f, 0x72, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x52, 0x07, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x22, 0x76, 0x0a, 0x24, 0x41, 0x72, 0x74,
+	0x69, 0x66, 0x61, 0x63, 0x74, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61,
+	0x64, 0x12, 0x27, 0x0a, 0x05, 0x72, 0x69, 0x6e, 0x66, 0x6f, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x11, 0x2e, 0x42, 0x61, 0x73, 0x69, 0x63, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49,
+	0x6e, 0x66, 0x6f, 0x52, 0x05, 0x72, 0x69, 0x6e, 0x66, 0x6f, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x6c,
+	0x69, 0x65, 0x6e, 0x74, 0x5f, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0d, 0x52, 0x0d, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f,
+	0x6e, 0x22, 0x6f, 0x0a, 0x25, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x73, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x50, 0x61, 0x79, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x37, 0x0a, 0x06, 0x63, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x41, 0x72, 0x74,
+	0x69, 0x66, 0x61, 0x63, 0x74, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x52, 0x06, 0x63, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x12, 0x0d, 0x0a, 0x02, 0x5f, 0x32, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x01, 0x32, 0x22, 0xea, 0x07, 0x0a, 0x1e, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x73,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x60, 0x0a, 0x12, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e,
+	0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x31, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x73, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x2e, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65,
+	0x74, 0x65, 0x72, 0x73, 0x52, 0x11, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72,
+	0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x63, 0x0a, 0x13, 0x61, 0x72, 0x74, 0x69, 0x66,
+	0x61, 0x63, 0x74, 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x18, 0x02,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x32, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x73,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x50, 0x61,
+	0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x52, 0x12, 0x61, 0x72, 0x74, 0x69, 0x66, 0x61,
+	0x63, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x1a, 0xa9, 0x03, 0x0a,
+	0x11, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65,
+	0x72, 0x73, 0x12, 0x2a, 0x0a, 0x04, 0x73, 0x68, 0x69, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e,
+	0x32, 0x16, 0x2e, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x53,
+	0x70, 0x61, 0x63, 0x65, 0x73, 0x68, 0x69, 0x70, 0x52, 0x04, 0x73, 0x68, 0x69, 0x70, 0x12, 0x58,
+	0x0a, 0x09, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x3a, 0x2e, 0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x73, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x2e, 0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65,
+	0x74, 0x65, 0x72, 0x73, 0x2e, 0x44, 0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x09, 0x64,
+	0x75, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x2f, 0x0a, 0x13, 0x63, 0x61, 0x70, 0x61,
+	0x63, 0x69, 0x74, 0x79, 0x5f, 0x44, 0x45, 0x50, 0x52, 0x45, 0x43, 0x41, 0x54, 0x45, 0x44, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x12, 0x63, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x44,
+	0x45, 0x50, 0x52, 0x45, 0x43, 0x41, 0x54, 0x45, 0x44, 0x1a, 0xdc, 0x01, 0x0a, 0x08, 0x44, 0x75,
+	0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x3e, 0x0a, 0x0d, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x19, 0x2e,
+	0x4d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x49, 0x6e, 0x66, 0x6f, 0x2e, 0x44, 0x75, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x52, 0x0c, 0x64, 0x75, 0x72, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64,
+	0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x52, 0x07, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73,
+	0x12, 0x18, 0x0a, 0x07, 0x71, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x03, 0x20, 0x01, 0x28,
+	0x02, 0x52, 0x07, 0x71, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x1f, 0x0a, 0x0b, 0x6d, 0x69,
+	0x6e, 0x5f, 0x71, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x04, 0x20, 0x01, 0x28, 0x02, 0x52,
+	0x0a, 0x6d, 0x69, 0x6e, 0x51, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x1f, 0x0a, 0x0b, 0x6d,
+	0x61, 0x78, 0x5f, 0x71, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x02,
+	0x52, 0x0a, 0x6d, 0x61, 0x78, 0x51, 0x75, 0x61, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x1a, 0x0a, 0x08,
+	0x63, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x18, 0x06, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x08,
+	0x63, 0x61, 0x70, 0x61, 0x63, 0x69, 0x74, 0x79, 0x1a, 0xd4, 0x02, 0x0a, 0x12, 0x41, 0x72, 0x74,
+	0x69, 0x66, 0x61, 0x63, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12,
+	0x21, 0x0a, 0x04, 0x73, 0x70, 0x65, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0d, 0x2e,
+	0x41, 0x72, 0x74, 0x69, 0x66, 0x61, 0x63, 0x74, 0x53, 0x70, 0x65, 0x63, 0x52, 0x04, 0x73, 0x70,
+	0x65, 0x63, 0x12, 0x21, 0x0a, 0x0c, 0x62, 0x61, 0x73, 0x65, 0x5f, 0x71, 0x75, 0x61, 0x6c, 0x69,
+	0x74, 0x79, 0x18, 0x02, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0b, 0x62, 0x61, 0x73, 0x65, 0x51, 0x75,
+	0x61, 0x6c, 0x69, 0x74, 0x79, 0x12, 0x27, 0x0a, 0x0f, 0x6f, 0x64, 0x64, 0x73, 0x5f, 0x6d, 0x75,
+	0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0e,
+	0x6f, 0x64, 0x64, 0x73, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x70, 0x6c, 0x69, 0x65, 0x72, 0x12, 0x14,
+	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x52, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x12, 0x25, 0x0a, 0x0e, 0x63, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67,
+	0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0d, 0x63, 0x72,
+	0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x2c, 0x0a, 0x12, 0x63,
+	0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x5f, 0x6c, 0x6f,
+	0x77, 0x18, 0x06, 0x20, 0x01, 0x28, 0x01, 0x52, 0x10, 0x63, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e,
+	0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x4c, 0x6f, 0x77, 0x12, 0x32, 0x0a, 0x15, 0x63, 0x72, 0x61,
+	0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x5f, 0x64, 0x6f, 0x6d, 0x61,
+	0x69, 0x6e, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x13, 0x63, 0x72, 0x61, 0x66, 0x74, 0x69,
+	0x6e, 0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x44, 0x6f, 0x6d, 0x61, 0x69, 0x6e, 0x12, 0x30, 0x0a,
+	0x14, 0x63, 0x72, 0x61, 0x66, 0x74, 0x69, 0x6e, 0x67, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x5f,
+	0x63, 0x75, 0x72, 0x76, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x01, 0x52, 0x12, 0x63, 0x72, 0x61,
+	0x66, 0x74, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x69, 0x63, 0x65, 0x43, 0x75, 0x72, 0x76, 0x65, 0x2a,
+	0x34, 0x0a, 0x08, 0x50, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x12, 0x14, 0x0a, 0x10, 0x49,
+	0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x5f, 0x50, 0x4c, 0x41, 0x54, 0x46, 0x4f, 0x52, 0x4d, 0x10,
+	0x00, 0x12, 0x07, 0x0a, 0x03, 0x49, 0x4f, 0x53, 0x10, 0x01, 0x12, 0x09, 0x0a, 0x05, 0x44, 0x52,
+	0x4f, 0x49, 0x44, 0x10, 0x02, 0x2a, 0x83, 0x03, 0x0a, 0x07, 0x45, 0x67, 0x67, 0x54, 0x79, 0x70,
+	0x65, 0x12, 0x0f, 0x0a, 0x0b, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x5f, 0x45, 0x47, 0x47,
+	0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x45, 0x44, 0x49, 0x42, 0x4c, 0x45, 0x10, 0x01, 0x12, 0x0d,
+	0x0a, 0x09, 0x53, 0x55, 0x50, 0x45, 0x52, 0x46, 0x4f, 0x4f, 0x44, 0x10, 0x02, 0x12, 0x0b, 0x0a,
+	0x07, 0x4d, 0x45, 0x44, 0x49, 0x43, 0x41, 0x4c, 0x10, 0x03, 0x12, 0x0f, 0x0a, 0x0b, 0x52, 0x4f,
+	0x43, 0x4b, 0x45, 0x54, 0x5f, 0x46, 0x55, 0x45, 0x4c, 0x10, 0x04, 0x12, 0x12, 0x0a, 0x0e, 0x53,
+	0x55, 0x50, 0x45, 0x52, 0x5f, 0x4d, 0x41, 0x54, 0x45, 0x52, 0x49, 0x41, 0x4c, 0x10, 0x05, 0x12,
+	0x0a, 0x0a, 0x06, 0x46, 0x55, 0x53, 0x49, 0x4f, 0x4e, 0x10, 0x06, 0x12, 0x0b, 0x0a, 0x07, 0x51,
+	0x55, 0x41, 0x4e, 0x54, 0x55, 0x4d, 0x10, 0x07, 0x12, 0x0f, 0x0a, 0x0b, 0x49, 0x4d, 0x4d, 0x4f,
+	0x52, 0x54, 0x41, 0x4c, 0x49, 0x54, 0x59, 0x10, 0x08, 0x12, 0x0b, 0x0a, 0x07, 0x54, 0x41, 0x43,
+	0x48, 0x59, 0x4f, 0x4e, 0x10, 0x09, 0x12, 0x0c, 0x0a, 0x08, 0x47, 0x52, 0x41, 0x56, 0x49, 0x54,
+	0x4f, 0x4e, 0x10, 0x0a, 0x12, 0x0d, 0x0a, 0x09, 0x44, 0x49, 0x4c, 0x49, 0x54, 0x48, 0x49, 0x55,
+	0x4d, 0x10, 0x0b, 0x12, 0x0b, 0x0a, 0x07, 0x50, 0x52, 0x4f, 0x44, 0x49, 0x47, 0x59, 0x10, 0x0c,
+	0x12, 0x0d, 0x0a, 0x09, 0x54, 0x45, 0x52, 0x52, 0x41, 0x46, 0x4f, 0x52, 0x4d, 0x10, 0x0d, 0x12,
+	0x0e, 0x0a, 0x0a, 0x41, 0x4e, 0x54, 0x49, 0x4d, 0x41, 0x54, 0x54, 0x45, 0x52, 0x10, 0x0e, 0x12,
+	0x0f, 0x0a, 0x0b, 0x44, 0x41, 0x52, 0x4b, 0x5f, 0x4d, 0x41, 0x54, 0x54, 0x45, 0x52, 0x10, 0x0f,
+	0x12, 0x06, 0x0a, 0x02, 0x41, 0x49, 0x10, 0x10, 0x12, 0x0a, 0x0a, 0x06, 0x4e, 0x45, 0x42, 0x55,
+	0x4c, 0x41, 0x10, 0x11, 0x12, 0x0c, 0x0a, 0x08, 0x55, 0x4e, 0x49, 0x56, 0x45, 0x52, 0x53, 0x45,
+	0x10, 0x12, 0x12, 0x11, 0x0a, 0x0d, 0x45, 0x4e, 0x4c, 0x49, 0x47, 0x48, 0x54, 0x45, 0x4e, 0x4d,
+	0x45, 0x4e, 0x54, 0x10, 0x13, 0x12, 0x0d, 0x0a, 0x09, 0x43, 0x48, 0x4f, 0x43, 0x4f, 0x4c, 0x41,
+	0x54, 0x45, 0x10, 0x64, 0x12, 0x0a, 0x0a, 0x06, 0x45, 0x41, 0x53, 0x54, 0x45, 0x52, 0x10, 0x65,
+	0x12, 0x10, 0x0a, 0x0c, 0x57, 0x41, 0x54, 0x45, 0x52, 0x42, 0x41, 0x4c, 0x4c, 0x4f, 0x4f, 0x4e,
+	0x10, 0x66, 0x12, 0x0c, 0x0a, 0x08, 0x46, 0x49, 0x52, 0x45, 0x57, 0x4f, 0x52, 0x4b, 0x10, 0x67,
+	0x12, 0x0b, 0x0a, 0x07, 0x50, 0x55, 0x4d, 0x50, 0x4b, 0x49, 0x4e, 0x10, 0x68, 0x12, 0x0c, 0x0a,
+	0x07, 0x55, 0x4e, 0x4b, 0x4e, 0x4f, 0x57, 0x4e, 0x10, 0xe8, 0x07, 0x2a, 0x58, 0x0a, 0x0a, 0x54,
+	0x72, 0x6f, 0x70, 0x68, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0d, 0x0a, 0x09, 0x4e, 0x4f, 0x5f,
+	0x54, 0x52, 0x4f, 0x50, 0x48, 0x59, 0x10, 0x00, 0x12, 0x0a, 0x0a, 0x06, 0x42, 0x52, 0x4f, 0x4e,
+	0x5a, 0x45, 0x10, 0x01, 0x12, 0x0a, 0x0a, 0x06, 0x53, 0x49, 0x4c, 0x56, 0x45, 0x52, 0x10, 0x02,
+	0x12, 0x08, 0x0a, 0x04, 0x47, 0x4f, 0x4c, 0x44, 0x10, 0x03, 0x12, 0x0c, 0x0a, 0x08, 0x50, 0x4c,
+	0x41, 0x54, 0x49, 0x4e, 0x55, 0x4d, 0x10, 0x04, 0x12, 0x0b, 0x0a, 0x07, 0x44, 0x49, 0x41, 0x4d,
+	0x4f, 0x4e, 0x44, 0x10, 0x05, 0x2a, 0xac, 0x01, 0x0a, 0x0a, 0x52, 0x65, 0x77, 0x61, 0x72, 0x64,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x0e, 0x49, 0x4e, 0x56, 0x41, 0x4c, 0x49, 0x44, 0x5f,
+	0x52, 0x45, 0x57, 0x41, 0x52, 0x44, 0x10, 0x00, 0x12, 0x0e, 0x0a, 0x0a, 0x47, 0x4f, 0x4c, 0x44,
+	0x45, 0x4e, 0x5f, 0x45, 0x47, 0x47, 0x10, 0x02, 0x12, 0x0c, 0x0a, 0x08, 0x53, 0x4f, 0x55, 0x4c,
+	0x5f, 0x45, 0x47, 0x47, 0x10, 0x03, 0x12, 0x10, 0x0a, 0x0c, 0x50, 0x52, 0x4f, 0x50, 0x48, 0x45,
+	0x43, 0x59, 0x5f, 0x45, 0x47, 0x47, 0x10, 0x04, 0x12, 0x11, 0x0a, 0x0d, 0x45, 0x50, 0x49, 0x43,
+	0x5f, 0x52, 0x45, 0x53, 0x45, 0x41, 0x52, 0x43, 0x48, 0x10, 0x05, 0x12, 0x14, 0x0a, 0x10, 0x50,
+	0x49, 0x47, 0x47, 0x59, 0x5f, 0x47, 0x4f, 0x4c, 0x44, 0x45, 0x4e, 0x5f, 0x45, 0x47, 0x47, 0x10,
+	0x06, 0x12, 0x12, 0x0a, 0x0e, 0x50, 0x49, 0x47, 0x47, 0x59, 0x5f, 0x4d, 0x55, 0x4c, 0x54, 0x49,
+	0x50, 0x4c, 0x59, 0x10, 0x07, 0x12, 0x12, 0x0a, 0x0e, 0x50, 0x49, 0x47, 0x47, 0x59, 0x5f, 0x4c,
+	0x45, 0x56, 0x45, 0x4c, 0x5f, 0x55, 0x50, 0x10, 0x08, 0x12, 0x09, 0x0a, 0x05, 0x42, 0x4f, 0x4f,
+	0x53, 0x54, 0x10, 0x09, 0x42, 0x2e, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2f, 0x66, 0x61, 0x6e, 0x61, 0x74, 0x69, 0x63, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
+	0x65, 0x72, 0x2f, 0x45, 0x67, 0x67, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x6f, 0x72,
+	0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4854,59 +5350,65 @@ func file_api_egginc_proto_rawDescGZIP() []byte {
 
 var (
 	file_api_egginc_proto_enumTypes = make([]protoimpl.EnumInfo, 11)
-	file_api_egginc_proto_msgTypes  = make([]protoimpl.MessageInfo, 40)
+	file_api_egginc_proto_msgTypes  = make([]protoimpl.MessageInfo, 46)
 	file_api_egginc_proto_goTypes   = []interface{}{
-		(Platform)(0),                               // 0: Platform
-		(EggType)(0),                                // 1: EggType
-		(TrophyType)(0),                             // 2: TrophyType
-		(RewardType)(0),                             // 3: RewardType
-		(ArtifactSpec_Name)(0),                      // 4: ArtifactSpec.Name
-		(ArtifactSpec_Level)(0),                     // 5: ArtifactSpec.Level
-		(ArtifactSpec_Rarity)(0),                    // 6: ArtifactSpec.Rarity
-		(ArtifactSpec_Type)(0),                      // 7: ArtifactSpec.Type
-		(MissionInfo_Spaceship)(0),                  // 8: MissionInfo.Spaceship
-		(MissionInfo_Status)(0),                     // 9: MissionInfo.Status
-		(MissionInfo_DurationType)(0),               // 10: MissionInfo.DurationType
-		(*FirstContactRequestPayload)(nil),          // 11: FirstContactRequestPayload
-		(*BasicRequestInfo)(nil),                    // 12: BasicRequestInfo
-		(*FirstContactResponsePayload)(nil),         // 13: FirstContactResponsePayload
-		(*FirstContact)(nil),                        // 14: FirstContact
-		(*Farm)(nil),                                // 15: Farm
-		(*Research)(nil),                            // 16: Research
-		(*EpicResearch)(nil),                        // 17: EpicResearch
-		(*Contract)(nil),                            // 18: Contract
-		(*ContractProperties)(nil),                  // 19: ContractProperties
-		(*Reward)(nil),                              // 20: Reward
-		(*ArtifactsDB)(nil),                         // 21: ArtifactsDB
-		(*ArtifactSpec)(nil),                        // 22: ArtifactSpec
-		(*ArtifactInventoryItem)(nil),               // 23: ArtifactInventoryItem
-		(*CompleteArtifact)(nil),                    // 24: CompleteArtifact
-		(*InventorySlot)(nil),                       // 25: InventorySlot
-		(*MissionInfo)(nil),                         // 26: MissionInfo
-		(*CoopStatusRequestPayload)(nil),            // 27: CoopStatusRequestPayload
-		(*CoopStatusResponsePayload)(nil),           // 28: CoopStatusResponsePayload
-		(*CoopStatus)(nil),                          // 29: CoopStatus
-		(*GetPeriodicalsRequestPayload)(nil),        // 30: GetPeriodicalsRequestPayload
-		(*GetPeriodicalsResponsePayload)(nil),       // 31: GetPeriodicalsResponsePayload
-		(*Periodicals)(nil),                         // 32: Periodicals
-		(*Sale)(nil),                                // 33: Sale
-		(*Event)(nil),                               // 34: Event
-		(*FirstContact_Payload)(nil),                // 35: FirstContact.Payload
-		(*FirstContact_Payload_Settings)(nil),       // 36: FirstContact.Payload.Settings
-		(*FirstContact_Payload_Stats)(nil),          // 37: FirstContact.Payload.Stats
-		(*FirstContact_Payload_Progress)(nil),       // 38: FirstContact.Payload.Progress
-		(*FirstContact_Payload_Contracts)(nil),      // 39: FirstContact.Payload.Contracts
-		(*FirstContact_Payload_Progress_Boost)(nil), // 40: FirstContact.Payload.Progress.Boost
-		(*ContractProperties_RewardTier)(nil),       // 41: ContractProperties.RewardTier
-		(*ArtifactsDB_ActiveArtifactSlot)(nil),      // 42: ArtifactsDB.ActiveArtifactSlot
-		(*ArtifactsDB_ActiveArtifactSet)(nil),       // 43: ArtifactsDB.ActiveArtifactSet
-		(*ArtifactsDB_CraftableArtifact)(nil),       // 44: ArtifactsDB.CraftableArtifact
-		(*MissionInfo_Fuel)(nil),                    // 45: MissionInfo.Fuel
-		(*CoopStatus_Member)(nil),                   // 46: CoopStatus.Member
-		(*CoopStatus_TokenGift)(nil),                // 47: CoopStatus.TokenGift
-		(*Periodicals_Sales)(nil),                   // 48: Periodicals.Sales
-		(*Periodicals_Events)(nil),                  // 49: Periodicals.Events
-		(*Periodicals_Contracts)(nil),               // 50: Periodicals.Contracts
+		(Platform)(0),                                             // 0: Platform
+		(EggType)(0),                                              // 1: EggType
+		(TrophyType)(0),                                           // 2: TrophyType
+		(RewardType)(0),                                           // 3: RewardType
+		(ArtifactSpec_Name)(0),                                    // 4: ArtifactSpec.Name
+		(ArtifactSpec_Level)(0),                                   // 5: ArtifactSpec.Level
+		(ArtifactSpec_Rarity)(0),                                  // 6: ArtifactSpec.Rarity
+		(ArtifactSpec_Type)(0),                                    // 7: ArtifactSpec.Type
+		(MissionInfo_Spaceship)(0),                                // 8: MissionInfo.Spaceship
+		(MissionInfo_Status)(0),                                   // 9: MissionInfo.Status
+		(MissionInfo_DurationType)(0),                             // 10: MissionInfo.DurationType
+		(*FirstContactRequestPayload)(nil),                        // 11: FirstContactRequestPayload
+		(*BasicRequestInfo)(nil),                                  // 12: BasicRequestInfo
+		(*FirstContactResponsePayload)(nil),                       // 13: FirstContactResponsePayload
+		(*FirstContact)(nil),                                      // 14: FirstContact
+		(*Farm)(nil),                                              // 15: Farm
+		(*Research)(nil),                                          // 16: Research
+		(*EpicResearch)(nil),                                      // 17: EpicResearch
+		(*Contract)(nil),                                          // 18: Contract
+		(*ContractProperties)(nil),                                // 19: ContractProperties
+		(*Reward)(nil),                                            // 20: Reward
+		(*ArtifactsDB)(nil),                                       // 21: ArtifactsDB
+		(*ArtifactSpec)(nil),                                      // 22: ArtifactSpec
+		(*ArtifactInventoryItem)(nil),                             // 23: ArtifactInventoryItem
+		(*CompleteArtifact)(nil),                                  // 24: CompleteArtifact
+		(*InventorySlot)(nil),                                     // 25: InventorySlot
+		(*MissionInfo)(nil),                                       // 26: MissionInfo
+		(*CoopStatusRequestPayload)(nil),                          // 27: CoopStatusRequestPayload
+		(*CoopStatusResponsePayload)(nil),                         // 28: CoopStatusResponsePayload
+		(*CoopStatus)(nil),                                        // 29: CoopStatus
+		(*GetPeriodicalsRequestPayload)(nil),                      // 30: GetPeriodicalsRequestPayload
+		(*GetPeriodicalsResponsePayload)(nil),                     // 31: GetPeriodicalsResponsePayload
+		(*Periodicals)(nil),                                       // 32: Periodicals
+		(*Sale)(nil),                                              // 33: Sale
+		(*Event)(nil),                                             // 34: Event
+		(*ArtifactsConfigurationRequestPayload)(nil),              // 35: ArtifactsConfigurationRequestPayload
+		(*ArtifactsConfigurationResponsePayload)(nil),             // 36: ArtifactsConfigurationResponsePayload
+		(*ArtifactsConfigurationResponse)(nil),                    // 37: ArtifactsConfigurationResponse
+		(*FirstContact_Payload)(nil),                              // 38: FirstContact.Payload
+		(*FirstContact_Payload_Settings)(nil),                     // 39: FirstContact.Payload.Settings
+		(*FirstContact_Payload_Stats)(nil),                        // 40: FirstContact.Payload.Stats
+		(*FirstContact_Payload_Progress)(nil),                     // 41: FirstContact.Payload.Progress
+		(*FirstContact_Payload_Contracts)(nil),                    // 42: FirstContact.Payload.Contracts
+		(*FirstContact_Payload_Progress_Boost)(nil),               // 43: FirstContact.Payload.Progress.Boost
+		(*ContractProperties_RewardTier)(nil),                     // 44: ContractProperties.RewardTier
+		(*ArtifactsDB_ActiveArtifactSlot)(nil),                    // 45: ArtifactsDB.ActiveArtifactSlot
+		(*ArtifactsDB_ActiveArtifactSet)(nil),                     // 46: ArtifactsDB.ActiveArtifactSet
+		(*ArtifactsDB_CraftableArtifact)(nil),                     // 47: ArtifactsDB.CraftableArtifact
+		(*MissionInfo_Fuel)(nil),                                  // 48: MissionInfo.Fuel
+		(*CoopStatus_Member)(nil),                                 // 49: CoopStatus.Member
+		(*CoopStatus_TokenGift)(nil),                              // 50: CoopStatus.TokenGift
+		(*Periodicals_Sales)(nil),                                 // 51: Periodicals.Sales
+		(*Periodicals_Events)(nil),                                // 52: Periodicals.Events
+		(*Periodicals_Contracts)(nil),                             // 53: Periodicals.Contracts
+		(*ArtifactsConfigurationResponse_MissionParameters)(nil),  // 54: ArtifactsConfigurationResponse.MissionParameters
+		(*ArtifactsConfigurationResponse_ArtifactParameters)(nil), // 55: ArtifactsConfigurationResponse.ArtifactParameters
+		(*ArtifactsConfigurationResponse_MissionParameters_Duration)(nil), // 56: ArtifactsConfigurationResponse.MissionParameters.Duration
 	}
 )
 
@@ -4914,21 +5416,21 @@ var file_api_egginc_proto_depIdxs = []int32{
 	12, // 0: FirstContactRequestPayload.rinfo:type_name -> BasicRequestInfo
 	0,  // 1: FirstContactRequestPayload.platform:type_name -> Platform
 	14, // 2: FirstContactResponsePayload.payload:type_name -> FirstContact
-	35, // 3: FirstContact.data:type_name -> FirstContact.Payload
+	38, // 3: FirstContact.data:type_name -> FirstContact.Payload
 	1,  // 4: Farm.egg_type:type_name -> EggType
 	16, // 5: Farm.researches:type_name -> Research
 	19, // 6: Contract.props:type_name -> ContractProperties
 	1,  // 7: ContractProperties.egg_type:type_name -> EggType
 	20, // 8: ContractProperties.rewards:type_name -> Reward
-	41, // 9: ContractProperties.reward_tiers:type_name -> ContractProperties.RewardTier
+	44, // 9: ContractProperties.reward_tiers:type_name -> ContractProperties.RewardTier
 	3,  // 10: Reward.type:type_name -> RewardType
 	23, // 11: ArtifactsDB.inventory_items:type_name -> ArtifactInventoryItem
 	25, // 12: ArtifactsDB.inventory_slots:type_name -> InventorySlot
-	42, // 13: ArtifactsDB.active_artifacts:type_name -> ArtifactsDB.ActiveArtifactSlot
-	43, // 14: ArtifactsDB.active_artifact_sets:type_name -> ArtifactsDB.ActiveArtifactSet
+	45, // 13: ArtifactsDB.active_artifacts:type_name -> ArtifactsDB.ActiveArtifactSlot
+	46, // 14: ArtifactsDB.active_artifact_sets:type_name -> ArtifactsDB.ActiveArtifactSet
 	22, // 15: ArtifactsDB.discovered_artifacts:type_name -> ArtifactSpec
-	44, // 16: ArtifactsDB.craftable_artifacts:type_name -> ArtifactsDB.CraftableArtifact
-	44, // 17: ArtifactsDB.crafting_counts:type_name -> ArtifactsDB.CraftableArtifact
+	47, // 16: ArtifactsDB.craftable_artifacts:type_name -> ArtifactsDB.CraftableArtifact
+	47, // 17: ArtifactsDB.crafting_counts:type_name -> ArtifactsDB.CraftableArtifact
 	26, // 18: ArtifactsDB.mission_infos:type_name -> MissionInfo
 	26, // 19: ArtifactsDB.mission_archive:type_name -> MissionInfo
 	4,  // 20: ArtifactSpec.name:type_name -> ArtifactSpec.Name
@@ -4941,39 +5443,47 @@ var file_api_egginc_proto_depIdxs = []int32{
 	8,  // 27: MissionInfo.ship:type_name -> MissionInfo.Spaceship
 	9,  // 28: MissionInfo.status:type_name -> MissionInfo.Status
 	10, // 29: MissionInfo.duration_type:type_name -> MissionInfo.DurationType
-	45, // 30: MissionInfo.fuel:type_name -> MissionInfo.Fuel
+	48, // 30: MissionInfo.fuel:type_name -> MissionInfo.Fuel
 	29, // 31: CoopStatusResponsePayload.status:type_name -> CoopStatus
-	46, // 32: CoopStatus.members:type_name -> CoopStatus.Member
-	47, // 33: CoopStatus.token_gifts:type_name -> CoopStatus.TokenGift
+	49, // 32: CoopStatus.members:type_name -> CoopStatus.Member
+	50, // 33: CoopStatus.token_gifts:type_name -> CoopStatus.TokenGift
 	12, // 34: GetPeriodicalsRequestPayload.rinfo:type_name -> BasicRequestInfo
 	32, // 35: GetPeriodicalsResponsePayload.periodicals:type_name -> Periodicals
-	48, // 36: Periodicals.sales:type_name -> Periodicals.Sales
-	49, // 37: Periodicals.events:type_name -> Periodicals.Events
-	50, // 38: Periodicals.contracts:type_name -> Periodicals.Contracts
-	36, // 39: FirstContact.Payload.settings:type_name -> FirstContact.Payload.Settings
-	37, // 40: FirstContact.Payload.stats:type_name -> FirstContact.Payload.Stats
-	38, // 41: FirstContact.Payload.progress:type_name -> FirstContact.Payload.Progress
-	15, // 42: FirstContact.Payload.farms:type_name -> Farm
-	39, // 43: FirstContact.Payload.contracts:type_name -> FirstContact.Payload.Contracts
-	21, // 44: FirstContact.Payload.artifacts_db:type_name -> ArtifactsDB
-	17, // 45: FirstContact.Payload.Progress.epic_researches:type_name -> EpicResearch
-	2,  // 46: FirstContact.Payload.Progress.farm_trophy_level:type_name -> TrophyType
-	40, // 47: FirstContact.Payload.Progress.boosts:type_name -> FirstContact.Payload.Progress.Boost
-	18, // 48: FirstContact.Payload.Contracts.active_contracts:type_name -> Contract
-	18, // 49: FirstContact.Payload.Contracts.past_contracts:type_name -> Contract
-	29, // 50: FirstContact.Payload.Contracts.active_coop_statuses:type_name -> CoopStatus
-	20, // 51: ContractProperties.RewardTier.rewards:type_name -> Reward
-	42, // 52: ArtifactsDB.ActiveArtifactSet.slots:type_name -> ArtifactsDB.ActiveArtifactSlot
-	22, // 53: ArtifactsDB.CraftableArtifact.spec:type_name -> ArtifactSpec
-	1,  // 54: MissionInfo.Fuel.egg:type_name -> EggType
-	33, // 55: Periodicals.Sales.sales:type_name -> Sale
-	34, // 56: Periodicals.Events.events:type_name -> Event
-	19, // 57: Periodicals.Contracts.contracts:type_name -> ContractProperties
-	58, // [58:58] is the sub-list for method output_type
-	58, // [58:58] is the sub-list for method input_type
-	58, // [58:58] is the sub-list for extension type_name
-	58, // [58:58] is the sub-list for extension extendee
-	0,  // [0:58] is the sub-list for field type_name
+	51, // 36: Periodicals.sales:type_name -> Periodicals.Sales
+	52, // 37: Periodicals.events:type_name -> Periodicals.Events
+	53, // 38: Periodicals.contracts:type_name -> Periodicals.Contracts
+	12, // 39: ArtifactsConfigurationRequestPayload.rinfo:type_name -> BasicRequestInfo
+	37, // 40: ArtifactsConfigurationResponsePayload.config:type_name -> ArtifactsConfigurationResponse
+	54, // 41: ArtifactsConfigurationResponse.mission_parameters:type_name -> ArtifactsConfigurationResponse.MissionParameters
+	55, // 42: ArtifactsConfigurationResponse.artifact_parameters:type_name -> ArtifactsConfigurationResponse.ArtifactParameters
+	39, // 43: FirstContact.Payload.settings:type_name -> FirstContact.Payload.Settings
+	40, // 44: FirstContact.Payload.stats:type_name -> FirstContact.Payload.Stats
+	41, // 45: FirstContact.Payload.progress:type_name -> FirstContact.Payload.Progress
+	15, // 46: FirstContact.Payload.farms:type_name -> Farm
+	42, // 47: FirstContact.Payload.contracts:type_name -> FirstContact.Payload.Contracts
+	21, // 48: FirstContact.Payload.artifacts_db:type_name -> ArtifactsDB
+	17, // 49: FirstContact.Payload.Progress.epic_researches:type_name -> EpicResearch
+	2,  // 50: FirstContact.Payload.Progress.farm_trophy_level:type_name -> TrophyType
+	43, // 51: FirstContact.Payload.Progress.boosts:type_name -> FirstContact.Payload.Progress.Boost
+	18, // 52: FirstContact.Payload.Contracts.active_contracts:type_name -> Contract
+	18, // 53: FirstContact.Payload.Contracts.past_contracts:type_name -> Contract
+	29, // 54: FirstContact.Payload.Contracts.active_coop_statuses:type_name -> CoopStatus
+	20, // 55: ContractProperties.RewardTier.rewards:type_name -> Reward
+	45, // 56: ArtifactsDB.ActiveArtifactSet.slots:type_name -> ArtifactsDB.ActiveArtifactSlot
+	22, // 57: ArtifactsDB.CraftableArtifact.spec:type_name -> ArtifactSpec
+	1,  // 58: MissionInfo.Fuel.egg:type_name -> EggType
+	33, // 59: Periodicals.Sales.sales:type_name -> Sale
+	34, // 60: Periodicals.Events.events:type_name -> Event
+	19, // 61: Periodicals.Contracts.contracts:type_name -> ContractProperties
+	8,  // 62: ArtifactsConfigurationResponse.MissionParameters.ship:type_name -> MissionInfo.Spaceship
+	56, // 63: ArtifactsConfigurationResponse.MissionParameters.durations:type_name -> ArtifactsConfigurationResponse.MissionParameters.Duration
+	22, // 64: ArtifactsConfigurationResponse.ArtifactParameters.spec:type_name -> ArtifactSpec
+	10, // 65: ArtifactsConfigurationResponse.MissionParameters.Duration.duration_type:type_name -> MissionInfo.DurationType
+	66, // [66:66] is the sub-list for method output_type
+	66, // [66:66] is the sub-list for method input_type
+	66, // [66:66] is the sub-list for extension type_name
+	66, // [66:66] is the sub-list for extension extendee
+	0,  // [0:66] is the sub-list for field type_name
 }
 
 func init() { file_api_egginc_proto_init() }
@@ -5271,7 +5781,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FirstContact_Payload); i {
+			switch v := v.(*ArtifactsConfigurationRequestPayload); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5283,7 +5793,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FirstContact_Payload_Settings); i {
+			switch v := v.(*ArtifactsConfigurationResponsePayload); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5295,7 +5805,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FirstContact_Payload_Stats); i {
+			switch v := v.(*ArtifactsConfigurationResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5307,7 +5817,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FirstContact_Payload_Progress); i {
+			switch v := v.(*FirstContact_Payload); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5319,7 +5829,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FirstContact_Payload_Contracts); i {
+			switch v := v.(*FirstContact_Payload_Settings); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5331,7 +5841,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*FirstContact_Payload_Progress_Boost); i {
+			switch v := v.(*FirstContact_Payload_Stats); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5343,7 +5853,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ContractProperties_RewardTier); i {
+			switch v := v.(*FirstContact_Payload_Progress); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5355,7 +5865,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ArtifactsDB_ActiveArtifactSlot); i {
+			switch v := v.(*FirstContact_Payload_Contracts); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5367,7 +5877,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ArtifactsDB_ActiveArtifactSet); i {
+			switch v := v.(*FirstContact_Payload_Progress_Boost); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5379,7 +5889,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ArtifactsDB_CraftableArtifact); i {
+			switch v := v.(*ContractProperties_RewardTier); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5391,7 +5901,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MissionInfo_Fuel); i {
+			switch v := v.(*ArtifactsDB_ActiveArtifactSlot); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5403,7 +5913,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CoopStatus_Member); i {
+			switch v := v.(*ArtifactsDB_ActiveArtifactSet); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5415,7 +5925,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CoopStatus_TokenGift); i {
+			switch v := v.(*ArtifactsDB_CraftableArtifact); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5427,7 +5937,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Periodicals_Sales); i {
+			switch v := v.(*MissionInfo_Fuel); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5439,7 +5949,7 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Periodicals_Events); i {
+			switch v := v.(*CoopStatus_Member); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5451,7 +5961,79 @@ func file_api_egginc_proto_init() {
 			}
 		}
 		file_api_egginc_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CoopStatus_TokenGift); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_egginc_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Periodicals_Sales); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_egginc_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Periodicals_Events); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_egginc_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Periodicals_Contracts); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_egginc_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ArtifactsConfigurationResponse_MissionParameters); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_egginc_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ArtifactsConfigurationResponse_ArtifactParameters); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_egginc_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ArtifactsConfigurationResponse_MissionParameters_Duration); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -5469,7 +6051,7 @@ func file_api_egginc_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_egginc_proto_rawDesc,
 			NumEnums:      11,
-			NumMessages:   40,
+			NumMessages:   46,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

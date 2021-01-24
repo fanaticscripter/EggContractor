@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option go_package = "github.com/fanaticscripter/EggContractor/api";
 
-// http://www.auxbrain.com/ei/first_contact
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/first_contact
 message FirstContactRequestPayload {
   BasicRequestInfo rinfo = 8;
   string ei_user_id = 4;
@@ -32,7 +32,7 @@ enum Platform {
 
 message FirstContactResponsePayload {
   FirstContact payload = 1;
-  string _2 = 2;  // unknown, a hex string possibly denoting a request ID
+  string _2 = 2;  // unknown, a 256-bit signature/MAC
 }
 
 // Partially reverse engineered.
@@ -427,7 +427,7 @@ message MissionInfo {
   string mission_log = 10;
 }
 
-// http://www.auxbrain.com/ei/coop_status
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/coop_status
 message CoopStatusRequestPayload {
   string contract_id = 1;
   string code = 2;
@@ -436,7 +436,7 @@ message CoopStatusRequestPayload {
 
 message CoopStatusResponsePayload {
   CoopStatus status = 1;
-  string _2 = 2;  // unknown, a hex string possibly denoting a request ID
+  string _2 = 2;  // unknown, a 256-bit signature/MAC
 }
 
 message CoopStatus {
@@ -479,7 +479,7 @@ message CoopStatus {
   repeated TokenGift token_gifts = 11;
 }
 
-// http://www.auxbrain.com/ei/get_periodicals
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_periodicals
 message GetPeriodicalsRequestPayload {
   string user_id = 1;
   bool piggy_full = 2;
@@ -495,7 +495,7 @@ message GetPeriodicalsRequestPayload {
 
 message GetPeriodicalsResponsePayload {
   Periodicals periodicals = 1;
-  string _2 = 2;  // unknown, a hex string possibly denoting a request ID
+  string _2 = 2;  // unknown, a 256-bit signature/MAC
 }
 
 message Periodicals {
@@ -531,4 +531,46 @@ message Event {
   double multiplier = 4;  // For discount events, this is the final price
                           // multiplier, e.g. 0.3 for 70% off research.
   string message = 5;
+}
+
+// http://afx-2-dot-auxbrainhome.appspot.com/ei_afx/config
+message ArtifactsConfigurationRequestPayload {
+  BasicRequestInfo rinfo = 2;
+  uint32 client_version = 1;
+}
+
+message ArtifactsConfigurationResponsePayload {
+  ArtifactsConfigurationResponse config = 1;
+  string _2 = 2;  // unknown, a 256-bit signature/MAC
+}
+
+message ArtifactsConfigurationResponse {
+  repeated MissionParameters mission_parameters = 1;
+  message MissionParameters {
+    MissionInfo.Spaceship ship = 1;
+
+    repeated Duration durations = 3;
+    message Duration {
+      MissionInfo.DurationType duration_type = 1;
+      double seconds = 2;
+      float quality = 3;
+      float min_quality = 4;
+      float max_quality = 5;
+      uint32 capacity = 6;
+    }
+
+    uint32 capacity_DEPRECATED = 2;
+  }
+
+  repeated ArtifactParameters artifact_parameters = 2;
+  message ArtifactParameters {
+    ArtifactSpec spec = 1;
+    double base_quality = 2;
+    double odds_multiplier = 4;
+    double value = 3;
+    double crafting_price = 5;
+    double crafting_price_low = 6;
+    uint32 crafting_price_domain = 7;
+    double crafting_price_curve = 8;
+  }
 }
