@@ -135,12 +135,11 @@ export default {
 
   methods: {
     formatTime(timestamp) {
-      return new Intl.DateTimeFormat("default", {
-        hour: "numeric",
-        minute: "numeric",
-        second: "numeric",
-        hour12: false,
-        hourCycle: 'h23'
+      return new Intl.DateTimeFormat("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hourCycle: "h23",
       }).format(new Date(timestamp * 1000));
     },
 
