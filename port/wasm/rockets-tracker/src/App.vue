@@ -11,7 +11,14 @@
         placeholder="Player ID"
       />
       <div class="text-center">
-        <span class="mt-2 inline-flex items-center space-x-1" id="email-description" v-tippy="{ content: 'The ID asked for here is the unique ID used by Egg, Inc.\'s server to identify your account. You can find it in game screen -> nine dots menu -> Settings -> Privacy & Data, at the very bottom. It should look like EI1234567890123456. Your old game services ID prior to the Artifact Update does not work here. Also note that the ID is case-sensitive.' }">
+        <span
+          class="mt-2 inline-flex items-center space-x-1"
+          id="email-description"
+          v-tippy="{
+            content:
+              'The ID asked for here is the unique ID used by Egg, Inc.\'s server to identify your account. You can find it in game screen -> nine dots menu -> Settings -> Privacy & Data, at the very bottom. It should look like EI1234567890123456. Your old game services ID prior to the Artifact Update does not work here. Also note that the ID is case-sensitive.',
+          }"
+        >
           <svg
             class="h-4 w-4 text-gray-400"
             xmlns="http://www.w3.org/2000/svg"
@@ -95,6 +102,7 @@
       :activeMissions="activeMissions"
       :missionStats="missionStats"
       :unlockProgress="unlockProgress"
+      :launchLog="launchLog"
     ></mission-info>
   </template>
 </template>
@@ -137,6 +145,7 @@ export default {
       activeMissions: [],
       missionStats: null,
       unlockProgress: null,
+      launchLog: null,
       loading: false,
       error: "",
     };
@@ -160,12 +169,16 @@ export default {
       this.loading = true;
       this.error = "";
       try {
-        const { activeMissions, missionStats, unlockProgress } = await this.retrieveMissions(
-          playerId
-        );
+        const {
+          activeMissions,
+          missionStats,
+          unlockProgress,
+          launchLog,
+        } = await this.retrieveMissions(playerId);
         this.activeMissions = activeMissions;
         this.missionStats = missionStats;
         this.unlockProgress = unlockProgress;
+        this.launchLog = launchLog;
         this.loading = false;
         this.error = null;
       } catch (err) {

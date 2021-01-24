@@ -93,11 +93,29 @@
       </ul>
     </div>
   </div>
+
+  <div class="mx-4 lg:mx-0 my-4">
+    <h2 class="mx-4 mt-4 mb-2 text-center text-md leading-6 font-medium text-gray-900">Launch log</h2>
+    <div>
+      <template v-for="date in launchLog.dates" :key="date.date">
+        <div class="my-2 text-sm font-medium text-gray-900">{{ date.date }}</div>
+        <div class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+          <div v-for="(mission, index) in date.missions" :key="index" class="text-xs tabular-nums">
+            <span class="mr-2">{{ formatTime(mission.startTimestamp) }}</span>
+            <span class="mr-1">{{ mission.shipName }}</span>
+            <span :class="[durationTypeFgClass(mission.durationTypeDisplay)]">{{
+              mission.durationTypeDisplay
+            }}</span>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
 </template>
 
 <script>
 import CountdownTimer from "./CountdownTimer.vue";
-import ProgressRing from './ProgressRing.vue';
+import ProgressRing from "./ProgressRing.vue";
 
 export default {
   components: {
@@ -108,6 +126,7 @@ export default {
     activeMissions: Array,
     missionStats: Object,
     unlockProgress: Object,
+    launchLog: Object,
   },
 
   data() {
@@ -115,6 +134,16 @@ export default {
   },
 
   methods: {
+    formatTime(timestamp) {
+      return new Intl.DateTimeFormat("default", {
+        hour: "numeric",
+        minute: "numeric",
+        second: "numeric",
+        hour12: false,
+        hourCycle: 'h23'
+      }).format(new Date(timestamp * 1000));
+    },
+
     durationTypeFgClass(durationType) {
       switch (durationType) {
         case "Tutorial":
