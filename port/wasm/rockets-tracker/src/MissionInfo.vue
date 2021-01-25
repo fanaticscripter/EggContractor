@@ -1,5 +1,5 @@
 <template>
-  <ul v-if="activeMissions && activeMissions.length > 0" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 mx-4 lg:mx-0 my-4" :class="[activeMissions.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3']">
+  <ul v-if="activeMissions && activeMissions.length > 0" class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 mx-4 xl:mx-0 my-4" :class="[activeMissions.length >= 4 ? 'lg:grid-cols-4' : 'lg:grid-cols-3']">
     <li v-for="(mission, index) in activeMissions" :key="index" class="col-span-1 flex flex-col text-center bg-gray-50 rounded-2xl shadow-lg divide-y divide-gray-200">
       <div class="flex-1 flex flex-col p-6">
         <div class="w-36 h-36 flex-shrink-0 mx-auto relative" :class="[durationTypeFgClass(mission.durationTypeDisplay)]">
@@ -46,8 +46,8 @@
     </div>
 
     <div class="flex flex-col">
-      <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-        <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="-my-2 overflow-x-auto xl:-mx-4">
+        <div class="py-2 align-middle inline-block min-w-full lg:px-4">
           <div class="shadow overflow-hidden border-b border-gray-200">
             <table class="min-w-full divide-y divide-gray-200">
               <thead class="bg-gray-50">
@@ -94,7 +94,7 @@
     </div>
   </div>
 
-  <div class="mx-4 lg:mx-0 my-4">
+  <div class="mx-4 xl:mx-0 my-4">
     <h2 class="mx-4 mt-4 mb-2 text-center text-md leading-6 font-medium text-gray-900">Launch log</h2>
     <div>
       <template v-for="date in launchLog.dates" :key="date.date">
