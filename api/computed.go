@@ -744,7 +744,11 @@ func capitalizeArtifactName(n string) string {
 }
 
 func (a *ArtifactSpec) Type() ArtifactSpec_Type {
-	switch a.Name {
+	return a.Name.ArtifactType()
+}
+
+func (a ArtifactSpec_Name) ArtifactType() ArtifactSpec_Type {
+	switch a {
 	// Artifacts
 	case ArtifactSpec_LUNAR_TOTEM:
 		fallthrough
@@ -858,6 +862,62 @@ func (a *ArtifactSpec) Type() ArtifactSpec_Type {
 		return ArtifactSpec_INGREDIENT
 	}
 	return ArtifactSpec_ARTIFACT
+}
+
+// CorrespondingStone returns the corresponding stone for a stone fragment.
+// Result is undefined for non-stone fragments.
+func (a ArtifactSpec_Name) CorrespondingStone() ArtifactSpec_Name {
+	switch a {
+	case ArtifactSpec_TACHYON_STONE_FRAGMENT:
+		return ArtifactSpec_TACHYON_STONE
+	case ArtifactSpec_DILITHIUM_STONE_FRAGMENT:
+		return ArtifactSpec_DILITHIUM_STONE
+	case ArtifactSpec_SHELL_STONE_FRAGMENT:
+		return ArtifactSpec_SHELL_STONE
+	case ArtifactSpec_LUNAR_STONE_FRAGMENT:
+		return ArtifactSpec_LUNAR_STONE
+	case ArtifactSpec_SOUL_STONE_FRAGMENT:
+		return ArtifactSpec_SOUL_STONE
+	case ArtifactSpec_PROPHECY_STONE_FRAGMENT:
+		return ArtifactSpec_PROPHECY_STONE
+	case ArtifactSpec_QUANTUM_STONE_FRAGMENT:
+		return ArtifactSpec_QUANTUM_STONE
+	case ArtifactSpec_TERRA_STONE_FRAGMENT:
+		return ArtifactSpec_TERRA_STONE
+	case ArtifactSpec_LIFE_STONE_FRAGMENT:
+		return ArtifactSpec_LIFE_STONE
+	case ArtifactSpec_CLARITY_STONE_FRAGMENT:
+		return ArtifactSpec_CLARITY_STONE
+	}
+	return ArtifactSpec_UNKNOWN
+}
+
+// CorrespondingFragment returns the corresponding stone fragment for a stone.
+// Result is undefined for non-stones.
+func (a ArtifactSpec_Name) CorrespondingFragment() ArtifactSpec_Name {
+	switch a {
+	case ArtifactSpec_TACHYON_STONE:
+		return ArtifactSpec_TACHYON_STONE_FRAGMENT
+	case ArtifactSpec_DILITHIUM_STONE:
+		return ArtifactSpec_DILITHIUM_STONE_FRAGMENT
+	case ArtifactSpec_SHELL_STONE:
+		return ArtifactSpec_SHELL_STONE_FRAGMENT
+	case ArtifactSpec_LUNAR_STONE:
+		return ArtifactSpec_LUNAR_STONE_FRAGMENT
+	case ArtifactSpec_SOUL_STONE:
+		return ArtifactSpec_SOUL_STONE_FRAGMENT
+	case ArtifactSpec_PROPHECY_STONE:
+		return ArtifactSpec_PROPHECY_STONE_FRAGMENT
+	case ArtifactSpec_QUANTUM_STONE:
+		return ArtifactSpec_QUANTUM_STONE_FRAGMENT
+	case ArtifactSpec_TERRA_STONE:
+		return ArtifactSpec_TERRA_STONE_FRAGMENT
+	case ArtifactSpec_LIFE_STONE:
+		return ArtifactSpec_LIFE_STONE_FRAGMENT
+	case ArtifactSpec_CLARITY_STONE:
+		return ArtifactSpec_CLARITY_STONE_FRAGMENT
+	}
+	return ArtifactSpec_UNKNOWN
 }
 
 func (r ArtifactSpec_Rarity) Display() string {

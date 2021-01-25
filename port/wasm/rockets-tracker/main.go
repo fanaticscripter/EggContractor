@@ -65,16 +65,19 @@ func retrieveMissions(playerId string) *result {
 	launched = append(launched, artifactsDB.MissionArchive...)
 	stats, progress := generateStatsFromMissionArchive(launched)
 	log := generateLaunchLogFromMissionArchive(launched)
+	afxProgress := getArtifactsProgress(artifactsDB)
 	return dataResult(struct {
-		ActiveMissions []*mission      `json:"activeMissions"`
-		MissionStats   *missionStats   `json:"missionStats"`
-		UnlockProgress *unlockProgress `json:"unlockProgress"`
-		LaunchLog      *launchLog      `json:"launchLog"`
+		ActiveMissions    []*mission         `json:"activeMissions"`
+		MissionStats      *missionStats      `json:"missionStats"`
+		UnlockProgress    *unlockProgress    `json:"unlockProgress"`
+		LaunchLog         *launchLog         `json:"launchLog"`
+		ArtifactsProgress *artifactsProgress `json:"artifactsProgress"`
 	}{
-		ActiveMissions: activeMissions,
-		MissionStats:   stats,
-		UnlockProgress: progress,
-		LaunchLog:      log,
+		ActiveMissions:    activeMissions,
+		MissionStats:      stats,
+		UnlockProgress:    progress,
+		LaunchLog:         log,
+		ArtifactsProgress: afxProgress,
 	})
 }
 

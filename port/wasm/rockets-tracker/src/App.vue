@@ -104,32 +104,20 @@
       :unlockProgress="unlockProgress"
       :launchLog="launchLog"
     ></mission-info>
+
+    <artifact-info :progress="artifactsProgress"></artifact-info>
   </template>
 </template>
 
 <script>
+import ArtifactInfo from "./ArtifactInfo.vue";
 import MissionInfo from "./MissionInfo.vue";
-
-function getLocalStorage(key) {
-  try {
-    return localStorage[`${window.location.pathname}_${key}`];
-  } catch (err) {
-    console.error(err);
-    return undefined;
-  }
-}
-
-function setLocalStorage(key, val) {
-  try {
-    localStorage[`${window.location.pathname}_${key}`] = val;
-  } catch (err) {
-    console.error(err);
-  }
-}
+import { getLocalStorage, setLocalStorage } from "./utils";
 
 export default {
   components: {
     MissionInfo,
+    ArtifactInfo,
   },
   props: {
     retrieveMissions: Function,
@@ -146,6 +134,7 @@ export default {
       missionStats: null,
       unlockProgress: null,
       launchLog: null,
+      artifactsProgress: null,
       loading: false,
       error: "",
     };
@@ -174,11 +163,13 @@ export default {
           missionStats,
           unlockProgress,
           launchLog,
+          artifactsProgress,
         } = await this.retrieveMissions(playerId);
         this.activeMissions = activeMissions;
         this.missionStats = missionStats;
         this.unlockProgress = unlockProgress;
         this.launchLog = launchLog;
+        this.artifactsProgress = artifactsProgress;
         this.loading = false;
         this.error = null;
       } catch (err) {

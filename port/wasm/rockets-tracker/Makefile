@@ -26,7 +26,7 @@ postcss:
 static:
 	rm -rf dist/static
 	mkdir -p dist/static
-	ln ../../../static/egginc/afx_ship_*.png ../../../static/egginc/icon_help.png dist/static
+	ln ../../../static/egginc/afx_*.png ../../../static/egginc/icon_help.png dist/static
 
 clean:
 	@$(RM) -r dist/index.html dist/*.*.js dist/wasm_exec.js dist/*.*.css dist/*.*.wasm dist/manifest.*.json static
