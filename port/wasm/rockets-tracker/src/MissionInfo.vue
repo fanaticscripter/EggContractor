@@ -3,7 +3,7 @@
     <li v-for="(mission, index) in activeMissions" :key="index" class="col-span-1 flex flex-col text-center bg-gray-50 rounded-2xl shadow-lg divide-y divide-gray-200">
       <div class="flex-1 flex flex-col p-6">
         <div class="w-36 h-36 flex-shrink-0 mx-auto relative" :class="[durationTypeFgClass(mission.durationTypeDisplay)]">
-          <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full" :src="mission.shipIconPath" :alt="mission.shipName">
+          <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full" :src="iconURL(mission.shipIconPath, 256)" :alt="mission.shipName">
           <progress-ring :radius="72" :stroke="2" :duration="mission.durationSeconds" :deadline="mission.returnTimestamp"></progress-ring>
         </div>
         <h3 class="mt-4 text-gray-900 text-sm font-medium">{{ mission.shipName }}</h3>
@@ -38,7 +38,7 @@
     <h2 class="mx-4 my-4 text-center text-md leading-6 font-medium text-gray-900">Mission statistics</h2>
 
     <div v-if="unlockProgress" class="-mt-4 text-sm text-center">
-      <img class="inline w-12 h-12" :src="unlockProgress.nextShipIconPath" alt="">
+      <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipIconPath, 128)" alt="">
       <span class="whitespace-nowrap">
         {{ unlockProgress.nextShipName }} unlock:
         <span class="font-medium">{{ unlockProgress.launchesDone }} / {{ unlockProgress.launchesRequired }}</span>
@@ -61,7 +61,7 @@
                 <template v-for="ship in missionStats.ships" :key="ship.shipName">
                   <tr class="text-gray-500">
                     <td class="relative px-6 py-1.5 border-r whitespace-nowrap text-sm" :rowspan="ship.types.length + 1">
-                      <img class="absolute top-1/2 left-6 transform -translate-y-1/2 w-12 h-12" :src="ship.shipIconPath" :alt="ship.shipName">
+                      <img class="absolute top-1/2 left-6 transform -translate-y-1/2 w-12 h-12" :src="iconURL(ship.shipIconPath, 128)" :alt="ship.shipName">
                       <span class="pl-14">{{ ship.shipName }}</span>
                     </td>
                     <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm">Aggregate</td>
@@ -116,6 +116,7 @@
 <script>
 import CountdownTimer from "./CountdownTimer.vue";
 import ProgressRing from "./ProgressRing.vue";
+import { iconURL } from "./utils";
 
 export default {
   components: {
@@ -170,6 +171,8 @@ export default {
           return "bg-black";
       }
     },
+
+    iconURL,
   },
 };
 </script>

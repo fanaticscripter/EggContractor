@@ -15,4 +15,9 @@ function setLocalStorage(key, val) {
   }
 }
 
-export { getLocalStorage, setLocalStorage };
+function iconURL(relpath, size) {
+  const dir = !size ? "orig" : size.toString();
+  return `https://eggincassets.tcl.sh/${dir}/${relpath}`;
+}
+
+export { getLocalStorage, setLocalStorage, iconURL };

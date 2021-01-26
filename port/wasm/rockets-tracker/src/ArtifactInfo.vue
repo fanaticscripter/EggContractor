@@ -30,7 +30,7 @@
     >
       <span class="inline-flex items-center space-x-1">
         Estimated total crafting expense so far:
-        <img class="h-4 w-4" src="static/icon_golden_egg.png" />
+        <img class="h-4 w-4" src="https://eggincassets.tcl.sh/64/egginc-extras/icon_golden_egg.png" />
         {{ totalCraftingCost.toLocaleString("en-US") }}
         <svg
           class="h-4 w-4 text-gray-400"

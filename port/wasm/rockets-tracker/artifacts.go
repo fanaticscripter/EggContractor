@@ -379,7 +379,7 @@ func getArtifactsProgress(db *api.ArtifactsDB) *artifactsProgress {
 			a := artifactFromClassTier(cls, i+1)
 			tiers = append(tiers, &artifactTier{
 				Name:       name,
-				IconPath:   "static/" + a.IconFilename(),
+				IconPath:   "egginc/" + a.IconFilename(),
 				TierNumber: i + 1,
 			})
 		}

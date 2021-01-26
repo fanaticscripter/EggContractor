@@ -26,13 +26,13 @@
                   class="flex items-center space-x-2"
                   :class="{ 'opacity-30': !tier.unlocked }"
                 >
-                  <a v-if="spoilers || tier.unlocked" :href="tier.iconPath" target="_blank">
-                    <img class="h-12 w-12" :src="tier.iconPath" alt="" />
+                  <a v-if="spoilers || tier.unlocked" :href="iconURL(tier.iconPath)" target="_blank">
+                    <img class="h-12 w-12" :src="iconURL(tier.iconPath, 128)" alt="" />
                   </a>
                   <img
                     v-else
                     class="h-12 w-12 silhouette"
-                    :src="tier.iconPath"
+                    :src="iconURL(tier.iconPath, 128)"
                     alt=""
                     v-tippy="{ content: 'turn on &quot;show unseen items&quot; to unlock' }"
                   />
@@ -80,6 +80,8 @@
 </template>
 
 <script>
+import { iconURL } from "./utils";
+
 export default {
   props: {
     items: Array,
@@ -100,6 +102,8 @@ export default {
       }
       return clauses.join(", ");
     },
+
+    iconURL,
   },
 };
 </script>

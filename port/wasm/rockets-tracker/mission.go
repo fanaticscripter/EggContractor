@@ -198,7 +198,7 @@ func generateLaunchLogFromMissionArchive(archive []*api.MissionInfo) *launchLog 
 }
 
 func shipIconPath(ship api.MissionInfo_Spaceship) string {
-	return "static/" + ship.IconFilename()
+	return "egginc/" + ship.IconFilename()
 }
 
 func shipRequiredLaunchesToUnlock(ship api.MissionInfo_Spaceship) uint32 {
