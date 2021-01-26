@@ -194,57 +194,7 @@ func prodStaticAssetURL(pth string) string {
 }
 
 func eggIconPath(e api.EggType) string {
-	var path string
-	switch e {
-	case api.EggType_EDIBLE:
-		path = "egginc/egg_edible.png"
-	case api.EggType_SUPERFOOD:
-		path = "egginc/egg_superfood.png"
-	case api.EggType_MEDICAL:
-		path = "egginc/egg_medical2.png"
-	case api.EggType_ROCKET_FUEL:
-		path = "egginc/egg_rocketfuel.png"
-	case api.EggType_SUPER_MATERIAL:
-		path = "egginc/egg_supermaterial.png"
-	case api.EggType_FUSION:
-		path = "egginc/egg_fusion.png"
-	case api.EggType_QUANTUM:
-		path = "egginc/egg_quantum.png"
-	case api.EggType_IMMORTALITY:
-		path = "egginc/egg_immortality.png"
-	case api.EggType_TACHYON:
-		path = "egginc/egg_tachyon.png"
-	case api.EggType_GRAVITON:
-		path = "egginc/egg_graviton.png"
-	case api.EggType_DILITHIUM:
-		path = "egginc/egg_dilithium.png"
-	case api.EggType_PRODIGY:
-		path = "egginc/egg_prodigy.png"
-	case api.EggType_TERRAFORM:
-		path = "egginc/egg_terraform.png"
-	case api.EggType_ANTIMATTER:
-		path = "egginc/egg_antimatter.png"
-	case api.EggType_DARK_MATTER:
-	case api.EggType_AI:
-		path = "egginc/egg_ai.png"
-	case api.EggType_NEBULA:
-		path = "egginc/egg_vision.png"
-	case api.EggType_UNIVERSE:
-		path = "egginc/egg_universe.png"
-	case api.EggType_ENLIGHTENMENT:
-		path = "egginc/egg_enlightenment.png"
-	// Contract-only eggs.
-	case api.EggType_CHOCOLATE:
-		path = "egginc/egg_chocolate.png"
-	case api.EggType_EASTER:
-		path = "egginc/egg_easter.png"
-	case api.EggType_WATERBALLOON:
-		path = "egginc/egg_waterballoon.png"
-	case api.EggType_FIREWORK:
-		path = "egginc/egg_firework.png"
-	case api.EggType_PUMPKIN:
-		path = "egginc/egg_pumpkin.png"
-	}
+	path := "egginc/" + e.IconFilename()
 	_, ok := _iconPathSet[path]
 	if ok {
 		return path
