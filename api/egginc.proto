@@ -461,7 +461,7 @@ message CoopStatus {
   double seconds_until_collection_deadline = 7;
   int32 _8 = 8;  // unknown, maybe bool; example: 0
   string creator_id = 9;
-  int32 _10 = 10;  // unknown, maybe bool; example: 0
+  bool public = 10;
   message TokenGift {
     string gifter_id = 1;
     int32 tokens = 2;
