@@ -284,7 +284,7 @@ func afxIconPath(artifact artifactClass, idx int) string {
 	case "vial_of_martian_dust":
 		id = "vial_martian_dust"
 	}
-	return fmt.Sprintf("static/afx_%s_%d.png", id, idx+1)
+	return fmt.Sprintf("egginc/afx_%s_%d.png", id, idx+1)
 }
 
 func main() {

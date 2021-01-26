@@ -12,7 +12,7 @@
           <div class="mt-2">
             {{range $idx, $levelname := .LevelNames}}
               <div class="flex items-center space-x-2">
-                {{with afxiconpath $artifact $idx}}<a href="{{.}}" target="_blank"><img class="h-12 w-12" src="{{.}}" alt=""></a>{{end}}
+                {{with afxiconpath $artifact $idx}}<a href="https://eggincassets.tcl.sh/orig/{{.}}" target="_blank"><img class="h-12 w-12" src="https://eggincassets.tcl.sh/128/{{.}}" alt=""></a>{{end}}
                 <div class="text-xs text-gray-700">{{.}}</div>
               </div>
             {{end}}
