@@ -13,7 +13,6 @@
       <div class="text-center">
         <span
           class="mt-2 inline-flex items-center space-x-1"
-          id="email-description"
           v-tippy="{
             content:
               'The ID asked for here is the unique ID used by Egg, Inc.\'s server to identify your account. You can find it in game screen -> nine dots menu -> Settings -> Privacy & Data, at the very bottom. It should look like EI1234567890123456. Your old game services ID prior to the Artifact Update does not work here. Also note that the ID is case-sensitive.',
