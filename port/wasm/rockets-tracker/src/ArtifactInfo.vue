@@ -25,7 +25,7 @@
       class="my-2 text-center text-sm text-gray-900"
       v-tippy="{
         content:
-          'This estimat may be inaccurate if crafting cost parameters were ever changed server-side.',
+          'This estimate may be inaccurate if crafting cost parameters were ever changed server-side.',
       }"
     >
       <span class="inline-flex items-center space-x-1">
