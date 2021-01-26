@@ -50,6 +50,18 @@ var _afxConfigCommand = &cobra.Command{
 		}
 		util.PrintTable(table)
 
+		fmt.Println()
+		for _, a := range config.ArtifactParameters {
+			tierNumber := a.Spec.TierNumber()
+			if tierNumber == 1 || a.Spec.Rarity > 0 {
+				continue
+			}
+			fmt.Printf("artifactClassTier{api.ArtifactSpec_%s, %d}: craftingCostParams{%f, %f, %d, %v},\n",
+				a.Spec.Name.String(), tierNumber,
+				a.CraftingPrice, a.CraftingPriceLow, a.CraftingPriceDomain, a.CraftingPriceCurve,
+			)
+		}
+
 		return nil
 	},
 }
