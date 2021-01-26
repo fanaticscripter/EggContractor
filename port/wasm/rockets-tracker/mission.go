@@ -42,7 +42,16 @@ type shipTypeMissionStats struct {
 	DurationSeconds     float64                      `json:"durationSeconds"`
 	DurationDisplay     string                       `json:"durationDisplay"`
 	Capacity            uint32                       `json:"capacity"`
+	Fuels               []*fuel                      `json:"fuels"`
 	Count               uint32                       `json:"count"`
+}
+
+type fuel struct {
+	Egg           api.EggType `json:"egg"`
+	EggDisplay    string      `json:"eggDisplay"`
+	EggIconPath   string      `json:"eggIconPath"`
+	Amount        float64     `json:"amount"`
+	AmountDisplay string      `json:"amountDisplay"`
 }
 
 type unlockProgress struct {
@@ -100,12 +109,26 @@ func generateStatsFromMissionArchive(archive []*api.MissionInfo) (*missionStats,
 		ship.Count++
 		typ, ok := ship.typesMap[m.DurationType]
 		if !ok {
+			var fuels []*fuel
+			for _, f := range m.Fuel {
+				fuels = append(fuels, &fuel{
+					Egg:           f.Egg,
+					EggDisplay:    f.Egg.Display(),
+					EggIconPath:   "egginc/" + f.Egg.IconFilename(),
+					Amount:        f.Amount,
+					AmountDisplay: util.NumfmtWhole(f.Amount),
+				})
+			}
+			sort.Slice(fuels, func(i, j int) bool {
+				return fuels[i].Egg < fuels[j].Egg
+			})
 			typ = &shipTypeMissionStats{
 				DurationType:        m.DurationType,
 				DurationTypeDisplay: m.DurationType.Display(),
 				DurationSeconds:     m.DurationSeconds,
 				DurationDisplay:     util.FormatDurationWhole(util.DoubleToDuration(m.DurationSeconds)),
 				Capacity:            m.Capacity,
+				Fuels:               fuels,
 			}
 			ship.typesMap[m.DurationType] = typ
 		}

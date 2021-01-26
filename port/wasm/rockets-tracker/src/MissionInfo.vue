@@ -55,6 +55,7 @@
                 <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Type</th>
                 <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Duration</th>
                 <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Capacity</th>
+                <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Fuels</th>
                 <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Launched</th>
               </thead>
               <tbody class="divide-y divide-gray-200">
@@ -67,6 +68,7 @@
                     <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm">Aggregate</td>
                     <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm"></td>
                     <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm"></td>
+                    <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm"></td>
                     <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm">{{ ship.count }}</td>
                   </tr>
                   <template v-for="type in ship.types" :key="type.durationTypeDisplay">
@@ -74,6 +76,9 @@
                       <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{ type.durationTypeDisplay }}</td>
                       <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{ type.durationDisplay }}</td>
                       <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{ type.capacity }}</td>
+                      <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">
+                        <img v-for="fuel in type.fuels" :key="fuel.egg" class="inline h-4 w-4" :src="iconURL(fuel.eggIconPath, 64)" v-tippy="{ content: fuel.amountDisplay }">
+                      </td>
                       <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{ type.count }}</td>
                     </tr>
                   </template>
