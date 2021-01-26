@@ -49,7 +49,15 @@
                       >
                     </div>
                     <div class="text-xs text-gray-400">{{ rarityReport(tier) }}</div>
-                    <div v-if="tier.craftedCount > 0" class="text-xs text-gray-400">
+                    <div
+                      v-if="tier.craftedCount > 0"
+                      class="text-xs text-gray-400"
+                      v-tippy="{
+                        content:
+                          `You spent an estimated ${tier.craftingCost.toLocaleString('en-US')} ` +
+                          `golden eggs on crafting this item!`,
+                      }"
+                    >
                       Crafted {{ tier.craftedCount }}
                     </div>
                   </div>

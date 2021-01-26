@@ -1,6 +1,6 @@
 MAKEFLAGS += -j4
 
-.PHONY: all init dist html wasm webpack postcss static clean serve
+.PHONY: all init dist html wasm webpack postcss static test clean serve
 
 all: dist
 
@@ -26,7 +26,11 @@ postcss:
 static:
 	rm -rf dist/static
 	mkdir -p dist/static
-	ln ../../../static/egginc/afx_*.png ../../../static/egginc/icon_help.png dist/static
+	ln ../../../static/egginc/afx_*.png ../../../static/egginc/icon_help.png ../../../static/egginc-extras/icon_golden_egg.png dist/static
+
+# Uses go_js_wasm_exec from https://github.com/agnivade/wasmbrowsertest.
+test:
+	GOOS=js GOARCH=wasm go test
 
 clean:
 	@$(RM) -r dist/index.html dist/*.*.js dist/wasm_exec.js dist/*.*.css dist/*.*.wasm dist/manifest.*.json static
