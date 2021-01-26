@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package aux;
+
+message ABBEntry {
+    optional string filename = 1;
+    optional uint64 offset = 2;
+    optional uint64 size = 3;
+    optional bool compressed = 4;
+    optional uint64 uncompressed_size = 5;
+}
+
+message ABBIndex {
+    repeated ABBEntry entries = 1;
+}

@@ -1,0 +1,23 @@
+syntax = "proto2";
+
+package aux;
+
+enum Platform {
+    IOS = 1;
+    DROID = 2;
+}
+
+enum DeviceFormFactor {
+    PHONE = 1;
+    TABLET = 2;
+}
+
+enum AdNetwork {
+    VUNGLE = 0;
+    CHARTBOOST = 1;
+    AD_COLONY = 2;
+    HYPER_MX = 3;
+    UNITY = 4;
+    FACEBOOK = 5;
+    APPLOVIN = 6;
+}

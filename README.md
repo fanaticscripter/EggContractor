@@ -6,7 +6,7 @@
 
 EggContractor is a self-hosted contract monitoring web app + CLI client for [Egg, Inc.](https://en.wikipedia.org/wiki/Egg,_Inc.). It allows you to easily monitor all your contract progress, as well as peeking into prospective coops you may want to join.
 
-Note that reverse engineered API protobufs are independently available at [api/egginc.proto](api/egginc.proto), so you may also find this repo useful for building your own client. You can also find a best-effort contract database at [misc/ContractAggregator](misc/ContractAggregator).
+Note that reverse engineered API protobufs are independently available at [misc/protobuf](misc/protobuf), so you may also find this repo useful for building your own client. (There is also an [initially hand-reversed version](api/egginc.proto) actually used by this codebase.) You can also find a best-effort contract database at [misc/ContractAggregator](misc/ContractAggregator).
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
