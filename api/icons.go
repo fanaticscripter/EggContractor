@@ -4,6 +4,60 @@ import "fmt"
 
 const _iconUnknown = "icon_help.png"
 
+func (e EggType) IconFilename() string {
+	switch e {
+	case EggType_EDIBLE:
+		return "egg_edible.png"
+	case EggType_SUPERFOOD:
+		return "egg_superfood.png"
+	case EggType_MEDICAL:
+		return "egg_medical2.png"
+	case EggType_ROCKET_FUEL:
+		return "egg_rocketfuel.png"
+	case EggType_SUPER_MATERIAL:
+		return "egg_supermaterial.png"
+	case EggType_FUSION:
+		return "egg_fusion.png"
+	case EggType_QUANTUM:
+		return "egg_quantum.png"
+	case EggType_IMMORTALITY:
+		return "egg_immortality.png"
+	case EggType_TACHYON:
+		return "egg_tachyon.png"
+	case EggType_GRAVITON:
+		return "egg_graviton.png"
+	case EggType_DILITHIUM:
+		return "egg_dilithium.png"
+	case EggType_PRODIGY:
+		return "egg_prodigy.png"
+	case EggType_TERRAFORM:
+		return "egg_terraform.png"
+	case EggType_ANTIMATTER:
+		return "egg_antimatter.png"
+	case EggType_DARK_MATTER:
+	case EggType_AI:
+		return "egg_ai.png"
+	case EggType_NEBULA:
+		return "egg_vision.png"
+	case EggType_UNIVERSE:
+		return "egg_universe.png"
+	case EggType_ENLIGHTENMENT:
+		return "egg_enlightenment.png"
+	// Contract-only eggs.
+	case EggType_CHOCOLATE:
+		return "egg_chocolate.png"
+	case EggType_EASTER:
+		return "egg_easter.png"
+	case EggType_WATERBALLOON:
+		return "egg_waterballoon.png"
+	case EggType_FIREWORK:
+		return "egg_firework.png"
+	case EggType_PUMPKIN:
+		return "egg_pumpkin.png"
+	}
+	return "egg_unknown.png"
+}
+
 func (a *ArtifactSpec) TierNumber() int {
 	switch a.Type() {
 	case ArtifactSpec_ARTIFACT:
