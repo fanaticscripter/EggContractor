@@ -198,29 +198,7 @@ func generateLaunchLogFromMissionArchive(archive []*api.MissionInfo) *launchLog 
 }
 
 func shipIconPath(ship api.MissionInfo_Spaceship) string {
-	switch ship {
-	case api.MissionInfo_CHICKEN_ONE:
-		return "static/afx_ship_chicken_1.png"
-	case api.MissionInfo_CHICKEN_NINE:
-		return "static/afx_ship_chicken_9.png"
-	case api.MissionInfo_CHICKEN_HEAVY:
-		return "static/afx_ship_chicken_heavy.png"
-	case api.MissionInfo_BCR:
-		return "static/afx_ship_bcr.png"
-	case api.MissionInfo_MILLENIUM_CHICKEN:
-		return "static/afx_ship_millenium_chicken.png"
-	case api.MissionInfo_CORELLIHEN_CORVETTE:
-		return "static/afx_ship_corellihen_corvette.png"
-	case api.MissionInfo_GALEGGTICA:
-		return "static/afx_ship_galeggtica.png"
-	case api.MissionInfo_CHICKFIANT:
-		return "static/afx_ship_defihent.png"
-	case api.MissionInfo_VOYEGGER:
-		return "static/afx_ship_voyegger.png"
-	case api.MissionInfo_HENERPRISE:
-		return "static/afx_ship_henerprise.png"
-	}
-	return "static/icon_help.png"
+	return "static/" + ship.IconFilename()
 }
 
 func shipRequiredLaunchesToUnlock(ship api.MissionInfo_Spaceship) uint32 {

@@ -137,3 +137,29 @@ func (a *ArtifactSpec) IconFilename() string {
 	}
 	return fmt.Sprintf("afx_%s_%d.png", base, a.TierNumber())
 }
+
+func (s MissionInfo_Spaceship) IconFilename() string {
+	switch s {
+	case MissionInfo_CHICKEN_ONE:
+		return "afx_ship_chicken_1.png"
+	case MissionInfo_CHICKEN_NINE:
+		return "afx_ship_chicken_9.png"
+	case MissionInfo_CHICKEN_HEAVY:
+		return "afx_ship_chicken_heavy.png"
+	case MissionInfo_BCR:
+		return "afx_ship_bcr.png"
+	case MissionInfo_MILLENIUM_CHICKEN:
+		return "afx_ship_millenium_chicken.png"
+	case MissionInfo_CORELLIHEN_CORVETTE:
+		return "afx_ship_corellihen_corvette.png"
+	case MissionInfo_GALEGGTICA:
+		return "afx_ship_galeggtica.png"
+	case MissionInfo_CHICKFIANT:
+		return "afx_ship_defihent.png"
+	case MissionInfo_VOYEGGER:
+		return "afx_ship_voyegger.png"
+	case MissionInfo_HENERPRISE:
+		return "afx_ship_henerprise.png"
+	}
+	return "icon_help.png"
+}
