@@ -42,7 +42,7 @@
         :class="{ 'cursor-not-allowed': submitDisabled }"
         :disabled="submitDisabled"
       >
-        Load Missions
+        Load Player Data
       </button>
     </div>
   </form>
