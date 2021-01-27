@@ -55,11 +55,15 @@ type fuel struct {
 }
 
 type unlockProgress struct {
-	NextShip         api.MissionInfo_Spaceship `json:"nextShip"`
-	NextShipName     string                    `json:"nextShipName"`
-	NextShipIconPath string                    `json:"nextShipIconPath"`
-	LaunchesRequired uint32                    `json:"launchesRequired"`
-	LaunchesDone     uint32                    `json:"launchesDone"`
+	NextShipToLaunch         api.MissionInfo_Spaceship `json:"nextShipToLaunch"`
+	NextShipToLaunchName     string                    `json:"nextShipToLaunchName"`
+	NextShipToLaunchIconPath string                    `json:"nextShipToLaunchIconPath"`
+	HasShipToUnlock          bool                      `json:"hasShipToUnlock"`
+	NextShipToUnlock         api.MissionInfo_Spaceship `json:"nextShipToUnlock"`
+	NextShipToUnlockName     string                    `json:"nextShipToUnlockName"`
+	NextShipToUnlockIconPath string                    `json:"nextShipToUnlockIconPath"`
+	LaunchesRequiredToUnlock uint32                    `json:"launchesRequiredToUnlock"`
+	LaunchesDone             uint32                    `json:"launchesDone"`
 }
 
 type launchLog struct {
@@ -168,24 +172,49 @@ func generateStatsFromMissionArchive(archive []*api.MissionInfo) (*missionStats,
 
 	if len(ships) == 0 {
 		return stats, &unlockProgress{
-			NextShip:         api.MissionInfo_CHICKEN_ONE,
-			NextShipName:     api.MissionInfo_CHICKEN_ONE.Name(),
-			NextShipIconPath: shipIconPath(api.MissionInfo_CHICKEN_ONE),
-			LaunchesRequired: 0,
-			LaunchesDone:     0,
+			NextShipToLaunch:         api.MissionInfo_CHICKEN_ONE,
+			NextShipToLaunchName:     api.MissionInfo_CHICKEN_ONE.Name(),
+			NextShipToLaunchIconPath: shipIconPath(api.MissionInfo_CHICKEN_ONE),
+			HasShipToUnlock:          true,
+			NextShipToUnlock:         api.MissionInfo_CHICKEN_ONE,
+			NextShipToUnlockName:     api.MissionInfo_CHICKEN_ONE.Name(),
+			NextShipToUnlockIconPath: shipIconPath(api.MissionInfo_CHICKEN_ONE),
+			LaunchesRequiredToUnlock: 0,
+			LaunchesDone:             0,
 		}
 	}
-	lastShip := ships[len(ships)-1].Ship
-	if lastShip == api.MissionInfo_HENERPRISE {
+	lastLaunchedShipStats := ships[len(ships)-1]
+	lastLaunchedShip := lastLaunchedShipStats.Ship
+	if lastLaunchedShip == api.MissionInfo_HENERPRISE {
 		return stats, nil
 	}
-	nextShip := lastShip + 1
+	nextShipToLaunch := lastLaunchedShip + 1
+	nextShipToUnlock := nextShipToLaunch
+	launchesDone := lastLaunchedShipStats.Count
+	if launchesDone >= shipRequiredLaunchesToUnlock(nextShipToUnlock) {
+		// The next ship is technically unlocked, just haven't launched one yet.
+		// Move on to the next.
+		if nextShipToUnlock == api.MissionInfo_HENERPRISE {
+			return stats, &unlockProgress{
+				NextShipToLaunch:         nextShipToLaunch,
+				NextShipToLaunchName:     nextShipToLaunch.Name(),
+				NextShipToLaunchIconPath: shipIconPath(nextShipToLaunch),
+				HasShipToUnlock:          false,
+			}
+		}
+		nextShipToUnlock++
+		launchesDone = 0
+	}
 	progress := &unlockProgress{
-		NextShip:         nextShip,
-		NextShipName:     nextShip.Name(),
-		NextShipIconPath: shipIconPath(nextShip),
-		LaunchesRequired: shipRequiredLaunchesToUnlock(nextShip),
-		LaunchesDone:     ships[len(ships)-1].Count,
+		NextShipToLaunch:         nextShipToLaunch,
+		NextShipToLaunchName:     nextShipToLaunch.Name(),
+		NextShipToLaunchIconPath: shipIconPath(nextShipToLaunch),
+		HasShipToUnlock:          true,
+		NextShipToUnlock:         nextShipToUnlock,
+		NextShipToUnlockName:     nextShipToUnlock.Name(),
+		NextShipToUnlockIconPath: shipIconPath(nextShipToUnlock),
+		LaunchesRequiredToUnlock: shipRequiredLaunchesToUnlock(nextShipToUnlock),
+		LaunchesDone:             launchesDone,
 	}
 
 	return stats, progress
