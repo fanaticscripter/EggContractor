@@ -49,6 +49,33 @@
 
   <template v-if="!playerIdSubmitted">
     <!-- Waiting for first submission of playerId -->
+    <!-- What's new -->
+    <div v-if="activeWhatsNew.length > 0" class="rounded-md bg-green-50 mx-4 my-4 xl:mx-0 p-4">
+      <h3 class="flex items-center space-x-2">
+        <svg
+          class="h-3 w-3 text-green-400"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 -32 576 576"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            fill="currentColor"
+            d="M32 176c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32 11.38 0 20.9-6.28 26.57-15.22l106.99 32.3c-3.35 9.76-5.56 20.04-5.56 30.92 0 52.94 43.06 96 96 96 44.49 0 81.66-30.57 92.5-71.7L480 448V64L58.57 191.22C52.9 182.28 43.38 176 32 176zm179.29 190.88l91.47 27.61C297.95 415.92 278.85 432 256 432c-26.47 0-48-21.53-48-48 0-6.05 1.24-11.79 3.29-17.12zM560 32h-32c-8.84 0-16 7.16-16 16v416c0 8.84 7.16 16 16 16h32c8.84 0 16-7.16 16-16V48c0-8.84-7.16-16-16-16z"
+            class=""
+          ></path>
+        </svg>
+        <span class="text-sm font-medium text-green-800">What's new</span>
+      </h3>
+      <div class="mt-2 text-sm text-green-700">
+        <ul class="list-disc pl-5 space-y-1">
+          <li v-for="wn in activeWhatsNew" :key="wn.id">
+            <span v-if="wn.rawHTML" v-html="wn.message"></span>
+            <template v-else>{{ wn.message }}</template>
+          </li>
+        </ul>
+      </div>
+    </div>
   </template>
   <template v-else-if="loading">
     <div class="flex items-center justify-center">
@@ -113,6 +140,16 @@ import ArtifactInfo from "./ArtifactInfo.vue";
 import MissionInfo from "./MissionInfo.vue";
 import { getLocalStorage, setLocalStorage } from "./utils";
 
+const whatsNew = [
+  {
+    id: "artifacting-progress",
+    message: `Now you can also <strong class="font-medium underline">track your artifact collection progress</strong>
+    with an organized and intuitive interface. Scroll down to the "Artifacting progress" section once data is loaded.`,
+    rawHTML: true,
+    expires: 1612062059000, // Tue Jan 26 03:00:59 UTC 2021 + 5days
+  },
+];
+
 export default {
   components: {
     MissionInfo,
@@ -136,6 +173,7 @@ export default {
       artifactsProgress: null,
       loading: false,
       error: "",
+      whatsNew,
     };
   },
   computed: {
@@ -144,6 +182,10 @@ export default {
     },
     truncatedError() {
       return this.error.length <= 500 ? this.error : `${this.error.substr(0, 497)}...`;
+    },
+    activeWhatsNew() {
+      const now = Date.now();
+      return this.whatsNew.filter(wn => now < wn.expires);
     },
   },
   methods: {
