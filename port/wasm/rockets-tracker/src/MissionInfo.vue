@@ -37,18 +37,20 @@
   <div class="mt-6">
     <h2 class="mx-4 my-4 text-center text-md leading-6 font-medium text-gray-900">Mission statistics</h2>
 
-    <div v-if="unlockProgress && unlockProgress.nextShipToLaunchName !== unlockProgress.nextShipToUnlockName" class="-mt-4 text-sm text-center">
-      <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipToLaunchIconPath, 128)" alt="">
-      <span class="whitespace-nowrap">
-        {{ unlockProgress.nextShipToLaunchName }} unlocked
-      </span>
-    </div>
-    <div v-if="unlockProgress && unlockProgress.hasShipToUnlock" class="-mt-4 text-sm text-center">
-      <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipToUnlockIconPath, 128)" alt="">
-      <span class="whitespace-nowrap">
-        {{ unlockProgress.nextShipToUnlockName }} unlock:
-        <span class="font-medium">{{ unlockProgress.launchesDone }} / {{ unlockProgress.launchesRequiredToUnlock }}</span>
-      </span>
+    <div class="my-2">
+      <div v-if="unlockProgress && unlockProgress.nextShipToLaunchName !== unlockProgress.nextShipToUnlockName" class="-mt-4 text-sm text-center space-x-1">
+        <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipToLaunchIconPath, 128)" alt="">
+        <span class="whitespace-nowrap">
+          {{ unlockProgress.nextShipToLaunchName }} unlocked
+        </span>
+      </div>
+      <div v-if="unlockProgress && unlockProgress.hasShipToUnlock" class="-mt-4 text-sm text-center space-x-1">
+        <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipToUnlockIconPath, 128)" alt="">
+        <span class="whitespace-nowrap">
+          {{ unlockProgress.nextShipToUnlockName }} unlock:
+          <span class="font-medium">{{ unlockProgress.launchesDone }} / {{ unlockProgress.launchesRequiredToUnlock }}</span>
+        </span>
+      </div>
     </div>
 
     <div class="flex flex-col">
