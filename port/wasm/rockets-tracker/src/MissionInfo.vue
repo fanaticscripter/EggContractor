@@ -34,6 +34,46 @@
     No active mission. You should start one!
   </div>
 
+  <!-- Notifications toggle -->
+  <div class="mt-2 space-y-1">
+    <div
+      v-if="notificationSupportedByBrowser"
+      class="flex items-center justify-center space-x-2"
+      v-tippy="{
+        content:
+          `Your browser's notifications feature is used to display system-level notifications when your rockets return. ` +
+          `You have to allow notifications from this site when prompted to enable this feature.`,
+        allowHTML: true,
+      }"
+    >
+      <button id="notifications" name="notifications" type="button" class="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" @click="toggleNotifications()">
+        <span class="sr-only">Toggle notifications</span>
+        <span aria-hidden="true" class="absolute h-4 w-9 mx-auto rounded-full transition-colors ease-in-out duration-200" :class="[notificationsOn ? 'bg-green-400' : 'bg-gray-200']"></span>
+        <span aria-hidden="true" class="absolute left-0 inline-block h-5 w-5 border border-gray-200 rounded-full bg-white shadow transform ring-0 transition-transform ease-in-out duration-200" :class="[notificationsOn ? 'translate-x-5' : 'translate-x-0']"></span>
+      </button>
+      <label for="notifications" class="text-sm text-gray-600">Mission return notifications</label>
+    </div>
+
+    <div
+      v-if="notificationPermissionDenied"
+      class="mt-2 flex items-center justify-center space-x-1"
+      v-tippy="{
+        content:
+          `The site has been denied / did not receive permissions to show you notifications. ` +
+          `Reload the page and try to toggle notifications again; or Google ` +
+          `“how to allow website notifications in <your browser>” for instructions.`,
+      }"
+    >
+      <svg class="h-4 w-4 text-red-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+      </svg>
+      <a href="https://www.google.com/search?q=how+to+allow+website+notifications+in+my+browser" target="_blank" class="text-xs text-red-500 hover:text-red-400">Notifications permission denied</a>
+      <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </div>
+
   <div class="mt-6">
     <h2 class="mx-4 my-4 text-center text-md leading-6 font-medium text-gray-900">Mission statistics</h2>
 
@@ -129,13 +169,16 @@
 <script>
 import CountdownTimer from "./CountdownTimer.vue";
 import ProgressRing from "./ProgressRing.vue";
-import { iconURL } from "./utils";
+import { getLocalStorage, setLocalStorage, iconURL } from "./utils";
 
+// Note: This component must be recreated for notifications to properly
+// unregister/re-register.
 export default {
   components: {
     CountdownTimer,
     ProgressRing,
   },
+
   props: {
     activeMissions: Array,
     missionStats: Object,
@@ -144,10 +187,83 @@ export default {
   },
 
   data() {
-    return {};
+    return {
+      notificationSupportedByBrowser: "Notification" in window,
+      notificationsOn: getLocalStorage("notifications") === "true",
+      notificationPermissionDenied: false,
+    };
   },
 
+  async mounted() {
+    if (this.notificationsOn) {
+      await this.registerNotifications();
+    }
+  },
+
+  beforeUnmount() {
+    this.unregisterNotifications();
+  },
+
+  // setTimeout IDs for scheduled notifications.
+  notificationTimeoutIds: [],
+
   methods: {
+    async toggleNotifications() {
+      this.notificationsOn = !this.notificationsOn;
+      setLocalStorage("notifications", this.notificationsOn);
+      if (this.notificationsOn) {
+        await this.registerNotifications();
+      } else {
+        this.unregisterNotifications();
+      }
+    },
+
+    async registerNotifications() {
+      if (!("Notification" in window)) {
+        return;
+      }
+      // Safari doesn't support the promise version of Notification.requestPermission. Thanks Apple!
+      const permission = await new Promise((resolve, _) => {
+        Notification.requestPermission(result => resolve(result));
+      });
+      if (permission === "default" || permission === "denied") {
+        console.error(`no permissions to display notifications: ${permission}`);
+        this.notificationPermissionDenied = true;
+        this.notificationsOn = false;
+        setLocalStorage("notifications", this.notificationsOn);
+        return;
+      }
+      this.notificationPermissionDenied = false;
+      for (const mission of this.activeMissions) {
+        if (mission.returnTimestamp > 0) {
+          const desc = `${mission.durationTypeDisplay.toLowerCase()} ${mission.shipName}`;
+          const timeout = mission.returnTimestamp * 1000 - Date.now();
+          if (timeout < 10000) {
+            continue;
+          }
+          const timeoutId = setTimeout(() => {
+            new Notification(`Your ${desc} mission has returned!`, {
+              icon: iconURL(mission.shipIconPath),
+            });
+          }, timeout);
+          console.log(
+            `scheduled notifaction for ${desc} in ${Math.round(
+              timeout
+            )}ms (timeout ID ${timeoutId})`
+          );
+          this.$options.notificationTimeoutIds.push(timeoutId);
+        }
+      }
+    },
+
+    unregisterNotifications() {
+      while (this.$options.notificationTimeoutIds.length > 0) {
+        const timeoutId = this.$options.notificationTimeoutIds.pop();
+        clearTimeout(timeoutId);
+        console.log(`unscheduled notification with timeout ID ${timeoutId}`);
+      }
+    },
+
     formatTime(timestamp) {
       return new Intl.DateTimeFormat("en-US", {
         hour: "2-digit",
