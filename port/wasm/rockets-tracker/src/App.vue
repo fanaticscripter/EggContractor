@@ -53,7 +53,7 @@
     <div v-if="activeWhatsNew.length > 0" class="rounded-md bg-green-50 mx-4 my-4 xl:mx-0 p-4">
       <h3 class="flex items-center space-x-2">
         <svg
-          class="h-3 w-3 text-green-400"
+          class="h-3 w-3 text-green-700"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 -32 576 576"
           fill="currentColor"
