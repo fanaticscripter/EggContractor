@@ -142,6 +142,18 @@ import { getLocalStorage, setLocalStorage } from "./utils";
 
 const whatsNew = [
   {
+    id: "notifications",
+    message: `<strong class="font-medium underline">OS-level mission return notifications</strong>
+    (displayed in macOS Notification Center, Windows 10 Action Center, etc.) are now available!
+    This feature is supported on all modern, mainstream desktop browsers, and possibly a select few
+    Android browsers. You should see a "Mission return notifications" toggle right under your
+    active missions if your browser is supported.
+    <strong class="font-medium underline">Toggle it on and allow notifications for this site
+    when prompted by your browser</strong> to enable.`,
+    rawHTML: true,
+    expires: 1612169010000, // Wed Jan 27 08:43:30 UTC 2021 +5days
+  },
+  {
     id: "artifacting-progress",
     message: `Now you can also <strong class="font-medium underline">track your artifact collection progress</strong>
     with an organized and intuitive interface. Scroll down to the "Artifacting progress" section once data is loaded.`,
