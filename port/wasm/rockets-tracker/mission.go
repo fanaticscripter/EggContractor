@@ -20,6 +20,7 @@ type mission struct {
 	Capacity            uint32                       `json:"capacity"`
 	StartTimestamp      float64                      `json:"startTimestamp"`
 	ReturnTimestamp     float64                      `json:"returnTimestamp"`
+	Fuels               []*fuel                      `json:"fuels"`
 }
 
 type missionStats struct {
@@ -81,6 +82,16 @@ func newMission(m *api.MissionInfo) *mission {
 	if startTimestamp > 0 {
 		returnTimestamp = startTimestamp + m.DurationSeconds
 	}
+	var fuels []*fuel
+	for _, f := range m.Fuel {
+		fuels = append(fuels, &fuel{
+			Egg:           f.Egg,
+			EggDisplay:    f.Egg.Display(),
+			EggIconPath:   "egginc/" + f.Egg.IconFilename(),
+			Amount:        f.Amount,
+			AmountDisplay: util.NumfmtWhole(f.Amount),
+		})
+	}
 	return &mission{
 		Ship:                m.Ship,
 		ShipName:            m.Ship.Name(),
@@ -94,6 +105,7 @@ func newMission(m *api.MissionInfo) *mission {
 		Capacity:            m.Capacity,
 		StartTimestamp:      startTimestamp,
 		ReturnTimestamp:     returnTimestamp,
+		Fuels:               fuels,
 	}
 }
 
