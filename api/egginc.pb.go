@@ -3469,7 +3469,7 @@ type FirstContact_Payload_Progress struct {
 	PrestigeEarnings          float64         `protobuf:"fixed64,5,opt,name=prestige_earnings,json=prestigeEarnings,proto3" json:"prestige_earnings,omitempty"`
 	LifetimeEarnings          float64         `protobuf:"fixed64,6,opt,name=lifetime_earnings,json=lifetimeEarnings,proto3" json:"lifetime_earnings,omitempty"`
 	PiggyBank                 int32           `protobuf:"varint,7,opt,name=piggy_bank,json=piggyBank,proto3" json:"piggy_bank,omitempty"`
-	PermitLevel               int32           `protobuf:"varint,8,opt,name=permit_level,json=permitLevel,proto3" json:"permit_level,omitempty"`
+	PermitLevel               int32           `protobuf:"varint,8,opt,name=permit_level,json=permitLevel,proto3" json:"permit_level,omitempty"` // 0 - standard permit; 1 - pro permit
 	EpicResearches            []*EpicResearch `protobuf:"bytes,9,rep,name=epic_researches,json=epicResearches,proto3" json:"epic_researches,omitempty"`
 	MaxFarmPopulationsReached []int64         `protobuf:"varint,18,rep,packed,name=max_farm_populations_reached,json=maxFarmPopulationsReached,proto3" json:"max_farm_populations_reached,omitempty"` // One entry for
 	// each egg type.
