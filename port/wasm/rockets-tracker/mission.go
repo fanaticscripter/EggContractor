@@ -234,13 +234,13 @@ func generateStatsFromMissionArchive(archive []*api.MissionInfo, hasProPermit bo
 	accumulativeMissionTimeRequired := time.Duration(progress.NextShipToUnlock.LaunchesRequired-launchesDone) *
 		shipShortestMissionDuration(nextShipToUnlock-1)
 	progress.NextShipToUnlock.AccumulativeMissionTimeRequired =
-		util.FormatDuration(accumulativeMissionTimeRequired / concurrentMissionCount)
+		util.FormatDurationWhole(accumulativeMissionTimeRequired / concurrentMissionCount)
 	for s := nextShipToUnlock + 1; s <= api.MissionInfo_HENERPRISE; s++ {
 		ship := newUnlockProgressShip(s)
 		accumulativeMissionTimeRequired += time.Duration(ship.LaunchesRequired) *
 			shipShortestMissionDuration(s-1)
 		ship.AccumulativeMissionTimeRequired =
-			util.FormatDuration(accumulativeMissionTimeRequired / concurrentMissionCount)
+			util.FormatDurationWhole(accumulativeMissionTimeRequired / concurrentMissionCount)
 		progress.FurtherShipsToUnlock = append(progress.FurtherShipsToUnlock, ship)
 	}
 
