@@ -107,7 +107,7 @@
       </div>
 
       <div class="py-1 text-center text-xs text-gray-500 underline cursor-pointer select-none" @click="furtherShipsToUnlockExpanded = !furtherShipsToUnlockExpanded">
-        Click here to {{ furtherShipsToUnlockExpanded ? "collapse": "expand" }} the full list ships to unlock
+        Click here to {{ furtherShipsToUnlockExpanded ? "collapse": "expand" }} the full list of ships to unlock
       </div>
       <template v-if="furtherShipsToUnlockExpanded && unlockProgress.furtherShipsToUnlock">
         <div v-for="ship in unlockProgress.furtherShipsToUnlock" :key="ship.name" class="text-sm text-center space-x-1">
