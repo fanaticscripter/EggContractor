@@ -35,6 +35,7 @@ func (e EggType) IconFilename() string {
 	case EggType_ANTIMATTER:
 		return "egg_antimatter.png"
 	case EggType_DARK_MATTER:
+		return "egg_darkmatter.png"
 	case EggType_AI:
 		return "egg_ai.png"
 	case EggType_NEBULA:
