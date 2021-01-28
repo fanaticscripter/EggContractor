@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="apple-touch-icon-precomposed" href="/static/favicon-180.png">
+    <title>Mission list - EggContractor</title>
+    <meta property="og:image" content="https://repository-images.githubusercontent.com/325571244/306e2d00-4af2-11eb-81ec-6be9db3cbe94">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mission list - EggContractor">
+    <meta property="og:url" content="https://wasmegg.netlify.app/mission-list/">
+    <meta property="og:description" content="Egg, Inc. spaceships & missions list">
+    <link rel="stylesheet" href="@@app.css@@">
+  </head>
+  <body class="py-4">
+    <main class="max-w-12xl mx-auto px-2 xl:px-8">
+      <div class="flex flex-col">
+        <div class="-my-2 overflow-x-auto xl:-mx-4">
+          <div class="py-2 align-middle inline-block min-w-full lg:px-4">
+            <div class="shadow overflow-hidden border-b border-gray-200">
+              <table class="min-w-full divide-y divide-gray-200 tabular-nums">
+                <thead class="bg-gray-50 divide-y">
+                  <tr class="divide-x">
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Ship</th>
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Sensors</th>
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Type</th>
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Duration</th>
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Capacity</th>
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Fuels</th>
+                    <th scope="col" rowspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Launches to Advance</th>
+                    <th scope="col" colspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Time to Advance</th>
+                    <th scope="col" colspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Cumulative Time</th>
+                    <th scope="col" colspan="2" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Internal Parameters</th>
+                  </tr>
+                  <tr class="divide-x">
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Std</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Pro</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Std</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Pro</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Quality</th>
+                    <th scope="col" class="px-6 py-2 text-center text-xs font-medium text-gray-500 uppercase">Quality Range</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  {{range .Ships}}
+                    {{$ship := .}}
+                    {{range $idx, $type := .Durations}}
+                      <tr class="text-gray-500 divide-x">
+                        {{if eq $idx 0}}
+                          {{with $ship}}
+                            {{$rowspan := .Durations | len}}
+                            <td class="relative px-6 py-1.5 whitespace-nowrap text-sm" rowspan="{{$rowspan}}">
+                              <img class="absolute top-1/2 left-6 transform -translate-y-1/2 w-16 h-16" src="{{iconurl (shipiconpath .Ship) 128}}">
+                              <span class="pl-20">{{.Ship.Name}}</span>
+                            </td>
+                            <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm" rowspan="{{$rowspan}}">
+                              {{$ship.Sensors}}
+                            </td>
+                          {{end}}
+                        {{end}}
+                        <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{.DurationType.Display}}</td>
+                        <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{.Seconds | seconds2duration | fmtduration}}</td>
+                        <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{.Capacity}}</td>
+                        <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">
+                          <div class="flex items-center justify-center w-44">
+                            {{with fuels $ship.Ship .DurationType}}
+                              {{range .}}
+                                <img class="h-4 w-4" src="{{iconurl (eggiconpath .Egg) 64}}">
+                                <span class="mr-1">{{numfmt .Amount}}</span>
+                              {{end}}
+                            {{end}}
+                          </div>
+                        </td>
+                        {{if eq $idx 0}}
+                          {{with $ship}}
+                            {{$rowspan := .Durations | len}}
+                            <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm" rowspan="{{$rowspan}}">
+                              {{if gt .LaunchesToAdvance 0}}{{.LaunchesToAdvance}}{{else}}&ndash;{{end}}
+                            </td>
+                            <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm" rowspan="{{$rowspan}}">
+                              {{if gt .TimeToAdvanceStd 0}}{{.TimeToAdvanceStd | fmtduration}}{{else}}&ndash;{{end}}
+                            </td>
+                            <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm" rowspan="{{$rowspan}}">
+                              {{if gt .TimeToAdvancePro 0}}{{.TimeToAdvancePro | fmtduration}}{{else}}&ndash;{{end}}
+                            </td>
+                            <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm" rowspan="{{$rowspan}}">
+                              {{if gt .CumulativeTimeToAdvanceStd 0}}{{.CumulativeTimeToAdvanceStd | fmtduration}}{{else}}&ndash;{{end}}
+                            </td>
+                            <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm" rowspan="{{$rowspan}}">
+                              {{if gt .CumulativeTimeToAdvancePro 0}}{{.CumulativeTimeToAdvancePro | fmtduration}}{{else}}&ndash;{{end}}
+                            </td>
+                          {{end}}
+                        {{end}}
+                        <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{.Quality}}</td>
+                        <td class="px-6 py-1.5 whitespace-nowrap text-center text-sm">{{.MinQuality}} &ndash; {{.MaxQuality}}</td>
+                      </tr>
+                    {{end}}
+                  {{end}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

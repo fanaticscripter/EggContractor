@@ -1,16 +1,22 @@
 MAKEFLAGS ?= -j4
 
-.PHONY: all init artifact-list init-artifact-list rockets-tracker init-rockets-tracker past-contracts init-past-contracts
+.PHONY: all init artifact-list init-artifact-list mission-list init-mission-list rockets-tracker init-rockets-tracker past-contracts init-past-contracts
 
-all: artifact-list past-contracts rockets-tracker
+all: artifact-list mission-list past-contracts rockets-tracker
 
-init: init-artifact-list init-past-contracts init-rockets-tracker
+init: init-artifact-list init-mission-list init-past-contracts init-rockets-tracker
 
 artifact-list:
 	$(MAKE) -C artifact-list
 
 init-artifact-list:
 	$(MAKE) -C artifact-list init
+
+mission-list:
+	$(MAKE) -C mission-list
+
+init-mission-list:
+	$(MAKE) -C mission-list init
 
 rockets-tracker:
 	$(MAKE) -C rockets-tracker
