@@ -76,6 +76,7 @@ message FirstContact {
       double prestige_earnings = 5;
       double lifetime_earnings = 6;
       int32 piggy_bank = 7;
+      int32 permit_level = 8;  // 0 - standard permit; 1 - pro permit
       repeated EpicResearch epic_researches = 9;
       repeated int64 max_farm_populations_reached = 18;  // One entry for
                                                          // each egg type.
