@@ -152,8 +152,17 @@
 
   <div class="mx-4 xl:mx-0 my-4">
     <h2 class="mx-4 mt-4 mb-2 text-center text-md leading-6 font-medium text-gray-900">Launch log</h2>
+    <div class="w-full max-w-xs mx-auto my-2">
+      <label for="launch-log-filter" class="sr-only">Filter launch log</label>
+      <select id="launch-log-filter" name="launch-log-filter" class="mt-1 block w-full pl-3 pr-10 py-1 text-sm bg-gray-50 border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md" v-model="launchLogFilter">
+        <option value="3d">Limit to 3 days</option>
+        <option value="7d">Limit to 7 days</option>
+        <option value="30d">Limit to 30 days</option>
+        <option value="none">Show all</option>
+      </select>
+    </div>
     <div>
-      <template v-for="date in launchLog.dates" :key="date.date">
+      <template v-for="date in filteredLaunchLogDates" :key="date.date">
         <div class="my-2 text-sm font-medium text-gray-900">{{ date.date }}</div>
         <div class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
           <div v-for="(mission, index) in date.missions" :key="index" class="text-xs tabular-nums">
@@ -194,6 +203,7 @@ export default {
       notificationSupportedByBrowser: "Notification" in window,
       notificationsOn: getLocalStorage("notifications") === "true",
       notificationPermissionDenied: false,
+      launchLogFilter: getLocalStorage("launchLogFilter") || "7d",
     };
   },
 
@@ -209,6 +219,39 @@ export default {
 
   // setTimeout IDs for scheduled notifications.
   notificationTimeoutIds: [],
+
+  computed: {
+    filteredLaunchLogDates () {
+      let days = 0;
+      switch (this.launchLogFilter) {
+        case "3d":
+          days = 3;
+          break;
+        case "7d":
+          days = 7;
+          break;
+        case "30d":
+          days = 30;
+          break;
+      }
+      if (days === 0) {
+        // Do not filter.
+        return this.launchLog.dates;
+      }
+      const now = new Date();
+      const earliestDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (days - 1));
+      return this.launchLog.dates.filter(date => {
+        const [yy, mm, dd] = date.date.split("-").map(parseFloat);
+        return new Date(yy, mm - 1, dd) >= earliestDay;
+      })
+    }
+  },
+
+  watch: {
+    launchLogFilter() {
+      setLocalStorage("launchLogFilter", this.launchLogFilter);
+    },
+  },
 
   methods: {
     async toggleNotifications() {
