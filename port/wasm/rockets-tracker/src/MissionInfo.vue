@@ -26,7 +26,7 @@
             <countdown-timer :deadline="mission.returnTimestamp"></countdown-timer>
           </div>
           <div v-else-if="mission.statusDisplay === 'Fueling' && mission.fuels && mission.fuels.length > 0" class="mt-1">
-            <img v-for="fuel in mission.fuels" :key="fuel.egg" class="inline h-4 w-4" :src="iconURL(fuel.eggIconPath, 64)" v-tippy="{ content: fuel.amountDisplay + ' (this value from your save data may lag behind your actual progress)' }">
+            <img v-for="fuel in mission.fuels" :key="fuel.egg" class="inline h-4 w-4 align-text-top" :src="iconURL(fuel.eggIconPath, 64)" v-tippy="{ content: fuel.amountDisplay + ' (this value from your save data may lag behind your actual progress)' }">
           </div>
         </div>
       </div>
