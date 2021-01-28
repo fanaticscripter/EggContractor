@@ -53,6 +53,7 @@ func retrieveMissions(playerId string) *result {
 		return errorResult(err)
 	}
 
+	hasProPermit := fc.Data.Progress.PermitLevel > 0
 	artifactsDB := fc.Data.ArtifactsDb
 	activeMissions := make([]*mission, 0)
 	launched := make([]*api.MissionInfo, 0)
@@ -63,7 +64,7 @@ func retrieveMissions(playerId string) *result {
 		}
 	}
 	launched = append(launched, artifactsDB.MissionArchive...)
-	stats, progress := generateStatsFromMissionArchive(launched)
+	stats, progress := generateStatsFromMissionArchive(launched, hasProPermit)
 	log := generateLaunchLogFromMissionArchive(launched)
 	afxProgress := getArtifactsProgress(artifactsDB)
 	return dataResult(struct {

@@ -80,20 +80,49 @@
   <div class="mt-6">
     <h2 class="mx-4 my-4 text-center text-md leading-6 font-medium text-gray-900">Mission statistics</h2>
 
-    <div class="my-2">
-      <div v-if="unlockProgress && unlockProgress.nextShipToLaunch.name !== unlockProgress.nextShipToUnlock.name" class="-mt-4 text-sm text-center space-x-1">
-        <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipToLaunch.iconPath, 128)" alt="">
+    <div v-if="unlockProgress" class="-mt-2 mb-2 -space-y-1">
+      <div v-if="unlockProgress.nextShipToLaunch.name !== unlockProgress.nextShipToUnlock.name" class="text-sm text-center space-x-1">
+        <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToLaunch.iconPath, 128)" alt="">
         <span class="whitespace-nowrap">
           {{ unlockProgress.nextShipToLaunch.name }} unlocked
         </span>
       </div>
-      <div v-if="unlockProgress && unlockProgress.nextShipToUnlock" class="-mt-4 text-sm text-center space-x-1">
-        <img class="inline w-12 h-12" :src="iconURL(unlockProgress.nextShipToUnlock.iconPath, 128)" alt="">
+
+      <div v-if="unlockProgress.nextShipToUnlock" class="text-sm text-center space-x-1">
+        <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToUnlock.iconPath, 128)" alt="">
         <span class="whitespace-nowrap">
           {{ unlockProgress.nextShipToUnlock.name }} unlock:
-          <span class="font-medium">{{ unlockProgress.nextShipToUnlock.launchesDone }} / {{ unlockProgress.nextShipToUnlock.launchesRequired }}</span>
+          <span class="font-medium">
+            {{ unlockProgress.nextShipToUnlock.launchesDone }} / {{ unlockProgress.nextShipToUnlock.launchesRequired }}
+          </span>
+          <span
+            class="inline-flex items-center space-x-1 ml-1"
+            v-tippy="{ content: 'This is the accumulative mission time for all remaining required launches, including mission time for previous locked ships (if any), divided by max concurrency (3 for Pro Permit holders, 1 otherwise). Remaining timer on your active mission(s) is not included.' }"
+          >
+            ({{ unlockProgress.nextShipToUnlock.accumulativeMissionTimeRequired }} <svg class="h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
+            </svg>)
+          </span>
         </span>
       </div>
+
+      <div class="py-1 text-center text-xs text-gray-500 underline cursor-pointer select-none" @click="furtherShipsToUnlockExpanded = !furtherShipsToUnlockExpanded">
+        Click here to {{ furtherShipsToUnlockExpanded ? "collapse": "expand" }} the full list ships to unlock
+      </div>
+      <template v-if="furtherShipsToUnlockExpanded && unlockProgress.furtherShipsToUnlock">
+        <div v-for="ship in unlockProgress.furtherShipsToUnlock" :key="ship.name" class="text-sm text-center space-x-1">
+          <img class="inline w-8 h-8" :src="iconURL(ship.iconPath, 128)" alt="">
+          <span class="whitespace-nowrap">
+            {{ ship.name }} unlock:
+            <span class="font-medium">
+              {{ ship.launchesDone }} / {{ ship.launchesRequired }}
+            </span>
+            <span class="inline-flex items-center space-x-1 ml-1">
+              ({{ ship.accumulativeMissionTimeRequired }})
+            </span>
+          </span>
+        </div>
+      </template>
     </div>
 
     <div class="flex flex-col">
@@ -203,6 +232,7 @@ export default {
       notificationSupportedByBrowser: "Notification" in window,
       notificationsOn: getLocalStorage("notifications") === "true",
       notificationPermissionDenied: false,
+      furtherShipsToUnlockExpanded: false,
       launchLogFilter: getLocalStorage("launchLogFilter") || "7d",
     };
   },

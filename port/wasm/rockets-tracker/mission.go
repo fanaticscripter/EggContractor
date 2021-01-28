@@ -2,6 +2,7 @@ package main
 
 import (
 	"sort"
+	"time"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
@@ -56,16 +57,18 @@ type fuel struct {
 }
 
 type unlockProgress struct {
-	NextShipToLaunch *unlockProgressShip `json:"nextShipToLaunch"`
-	NextShipToUnlock *unlockProgressShip `json:"nextShipToUnlock"`
+	NextShipToLaunch     *unlockProgressShip   `json:"nextShipToLaunch"`
+	NextShipToUnlock     *unlockProgressShip   `json:"nextShipToUnlock"`
+	FurtherShipsToUnlock []*unlockProgressShip `json:"furtherShipsToUnlock"`
 }
 
 type unlockProgressShip struct {
-	Id               api.MissionInfo_Spaceship `json:"id"`
-	Name             string                    `json:"name"`
-	IconPath         string                    `json:"iconPath"`
-	LaunchesRequired uint32                    `json:"launchesRequired"`
-	LaunchesDone     uint32                    `json:"launchesDone"`
+	Id                              api.MissionInfo_Spaceship `json:"id"`
+	Name                            string                    `json:"name"`
+	IconPath                        string                    `json:"iconPath"`
+	LaunchesRequired                uint32                    `json:"launchesRequired"`
+	LaunchesDone                    uint32                    `json:"launchesDone"`
+	AccumulativeMissionTimeRequired string                    `json:"accumulativeMissionTimeRequired"`
 }
 
 type launchLog struct {
@@ -119,7 +122,7 @@ func newUnlockProgressShip(s api.MissionInfo_Spaceship) *unlockProgressShip {
 	}
 }
 
-func generateStatsFromMissionArchive(archive []*api.MissionInfo) (*missionStats, *unlockProgress) {
+func generateStatsFromMissionArchive(archive []*api.MissionInfo, hasProPermit bool) (*missionStats, *unlockProgress) {
 	shipsMap := make(map[api.MissionInfo_Spaceship]*shipMissionStats)
 	for _, m := range archive {
 		ship, ok := shipsMap[m.Ship]
@@ -224,6 +227,23 @@ func generateStatsFromMissionArchive(archive []*api.MissionInfo) (*missionStats,
 	}
 	progress.NextShipToUnlock.LaunchesDone = launchesDone
 
+	concurrentMissionCount := time.Duration(1)
+	if hasProPermit {
+		concurrentMissionCount = 3
+	}
+	accumulativeMissionTimeRequired := time.Duration(progress.NextShipToUnlock.LaunchesRequired-launchesDone) *
+		shipShortestMissionDuration(nextShipToUnlock-1)
+	progress.NextShipToUnlock.AccumulativeMissionTimeRequired =
+		util.FormatDuration(accumulativeMissionTimeRequired / concurrentMissionCount)
+	for s := nextShipToUnlock + 1; s <= api.MissionInfo_HENERPRISE; s++ {
+		ship := newUnlockProgressShip(s)
+		accumulativeMissionTimeRequired += time.Duration(ship.LaunchesRequired) *
+			shipShortestMissionDuration(s-1)
+		ship.AccumulativeMissionTimeRequired =
+			util.FormatDuration(accumulativeMissionTimeRequired / concurrentMissionCount)
+		progress.FurtherShipsToUnlock = append(progress.FurtherShipsToUnlock, ship)
+	}
+
 	return stats, progress
 }
 
@@ -282,6 +302,33 @@ func shipRequiredLaunchesToUnlock(ship api.MissionInfo_Spaceship) uint32 {
 		return 27
 	case api.MissionInfo_HENERPRISE:
 		return 30
+	}
+	return 0
+}
+
+func shipShortestMissionDuration(ship api.MissionInfo_Spaceship) time.Duration {
+	// Forget about Tutorial, it's not important.
+	switch ship {
+	case api.MissionInfo_CHICKEN_ONE:
+		return 1200 * time.Second
+	case api.MissionInfo_CHICKEN_NINE:
+		return 1800 * time.Second
+	case api.MissionInfo_CHICKEN_HEAVY:
+		return 2700 * time.Second
+	case api.MissionInfo_BCR:
+		return 5400 * time.Second
+	case api.MissionInfo_MILLENIUM_CHICKEN:
+		return 10800 * time.Second
+	case api.MissionInfo_CORELLIHEN_CORVETTE:
+		return 14400 * time.Second
+	case api.MissionInfo_GALEGGTICA:
+		return 21600 * time.Second
+	case api.MissionInfo_CHICKFIANT:
+		return 28800 * time.Second
+	case api.MissionInfo_VOYEGGER:
+		return 43200 * time.Second
+	case api.MissionInfo_HENERPRISE:
+		return 86400 * time.Second
 	}
 	return 0
 }
