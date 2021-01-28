@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	"google.golang.org/protobuf/encoding/protojson"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
@@ -61,6 +62,13 @@ var _afxConfigCommand = &cobra.Command{
 				a.CraftingPrice, a.CraftingPriceLow, a.CraftingPriceDomain, a.CraftingPriceCurve,
 			)
 		}
+
+		fmt.Println()
+		fmt.Println(protojson.MarshalOptions{
+			Multiline:       true,
+			Indent:          "  ",
+			EmitUnpopulated: true,
+		}.Format(config))
 
 		return nil
 	},
