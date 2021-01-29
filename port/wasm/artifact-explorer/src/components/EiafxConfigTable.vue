@@ -66,7 +66,14 @@
               scope="col"
               colspan="3"
               class="sticky top-0 px-4 py-1 text-center text-xs font-medium text-gray-500 bg-gray-50"
-              v-tippy="{ content: ship.name }"
+              v-tippy="{
+                content: `
+                  <div>
+                    <img src='${iconURL(ship.iconPath, 256)}' class='h-16 w-16 mx-auto'>
+                    <div class='text-center'>${ship.name}<div>
+                  </div>`,
+                allowHTML: true,
+              }"
             >
               {{ ship.abbrevName }}
             </th>

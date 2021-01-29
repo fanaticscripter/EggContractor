@@ -41,6 +41,7 @@ func errorResult(err error) *result {
 type ship struct {
 	Name       string `json:"name"`
 	AbbrevName string `json:"abbrevName"`
+	IconPath   string `json:"iconPath"`
 }
 
 type missionParams = api.ArtifactsConfigurationResponse_MissionParameters_Duration
@@ -99,6 +100,7 @@ func retrieveData() *result {
 		ships = append(ships, &ship{
 			Name:       s.Ship.Name(),
 			AbbrevName: abbreviatedShipName(s.Ship),
+			IconPath:   "egginc/" + s.Ship.IconFilename(),
 		})
 		for _, d := range s.Durations {
 			if d.DurationType == api.MissionInfo_TUTORIAL {
