@@ -1,31 +1,22 @@
 MAKEFLAGS ?= -j4
 
-.PHONY: all init artifact-list init-artifact-list mission-list init-mission-list rockets-tracker init-rockets-tracker past-contracts init-past-contracts
+targets = artifact-explorer artifact-list mission-list past-contracts rockets-tracker
+init-targets = $(addprefix init-,$(targets))
+clean-targets = $(addprefix clean-,$(targets))
 
-all: artifact-list mission-list past-contracts rockets-tracker
+.PHONY: all init clean $(targets) $(init-targets) $(clean-targets)
 
-init: init-artifact-list init-mission-list init-past-contracts init-rockets-tracker
+all: $(targets)
 
-artifact-list:
-	$(MAKE) -C artifact-list
+init: $(init-targets)
 
-init-artifact-list:
-	$(MAKE) -C artifact-list init
+clean: $(clean-targets)
 
-mission-list:
-	$(MAKE) -C mission-list
+$(init-targets): init-%:
+	$(MAKE) -C $(patsubst init-%,%,$@) init
 
-init-mission-list:
-	$(MAKE) -C mission-list init
+$(targets): %:
+	$(MAKE) -C $@
 
-rockets-tracker:
-	$(MAKE) -C rockets-tracker
-
-init-rockets-tracker:
-	$(MAKE) -C rockets-tracker init
-
-past-contracts:
-	$(MAKE) -C past-contracts
-
-init-past-contracts:
-	$(MAKE) -C past-contracts init
+$(clean-targets): clean-%:
+	$(MAKE) -C $(patsubst clean-%,%,$@) clean
