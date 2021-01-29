@@ -13,12 +13,17 @@
     </template>
 
     <div class="px-4 py-4 sm:px-6 space-y-2">
-      <div class="text-sm font-medium text-gray-500">Available from the following missions:</div>
-      <ul class="grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2 xl:grid-cols-3">
-        <li v-for="mission in obtainableMissions" :key="mission.id">
-          <mission-name :mission="mission" />
-        </li>
-      </ul>
+      <template v-if="obtainableMissions.length > 0">
+        <div class="text-sm font-medium text-gray-500">Available from the following missions:</div>
+        <ul class="grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2 xl:grid-cols-3">
+          <li v-for="mission in obtainableMissions" :key="mission.id">
+            <mission-name :mission="mission" />
+          </li>
+        </ul>
+      </template>
+      <template v-else>
+        <div class="text-sm font-medium text-gray-500">Not available from missions :(</div>
+      </template>
     </div>
   </div>
 </template>
