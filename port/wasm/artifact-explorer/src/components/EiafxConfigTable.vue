@@ -107,14 +107,16 @@
             <th
               v-for="mission in missions"
               :key="mission.id"
-              class="sticky top-6 px-2 py-1 text-center text-xs font-medium text-gray-500 bg-gray-50 border border-gray-200"
+              class="sticky top-6 px-2 py-1 text-center text-xs font-medium text-gray-500 bg-gray-50 border border-gray-200 cursor-pointer"
               v-tippy="{
                 content:
                   `${mission.display}, ` +
                   `${mission.minQuality.toFixed(1)} - ${mission.maxQuality.toFixed(1)}`,
               }"
             >
-              {{ mission.abbrevType }}
+              <router-link :to="{ name: 'mission', params: { missionId: mission.id } }">
+                {{ mission.abbrevType }}
+              </router-link>
             </th>
 
             <th
@@ -224,7 +226,7 @@
 import ArtifactName from "@/components/ArtifactName.vue";
 import SortArrow from "@/components/SortArrow.vue";
 
-import { stringCmp } from "@/utils";
+import { iconURL, stringCmp } from "@/utils";
 
 const SORT_BY = {
   ITEM: "item",
@@ -290,6 +292,8 @@ export default {
   },
 
   methods: {
+    iconURL,
+
     sortButtonDirection(criterion) {
       if (this.sortBy === criterion) {
         return this.sortAscending ? 1 : -1;
