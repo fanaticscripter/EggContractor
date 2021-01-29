@@ -864,6 +864,22 @@ func (a ArtifactSpec_Name) ArtifactType() ArtifactSpec_Type {
 	return ArtifactSpec_ARTIFACT
 }
 
+// Family returns the family the artifact belongs to, which is the corresponding
+// stone for stone fragments.
+func (a *ArtifactSpec) Family() ArtifactSpec_Name {
+	return a.Name.Family()
+}
+
+// Family returns the family of the artifact, which is simply itself other than
+// when it is a stone fragment, in which case the corresponding stone is
+// returned.
+func (a ArtifactSpec_Name) Family() ArtifactSpec_Name {
+	if a.ArtifactType() == ArtifactSpec_STONE_INGREDIENT {
+		return a.CorrespondingStone()
+	}
+	return a
+}
+
 // CorrespondingStone returns the corresponding stone for a stone fragment.
 // Result is undefined for non-stone fragments.
 func (a ArtifactSpec_Name) CorrespondingStone() ArtifactSpec_Name {
@@ -918,6 +934,424 @@ func (a ArtifactSpec_Name) CorrespondingFragment() ArtifactSpec_Name {
 		return ArtifactSpec_CLARITY_STONE_FRAGMENT
 	}
 	return ArtifactSpec_UNKNOWN
+}
+
+func (a *ArtifactSpec) TierNumber() int {
+	switch a.Type() {
+	case ArtifactSpec_ARTIFACT:
+		// 0, 1, 2, 3 => T1, T2, T3, T4
+		return int(a.Level) + 1
+	case ArtifactSpec_STONE:
+		// 0, 1, 2 => T2, T3, T4 (fragment as T1)
+		return int(a.Level) + 2
+	case ArtifactSpec_STONE_INGREDIENT:
+		return 1
+	case ArtifactSpec_INGREDIENT:
+		// 0, 1, 2 => T1, T2, T3
+		return int(a.Level) + 1
+	}
+	return 1
+}
+
+func (a *ArtifactSpec) TierName() string {
+	switch a.Name {
+	// Artifacts
+	case ArtifactSpec_LUNAR_TOTEM:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "BASIC"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "POWERFUL"
+		case ArtifactSpec_GREATER:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_NEODYMIUM_MEDALLION:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "WEAK"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "PRECISE"
+		case ArtifactSpec_GREATER:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_BEAK_OF_MIDAS:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "DULL"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "JEWELED"
+		case ArtifactSpec_GREATER:
+			return "GLISTENING"
+		}
+	case ArtifactSpec_LIGHT_OF_EGGENDIL:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "DIM"
+		case ArtifactSpec_LESSER:
+			return "SHIMMERING"
+		case ArtifactSpec_NORMAL:
+			return "GLOWING"
+		case ArtifactSpec_GREATER:
+			return "BRILLIANT"
+		}
+	case ArtifactSpec_DEMETERS_NECKLACE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "SIMPLE"
+		case ArtifactSpec_LESSER:
+			return "JEWELED"
+		case ArtifactSpec_NORMAL:
+			return "PRISTINE"
+		case ArtifactSpec_GREATER:
+			return "BEGGSPOKE"
+		}
+	case ArtifactSpec_VIAL_MARTIAN_DUST:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "TINY"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "HERMETIC"
+		case ArtifactSpec_GREATER:
+			return "PRIME"
+		}
+	case ArtifactSpec_ORNATE_GUSSET:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "PLAIN"
+		case ArtifactSpec_LESSER:
+			return "ORNATE"
+		case ArtifactSpec_NORMAL:
+			return "DISTEGGUISHED"
+		case ArtifactSpec_GREATER:
+			return "JEWELED"
+		}
+	case ArtifactSpec_THE_CHALICE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "PLAIN"
+		case ArtifactSpec_LESSER:
+			return "POLISHED"
+		case ArtifactSpec_NORMAL:
+			return "JEWELED"
+		case ArtifactSpec_GREATER:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_BOOK_OF_BASAN:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "COLLECTORS"
+		case ArtifactSpec_NORMAL:
+			return "FORTIFIED"
+		case ArtifactSpec_GREATER:
+			return "GILDED"
+		}
+	case ArtifactSpec_PHOENIX_FEATHER:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "TATTERED"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "BRILLIANT"
+		case ArtifactSpec_GREATER:
+			return "BLAZING"
+		}
+	case ArtifactSpec_TUNGSTEN_ANKH:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "CRUDE"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "POLISHED"
+		case ArtifactSpec_GREATER:
+			return "BRILLIANT"
+		}
+	case ArtifactSpec_AURELIAN_BROOCH:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "PLAIN"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "JEWELED"
+		case ArtifactSpec_GREATER:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_CARVED_RAINSTICK:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "SIMPLE"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "ORNATE"
+		case ArtifactSpec_GREATER:
+			return "MEGGNIFICENT"
+		}
+	case ArtifactSpec_PUZZLE_CUBE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "ANCIENT"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "MYSTICAL"
+		case ArtifactSpec_GREATER:
+			return "UNSOLVABLE"
+		}
+	case ArtifactSpec_QUANTUM_METRONOME:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "MISALIGNED"
+		case ArtifactSpec_LESSER:
+			return "ADEQUATE"
+		case ArtifactSpec_NORMAL:
+			return "PERFECT"
+		case ArtifactSpec_GREATER:
+			return "REGGFERENCE"
+		}
+	case ArtifactSpec_SHIP_IN_A_BOTTLE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "DETAILED"
+		case ArtifactSpec_NORMAL:
+			return "COMPLEX"
+		case ArtifactSpec_GREATER:
+			return "EGGQUISITE"
+		}
+	case ArtifactSpec_TACHYON_DEFLECTOR:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "WEAK"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "ROBUST"
+		case ArtifactSpec_GREATER:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_INTERSTELLAR_COMPASS:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "MISCALIBRATED"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "PRECISE"
+		case ArtifactSpec_GREATER:
+			return "CLAIRVOYANT"
+		}
+	case ArtifactSpec_DILITHIUM_MONOCLE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "PRECISE"
+		case ArtifactSpec_NORMAL:
+			return "EGGSACTING"
+		case ArtifactSpec_GREATER:
+			return "FLAWLESS"
+		}
+	case ArtifactSpec_TITANIUM_ACTUATOR:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "INCONSISTENT"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "PRECISE"
+		case ArtifactSpec_GREATER:
+			return "REGGFERENCE"
+		}
+	case ArtifactSpec_MERCURYS_LENS:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "MISALIGNED"
+		case ArtifactSpec_LESSER:
+			return "REGULAR"
+		case ArtifactSpec_NORMAL:
+			return "PRECISE"
+		case ArtifactSpec_GREATER:
+			return "MEGGNIFICENT"
+		}
+	// Stones
+	case ArtifactSpec_TACHYON_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "BRILLIANT"
+		}
+	case ArtifactSpec_DILITHIUM_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "BRILLIANT"
+		}
+	case ArtifactSpec_SHELL_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "FLAWLESS"
+		}
+	case ArtifactSpec_LUNAR_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "MEGGNIFICENT"
+		}
+	case ArtifactSpec_SOUL_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "RADIANT"
+		}
+	case ArtifactSpec_PROPHECY_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "RADIANT"
+		}
+	case ArtifactSpec_QUANTUM_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "PHASED"
+		case ArtifactSpec_NORMAL:
+			return "MEGGNIFICENT"
+		}
+	case ArtifactSpec_TERRA_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "RICH"
+		case ArtifactSpec_NORMAL:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_LIFE_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "GOOD"
+		case ArtifactSpec_NORMAL:
+			return "EGGCEPTIONAL"
+		}
+	case ArtifactSpec_CLARITY_STONE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "REGULAR"
+		case ArtifactSpec_LESSER:
+			return "EGGSQUISITE"
+		case ArtifactSpec_NORMAL:
+			return "EGGCEPTIONAL"
+		}
+	// Stone fragments
+	case ArtifactSpec_TACHYON_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_DILITHIUM_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_SHELL_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_LUNAR_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_SOUL_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_PROPHECY_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_QUANTUM_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_TERRA_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_LIFE_STONE_FRAGMENT:
+		fallthrough
+	case ArtifactSpec_CLARITY_STONE_FRAGMENT:
+		return "FRAGMENT"
+	// Ingredients
+	case ArtifactSpec_GOLD_METEORITE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "TINY"
+		case ArtifactSpec_LESSER:
+			return "ENRICHED"
+		case ArtifactSpec_NORMAL:
+			return "SOLID"
+		}
+	case ArtifactSpec_TAU_CETI_GEODE:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "TAU"
+		case ArtifactSpec_LESSER:
+			return "GLIMMERING"
+		case ArtifactSpec_NORMAL:
+			return "RADIANT"
+		}
+	case ArtifactSpec_SOLAR_TITANIUM:
+		switch a.Level {
+		case ArtifactSpec_INFERIOR:
+			return "ORE"
+		case ArtifactSpec_LESSER:
+			return "BAR"
+		case ArtifactSpec_NORMAL:
+			return "GEOGON"
+		}
+	// Unconfirmed ingredients
+	case ArtifactSpec_EXTRATERRESTRIAL_ALUMINUM:
+		fallthrough
+	case ArtifactSpec_ANCIENT_TUNGSTEN:
+		fallthrough
+	case ArtifactSpec_SPACE_ROCKS:
+		fallthrough
+	case ArtifactSpec_ALIEN_WOOD:
+		fallthrough
+	case ArtifactSpec_CENTAURIAN_STEEL:
+		fallthrough
+	case ArtifactSpec_ERIDANI_FEATHER:
+		fallthrough
+	case ArtifactSpec_DRONE_PARTS:
+		fallthrough
+	case ArtifactSpec_CELESTIAL_BRONZE:
+		fallthrough
+	case ArtifactSpec_LALANDE_HIDE:
+		return "?"
+	}
+	return "?"
+}
+
+func (a *ArtifactSpec) CasedTierName() string {
+	return strings.Title(strings.ToLower(a.TierName()))
 }
 
 func (r ArtifactSpec_Rarity) Display() string {

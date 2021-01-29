@@ -59,23 +59,6 @@ func (e EggType) IconFilename() string {
 	return "egg_unknown.png"
 }
 
-func (a *ArtifactSpec) TierNumber() int {
-	switch a.Type() {
-	case ArtifactSpec_ARTIFACT:
-		// 0, 1, 2, 3 => T1, T2, T3, T4
-		return int(a.Level) + 1
-	case ArtifactSpec_STONE:
-		// 0, 1, 2 => T2, T3, T4 (fragment as T1)
-		return int(a.Level) + 2
-	case ArtifactSpec_STONE_INGREDIENT:
-		return 1
-	case ArtifactSpec_INGREDIENT:
-		// 0, 1, 2 => T1, T2, T3
-		return int(a.Level) + 1
-	}
-	return 1
-}
-
 func (a *ArtifactSpec) IconFilename() string {
 	var base string
 	switch a.Name {
