@@ -53,6 +53,11 @@ func retrieveMissions(playerId string) *result {
 		return errorResult(err)
 	}
 
+	if fc.Data.Progress == nil {
+		return errorResult(fmt.Errorf("server response empty, " +
+			"please check you have put in the correct ID (the game may silently update it)"))
+	}
+
 	hasProPermit := fc.Data.Progress.PermitLevel > 0
 	artifactsDB := fc.Data.ArtifactsDb
 	activeMissions := make([]*mission, 0)
