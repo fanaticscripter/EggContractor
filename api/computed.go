@@ -729,6 +729,7 @@ func capitalizeArtifactName(n string) string {
 	n = strings.ToUpper(n[:1]) + n[1:]
 	// Captalize proper nouns.
 	for s, repl := range map[string]string{
+		"demeters": "Demeters",
 		"midas":    "Midas",
 		"eggendil": "Eggendil",
 		"martian":  "Martian",
