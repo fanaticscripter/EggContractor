@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     hours() {
-      return Math.floor(this.remainingSeconds / 3600) % 24;
+      return Math.floor(this.remainingSeconds / 3600);
     },
     minutes() {
       return Math.floor(this.remainingSeconds / 60) % 60;
