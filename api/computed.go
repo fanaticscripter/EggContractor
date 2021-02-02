@@ -1313,7 +1313,7 @@ func (a *ArtifactSpec) TierName() string {
 	case ArtifactSpec_TAU_CETI_GEODE:
 		switch a.Level {
 		case ArtifactSpec_INFERIOR:
-			return "TAU"
+			return "PIECE"
 		case ArtifactSpec_LESSER:
 			return "GLIMMERING"
 		case ArtifactSpec_NORMAL:
