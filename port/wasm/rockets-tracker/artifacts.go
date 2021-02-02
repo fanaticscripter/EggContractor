@@ -54,27 +54,27 @@ type craftingCostParams struct {
 var _artifactsInfo = []*artifactClassInfo{
 	{
 		Id:        api.ArtifactSpec_PUZZLE_CUBE,
-		Effect:    "Lower research costs",
+		Effect:    "Lowers research costs",
 		TierNames: []string{"Ancient", "Regular", "Mystical", "Unsolvable"},
 	},
 	{
 		Id:        api.ArtifactSpec_LUNAR_TOTEM,
-		Effect:    "Modify away earnings",
+		Effect:    "Increases away earnings",
 		TierNames: []string{"Basic", "Regular", "Powerful", "Eggceptional"},
 	},
 	{
 		Id:        api.ArtifactSpec_DEMETERS_NECKLACE,
-		Effect:    "Increase egg value",
+		Effect:    "Increases egg value",
 		TierNames: []string{"Simple", "Jeweled", "Pristine", "Beggspoke"},
 	},
 	{
 		Id:        api.ArtifactSpec_VIAL_MARTIAN_DUST,
-		Effect:    "Increase max running chicken bonus",
+		Effect:    "Increases max running chicken bonus",
 		TierNames: []string{"Tiny", "Regular", "Hermetic", "Prime"},
 	},
 	{
 		Id:        api.ArtifactSpec_AURELIAN_BROOCH,
-		Effect:    "Increase drone rewards",
+		Effect:    "Increases drone rewards",
 		TierNames: []string{"Plain", "Regular", "Jeweled", "Eggceptional"},
 	},
 	{
@@ -84,42 +84,42 @@ var _artifactsInfo = []*artifactClassInfo{
 	},
 	{
 		Id:        api.ArtifactSpec_ORNATE_GUSSET,
-		Effect:    "Increase hen house capacity",
+		Effect:    "Increases hen house capacity",
 		TierNames: []string{"Plain", "Ornate", "Distegguished", "Jeweled"},
 	},
 	{
 		Id:        api.ArtifactSpec_NEODYMIUM_MEDALLION,
-		Effect:    "Increase drone frequency",
+		Effect:    "Increases drone frequency",
 		TierNames: []string{"Weak", "Regular", "Precise", "Eggceptional"},
 	},
 	{
 		Id:        api.ArtifactSpec_MERCURYS_LENS,
-		Effect:    "increases farm value",
+		Effect:    "Increases farm value",
 		TierNames: []string{"Misaligned", "Regular", "Precise", "Meggnificent"},
 	},
 	{
 		Id:        api.ArtifactSpec_BEAK_OF_MIDAS,
-		Effect:    "Increase gold reward chance",
+		Effect:    "Increases gold reward chance",
 		TierNames: []string{"Dull", "Regular", "Jeweled", "Glistening"},
 	},
 	{
 		Id:        api.ArtifactSpec_CARVED_RAINSTICK,
-		Effect:    "Increase chance of cash rewards from gifts and drones",
+		Effect:    "Increases chance of cash rewards from gifts and drones",
 		TierNames: []string{"Simple", "Regular", "Ornate", "Meggnificent"},
 	},
 	{
 		Id:        api.ArtifactSpec_INTERSTELLAR_COMPASS,
-		Effect:    "Increase egg shipping rate",
+		Effect:    "Increases egg shipping rate",
 		TierNames: []string{"Miscalibrated", "Regular", "Precise", "Clairvoyant"},
 	},
 	{
 		Id:        api.ArtifactSpec_THE_CHALICE,
-		Effect:    "Improved internal hatcheries",
+		Effect:    "Improves internal hatcheries",
 		TierNames: []string{"Plain", "Polished", "Jeweled", "Eggceptional"},
 	},
 	{
 		Id:        api.ArtifactSpec_PHOENIX_FEATHER,
-		Effect:    "Increased soul egg collection rate",
+		Effect:    "Increases soul egg collection rate",
 		TierNames: []string{"Tattered", "Regular", "Brilliant", "Blazing"},
 	},
 	{
@@ -129,22 +129,22 @@ var _artifactsInfo = []*artifactClassInfo{
 	},
 	{
 		Id:        api.ArtifactSpec_DILITHIUM_MONOCLE,
-		Effect:    "increases boost effectiveness",
+		Effect:    "Increases boost effectiveness",
 		TierNames: []string{"Regular", "Precise", "Eggsacting", "Flawless"},
 	},
 	{
 		Id:        api.ArtifactSpec_TITANIUM_ACTUATOR,
-		Effect:    "increase hold to hatch rate",
+		Effect:    "Increases hold to hatch rate",
 		TierNames: []string{"Inconsistent", "Regular", "Precise", "Reggference"},
 	},
 	{
 		Id:        api.ArtifactSpec_SHIP_IN_A_BOTTLE,
-		Effect:    "Increase co-op mates earnings",
+		Effect:    "Increases co-op mates earnings",
 		TierNames: []string{"Regular", "Detailed", "Complex", "Eggquisite"},
 	},
 	{
 		Id:        api.ArtifactSpec_TACHYON_DEFLECTOR,
-		Effect:    "Increase co-op mates egg laying rate",
+		Effect:    "Increases co-op mates egg laying rate",
 		TierNames: []string{"Weak", "Regular", "Robust", "Eggceptional"},
 	},
 	{
@@ -154,7 +154,7 @@ var _artifactsInfo = []*artifactClassInfo{
 	},
 	{
 		Id:        api.ArtifactSpec_LIGHT_OF_EGGENDIL,
-		Effect:    "Enlightenment egg value increase",
+		Effect:    "Increases enlightenment egg value",
 		TierNames: []string{"Dim", "Shimmering", "Glowing", "Brilliant"},
 	},
 }
@@ -187,7 +187,7 @@ var _stonesInfo = []*artifactClassInfo{
 	},
 	{
 		Id:        api.ArtifactSpec_DILITHIUM_STONE,
-		Effect:    "Increases boost duration",
+		Effect:    "Increases boost duration when set",
 		TierNames: []string{"Fragment", "Regular", "Eggsquisite", "Brilliant"},
 	},
 	{
@@ -202,7 +202,7 @@ var _stonesInfo = []*artifactClassInfo{
 	},
 	{
 		Id:        api.ArtifactSpec_CLARITY_STONE,
-		Effect:    "Enables effect of host artifact on enlightenment egg farm.",
+		Effect:    "Enables effect of host artifact on enlightenment egg farm",
 		TierNames: []string{"Fragment", "Regular", "Eggsquisite", "Eggceptional"},
 	},
 	{

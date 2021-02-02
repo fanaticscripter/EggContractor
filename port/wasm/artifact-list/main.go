@@ -18,31 +18,31 @@ var _artifacts = []artifactClass{
 	{
 		Id:         "puzzle_cube",
 		Name:       "Puzzle cube",
-		Effect:     "Lower research costs",
+		Effect:     "Lowers research costs",
 		LevelNames: []string{"Ancient", "Regular", "Mystical", "Unsolvable"},
 	},
 	{
 		Id:         "lunar_totem",
 		Name:       "Lunar totem",
-		Effect:     "Modify away earnings",
+		Effect:     "Increases away earnings",
 		LevelNames: []string{"Basic", "Regular", "Powerful", "Eggceptional"},
 	},
 	{
 		Id:         "demeters_necklace",
 		Name:       "Demeters necklace",
-		Effect:     "Increase egg value",
+		Effect:     "Increases egg value",
 		LevelNames: []string{"Simple", "Jeweled", "Pristine", "Beggspoke"},
 	},
 	{
 		Id:         "vial_of_martian_dust",
 		Name:       "Vial of martian dust",
-		Effect:     "Increase max running chicken bonus",
+		Effect:     "Increases max running chicken bonus",
 		LevelNames: []string{"Tiny", "Regular", "Hermetic", "Prime"},
 	},
 	{
 		Id:         "aurelian_brooch",
 		Name:       "Aurelian brooch",
-		Effect:     "Increase drone rewards",
+		Effect:     "Increases drone rewards",
 		LevelNames: []string{"Plain", "Regular", "Jeweled", "Eggceptional"},
 	},
 	{
@@ -54,49 +54,49 @@ var _artifacts = []artifactClass{
 	{
 		Id:         "ornate_gusset",
 		Name:       "Gusset",
-		Effect:     "Increase hen house capacity",
+		Effect:     "Increases hen house capacity",
 		LevelNames: []string{"Plain", "Ornate", "Distegguished", "Jeweled"},
 	},
 	{
 		Id:         "neodymium_medallion",
 		Name:       "Neodymium medallion",
-		Effect:     "Increase drone frequency",
+		Effect:     "Increases drone frequency",
 		LevelNames: []string{"Weak", "Regular", "Precise", "Eggceptional"},
 	},
 	{
 		Id:         "mercurys_lens",
 		Name:       "Mercury's lens",
-		Effect:     "increases farm value",
+		Effect:     "Increases farm value",
 		LevelNames: []string{"Misaligned", "Regular", "Precise", "Meggnificent"},
 	},
 	{
 		Id:         "beak_of_midas",
 		Name:       "Beak of midas",
-		Effect:     "Increase gold reward chance",
+		Effect:     "Increases gold reward chance",
 		LevelNames: []string{"Dull", "Regular", "Jeweled", "Glistening"},
 	},
 	{
 		Id:         "carved_rainstick",
 		Name:       "Carved rainstick",
-		Effect:     "Increase chance of cash rewards from gifts and drones",
+		Effect:     "Increases chance of cash rewards from gifts and drones",
 		LevelNames: []string{"Simple", "Regular", "Ornate", "Meggnificent"},
 	},
 	{
 		Id:         "interstellar_compass",
 		Name:       "Interstellar compass",
-		Effect:     "Increase egg shipping rate",
+		Effect:     "Increases egg shipping rate",
 		LevelNames: []string{"Miscalibrated", "Regular", "Precise", "Clairvoyant"},
 	},
 	{
 		Id:         "the_chalice",
 		Name:       "The chalice",
-		Effect:     "Improved internal hatcheries",
+		Effect:     "Improves internal hatcheries",
 		LevelNames: []string{"Plain", "Polished", "Jeweled", "Eggceptional"},
 	},
 	{
 		Id:         "phoenix_feather",
 		Name:       "Phoenix feather",
-		Effect:     "Increased soul egg collection rate",
+		Effect:     "Increases soul egg collection rate",
 		LevelNames: []string{"Tattered", "Regular", "Brilliant", "Blazing"},
 	},
 	{
@@ -108,25 +108,25 @@ var _artifacts = []artifactClass{
 	{
 		Id:         "dilithium_monocle",
 		Name:       "Dilithium monocle",
-		Effect:     "increases boost effectiveness",
+		Effect:     "Increases boost effectiveness",
 		LevelNames: []string{"Regular", "Precise", "Eggsacting", "Flawless"},
 	},
 	{
 		Id:         "titanium_actuator",
 		Name:       "Titanium actuator",
-		Effect:     "increase hold to hatch rate",
+		Effect:     "Increases hold to hatch rate",
 		LevelNames: []string{"Inconsistent", "Regular", "Precise", "Reggference"},
 	},
 	{
 		Id:         "ship_in_a_bottle",
 		Name:       "Ship in a bottle",
-		Effect:     "Increase co-op mates earnings",
+		Effect:     "Increases co-op mates' earnings",
 		LevelNames: []string{"Regular", "Detailed", "Complex", "Eggquisite"},
 	},
 	{
 		Id:         "tachyon_deflector",
 		Name:       "Tachyon deflector",
-		Effect:     "Increase co-op mates egg laying rate",
+		Effect:     "Increases co-op mates' egg laying rate",
 		LevelNames: []string{"Weak", "Regular", "Robust", "Eggceptional"},
 	},
 	{
@@ -138,7 +138,7 @@ var _artifacts = []artifactClass{
 	{
 		Id:         "light_of_eggendil",
 		Name:       "Light of eggendil",
-		Effect:     "Enlightenment egg value increase",
+		Effect:     "Increases enlightenment egg value",
 		LevelNames: []string{"Dim", "Shimmering", "Glowing", "Brilliant"},
 	},
 }
@@ -177,7 +177,7 @@ var _stones = []artifactClass{
 	{
 		Id:         "dilithium_stone",
 		Name:       "Dilithium stone",
-		Effect:     "Increases boost duration",
+		Effect:     "Increases boost duration when set",
 		LevelNames: []string{"Fragment", "Regular", "Eggsquisite", "Brilliant"},
 	},
 	{
@@ -195,7 +195,7 @@ var _stones = []artifactClass{
 	{
 		Id:         "clarity_stone",
 		Name:       "Clarity stone",
-		Effect:     "Enables effect of host artifact on enlightenment egg farm.",
+		Effect:     "Enables effect of host artifact on enlightenment egg farm",
 		LevelNames: []string{"Fragment", "Regular", "Eggsquisite", "Eggceptional"},
 	},
 	{
