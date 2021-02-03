@@ -1,3 +1,14 @@
+/artifact-explorer/app.*.js
+  cache-control: public,max-age=2592000,immutable
+
+/artifact-explorer/app.*.wasm
+  cache-control: public,max-age=2592000,immutable
+
+/artifact-explorer/static/*.png
+  cache-control: public,max-age=2592000,immutable
+
+# ---------------------------------------------------------------------
+
 /artifact-list/static/*.png
   cache-control: public,max-age=2592000,immutable
 
