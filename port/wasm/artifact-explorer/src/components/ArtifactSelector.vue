@@ -2,7 +2,7 @@
   <div class="my-4 space-y-2">
     <div class="w-full max-w-xs">
       <label for="artifact" class="block text-sm font-medium text-gray-700">
-        How do I get this artifact?
+        What does this artifact do and how do I get it?
       </label>
       <select
         id="artifact"
