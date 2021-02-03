@@ -1,7 +1,14 @@
 <template>
-  <div class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
+  <div id="artifact-card" class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
     <div class="bg-gray-100 px-4 py-4 border-b border-gray-200 sm:px-6">
-      <artifact-name :artifact="artifact" :showTier="true" :noLink="true" />
+      <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+        <div class="ml-4 mt-2">
+          <artifact-name :artifact="artifact" :showTier="true" :noLink="true" />
+        </div>
+        <div class="ml-4 mt-2 flex-shrink-0">
+          <share :id="artifact.id" :domElementId="'artifact-card'"/>
+        </div>
+      </div>
     </div>
 
     <template v-if="artifact.has_effects">
@@ -160,6 +167,7 @@
 import ArtifactName from "@/components/ArtifactName.vue";
 import MissionName from "@/components/MissionName.vue";
 import Info from "@/components/Info.vue";
+import Share from "@/components/Share.vue";
 
 import { iconURL, stringCmp } from "@/utils";
 
@@ -168,6 +176,7 @@ export default {
     ArtifactName,
     MissionName,
     Info,
+    Share,
   },
 
   props: {

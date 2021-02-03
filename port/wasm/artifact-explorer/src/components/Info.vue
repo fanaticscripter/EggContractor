@@ -5,6 +5,7 @@
     viewBox="0 0 20 20"
     fill="currentColor"
     aria-hidden="true"
+    data-html2canvas-ignore
   >
     <path
       fill-rule="evenodd"

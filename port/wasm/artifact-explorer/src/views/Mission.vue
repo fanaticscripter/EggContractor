@@ -1,7 +1,14 @@
 <template>
-  <div class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
+  <div id="mission-card" class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
     <div class="bg-gray-100 px-4 py-4 border-b border-gray-200 sm:px-6">
-      <mission-name :mission="mission" noLink="true" />
+      <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
+        <div class="ml-4 mt-2">
+          <mission-name :mission="mission" noLink="true" />
+        </div>
+        <div class="ml-4 mt-2 flex-shrink-0">
+          <share :id="mission.id" :domElementId="'mission-card'"/>
+        </div>
+      </div>
     </div>
 
     <div class="px-4 py-4 sm:px-6 space-y-2">
@@ -33,6 +40,7 @@
 <script>
 import ArtifactName from "@/components/ArtifactName.vue";
 import MissionName from "@/components/MissionName.vue";
+import Share from "@/components/Share.vue";
 
 import { getLocalStorage, setLocalStorage, stringCmp } from "@/utils";
 
@@ -47,6 +55,7 @@ export default {
   components: {
     ArtifactName,
     MissionName,
+    Share,
   },
 
   props: {
