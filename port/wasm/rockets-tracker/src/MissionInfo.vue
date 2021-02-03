@@ -81,7 +81,7 @@
     <h2 class="mx-4 my-4 text-center text-md leading-6 font-medium text-gray-900">Mission statistics</h2>
 
     <div v-if="unlockProgress" class="-mt-2 mb-2 -space-y-1">
-      <div v-if="unlockProgress.nextShipToLaunch.name !== unlockProgress.nextShipToUnlock.name" class="text-sm text-center space-x-1">
+      <div v-if="unlockProgress.nextShipToLaunch && (!unlockProgress.nextShipToUnlock || unlockProgress.nextShipToLaunch.name !== unlockProgress.nextShipToUnlock.name)" class="text-sm text-center space-x-1">
         <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToLaunch.iconPath, 128)" alt="">
         <span class="whitespace-nowrap">
           {{ unlockProgress.nextShipToLaunch.name }} unlocked
