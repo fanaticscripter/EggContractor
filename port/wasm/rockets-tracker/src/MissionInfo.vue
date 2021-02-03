@@ -106,22 +106,24 @@
         </span>
       </div>
 
-      <div class="py-1 text-center text-xs text-gray-500 underline cursor-pointer select-none" @click="furtherShipsToUnlockExpanded = !furtherShipsToUnlockExpanded">
-        Click here to {{ furtherShipsToUnlockExpanded ? "collapse": "expand" }} the full list of ships to unlock
-      </div>
-      <template v-if="furtherShipsToUnlockExpanded && unlockProgress.furtherShipsToUnlock">
-        <div v-for="ship in unlockProgress.furtherShipsToUnlock" :key="ship.name" class="text-sm text-center space-x-1">
-          <img class="inline w-8 h-8" :src="iconURL(ship.iconPath, 128)" alt="">
-          <span class="whitespace-nowrap">
-            {{ ship.name }} unlock:
-            <span class="font-medium">
-              {{ ship.launchesDone }} / {{ ship.launchesRequired }}
-            </span>
-            <span class="inline-flex items-center space-x-1 ml-1">
-              ({{ ship.accumulativeMissionTimeRequired }})
-            </span>
-          </span>
+      <template v-if="unlockProgress.furtherShipsToUnlock">
+        <div class="py-1 text-center text-xs text-gray-500 underline cursor-pointer select-none" @click="furtherShipsToUnlockExpanded = !furtherShipsToUnlockExpanded">
+          Click here to {{ furtherShipsToUnlockExpanded ? "collapse": "expand" }} the full list of ships to unlock
         </div>
+        <template v-if="furtherShipsToUnlockExpanded">
+          <div v-for="ship in unlockProgress.furtherShipsToUnlock" :key="ship.name" class="text-sm text-center space-x-1">
+            <img class="inline w-8 h-8" :src="iconURL(ship.iconPath, 128)" alt="">
+            <span class="whitespace-nowrap">
+              {{ ship.name }} unlock:
+              <span class="font-medium">
+                {{ ship.launchesDone }} / {{ ship.launchesRequired }}
+              </span>
+              <span class="inline-flex items-center space-x-1 ml-1">
+                ({{ ship.accumulativeMissionTimeRequired }})
+              </span>
+            </span>
+          </div>
+        </template>
       </template>
     </div>
 
