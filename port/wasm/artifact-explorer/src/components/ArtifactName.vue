@@ -1,12 +1,15 @@
 <template>
   <template v-if="plainText">
     {{ artifact.name }}
-    <template v-if="showTier"> (T{{ artifact.tierNumber }}) </template>
-    <template v-if="artifact.rarity > 0"> , {{ artifact.rarityDisplay }} </template>
+    <template v-if="showTier"> (T{{ artifact.tier_number }}) </template>
+    <template v-if="artifact.afxRarity > 0"> , {{ artifact.rarity }} </template>
   </template>
 
   <template v-else>
-    <router-link :to="{ name: 'artifact', params: { artifactId: artifact.itemId } }">
+    <component
+      :is="noLink ? 'div' : 'router-link'"
+      :to="noLink ? undefined : { name: 'artifact', params: { artifactId: artifact.id } }"
+    >
       <div class="flex">
         <div
           class="flex items-center"
@@ -18,18 +21,18 @@
           <div class="flex-shrink-0 h-4 w-4">
             <img class="h-4 w-4" :src="iconURL(artifact.iconPath, 32)" />
           </div>
-          <div class="ml-1 text-sm" :class="[rarityFgClass(artifact.rarity)]">
+          <div class="ml-1 text-sm" :class="[rarityFgClass(artifact.afxRarity)]">
             <span>{{ artifact.name }}</span>
             <template v-if="showTier">
-              <span> (T{{ artifact.tierNumber }})</span>
+              <span> (T{{ artifact.tier_number }})</span>
             </template>
-            <template v-if="artifact.rarity > 0">
-              <span>, {{ artifact.rarityDisplay }}</span>
+            <template v-if="artifact.afxRarity > 0">
+              <span>, {{ artifact.rarity }}</span>
             </template>
           </div>
         </div>
       </div>
-    </router-link>
+    </component>
   </template>
 </template>
 
@@ -41,6 +44,7 @@ export default {
     artifact: Object,
     showTier: Boolean,
     plainText: Boolean,
+    noLink: Boolean,
   },
 
   methods: {

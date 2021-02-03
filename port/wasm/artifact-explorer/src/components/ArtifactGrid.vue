@@ -27,7 +27,7 @@ export default {
   computed: {
     sections() {
       const items = this.artifacts
-        .filter(artifact => artifact.rarity === 0)
+        .filter(artifact => artifact.afxRarity === 0)
         .sort((artifact1, artifact2) => stringCmp(artifact1.sortKey, artifact2.sortKey));
       const families = [];
       let family = {};
@@ -53,14 +53,14 @@ export default {
       const stones = [];
       const ingredients = [];
       for (const family of families) {
-        switch (family.typeName) {
-          case "artifact":
+        switch (family.type) {
+          case "Artifact":
             artifacts.push(family);
             break;
-          case "stone":
+          case "Stone":
             stones.push(family);
             break;
-          case "ingredient":
+          case "Ingredient":
             ingredients.push(family);
             break;
         }

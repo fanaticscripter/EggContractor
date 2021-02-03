@@ -1,7 +1,7 @@
 <template>
   <div class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
     <div class="bg-gray-100 px-4 py-4 border-b border-gray-200 sm:px-6">
-      <mission-name :mission="mission" />
+      <mission-name :mission="mission" noLink="true" />
     </div>
 
     <div class="px-4 py-4 sm:px-6 space-y-2">

@@ -1,5 +1,8 @@
 <template>
-  <router-link :to="{ name: 'mission', params: { missionId: mission.id } }">
+  <component
+    :is="noLink ? 'div' : 'router-link'"
+    :to="noLink ? undefined : { name: 'mission', params: { missionId: mission.id } }"
+  >
     <div class="flex items-center">
       <div
         class="flex-shrink-0 h-4 w-4"
@@ -12,7 +15,7 @@
       </div>
       <span class="ml-1 text-sm">{{ mission.display }}</span>
     </div>
-  </router-link>
+  </component>
 </template>
 
 <script>
@@ -21,6 +24,7 @@ import { iconURL } from "@/utils";
 export default {
   props: {
     mission: Object,
+    noLink: Boolean,
   },
 
   methods: {

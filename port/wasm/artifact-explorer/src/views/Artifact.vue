@@ -1,10 +1,10 @@
 <template>
   <div class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
     <div class="bg-gray-100 px-4 py-4 border-b border-gray-200 sm:px-6">
-      <artifact-name :artifact="artifact" :showTier="true" />
+      <artifact-name :artifact="artifact" :showTier="true" :noLink="true" />
     </div>
 
-    <template v-if="artifact.tierNumber > 1">
+    <template v-if="artifact.tier_number > 1">
       <div class="px-4 py-4 sm:px-6 space-y-2">
         <div class="text-sm font-medium text-gray-500">Crafting recipe:</div>
         <div class="text-sm">Coming soon&trade;</div>
@@ -47,7 +47,7 @@ export default {
   computed: {
     artifact() {
       for (const artifact of this.artifacts) {
-        if (artifact.itemId === this.artifactId && artifact.rarity === 0) {
+        if (artifact.id === this.artifactId && artifact.afxRarity === 0) {
           return artifact;
         }
       }

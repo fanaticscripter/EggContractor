@@ -150,7 +150,7 @@
             </td>
 
             <td class="px-4 py-1 whitespace-nowrap text-center text-sm text-gray-500">
-              {{ artifact.tierNumber }}
+              {{ artifact.tier_number }}
             </td>
 
             <td class="px-4 py-1 whitespace-nowrap text-center text-sm text-gray-500">
@@ -168,7 +168,7 @@
                 "
                 class="px-2 py-1 whitespace-nowrap text-center text-sm text-gray-500 bg-green-300"
                 v-tippy="{
-                  content: `${mission.display}<br>${artifact.name}, ${artifact.rarityDisplay}`,
+                  content: `${mission.display}<br>${artifact.name}, ${artifact.rarity}`,
                   allowHTML: true,
                 }"
               >
@@ -178,7 +178,7 @@
                 v-else
                 class="px-2 py-1 whitespace-nowrap text-center text-sm bg-gray-300"
                 v-tippy="{
-                  content: `${mission.display}<br>${artifact.name}, ${artifact.rarityDisplay}`,
+                  content: `${mission.display}<br>${artifact.name}, ${artifact.rarity}`,
                   allowHTML: true,
                 }"
               ></td>
@@ -270,7 +270,7 @@ export default {
             cmp = stringCmp(a1.sortKey, a2.sortKey);
             break;
           case SORT_BY.TIER:
-            cmp = a1.tierNumber - a2.tierNumber;
+            cmp = a1.tier_number - a2.tier_number;
             break;
           case SORT_BY.ODDS_MULTIPLIER:
             cmp = a1.params.odds_multiplier - a2.params.odds_multiplier;
@@ -311,7 +311,7 @@ export default {
     },
 
     craftable(artifact) {
-      return artifact.tierNumber > 1 && artifact.rarity === 0;
+      return artifact.tier_number > 1 && artifact.afxRarity === 0;
     },
 
     formatSmallFloat(x) {

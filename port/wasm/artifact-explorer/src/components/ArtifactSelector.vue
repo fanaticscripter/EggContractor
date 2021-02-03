@@ -11,7 +11,7 @@
         v-model="artifactId"
       >
         <option value="">-- Select an artifact --</option>
-        <option v-for="artifact in commonArtifacts" :key="artifact.itemId" :value="artifact.itemId">
+        <option v-for="artifact in commonArtifacts" :key="artifact.id" :value="artifact.id">
           <artifact-name :artifact="artifact" :showTier="true" :plainText="true" />
         </option>
       </select>
@@ -47,7 +47,7 @@ export default {
   computed: {
     commonArtifacts() {
       return this.artifacts
-        .filter(artifact => artifact.rarity === 0)
+        .filter(artifact => artifact.afxRarity === 0)
         .sort((artifact1, artifact2) => stringCmp(artifact1.sortKey, artifact2.sortKey));
     },
   },
