@@ -21,16 +21,26 @@
       </div>
     </div>
 
+    <div class="my-2 flex flex-wrap items-center justify-center space-x-1">
+      <span class="text-sm text-gray-900 truncate">Account balance:</span>
+      <span class="inline-flex items-center space-x-1 text-sm text-gray-900">
+        <img class="h-4 w-4" :src="iconURL('egginc-extras/icon_golden_egg.png', 64)" />
+        {{ totalCraftingCost.toLocaleString("en-US") }}
+      </span>
+    </div>
+
     <div
-      class="my-2 text-center text-sm text-gray-900"
+      class="my-2 flex flex-wrap items-center justify-center space-x-1"
       v-tippy="{
         content:
-          'This estimate may be inaccurate if crafting cost parameters were ever changed server-side.',
+          'This estimate does not take into discounts from crafting sales (as the save file simply does not have that level of granularity). It may also be inaccurate if crafting cost parameters were ever changed server-side.',
       }"
     >
-      <span class="inline-flex items-center space-x-1">
-        Estimated total crafting expense so far:
-        <img class="h-4 w-4" src="https://eggincassets.tcl.sh/64/egginc-extras/icon_golden_egg.png" />
+      <span class="text-sm text-gray-900 truncate"
+        >Estimated total crafting expense so far (pre-discount):</span
+      >
+      <span class="inline-flex items-center space-x-1 text-sm text-gray-900">
+        <img class="h-4 w-4" :src="iconURL('egginc-extras/icon_golden_egg.png', 64)" />
         {{ totalCraftingCost.toLocaleString("en-US") }}
         <svg
           class="h-4 w-4 text-gray-400"
@@ -61,7 +71,7 @@
 
 <script>
 import ArtifactGrid from "./ArtifactGrid.vue";
-import { getLocalStorage, setLocalStorage } from "./utils";
+import { getLocalStorage, setLocalStorage, iconURL } from "./utils";
 
 export default {
   components: { ArtifactGrid },
@@ -97,6 +107,10 @@ export default {
     spoilers() {
       setLocalStorage("spoilers", this.spoilers);
     },
+  },
+
+  methods: {
+    iconURL,
   },
 };
 </script>
