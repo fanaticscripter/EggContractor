@@ -103,6 +103,24 @@ message FirstContact {
     }
     Contracts contracts = 13;
 
+    // WARNING: Defaults not applied due to proto3 limitations!
+    message Artifacts {
+      bool infusing = 1;
+      ArtifactInventoryItem item_being_infused = 2;
+      ArtifactSpec spec_being_infused = 13;
+      EggType egg_type_infusing = 3;
+      double infusing_eggs_required = 4;
+      double eggs_infused = 5;
+      double flow_percentage_artifacts = 6;  // [default = 0.5];
+      bool fueling_enabled = 7;              // [default = true];
+      bool infusing_enabled = 8;             // [default = true];
+      MissionInfo.Spaceship last_fueled_ship = 9;
+      double inventory_score = 10;
+      bool enabled = 11;
+      bool intro_shown = 12;
+    }
+    Artifacts artifacts = 14;
+
     ArtifactsDB artifacts_db = 15;
   }
   Payload data = 1;
