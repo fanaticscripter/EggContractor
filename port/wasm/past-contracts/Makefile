@@ -2,7 +2,8 @@ MAKEFLAGS += -j4
 
 .PHONY: all init dist html wasm webpack postcss clean serve
 
-all: dist
+all: clean
+	$(MAKE) dist
 
 init:
 	yarn install
