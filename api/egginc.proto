@@ -71,11 +71,11 @@ message FirstContact {
     Stats stats = 6;
 
     message Progress {
-      int32 lifefime_golden_eggs = 2;
-      int32 lifetime_golden_eggs_spent = 3;
+      uint64 lifetime_golden_eggs = 2;
+      uint64 lifetime_golden_eggs_spent = 3;
       double prestige_earnings = 5;
       double lifetime_earnings = 6;
-      int32 piggy_bank = 7;
+      uint64 piggy_bank = 7;
       int32 permit_level = 8;  // 0 - standard permit; 1 - pro permit
       repeated EpicResearch epic_researches = 9;
       repeated int64 max_farm_populations_reached = 18;  // One entry for
