@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const webpack = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
@@ -55,6 +56,19 @@ module.exports = {
   ],
   externals: {
     Go: "Go",
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+        },
+      }),
+    ],
   },
   performance: {
     maxEntrypointSize: 500000,
