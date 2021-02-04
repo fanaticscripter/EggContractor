@@ -51,7 +51,9 @@ export default {
     iconURL,
 
     effect(family) {
-      const tier = family.tiers[0];
+      // Get family effect from the last tier. The first tier's effects may be
+      // null (stone fragment).
+      const tier = family.tiers[family.tiers.length - 1];
       return tier.has_effects ? tier.effects[0].family_effect : "";
     },
   },
