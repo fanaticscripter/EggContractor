@@ -131,7 +131,7 @@
       :launchLog="launchLog"
     ></mission-info>
 
-    <artifact-info :progress="artifactsProgress"></artifact-info>
+    <artifact-info :progress="artifactsProgress" :save="save"></artifact-info>
   </template>
 </template>
 
@@ -183,6 +183,7 @@ export default {
       unlockProgress: null,
       launchLog: null,
       artifactsProgress: null,
+      save: null,
       loading: false,
       error: "",
       whatsNew,
@@ -217,12 +218,14 @@ export default {
           unlockProgress,
           launchLog,
           artifactsProgress,
+          save,
         } = await this.retrieveMissions(playerId);
         this.activeMissions = activeMissions;
         this.missionStats = missionStats;
         this.unlockProgress = unlockProgress;
         this.launchLog = launchLog;
         this.artifactsProgress = artifactsProgress;
+        this.save = save;
         this.loading = false;
         this.error = null;
       } catch (err) {

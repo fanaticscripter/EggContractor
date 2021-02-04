@@ -53,7 +53,7 @@ func retrieveMissions(playerId string) *result {
 		return errorResult(err)
 	}
 
-	if fc.Data.Progress == nil {
+	if fc.Data == nil || fc.Data.Progress == nil {
 		return errorResult(fmt.Errorf("server response empty, " +
 			"please check you have put in the correct ID (the game may silently update it)"))
 	}
@@ -73,17 +73,19 @@ func retrieveMissions(playerId string) *result {
 	log := generateLaunchLogFromMissionArchive(launched)
 	afxProgress := getArtifactsProgress(artifactsDB)
 	return dataResult(struct {
-		ActiveMissions    []*mission         `json:"activeMissions"`
-		MissionStats      *missionStats      `json:"missionStats"`
-		UnlockProgress    *unlockProgress    `json:"unlockProgress"`
-		LaunchLog         *launchLog         `json:"launchLog"`
-		ArtifactsProgress *artifactsProgress `json:"artifactsProgress"`
+		ActiveMissions    []*mission                `json:"activeMissions"`
+		MissionStats      *missionStats             `json:"missionStats"`
+		UnlockProgress    *unlockProgress           `json:"unlockProgress"`
+		LaunchLog         *launchLog                `json:"launchLog"`
+		ArtifactsProgress *artifactsProgress        `json:"artifactsProgress"`
+		Save              *api.FirstContact_Payload `json:"save"`
 	}{
 		ActiveMissions:    activeMissions,
 		MissionStats:      stats,
 		UnlockProgress:    progress,
 		LaunchLog:         log,
 		ArtifactsProgress: afxProgress,
+		Save:              fc.Data,
 	})
 }
 
