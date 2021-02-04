@@ -61,6 +61,16 @@
           {{ accountBalance.toLocaleString("en-US") }}
         </span>
       </div>
+
+      <div
+        v-if="inventoryScore !== undefined"
+        class="flex flex-wrap items-center justify-center space-x-1"
+      >
+        <span class="text-sm text-gray-900 truncate">Inventory score:</span>
+        <span class="inline-flex items-center space-x-1 text-sm text-gray-900">
+          {{ Math.floor(inventoryScore) }}
+        </span>
+      </div>
     </div>
 
     <h3 class="my-2 text-sm font-medium text-gray-900">Artifacts</h3>
@@ -111,6 +121,15 @@ export default {
         }
       }
       return sum;
+    },
+
+    inventoryScore() {
+      try {
+        return this.save.artifacts.inventory_score;
+      } catch (e) {
+        console.error(e);
+        return undefined;
+      }
     },
   },
 
