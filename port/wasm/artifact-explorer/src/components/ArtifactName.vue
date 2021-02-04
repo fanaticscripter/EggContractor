@@ -21,7 +21,15 @@
           <div class="flex-shrink-0 h-4 w-4">
             <img class="h-4 w-4" :src="iconURL(artifact.iconPath, 32)" />
           </div>
-          <div class="ml-1 text-sm" :class="[rarityFgClass(artifact.afxRarity)]">
+          <div
+            class="ml-1 text-sm"
+            :class="[
+              rarityFgClass(artifact.afxRarity),
+              ...(!noAvailabilityMarker && artifact.available_from_missions === false
+                ? ['text-red-900', 'dagger']
+                : []),
+            ]"
+          >
             <span>{{ artifact.name }}</span>
             <template v-if="showTier">
               <span> (T{{ artifact.tier_number }})</span>
@@ -45,6 +53,7 @@ export default {
     showTier: Boolean,
     plainText: Boolean,
     noLink: Boolean,
+    noAvailabilityMarker: Boolean,
   },
 
   methods: {
@@ -65,3 +74,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.dagger:after {
+  content: "\2020";
+}
+</style>

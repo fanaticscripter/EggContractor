@@ -46,11 +46,12 @@ type Tier struct {
 
 	CoreTier
 
-	Quality             float64                   `json:"quality"`
-	Craftable           bool                      `json:"craftable"`
-	HasRarities         bool                      `json:"has_rarities"`
-	PossibleAfxRarities []api.ArtifactSpec_Rarity `json:"possible_afx_rarities"`
-	HasEffects          bool                      `json:"has_effects"`
+	Quality               float64                   `json:"quality"`
+	Craftable             bool                      `json:"craftable"`
+	HasRarities           bool                      `json:"has_rarities"`
+	PossibleAfxRarities   []api.ArtifactSpec_Rarity `json:"possible_afx_rarities"`
+	HasEffects            bool                      `json:"has_effects"`
+	AvailableFromMissions bool                      `json:"available_from_missions"`
 
 	Effects []*Effect `json:"effects"`
 	Recipe  *Recipe   `json:"recipe"`

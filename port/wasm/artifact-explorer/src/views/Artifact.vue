@@ -1,12 +1,20 @@
 <template>
-  <div id="artifact-card" class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md">
+  <div
+    id="artifact-card"
+    class="-mx-4 sm:mx-0 bg-gray-50 overflow-hidden sm:rounded-lg sm:shadow-md"
+  >
     <div class="bg-gray-100 px-4 py-4 border-b border-gray-200 sm:px-6">
       <div class="-ml-4 -mt-2 flex items-center justify-between flex-wrap sm:flex-nowrap">
         <div class="ml-4 mt-2">
-          <artifact-name :artifact="artifact" :showTier="true" :noLink="true" />
+          <artifact-name
+            :artifact="artifact"
+            :showTier="true"
+            :noLink="true"
+            :noAvailabilityMarker="true"
+          />
         </div>
         <div class="ml-4 mt-2 flex-shrink-0">
-          <share :id="artifact.id" :domElementId="'artifact-card'"/>
+          <share :id="artifact.id" :domElementId="'artifact-card'" />
         </div>
       </div>
     </div>
@@ -160,6 +168,10 @@
         </ul>
       </div>
     </template>
+
+    <div class="px-4 pb-4 sm:px-6 text-xs text-gray-500">
+      &dagger; Not available from missions.
+    </div>
   </div>
 </template>
 

@@ -24,7 +24,14 @@
                       }"
                     >
                       <img class="h-8 w-8" :src="iconURL(tier.iconPath, 128)" alt="" />
-                      <div class="text-xs text-gray-500">
+                      <div
+                        class="text-xs"
+                        :class="
+                          tier.available_from_missions
+                            ? 'text-gray-500'
+                            : ['text-red-900', 'dagger']
+                        "
+                      >
                         {{ tier.tier_name }}
                       </div>
                     </div>
@@ -59,3 +66,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.dagger:after {
+  content: "\2020";
+}
+</style>
