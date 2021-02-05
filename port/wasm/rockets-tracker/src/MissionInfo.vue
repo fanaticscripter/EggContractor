@@ -3,7 +3,7 @@
     <li v-for="(mission, index) in activeMissions" :key="index" class="col-span-1 flex flex-col text-center bg-gray-50 rounded-2xl shadow-lg divide-y divide-gray-200">
       <div class="flex-1 flex flex-col p-6">
         <div class="w-36 h-36 flex-shrink-0 mx-auto relative" :class="[durationTypeFgClass(mission.durationTypeDisplay)]">
-          <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full" :src="iconURL(mission.shipIconPath, 256)" :alt="mission.shipName">
+          <img class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full" :src="iconURL(mission.shipIconPath, 256)">
           <progress-ring :radius="72" :stroke="2" :duration="mission.durationSeconds" :deadline="mission.returnTimestamp"></progress-ring>
         </div>
         <h3 class="mt-4 text-gray-900 text-sm font-medium">{{ mission.shipName }}</h3>
@@ -82,14 +82,14 @@
 
     <div v-if="unlockProgress" class="-mt-2 mb-2 -space-y-1">
       <div v-if="unlockProgress.nextShipToLaunch && (!unlockProgress.nextShipToUnlock || unlockProgress.nextShipToLaunch.name !== unlockProgress.nextShipToUnlock.name)" class="text-sm text-center space-x-1">
-        <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToLaunch.iconPath, 128)" alt="">
+        <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToLaunch.iconPath, 128)">
         <span class="whitespace-nowrap">
           {{ unlockProgress.nextShipToLaunch.name }} unlocked
         </span>
       </div>
 
       <div v-if="unlockProgress.nextShipToUnlock" class="text-sm text-center space-x-1">
-        <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToUnlock.iconPath, 128)" alt="">
+        <img class="inline w-8 h-8" :src="iconURL(unlockProgress.nextShipToUnlock.iconPath, 128)">
         <span class="whitespace-nowrap">
           {{ unlockProgress.nextShipToUnlock.name }} unlock:
           <span class="font-medium">
@@ -112,7 +112,7 @@
         </div>
         <template v-if="furtherShipsToUnlockExpanded">
           <div v-for="ship in unlockProgress.furtherShipsToUnlock" :key="ship.name" class="text-sm text-center space-x-1">
-            <img class="inline w-8 h-8" :src="iconURL(ship.iconPath, 128)" alt="">
+            <img class="inline w-8 h-8" :src="iconURL(ship.iconPath, 128)">
             <span class="whitespace-nowrap">
               {{ ship.name }} unlock:
               <span class="font-medium">
@@ -144,7 +144,7 @@
                 <template v-for="ship in missionStats.ships" :key="ship.shipName">
                   <tr class="text-gray-500">
                     <td class="relative px-6 py-1.5 border-r whitespace-nowrap text-sm" :rowspan="ship.types.length + 1">
-                      <img class="absolute top-1/2 left-6 transform -translate-y-1/2 w-12 h-12" :src="iconURL(ship.shipIconPath, 128)" :alt="ship.shipName">
+                      <img class="absolute top-1/2 left-6 transform -translate-y-1/2 w-12 h-12" :src="iconURL(ship.shipIconPath, 128)">
                       <span class="pl-14">{{ ship.shipName }}</span>
                     </td>
                     <td class="px-6 py-1.5 bg-gray-50 whitespace-nowrap text-center text-sm">Aggregate</td>

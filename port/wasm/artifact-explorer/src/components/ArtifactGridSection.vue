@@ -23,7 +23,7 @@
                         allowHTML: true,
                       }"
                     >
-                      <img class="h-8 w-8" :src="iconURL(tier.iconPath, 128)" alt="" />
+                      <img class="h-8 w-8" :src="iconURL(tier.iconPath, 128)"/>
                       <div
                         class="text-xs"
                         :class="

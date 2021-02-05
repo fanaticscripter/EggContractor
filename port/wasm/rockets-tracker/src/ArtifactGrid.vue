@@ -26,14 +26,17 @@
                   class="flex items-center space-x-2"
                   :class="{ 'opacity-30': !tier.unlocked }"
                 >
-                  <a v-if="spoilers || tier.unlocked" :href="iconURL(tier.iconPath)" target="_blank">
-                    <img class="h-12 w-12" :src="iconURL(tier.iconPath, 128)" alt="" />
+                  <a
+                    v-if="spoilers || tier.unlocked"
+                    :href="iconURL(tier.iconPath)"
+                    target="_blank"
+                  >
+                    <img class="h-12 w-12" :src="iconURL(tier.iconPath, 128)" />
                   </a>
                   <img
                     v-else
                     class="h-12 w-12 silhouette"
                     :src="iconURL(tier.iconPath, 128)"
-                    alt=""
                     v-tippy="{ content: 'turn on &quot;show unseen items&quot; to unlock' }"
                   />
 
