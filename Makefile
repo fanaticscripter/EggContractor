@@ -10,7 +10,7 @@ dev: go webpack-dev postcss-dev
 	ln -sf ../static/egginc-extras public/egginc-extras
 
 go: protobuf
-	go build
+	GOFLAGS=-trimpath go build
 
 protobuf:
 	protoc --proto_path=. --go_out=paths=source_relative:. api/egginc.proto

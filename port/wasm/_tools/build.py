@@ -22,6 +22,7 @@ def wasm_handler(args):
     env = os.environ.copy()
     env["GOOS"] = "js"
     env["GOARCH"] = "wasm"
+    env["GOFLAGS"] = "-trimpath"
     print("go build -ldflags='-s -w' -o dist/app.wasm")
     subprocess.check_call(
         ["go", "build", "-ldflags=-s -w", "-o", "dist/app.wasm"], env=env
