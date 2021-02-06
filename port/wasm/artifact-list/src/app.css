@@ -1,3 +1,25 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+
+.other-tools-ribbon {
+  @apply block absolute top-0 right-0 transform rotate-45 shadow
+    bg-gray-600 hover:bg-gray-500
+    transition-colors duration-200 ease-in-out;
+  /* width / 2 + margin-right == height / 2 + margin-top */
+  width: 150px;
+  height: 30px;
+  margin-right: -40px;
+  margin-top: 20px;
+  text-indent: -9999px;
+}
+
+.other-tools-ribbon:after {
+  @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+    text-center align-middle text-white font-medium uppercase whitespace-nowrap
+    w-full border border-white border-dotted;
+  content: "Other tools";
+  font-size: 10px;
+  line-height: 24px;
+  text-indent: 0;
+}
