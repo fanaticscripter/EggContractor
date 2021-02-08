@@ -10,10 +10,22 @@
         class="mt-1 block w-full pl-3 pr-10 py-1 text-sm bg-gray-50 border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-md"
         v-model="artifactId"
       >
-        <option value="">-- Select an artifact --</option>
-        <option v-for="artifact in commonArtifacts" :key="artifact.id" :value="artifact.id">
-          <artifact-name :artifact="artifact" :showTier="true" :plainText="true" />
-        </option>
+        <option value="">-- Select an item --</option>
+        <optgroup label="Artifacts">
+          <option v-for="item in artifactsSection" :key="item.id" :value="item.id">
+            {{ item.selectName }}
+          </option>
+        </optgroup>
+        <optgroup label="Stones">
+          <option v-for="item in stonesSection" :key="item.id" :value="item.id">
+            {{ item.selectName }}
+          </option>
+        </optgroup>
+        <optgroup label="Ingredients">
+          <option v-for="item in ingredientsSection" :key="item.id" :value="item.id">
+            {{ item.selectName }}
+          </option>
+        </optgroup>
       </select>
     </div>
     <p class="text-xs text-gray-500">
@@ -40,15 +52,22 @@ export default {
 
   data() {
     return {
+      commonArtifacts: this.artifacts.filter(artifact => artifact.afxRarity === 0),
       artifactId: this.initialArtifactId || "",
     };
   },
 
   computed: {
-    commonArtifacts() {
-      return this.artifacts
-        .filter(artifact => artifact.afxRarity === 0)
-        .sort((artifact1, artifact2) => stringCmp(artifact1.sortKey, artifact2.sortKey));
+    artifactsSection() {
+      return this.sectionByType("Artifact");
+    },
+
+    stonesSection() {
+      return this.sectionByType("Stone");
+    },
+
+    ingredientsSection() {
+      return this.sectionByType("Ingredient");
     },
   },
 
@@ -66,6 +85,18 @@ export default {
           },
         });
       }
+    },
+  },
+
+  methods: {
+    sectionByType(typeName) {
+      return this.commonArtifacts
+        .filter(item => item.family.type === typeName)
+        .map(item => ({
+          id: item.id,
+          selectName: `${item.family.name}, ${item.tier_name} (T${item.tier_number})`,
+        }))
+        .sort((item1, item2) => stringCmp(item1.selectName, item2.selectName));
     },
   },
 };
