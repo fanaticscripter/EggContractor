@@ -92,11 +92,16 @@ export default {
     sectionByType(typeName) {
       return this.commonArtifacts
         .filter(item => item.family.type === typeName)
+        .sort((item1, item2) => {
+          if (item1.family.id !== item2.family.id) {
+            return stringCmp(item1.family.name, item2.family.name);
+          }
+          return item1.tier_number - item2.tier_number;
+        })
         .map(item => ({
           id: item.id,
           selectName: `${item.family.name}, ${item.tier_name} (T${item.tier_number})`,
-        }))
-        .sort((item1, item2) => stringCmp(item1.selectName, item2.selectName));
+        }));
     },
   },
 };
