@@ -23,16 +23,29 @@
                         allowHTML: true,
                       }"
                     >
-                      <img class="h-8 w-8" :src="iconURL(tier.iconPath, 128)"/>
-                      <div
-                        class="text-xs"
-                        :class="
-                          tier.available_from_missions
-                            ? 'text-gray-500'
-                            : ['text-red-900', 'dagger']
-                        "
-                      >
-                        {{ tier.tier_name }}
+                      <img class="h-12 w-12" :src="iconURL(tier.iconPath, 128)" />
+                      <div>
+                        <div
+                          class="text-xs"
+                          :class="
+                            tier.available_from_missions
+                              ? 'text-gray-500'
+                              : ['text-red-900', 'dagger']
+                          "
+                        >
+                          {{ tier.tier_name }}
+                        </div>
+                        <div class="text-xs text-gray-400 tabular-nums truncate">
+                          <template
+                            v-for="(rarity, index) in tier.effects"
+                            :key="rarity.afx_rarity"
+                          >
+                            <template v-if="index !== 0">, </template>
+                            <span :class="rarityFgClass(rarity.afx_rarity)">{{
+                              rarity.effect_size
+                            }}</span>
+                          </template>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -54,6 +67,10 @@ export default {
     families: Array,
   },
 
+  data() {
+    console.log(this.families[0]);
+  },
+
   methods: {
     iconURL,
 
@@ -62,6 +79,19 @@ export default {
       // null (stone fragment).
       const tier = family.tiers[family.tiers.length - 1];
       return tier.has_effects ? tier.effects[0].family_effect : "";
+    },
+
+    rarityFgClass(rarity) {
+      switch (rarity) {
+        case 1:
+          return "text-blue-400";
+        case 2:
+          return "text-purple-400";
+        case 3:
+          return "text-yellow-400";
+        default:
+          return "";
+      }
     },
   },
 };
