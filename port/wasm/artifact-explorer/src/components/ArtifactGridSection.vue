@@ -1,5 +1,5 @@
 <template>
-  <ul class="my-2 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+  <ul class="my-2 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <template v-for="family in families" :key="family.name">
       <li class="col-span-1 bg-gray-50 rounded-lg shadow divide-y divide-gray-200">
         <div class="w-full flex items-center justify-between px-6 py-4 space-x-4">
@@ -35,15 +35,44 @@
                         >
                           {{ tier.tier_name }}
                         </div>
+
+                        <!-- Effects and slots -->
                         <div class="text-xs text-gray-400 tabular-nums truncate">
                           <template
                             v-for="(rarity, index) in tier.effects"
                             :key="rarity.afx_rarity"
                           >
                             <template v-if="index !== 0">, </template>
-                            <span :class="rarityFgClass(rarity.afx_rarity)">{{
-                              rarity.effect_size
-                            }}</span>
+                            <span
+                              class="inline-flex items-center space-x-px"
+                              :class="rarityFgClass(rarity.afx_rarity)"
+                            >
+                              <span>{{ rarity.effect_size }}</span>
+                              <!-- One dot for each slot -->
+                              <template v-if="rarity.slots > 0">
+                                <svg
+                                  viewBox="0 0 10 30"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-3 w-1"
+                                >
+                                  <circle cx="5" cy="5" r="3" fill="currentColor" />
+                                  <circle
+                                    v-if="rarity.slots >= 2"
+                                    cx="5"
+                                    cy="15"
+                                    r="3"
+                                    fill="currentColor"
+                                  />
+                                  <circle
+                                    v-if="rarity.slots >= 3"
+                                    cx="5"
+                                    cy="25"
+                                    r="3"
+                                    fill="currentColor"
+                                  />
+                                </svg>
+                              </template>
+                            </span>
                           </template>
                         </div>
                       </div>
