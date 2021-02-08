@@ -54,7 +54,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -129,7 +131,9 @@
               "initial": 90,
               "minimum": 9
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -216,7 +220,9 @@
               "initial": 14672,
               "minimum": 1467
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -323,7 +329,9 @@
               "initial": 110353,
               "minimum": 11035
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -380,7 +388,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -455,7 +465,9 @@
               "initial": 47,
               "minimum": 4
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -530,7 +542,9 @@
               "initial": 4749,
               "minimum": 474
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -627,7 +641,9 @@
               "initial": 28986,
               "minimum": 2898
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -684,7 +700,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -759,7 +777,9 @@
               "initial": 383,
               "minimum": 38
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -856,7 +876,9 @@
               "initial": 7628,
               "minimum": 762
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -963,7 +985,9 @@
               "initial": 41267,
               "minimum": 4126
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -1020,7 +1044,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1095,7 +1121,9 @@
               "initial": 3302,
               "minimum": 330
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1182,7 +1210,9 @@
               "initial": 26353,
               "minimum": 2635
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1279,7 +1309,9 @@
               "initial": 139253,
               "minimum": 13925
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -1336,7 +1368,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1401,7 +1435,9 @@
               "initial": 1186,
               "minimum": 118
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1498,7 +1534,9 @@
               "initial": 13827,
               "minimum": 1382
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1605,7 +1643,9 @@
               "initial": 58753,
               "minimum": 5875
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -1662,7 +1702,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1737,7 +1779,9 @@
               "initial": 3982,
               "minimum": 398
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1834,7 +1878,9 @@
               "initial": 25099,
               "minimum": 2509
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -1931,7 +1977,9 @@
               "initial": 110546,
               "minimum": 11054
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -1988,7 +2036,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2063,7 +2113,9 @@
               "initial": 5167,
               "minimum": 516
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2150,7 +2202,9 @@
               "initial": 28986,
               "minimum": 2898
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2247,7 +2301,9 @@
               "initial": 163774,
               "minimum": 16377
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -2304,7 +2360,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2379,7 +2437,9 @@
               "initial": 3982,
               "minimum": 398
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2466,7 +2526,9 @@
               "initial": 16466,
               "minimum": 1646
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2573,7 +2635,9 @@
               "initial": 58753,
               "minimum": 5875
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -2630,7 +2694,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2705,7 +2771,9 @@
               "initial": 7084,
               "minimum": 708
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2792,7 +2860,9 @@
               "initial": 30365,
               "minimum": 3036
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -2899,7 +2969,9 @@
               "initial": 295510,
               "minimum": 29551
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -2956,7 +3028,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3021,7 +3095,9 @@
               "initial": 6075,
               "minimum": 607
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3108,7 +3184,9 @@
               "initial": 23885,
               "minimum": 2388
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3205,7 +3283,9 @@
               "initial": 86083,
               "minimum": 8608
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -3262,7 +3342,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3339,7 +3421,9 @@
               "initial": 10082,
               "minimum": 1008
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3416,7 +3500,9 @@
               "initial": 39572,
               "minimum": 3957
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3513,7 +3599,9 @@
               "initial": 168121,
               "minimum": 16812
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -3570,7 +3658,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3635,7 +3725,9 @@
               "initial": 9425,
               "minimum": 942
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3722,7 +3814,9 @@
               "initial": 37923,
               "minimum": 3792
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3829,7 +3923,9 @@
               "initial": 226570,
               "minimum": 22657
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -3886,7 +3982,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -3973,7 +4071,9 @@
               "initial": 8798,
               "minimum": 879
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4070,7 +4170,9 @@
               "initial": 30365,
               "minimum": 3036
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4167,7 +4269,9 @@
               "initial": 139253,
               "minimum": 13925
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -4224,7 +4328,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4301,7 +4407,9 @@
               "initial": 16466,
               "minimum": 1646
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4388,7 +4496,9 @@
               "initial": 50473,
               "minimum": 5047
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4485,7 +4595,34 @@
               "initial": 237296,
               "minimum": 23729
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "phoenix-feather-3",
+              "afx_id": 11,
+              "afx_level": 2,
+              "name": "Brilliant phoenix feather",
+              "tier_number": 3,
+              "tier_name": "Brilliant",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_phoenix_feather_3.png",
+              "count": 12
+            },
+            {
+              "id": "book-of-basan-3",
+              "afx_id": 10,
+              "afx_level": 2,
+              "name": "Fortified book of Basan",
+              "tier_number": 3,
+              "tier_name": "Fortified",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_book_of_basan_3.png",
+              "count": 1
+            }
+          ]
         }
       ]
     },
@@ -4542,7 +4679,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4629,7 +4768,9 @@
               "initial": 18400,
               "minimum": 1840
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4726,7 +4867,9 @@
               "initial": 67892,
               "minimum": 6789
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4833,7 +4976,34 @@
               "initial": 306621,
               "minimum": 30662
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "quantum-metronome-3",
+              "afx_id": 24,
+              "afx_level": 2,
+              "name": "Perfect quantum metronome",
+              "tier_number": 3,
+              "tier_name": "Perfect",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_quantum_metronome_3.png",
+              "count": 9
+            },
+            {
+              "id": "tau-ceti-geode-3",
+              "afx_id": 18,
+              "afx_level": 2,
+              "name": "Radiant Tau Ceti geode",
+              "tier_number": 3,
+              "tier_name": "Radiant",
+              "afx_type": 2,
+              "type": "Ingredient",
+              "icon_filename": "afx_tau_ceti_geode_3.png",
+              "count": 4
+            }
+          ]
         }
       ]
     },
@@ -4890,7 +5060,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -4967,7 +5139,9 @@
               "initial": 24487,
               "minimum": 2448
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5044,7 +5218,9 @@
               "initial": 80590,
               "minimum": 8059
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5141,7 +5317,34 @@
               "initial": 271970,
               "minimum": 27197
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "mercurys-lens-4",
+              "afx_id": 30,
+              "afx_level": 3,
+              "name": "Meggnificent Mercury's lens",
+              "tier_number": 4,
+              "tier_name": "Meggnificent",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_mercurys_lens_4.png",
+              "count": 2
+            },
+            {
+              "id": "dilithium-monocle-3",
+              "afx_id": 28,
+              "afx_level": 2,
+              "name": "Eggsacting dilithium monocle",
+              "tier_number": 3,
+              "tier_name": "Eggsacting",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_dilithium_monocle_3.png",
+              "count": 10
+            }
+          ]
         }
       ]
     },
@@ -5198,7 +5401,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5275,7 +5480,9 @@
               "initial": 26353,
               "minimum": 2635
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5362,7 +5569,9 @@
               "initial": 88920,
               "minimum": 8892
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5459,7 +5668,46 @@
               "initial": 215900,
               "minimum": 21590
             }
-          }
+          },
+          "ingredients_available_from_missions": false,
+          "hard_dependencies": [
+            {
+              "id": "quantum-metronome-3",
+              "afx_id": 24,
+              "afx_level": 2,
+              "name": "Perfect quantum metronome",
+              "tier_number": 3,
+              "tier_name": "Perfect",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_quantum_metronome_3.png",
+              "count": 27
+            },
+            {
+              "id": "titanium-actuator-3",
+              "afx_id": 29,
+              "afx_level": 2,
+              "name": "Precise titanium actuator",
+              "tier_number": 3,
+              "tier_name": "Precise",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_titanium_actuator_3.png",
+              "count": 8
+            },
+            {
+              "id": "tau-ceti-geode-3",
+              "afx_id": 18,
+              "afx_level": 2,
+              "name": "Radiant Tau Ceti geode",
+              "tier_number": 3,
+              "tier_name": "Radiant",
+              "afx_type": 2,
+              "type": "Ingredient",
+              "icon_filename": "afx_tau_ceti_geode_3.png",
+              "count": 12
+            }
+          ]
         }
       ]
     },
@@ -5516,7 +5764,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5593,7 +5843,9 @@
               "initial": 36322,
               "minimum": 3632
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5680,7 +5932,9 @@
               "initial": 113895,
               "minimum": 11389
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5787,7 +6041,34 @@
               "initial": 442510,
               "minimum": 44251
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "ship-in-a-bottle-3",
+              "afx_id": 25,
+              "afx_level": 2,
+              "name": "Complex ship in a bottle",
+              "tier_number": 3,
+              "tier_name": "Complex",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_ship_in_a_bottle_3.png",
+              "count": 12
+            },
+            {
+              "id": "book-of-basan-3",
+              "afx_id": 10,
+              "afx_level": 2,
+              "name": "Fortified book of Basan",
+              "tier_number": 3,
+              "tier_name": "Fortified",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_book_of_basan_3.png",
+              "count": 2
+            }
+          ]
         }
       ]
     },
@@ -5844,7 +6125,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -5921,7 +6204,9 @@
               "initial": 77412,
               "minimum": 7741
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6008,7 +6293,9 @@
               "initial": 259516,
               "minimum": 25951
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6115,7 +6402,46 @@
               "initial": 1220591,
               "minimum": 122059
             }
-          }
+          },
+          "ingredients_available_from_missions": false,
+          "hard_dependencies": [
+            {
+              "id": "ship-in-a-bottle-3",
+              "afx_id": 25,
+              "afx_level": 2,
+              "name": "Complex ship in a bottle",
+              "tier_number": 3,
+              "tier_name": "Complex",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_ship_in_a_bottle_3.png",
+              "count": 48
+            },
+            {
+              "id": "tachyon-deflector-3",
+              "afx_id": 26,
+              "afx_level": 2,
+              "name": "Robust tachyon deflector",
+              "tier_number": 3,
+              "tier_name": "Robust",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_tachyon_deflector_3.png",
+              "count": 12
+            },
+            {
+              "id": "book-of-basan-3",
+              "afx_id": 10,
+              "afx_level": 2,
+              "name": "Fortified book of Basan",
+              "tier_number": 3,
+              "tier_name": "Fortified",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_book_of_basan_3.png",
+              "count": 8
+            }
+          ]
         }
       ]
     },
@@ -6172,7 +6498,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6249,7 +6577,9 @@
               "initial": 114405,
               "minimum": 11440
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6336,7 +6666,9 @@
               "initial": 360472,
               "minimum": 36047
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6433,7 +6765,46 @@
               "initial": 934701,
               "minimum": 93470
             }
-          }
+          },
+          "ingredients_available_from_missions": false,
+          "hard_dependencies": [
+            {
+              "id": "phoenix-feather-3",
+              "afx_id": 11,
+              "afx_level": 2,
+              "name": "Brilliant phoenix feather",
+              "tier_number": 3,
+              "tier_name": "Brilliant",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_phoenix_feather_3.png",
+              "count": 48
+            },
+            {
+              "id": "book-of-basan-3",
+              "afx_id": 10,
+              "afx_level": 2,
+              "name": "Fortified book of Basan",
+              "tier_number": 3,
+              "tier_name": "Fortified",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_book_of_basan_3.png",
+              "count": 16
+            },
+            {
+              "id": "light-of-eggendil-3",
+              "afx_id": 5,
+              "afx_level": 2,
+              "name": "Glowing light of Eggendil",
+              "tier_number": 3,
+              "tier_name": "Glowing",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_light_eggendil_3.png",
+              "count": 10
+            }
+          ]
         }
       ]
     },
@@ -6490,7 +6861,9 @@
               "slots": 0
             }
           ],
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6577,7 +6950,9 @@
               "initial": 67892,
               "minimum": 6789
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6664,7 +7039,9 @@
               "initial": 168121,
               "minimum": 16812
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6761,7 +7138,46 @@
               "initial": 330068,
               "minimum": 33006
             }
-          }
+          },
+          "ingredients_available_from_missions": false,
+          "hard_dependencies": [
+            {
+              "id": "phoenix-feather-3",
+              "afx_id": 11,
+              "afx_level": 2,
+              "name": "Brilliant phoenix feather",
+              "tier_number": 3,
+              "tier_name": "Brilliant",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_phoenix_feather_3.png",
+              "count": 48
+            },
+            {
+              "id": "book-of-basan-3",
+              "afx_id": 10,
+              "afx_level": 2,
+              "name": "Fortified book of Basan",
+              "tier_number": 3,
+              "tier_name": "Fortified",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_book_of_basan_3.png",
+              "count": 4
+            },
+            {
+              "id": "light-of-eggendil-3",
+              "afx_id": 5,
+              "afx_level": 2,
+              "name": "Glowing light of Eggendil",
+              "tier_number": 3,
+              "tier_name": "Glowing",
+              "afx_type": 0,
+              "type": "Artifact",
+              "icon_filename": "afx_light_eggendil_3.png",
+              "count": 10
+            }
+          ]
         }
       ]
     },
@@ -6808,7 +7224,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6872,7 +7290,9 @@
               "initial": 406,
               "minimum": 40
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -6936,7 +7356,9 @@
               "initial": 12447,
               "minimum": 1244
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7000,7 +7422,9 @@
               "initial": 155125,
               "minimum": 15512
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -7047,7 +7471,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7111,7 +7537,9 @@
               "initial": 262,
               "minimum": 26
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7175,7 +7603,9 @@
               "initial": 18048,
               "minimum": 1804
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7251,7 +7681,9 @@
               "initial": 183125,
               "minimum": 18312
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -7298,7 +7730,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7362,7 +7796,9 @@
               "initial": 495,
               "minimum": 49
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7426,7 +7862,9 @@
               "initial": 18048,
               "minimum": 1804
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7490,7 +7928,9 @@
               "initial": 236946,
               "minimum": 23694
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -7537,7 +7977,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7601,7 +8043,9 @@
               "initial": 5196,
               "minimum": 519
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7665,7 +8109,9 @@
               "initial": 29988,
               "minimum": 2998
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7729,7 +8175,22 @@
               "initial": 303837,
               "minimum": 30383
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "terra-stone-3",
+              "afx_id": 37,
+              "afx_level": 1,
+              "name": "Rich terra stone",
+              "tier_number": 3,
+              "tier_name": "Rich",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_terra_stone_3.png",
+              "count": 20
+            }
+          ]
         }
       ]
     },
@@ -7776,7 +8237,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7840,7 +8303,9 @@
               "initial": 5196,
               "minimum": 519
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7904,7 +8369,9 @@
               "initial": 64770,
               "minimum": 6477
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -7968,7 +8435,9 @@
               "initial": 250022,
               "minimum": 25002
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -8015,7 +8484,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8079,7 +8550,9 @@
               "initial": 19671,
               "minimum": 1967
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8143,7 +8616,9 @@
               "initial": 82572,
               "minimum": 8257
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8207,7 +8682,22 @@
               "initial": 459362,
               "minimum": 45936
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "dilithium-stone-3",
+              "afx_id": 31,
+              "afx_level": 1,
+              "name": "Eggsquisite dilithium stone",
+              "tier_number": 3,
+              "tier_name": "Eggsquisite",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_dilithium_stone_3.png",
+              "count": 15
+            }
+          ]
         }
       ]
     },
@@ -8254,7 +8744,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8318,7 +8810,9 @@
               "initial": 7252,
               "minimum": 725
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8382,7 +8876,9 @@
               "initial": 25118,
               "minimum": 2511
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8446,7 +8942,9 @@
               "initial": 228278,
               "minimum": 22827
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -8493,7 +8991,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8557,7 +9057,9 @@
               "initial": 10507,
               "minimum": 1050
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8621,7 +9123,9 @@
               "initial": 63177,
               "minimum": 6317
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8685,7 +9189,22 @@
               "initial": 325027,
               "minimum": 32502
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "life-stone-3",
+              "afx_id": 38,
+              "afx_level": 1,
+              "name": "Good life stone",
+              "tier_number": 3,
+              "tier_name": "Good",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_life_stone_3.png",
+              "count": 15
+            }
+          ]
         }
       ]
     },
@@ -8732,7 +9251,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8796,7 +9317,9 @@
               "initial": 36603,
               "minimum": 3660
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8872,7 +9395,9 @@
               "initial": 185026,
               "minimum": 18502
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -8948,7 +9473,46 @@
               "initial": 774986,
               "minimum": 77498
             }
-          }
+          },
+          "ingredients_available_from_missions": false,
+          "hard_dependencies": [
+            {
+              "id": "soul-stone-4",
+              "afx_id": 34,
+              "afx_level": 2,
+              "name": "Radiant soul stone",
+              "tier_number": 4,
+              "tier_name": "Radiant",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_soul_stone_4.png",
+              "count": 4
+            },
+            {
+              "id": "clarity-stone-3",
+              "afx_id": 40,
+              "afx_level": 1,
+              "name": "Eggsquisite clarity stone",
+              "tier_number": 3,
+              "tier_name": "Eggsquisite",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_clarity_stone_3.png",
+              "count": 20
+            },
+            {
+              "id": "prophecy-stone-3",
+              "afx_id": 39,
+              "afx_level": 1,
+              "name": "Eggsquisite prophecy stone",
+              "tier_number": 3,
+              "tier_name": "Eggsquisite",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_prophecy_stone_3.png",
+              "count": 24
+            }
+          ]
         }
       ]
     },
@@ -8995,7 +9559,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9059,7 +9625,9 @@
               "initial": 50259,
               "minimum": 5025
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9123,7 +9691,9 @@
               "initial": 246536,
               "minimum": 24653
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9199,7 +9769,34 @@
               "initial": 731674,
               "minimum": 73167
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": [
+            {
+              "id": "soul-stone-4",
+              "afx_id": 34,
+              "afx_level": 2,
+              "name": "Radiant soul stone",
+              "tier_number": 4,
+              "tier_name": "Radiant",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_soul_stone_4.png",
+              "count": 2
+            },
+            {
+              "id": "prophecy-stone-3",
+              "afx_id": 39,
+              "afx_level": 1,
+              "name": "Eggsquisite prophecy stone",
+              "tier_number": 3,
+              "tier_name": "Eggsquisite",
+              "afx_type": 1,
+              "type": "Stone",
+              "icon_filename": "afx_prophecy_stone_3.png",
+              "count": 12
+            }
+          ]
         }
       ]
     },
@@ -9244,7 +9841,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9297,7 +9896,9 @@
               "initial": 3982,
               "minimum": 398
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9350,7 +9951,9 @@
               "initial": 31373,
               "minimum": 3137
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -9395,7 +9998,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9448,7 +10053,9 @@
               "initial": 7867,
               "minimum": 786
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9501,7 +10108,9 @@
               "initial": 53149,
               "minimum": 5314
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     },
@@ -9546,7 +10155,9 @@
           "has_effects": false,
           "available_from_missions": true,
           "effects": null,
-          "recipe": null
+          "recipe": null,
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9599,7 +10210,9 @@
               "initial": 3753,
               "minimum": 375
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         },
         {
           "family": {
@@ -9652,7 +10265,9 @@
               "initial": 37794,
               "minimum": 3779
             }
-          }
+          },
+          "ingredients_available_from_missions": true,
+          "hard_dependencies": null
         }
       ]
     }

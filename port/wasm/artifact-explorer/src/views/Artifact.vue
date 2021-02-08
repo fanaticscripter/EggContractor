@@ -102,6 +102,33 @@
       <hr />
     </template>
 
+    <template v-if="!artifact.ingredients_available_from_missions">
+      <div class="px-4 py-4 sm:px-6 space-y-2">
+        <div class="flex items-center space-x-1">
+          <span class="text-sm font-medium text-gray-500">Hard dependencies</span>
+          <info
+            v-tippy="{
+              content:
+                'For an item unobtainable from missions, the hard dependencies are the highest level mission-obtainable items in the crafting ingredient tree; i.e., you absolutely have to gather these ingredients to craft the item in question, no way to skip them.',
+            }"
+          />
+        </div>
+        <div>
+          <table class="tabular-nums">
+            <tbody>
+              <tr v-for="ingredient in artifact.hard_dependencies" :key="ingredient.id">
+                <td class="text-left text-sm">{{ ingredient.count }}&times;</td>
+                <td class="pl-1">
+                  <artifact-name :artifact="id2artifact[ingredient.id]" :showTier="true" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <hr />
+    </template>
+
     <template v-if="recursiveIngredients.length > 0">
       <div class="px-4 py-4 sm:px-6 space-y-2">
         <div class="flex items-center space-x-1">
@@ -149,6 +176,27 @@
       </div>
     </template>
 
+    <template v-if="hardDependents.length > 0">
+      <hr />
+      <div class="px-4 py-4 sm:px-6 space-y-2">
+        <div class="flex items-center space-x-1">
+          <span class="text-sm font-medium text-gray-500">Hard dependents</span>
+          <info
+            v-tippy="{
+              content:
+                'For a mission-obtainable item, a hard dependent is a mission-unobtainable item that must use the indicated number of this item in its crafting tree.',
+            }"
+          />
+        </div>
+        <ul class="grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2 xl:grid-cols-3 tabular-nums">
+          <li v-for="dependent in hardDependents" :key="dependent.item.id" class="flex">
+            <span class="text-sm pr-1">{{ dependent.count }}x in</span>
+            <artifact-name :artifact="dependent.item" :showTier="true" />
+          </li>
+        </ul>
+      </div>
+    </template>
+
     <template v-if="recursiveDependents.length > 0">
       <hr />
       <div class="px-4 py-4 sm:px-6 space-y-2">
@@ -169,9 +217,7 @@
       </div>
     </template>
 
-    <div class="px-4 pb-4 sm:px-6 text-xs text-gray-500">
-      &dagger; Not available from missions.
-    </div>
+    <div class="px-4 pb-4 sm:px-6 text-xs text-gray-500">&dagger; Not available from missions.</div>
   </div>
 </template>
 
@@ -256,6 +302,27 @@ export default {
 
     dependents() {
       return this.calculateDependents(this.artifact);
+    },
+
+    hardDependents() {
+      const allDependents = [].concat(
+        this.dependents.map(it => it.item),
+        this.recursiveDependents
+      );
+      const hard = [];
+      for (const dependent of allDependents) {
+        if (dependent.hard_dependencies !== null) {
+          for (const ingr of dependent.hard_dependencies) {
+            if (ingr.id === this.artifact.id) {
+              hard.push({
+                item: dependent,
+                count: ingr.count,
+              });
+            }
+          }
+        }
+      }
+      return hard.sort((it1, it2) => stringCmp(it1.item.sortKey, it2.item.sortKey));
     },
 
     recursiveDependents() {

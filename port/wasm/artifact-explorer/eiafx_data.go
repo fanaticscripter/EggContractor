@@ -55,6 +55,9 @@ type Tier struct {
 
 	Effects []*Effect `json:"effects"`
 	Recipe  *Recipe   `json:"recipe"`
+
+	IngredientsAvailableFromMissions bool         `json:"ingredients_available_from_missions"`
+	HardDependencies                 []Ingredient `json:"hard_dependencies"`
 }
 
 type CoreTier struct {
