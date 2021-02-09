@@ -1,5 +1,10 @@
 <template>
-  {{ hours }}:{{ minutes.toString().padStart(2, "0") }}:{{ seconds.toString().padStart(2, "0") }}
+  <template v-if="days > 0">
+    {{ days }}:{{ hours.toString().padStart(2, "0") }}:{{ minutes.toString().padStart(2, "0") }}:{{ seconds.toString().padStart(2, "0") }}
+  </template>
+  <template v-else>
+    {{ hours }}:{{ minutes.toString().padStart(2, "0") }}:{{ seconds.toString().padStart(2, "0") }}
+  </template>
 </template>
 
 <script>
@@ -28,8 +33,11 @@ export default {
     }, 200);
   },
   computed: {
+    days () {
+      return Math.floor(this.remainingSeconds / 86400);
+    },
     hours() {
-      return Math.floor(this.remainingSeconds / 3600);
+      return Math.floor(this.remainingSeconds / 3600) % 24;
     },
     minutes() {
       return Math.floor(this.remainingSeconds / 60) % 60;
