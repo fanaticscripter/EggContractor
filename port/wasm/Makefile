@@ -1,6 +1,6 @@
 MAKEFLAGS ?= -j4
 
-targets = artifact-explorer artifact-list mission-list past-contracts rockets-tracker
+targets = artifact-explorer artifact-list consumption-sheet mission-list past-contracts rockets-tracker
 init-targets = $(addprefix init-,$(targets))
 clean-targets = $(addprefix clean-,$(targets))
 
