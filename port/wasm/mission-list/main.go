@@ -399,7 +399,7 @@ const _afxConfigJSON = `
         {
           "durationType": "LONG",
           "seconds": 3600,
-          "quality": 1.55,
+          "quality": 1.6,
           "minQuality": 0,
           "maxQuality": 2.35,
           "capacity": 8
@@ -407,7 +407,7 @@ const _afxConfigJSON = `
         {
           "durationType": "EPIC",
           "seconds": 10800,
-          "quality": 1.68,
+          "quality": 1.75,
           "minQuality": 0,
           "maxQuality": 2.7,
           "capacity": 9
@@ -421,25 +421,25 @@ const _afxConfigJSON = `
         {
           "durationType": "SHORT",
           "seconds": 2700,
-          "quality": 1.7,
+          "quality": 1.9,
           "minQuality": 0,
-          "maxQuality": 2.2,
+          "maxQuality": 3.1,
           "capacity": 12
         },
         {
           "durationType": "LONG",
           "seconds": 5400,
-          "quality": 1.85,
+          "quality": 2.1,
           "minQuality": 0,
-          "maxQuality": 2.7,
+          "maxQuality": 3.3,
           "capacity": 14
         },
         {
           "durationType": "EPIC",
           "seconds": 14400,
-          "quality": 1.9,
+          "quality": 2.4,
           "minQuality": 0,
-          "maxQuality": 3.2,
+          "maxQuality": 3.6,
           "capacity": 15
         }
       ],
@@ -451,25 +451,25 @@ const _afxConfigJSON = `
         {
           "durationType": "SHORT",
           "seconds": 5400,
-          "quality": 2,
+          "quality": 2.5,
           "minQuality": 0,
-          "maxQuality": 2.7,
+          "maxQuality": 3.2,
           "capacity": 18
         },
         {
           "durationType": "LONG",
           "seconds": 14400,
-          "quality": 2.2,
+          "quality": 2.7,
           "minQuality": 0,
-          "maxQuality": 3.3,
+          "maxQuality": 3.6,
           "capacity": 20
         },
         {
           "durationType": "EPIC",
           "seconds": 28800,
-          "quality": 2.4,
+          "quality": 2.9,
           "minQuality": 0,
-          "maxQuality": 3.8,
+          "maxQuality": 4.2,
           "capacity": 22
         }
       ],
@@ -483,7 +483,7 @@ const _afxConfigJSON = `
           "seconds": 10800,
           "quality": 3,
           "minQuality": 0.5,
-          "maxQuality": 3.9,
+          "maxQuality": 4.1,
           "capacity": 10
         },
         {
@@ -491,7 +491,7 @@ const _afxConfigJSON = `
           "seconds": 21600,
           "quality": 3.3,
           "minQuality": 0.5,
-          "maxQuality": 4.4,
+          "maxQuality": 4.5,
           "capacity": 12
         },
         {
@@ -499,7 +499,7 @@ const _afxConfigJSON = `
           "seconds": 43200,
           "quality": 3.5,
           "minQuality": 0.5,
-          "maxQuality": 5.2,
+          "maxQuality": 5.4,
           "capacity": 14
         }
       ],
@@ -513,7 +513,7 @@ const _afxConfigJSON = `
           "seconds": 14400,
           "quality": 3.5,
           "minQuality": 1.5,
-          "maxQuality": 4.2,
+          "maxQuality": 4.3,
           "capacity": 18
         },
         {
@@ -521,7 +521,7 @@ const _afxConfigJSON = `
           "seconds": 43200,
           "quality": 3.8,
           "minQuality": 1.6,
-          "maxQuality": 4.9,
+          "maxQuality": 5,
           "capacity": 21
         },
         {
@@ -529,7 +529,7 @@ const _afxConfigJSON = `
           "seconds": 86400,
           "quality": 4.1,
           "minQuality": 1.75,
-          "maxQuality": 5.8,
+          "maxQuality": 5.9,
           "capacity": 24
         }
       ],
