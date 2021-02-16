@@ -19,6 +19,9 @@ import (
 )
 
 type localConfig struct {
+	Player struct {
+		Id string
+	}
 	Database config.DatabaseConfig
 	Export   struct {
 		CSVPath string `mapstructure:"csv_path"`
@@ -49,6 +52,10 @@ Each identifier either identifies a player or a coop. A player is identified by
 player ID; a coop is identified as contract-id@coop-code.
 
 Config file (defaults to config.toml):
+
+  [player]
+  # Player ID used in API request to retrieve active contracts. Required.
+  id = ""
 
   [database]
   # Path for contracts database. Required.
@@ -81,6 +88,10 @@ Flags:
 	err := loadConfig(cfgFile)
 	if err != nil {
 		log.Fatalf("error loading %s: %s", cfgFile, err)
+	}
+
+	if _config.Player.Id == "" {
+		log.Fatalf("%s: player.id required", cfgFile)
 	}
 
 	if _config.Database.Path == "" {
@@ -152,7 +163,7 @@ LoopPlayerIdSet:
 	}
 
 	log.Info("scraping currently active contracts")
-	getAndRecordActiveContracts()
+	getAndRecordActiveContracts(_config.Player.Id)
 
 	afterCount, err := db.GetContractCount()
 	if err != nil {
@@ -221,9 +232,9 @@ func getAndRecordPlayerContracts(playerId string) {
 	recordContracts(resp.Data.AllContractProperties())
 }
 
-func getAndRecordActiveContracts() {
+func getAndRecordActiveContracts(userId string) {
 	resp, err := api.RequestPeriodicals(&api.GetPeriodicalsRequestPayload{
-		UserId:   "EI1234567890123456",
+		UserId:   userId,
 		SoulEggs: 1e12,
 	})
 	if err != nil {
