@@ -22,12 +22,16 @@ jobs:
           make
       - name: Create config file
         run: |
-          cat >config.toml <<'EOF'
+          cat >config.toml <<EOF
+          [player]
+          id = "$API_USER_ID"
           [database]
           path = "data/contracts.db"
           [export]
           csv_path = "data/contracts.csv"
           EOF
+        env:
+          API_USER_ID: ${{ secrets.UPDATE_CONTRACTS_API_USER_ID }}
       - name: Update contracts
         run: |
           ./ContractAggregator --bootstrap-csv
