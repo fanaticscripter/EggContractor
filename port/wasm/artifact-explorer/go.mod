@@ -1,4 +1,4 @@
-module github.com/fanaticscripter/EggContractor/port/wasm/artifacts-cfg
+module github.com/fanaticscripter/EggContractor/port/wasm/artifact-explorer
 
 go 1.15
 
