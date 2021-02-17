@@ -26,7 +26,8 @@
         class="flex flex-wrap items-center justify-center space-x-1"
         v-tippy="{
           content:
-            'This estimate does not take into discounts from crafting sales (as the save file simply does not have that level of granularity). It may also be inaccurate if crafting cost parameters were ever changed server-side.',
+            'This estimate does not take into discounts from crafting sales (as the save file simply does not have that level of granularity). It may also be inaccurate if crafting cost parameters were ever changed server-side.<br>Note that stone-setting expenses are not included.',
+          allowHTML: true,
         }"
       >
         <span class="text-sm text-gray-900 truncate"
