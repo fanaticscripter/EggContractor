@@ -6,38 +6,23 @@ import (
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
-	"regexp"
+	"io/ioutil"
+	"log"
 	"strings"
 	"sync"
-	"syscall/js"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
-var (
-	_playerIdPattern   = regexp.MustCompile(`(?i)^EI\d+$`)
-	_nonIdCharsPattern = regexp.MustCompile(`[^A-Za-z0-9_-]+`)
-)
+const _appDataFile = "src/app-data.json"
 
-type result struct {
-	Successful bool        `json:"successful"`
-	Data       interface{} `json:"data"`
-	Err        string      `json:"error"`
-}
-
-func dataResult(data interface{}) *result {
-	return &result{
-		Successful: true,
-		Data:       data,
-	}
-}
-
-func errorResult(err error) *result {
-	return &result{
-		Successful: false,
-		Err:        err.Error(),
-	}
+type payload struct {
+	Ships        []*ship     `json:"ships"`
+	Missions     []*mission  `json:"missions"`
+	Artifacts    []*artifact `json:"artifacts"`
+	MissionsCSV  string      `json:"missionsCSV"`
+	ArtifactsCSV string      `json:"artifactsCSV"`
 }
 
 type ship struct {
@@ -72,15 +57,7 @@ type artifact struct {
 	Params    *artifactParams         `json:"params"`
 }
 
-type family struct {
-	Id       api.ArtifactSpec_Name `json:"id"`
-	Name     string                `json:"name"`
-	Effect   string                `json:"effect"`
-	Type     api.ArtifactSpec_Type `json:"type"`
-	TypeName string                `json:"typeName"`
-}
-
-func retrieveData() *result {
+func assemblePayload() (*payload, error) {
 	ctx, cancel := context.WithCancel(context.Background())
 	errs := make(chan error, 2)
 	var wg sync.WaitGroup
@@ -105,8 +82,7 @@ func retrieveData() *result {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		var err error
-		err = loadEiAfxData(ctx)
+		err := loadEiAfxData()
 		if err != nil {
 			errs <- err
 			cancel()
@@ -117,7 +93,7 @@ func retrieveData() *result {
 
 	select {
 	case err := <-errs:
-		return errorResult(err)
+		return nil, err
 	default:
 		// No error
 	}
@@ -154,7 +130,7 @@ func retrieveData() *result {
 	for _, p := range config.ArtifactParameters {
 		a, err := newArtifact(p)
 		if err != nil {
-			return errorResult(err)
+			return nil, err
 		}
 		artifacts = append(artifacts, a)
 	}
@@ -219,19 +195,13 @@ func retrieveData() *result {
 	w.Flush()
 	artifactsCSV := b.String()
 
-	return dataResult(struct {
-		Ships        []*ship     `json:"ships"`
-		Missions     []*mission  `json:"missions"`
-		Artifacts    []*artifact `json:"artifacts"`
-		MissionsCSV  string      `json:"missionsCSV"`
-		ArtifactsCSV string      `json:"artifactsCSV"`
-	}{
+	return &payload{
 		Ships:        ships,
 		Missions:     missions,
 		Artifacts:    artifacts,
 		MissionsCSV:  missionsCSV,
 		ArtifactsCSV: artifactsCSV,
-	})
+	}, nil
 }
 
 func missionId(ship api.MissionInfo_Spaceship, durationType api.MissionInfo_DurationType) string {
@@ -308,19 +278,17 @@ func newArtifact(p *artifactParams) (*artifact, error) {
 }
 
 func main() {
-	// I can't think of any communications mechanism other than global variables
-	// and callbacks. (Note that we can't set a directly global variable for the
-	// result, since when we do that the global variable seems to be somehow
-	// "cached" for a while when accessed immediately, so if we run two
-	// instances with different input args, when accessing the result of the
-	// second run we would somehow still get the result of the first run... I
-	// didn't investigate further since the callback route works despite the
-	// increased complexity.)
-	//
-	// Related:
-	// https://github.com/golang/go/issues/25612
-	// https://stackoverflow.com/q/56398142
-	res := retrieveData()
-	encoded, _ := json.Marshal(res)
-	js.Global().Call("wasmCallback", js.ValueOf(string(encoded)))
+	data, err := assemblePayload()
+	if err != nil {
+		log.Fatal(err)
+	}
+	encoded, err := json.MarshalIndent(data, "", "  ")
+	if err != nil {
+		log.Fatalf("error serializing app payload: %s", err)
+	}
+	encoded = append(encoded, '\n')
+	err = ioutil.WriteFile(_appDataFile, encoded, 0o644)
+	if err != nil {
+		log.Fatalf("error writing to %s: %s", _appDataFile, err)
+	}
 }

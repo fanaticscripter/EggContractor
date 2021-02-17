@@ -1,6 +1,6 @@
 MAKEFLAGS += -j4
 
-.PHONY: all init dist html wasm webpack postcss static clean serve
+.PHONY: all init dist html webpack postcss data clean serve
 
 all: clean
 	$(MAKE) dist
@@ -8,28 +8,23 @@ all: clean
 init:
 	yarn install
 
-dist: html static
-	../_tools/build.py dist --additional data.json
+dist: html
+	../_tools/build.py dist
 
 html: webpack postcss
-	cp -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" dist
 	../_tools/build.py html
 
-wasm:
-	../_tools/build.py wasm
-
-webpack: wasm
+webpack: data
 	yarn webpack
 
 postcss:
 	yarn postcss --env=production src/app.css -o dist/app.css
 
-static:
-	mkdir -p dist
-	cp -f ../_common/data/eiafx-data.json dist/data.json
+data:
+	go run .
 
 clean:
-	@$(RM) -r dist/index.html dist/*.*.js dist/wasm_exec.js dist/*.*.css dist/*.*.wasm dist/manifest.*.json dist/data.json
+	@$(RM) -r dist/index.html dist/*.*.css dist/*.*.js dist/manifest.*.json
 
 serve:
 	cd dist && npx serve

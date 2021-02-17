@@ -1,17 +1,9 @@
-const fs = require("fs");
 const path = require("path");
 
 const webpack = require("webpack");
 const TerserPlugin = require("terser-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-
-const wasmManifest = JSON.parse(fs.readFileSync("dist/manifest.wasm.json"));
-const wasmFile = wasmManifest["app.wasm"];
-if (!wasmFile) {
-  console.error("app.wasm mapping not found in dist/manifest.wasm.json");
-  process.exit(1);
-}
 
 module.exports = {
   mode: "production",
@@ -46,7 +38,6 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-      __WASM_FILE__: JSON.stringify(wasmFile),
       __VUE_OPTIONS_API__: true,
     }),
     new WebpackManifestPlugin({
@@ -54,9 +45,6 @@ module.exports = {
       publicPath: "",
     }),
   ],
-  externals: {
-    Go: "Go",
-  },
   optimization: {
     minimize: true,
     minimizer: [
@@ -71,7 +59,6 @@ module.exports = {
     ],
   },
   performance: {
-    maxEntrypointSize: 500000,
-    maxAssetSize: 500000,
+    hints: false,
   },
 };

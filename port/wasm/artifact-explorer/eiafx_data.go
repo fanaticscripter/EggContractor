@@ -1,22 +1,16 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"io/ioutil"
-	"net/http"
-	"time"
-
-	"golang.org/x/net/context/ctxhttp"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/pkg/errors"
 )
 
-var (
-	_client    *http.Client
-	_eiafxData *Store
-)
+const _eiafxDataFile = "../_common/data/eiafx-data.json"
+
+var _eiafxData *Store
 
 type Store struct {
 	Schema           string    `json:"$schema"`
@@ -106,27 +100,15 @@ type CraftingPrice struct {
 	Minimum uint32  `json:"minimum"`
 }
 
-func init() {
-	_client = &http.Client{
-		Timeout: 5 * time.Second,
-	}
-}
-
-func loadEiAfxData(ctx context.Context) error {
-	url := "data.json"
-	resp, err := ctxhttp.Get(ctx, _client, url)
+func loadEiAfxData() error {
+	body, err := ioutil.ReadFile(_eiafxDataFile)
 	if err != nil {
-		return errors.Wrapf(err, "GET %s", url)
-	}
-	defer resp.Body.Close()
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return errors.Wrapf(err, "GET %s", url)
+		return errors.Wrapf(err, "error reading %s", _eiafxDataFile)
 	}
 	_eiafxData = &Store{}
 	err = json.Unmarshal(body, _eiafxData)
 	if err != nil {
-		return errors.Wrapf(err, "error unmarshalling %s data", url)
+		return errors.Wrapf(err, "error unmarshalling %s", _eiafxDataFile)
 	}
 	return nil
 }
