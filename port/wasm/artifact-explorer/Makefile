@@ -26,7 +26,7 @@ postcss:
 
 static:
 	mkdir -p dist
-	cp -f static/data.json dist/data.json
+	cp -f ../_common/data/eiafx-data.json dist/data.json
 
 clean:
 	@$(RM) -r dist/index.html dist/*.*.js dist/wasm_exec.js dist/*.*.css dist/*.*.wasm dist/manifest.*.json dist/data.json

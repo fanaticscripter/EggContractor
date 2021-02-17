@@ -9,7 +9,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const _consumptionDataFile = "data/consumption-data.json"
+const _consumptionDataFile = "../_common/data/consumption-data.json"
 
 var _consumptionOutcomes []ConsumptionOutcome
 

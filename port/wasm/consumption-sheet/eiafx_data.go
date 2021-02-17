@@ -8,7 +8,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-const _eiafxDataFile = "data/eiafx-data.json"
+const _eiafxDataFile = "../_common/data/eiafx-data.json"
 
 var _eiafxData *Store
 
