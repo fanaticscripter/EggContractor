@@ -1,7 +1,11 @@
 <template>
   <div class="my-3 text-center">
     <div class="text-sm">Contracts completed: <strong class="font-semibold">{{ completedContractCount }}/{{ totalContractCount }}</strong></div>
-    <div class="text-sm">Prophecy eggs collected: <strong class="font-semibold">{{ collectedPEs }}/{{ totalPEs }}</strong></div>
+    <div class="mt-1 text-sm font-semibold">Prophecy eggs</div>
+    <div class="text-sm">From contracts: <strong class="font-semibold">{{ collectedContractPEs }}/{{ totalContractPEs }}</strong></div>
+    <div class="text-sm" v-tippy="{ content: trophyDetails, allowHTML: true }">From trophies: <strong class="font-semibold">{{ otherPEProgress.trophies.collected }}/{{ otherPEProgress.trophies.total }}</strong></div>
+    <div class="text-sm">From daily gifts: <strong class="font-semibold">{{ otherPEProgress.gifts.collected }}/{{ otherPEProgress.gifts.total }}</strong></div>
+    <div class="text-sm">Total: <strong class="font-semibold">{{ collectedPEs }}/{{ totalPEs }}</strong></div>
   </div>
 
   <div class="sm:mx-auto sm:max-w-xs sm:w-full mx-4 my-3">
@@ -123,6 +127,7 @@ export default {
   props: {
     contracts: Array,
     csvdata: String,
+    otherPEProgress: Object,
   },
   data() {
     return {
@@ -142,14 +147,28 @@ export default {
     completedContractCount() {
       return this.contracts.filter(contract => !contract.incomplete).length;
     },
-    totalPEs() {
+    totalContractPEs() {
       return this.contracts.reduce((total, contract) => total + contract.prophecyEggCount, 0);
     },
-    collectedPEs() {
+    collectedContractPEs() {
       return this.contracts.reduce(
         (total, contract) =>
           total + contract.prophecyEggCount * (contract.prophecyEggNotCollected ? 0 : 1),
         0
+      );
+    },
+    totalPEs() {
+      return (
+        this.totalContractPEs +
+        this.otherPEProgress.trophies.total +
+        this.otherPEProgress.gifts.total
+      );
+    },
+    collectedPEs() {
+      return (
+        this.collectedContractPEs +
+        this.otherPEProgress.trophies.collected +
+        this.otherPEProgress.gifts.collected
       );
     },
     taggedContracts() {
@@ -179,6 +198,12 @@ export default {
         }
       }
       return contracts;
+    },
+    trophyDetails() {
+      const details = this.otherPEProgress.trophies.eggs.map(
+        e => `${e.egg}: ${e.trophy}, ${e.collected}/${e.total}`
+      );
+      return '<div class="">' + details.join("<br>") + "</div>";
     },
   },
   methods: {

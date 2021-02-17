@@ -279,12 +279,116 @@ func retrieveContractList(playerId string) *result {
 	}
 	w.Flush()
 
+	type peProgress struct {
+		Total     int `json:"total"`
+		Collected int `json:"collected"`
+	}
+
+	type eggPEProgress struct {
+		peProgress
+		Egg    string `json:"egg"`
+		Trophy string `json:"trophy"`
+	}
+
+	type trophiesPEProgress struct {
+		peProgress
+		Eggs []*eggPEProgress `json:"eggs"`
+	}
+
+	type otherPEProgress struct {
+		Trophies *trophiesPEProgress `json:"trophies"`
+		Gifts    *peProgress         `json:"gifts"`
+	}
+
+	trophyLevels := fc.Data.Progress.FarmTrophyLevel
+	trophies := &trophiesPEProgress{}
+	if len(trophyLevels) == 19 {
+		for e := api.EggType_EDIBLE; e <= api.EggType_ENLIGHTENMENT; e++ {
+			trophyLevel := trophyLevels[e-1]
+			trophy := "No trophy"
+			if trophyLevel > 0 {
+				trophy = strings.Title(strings.ToLower(trophyLevel.String()))
+			}
+			eggProgress := &eggPEProgress{
+				Egg:    e.Display(),
+				Trophy: trophy,
+			}
+
+			if e == api.EggType_ENLIGHTENMENT {
+				eggProgress.Total = 21
+				if trophyLevel >= api.TrophyType_BRONZE {
+					eggProgress.Collected += 1
+				}
+				if trophyLevel >= api.TrophyType_SILVER {
+					eggProgress.Collected += 2
+				}
+				if trophyLevel >= api.TrophyType_GOLD {
+					eggProgress.Collected += 3
+				}
+				if trophyLevel >= api.TrophyType_PLATINUM {
+					eggProgress.Collected += 5
+				}
+				if trophyLevel >= api.TrophyType_DIAMOND {
+					eggProgress.Collected += 10
+				}
+			} else {
+				// All other eggs offer PE only at diamond, or none at all.
+				var diamondPECount int
+				switch e {
+				case api.EggType_EDIBLE:
+					diamondPECount = 5
+				case api.EggType_SUPERFOOD:
+					diamondPECount = 4
+				case api.EggType_MEDICAL:
+					diamondPECount = 3
+				case api.EggType_ROCKET_FUEL:
+					diamondPECount = 2
+
+				case api.EggType_SUPER_MATERIAL:
+					fallthrough
+				case api.EggType_FUSION:
+					fallthrough
+				case api.EggType_QUANTUM:
+					fallthrough
+				case api.EggType_IMMORTALITY:
+					fallthrough
+				case api.EggType_TACHYON:
+					diamondPECount = 1
+
+				default:
+					// No PE.
+					continue
+				}
+				eggProgress.Total = diamondPECount
+				if trophyLevel == api.TrophyType_DIAMOND {
+					eggProgress.Collected = diamondPECount
+				}
+			}
+
+			trophies.Total += eggProgress.Total
+			trophies.Collected += eggProgress.Collected
+			trophies.Eggs = append(trophies.Eggs, eggProgress)
+		}
+	} else {
+		log.Warnf("unexpected number of trophy levels: %d instead of %d", len(trophyLevels), 19)
+	}
+
+	gifts := &peProgress{
+		Total:     24,
+		Collected: int(fc.Data.Progress.NumDailyGiftsCollected) / 28,
+	}
+
 	return dataResult(struct {
-		Contracts []contractSummary `json:"contracts"`
-		CSV       string            `json:"csv"`
+		Contracts       []contractSummary `json:"contracts"`
+		CSV             string            `json:"csv"`
+		OtherPEProgress otherPEProgress   `json:"otherPEProgress"`
 	}{
 		Contracts: contracts,
 		CSV:       b.String(),
+		OtherPEProgress: otherPEProgress{
+			Trophies: trophies,
+			Gifts:    gifts,
+		},
 	})
 }
 

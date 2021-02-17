@@ -97,7 +97,11 @@
     </div>
   </template>
   <template v-else>
-    <contract-table :contracts="contracts" :csvdata="csvdata"></contract-table>
+    <contract-table
+      :contracts="contracts"
+      :csvdata="csvdata"
+      :otherPEProgress="otherPEProgress"
+    ></contract-table>
   </template>
 </template>
 
@@ -137,6 +141,8 @@ export default {
       playerId,
       playerIdSubmitted: false,
       contracts: [],
+      csvdata: null,
+      otherPEProgress: null,
       contractsLoading: false,
       error: "",
     };
@@ -160,9 +166,12 @@ export default {
       this.contractsLoading = true;
       this.error = "";
       try {
-        const { contracts, csv: csvdata } = await this.retrievePastContracts(playerId);
+        const { contracts, csv: csvdata, otherPEProgress } = await this.retrievePastContracts(
+          playerId
+        );
         this.contracts = contracts;
         this.csvdata = csvdata;
+        this.otherPEProgress = otherPEProgress;
         this.contractsLoading = false;
         this.error = null;
       } catch (err) {
