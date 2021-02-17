@@ -18,19 +18,7 @@
               'The ID asked for here is the unique ID used by Egg, Inc.\'s server to identify your account. You can find it in game screen -> nine dots menu -> Settings -> Privacy & Data, at the very bottom. It should look like EI1234567890123456. Your old game services ID prior to the Artifact Update does not work here. Also note that the ID is case-sensitive.',
           }"
         >
-          <svg
-            class="h-4 w-4 text-gray-400"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <info />
           <span class="text-xs text-gray-500">Where do I find my ID?</span>
         </span>
       </div>
@@ -138,6 +126,8 @@
 <script>
 import ArtifactInfo from "./ArtifactInfo.vue";
 import MissionInfo from "./MissionInfo.vue";
+import Info from '../../artifact-explorer/src/components/Info.vue';
+
 import { getLocalStorage, setLocalStorage } from "./utils";
 
 const whatsNew = [
@@ -166,6 +156,7 @@ export default {
   components: {
     MissionInfo,
     ArtifactInfo,
+    Info,
   },
   props: {
     retrieveMissions: Function,
