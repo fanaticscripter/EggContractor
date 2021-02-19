@@ -2151,18 +2151,18 @@
             {
               "afx_rarity": 0,
               "rarity": "Common",
-              "effect": "+14% hab capacity",
+              "effect": "+15% hab capacity",
               "effect_target": "hab capacity",
-              "effect_size": "+14%",
+              "effect_size": "+15%",
               "family_effect": "Increases hen house capacity",
               "slots": 0
             },
             {
               "afx_rarity": 1,
               "rarity": "Rare",
-              "effect": "+15% hab capacity",
+              "effect": "+16% hab capacity",
               "effect_target": "hab capacity",
-              "effect_size": "+15%",
+              "effect_size": "+16%",
               "family_effect": "Increases hen house capacity",
               "slots": 1
             }
@@ -2593,9 +2593,9 @@
             {
               "afx_rarity": 3,
               "rarity": "Legendary",
-              "effect": "+129% drone frequency",
+              "effect": "+130% drone frequency",
               "effect_target": "drone frequency",
-              "effect_size": "+129%",
+              "effect_size": "+130%",
               "family_effect": "Increases drone frequency",
               "slots": 3
             }
@@ -4029,9 +4029,9 @@
             {
               "afx_rarity": 2,
               "rarity": "Epic",
-              "effect": "+14% internal hatchery rate",
+              "effect": "+15% internal hatchery rate",
               "effect_target": "internal hatchery rate",
-              "effect_size": "+14%",
+              "effect_size": "+15%",
               "family_effect": "Improves internal hatcheries",
               "slots": 2
             }
@@ -4807,9 +4807,9 @@
             {
               "afx_rarity": 0,
               "rarity": "Common",
-              "effect": "+14% egg laying rate",
+              "effect": "+15% egg laying rate",
               "effect_target": "egg laying rate",
-              "effect_size": "+14%",
+              "effect_size": "+15%",
               "family_effect": "Increases egg laying rate",
               "slots": 0
             },
@@ -5176,9 +5176,9 @@
             {
               "afx_rarity": 0,
               "rarity": "Common",
-              "effect": "+14% boost boost",
+              "effect": "+15% boost boost",
               "effect_target": "boost boost",
-              "effect_size": "+14%",
+              "effect_size": "+15%",
               "family_effect": "Increases boost effectiveness",
               "slots": 0
             }
@@ -6251,9 +6251,9 @@
             {
               "afx_rarity": 1,
               "rarity": "Rare",
-              "effect": "+12% co-op teammates' egg laying rate",
+              "effect": "+13% co-op teammates' egg laying rate",
               "effect_target": "co-op teammates' egg laying rate",
-              "effect_size": "+12%",
+              "effect_size": "+13%",
               "family_effect": "Increases co-op mates egg laying rate",
               "slots": 1
             }
@@ -6333,9 +6333,9 @@
             {
               "afx_rarity": 0,
               "rarity": "Common",
-              "effect": "+14% co-op teammates' egg laying rate",
+              "effect": "+15% co-op teammates' egg laying rate",
               "effect_target": "co-op teammates' egg laying rate",
-              "effect_size": "+14%",
+              "effect_size": "+15%",
               "family_effect": "Increases co-op mates egg laying rate",
               "slots": 0
             },
