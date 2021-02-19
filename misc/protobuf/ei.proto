@@ -683,11 +683,36 @@ message ServerGift {
     optional double reward_amount = 5;
 }
 
+message LiveConfig {
+    optional string config_id = 1;
+
+    optional BoostsConfig boosts_config = 2;
+    message BoostsConfig {
+        repeated ItemConfig item_configs = 1;
+        message ItemConfig {
+            optional string boost_id = 1;
+            optional uint32 price = 2;
+            optional uint32 token_price = 3;
+            optional double se_required = 4;
+        }
+    }
+}
+
+message InGameMail {
+    optional string id = 1;
+    optional string title = 2;
+    optional string message = 3;
+    optional string action = 4;
+    optional string url = 5;
+}
+
 message PeriodicalsResponse {
     optional SalesInfo sales = 1;
     optional EggIncCurrentEvents events = 2;
     optional ContractsResponse contracts = 3;
     repeated ServerGift gifts = 4;
+    optional LiveConfig live_config = 5;
+    repeated InGameMail mail_bag = 6;
 }
 
 message GetPeriodicalsRequest {
