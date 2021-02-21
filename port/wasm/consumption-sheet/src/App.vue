@@ -1,11 +1,11 @@
 <template>
-  <div class="flex-1 max-w-7xl w-full mx-auto px-4 xl:px-0 my-4">
+  <div class="flex-1 max-w-10xl w-full mx-auto px-4 my-4">
     <section id="index" class="mt-4 mb-6 hide-in-screenshot-mode">
       <h2 class="my-2">Index</h2>
 
       <p><a href="#consumption" class="text-sm text-gray-700 hover:text-gray-500 underline">What do I get from consuming ...?</a></p>
       <div
-        class="my-2 grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+        class="my-2 grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 3xl:grid-cols-8"
       >
         <a
           v-for="family in data.families"
@@ -22,7 +22,7 @@
         <a href="#sources" class="text-sm text-gray-700 hover:text-gray-500 underline">Consuming which items yields ... stone?</a>
       </p>
       <div
-        class="my-2 grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6"
+        class="my-2 grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 3xl:grid-cols-8"
       >
         <template v-for="family in data.families" :key="family.id">
           <a
@@ -68,7 +68,7 @@
         </p>
       </div>
 
-      <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
         <div
           v-for="family in data.families"
           :key="family.id"
@@ -136,7 +136,7 @@
         </p>
       </div>
 
-      <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
         <template v-for="family in data.families" :key="family.id">
           <div
             v-if="family.type === 'Stone'"

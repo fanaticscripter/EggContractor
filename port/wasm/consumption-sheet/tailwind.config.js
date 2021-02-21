@@ -6,9 +6,12 @@ module.exports = {
   darkMode: false,
   theme: {
     extend: {
+      screens: {
+        "3xl": "1600px",
+      },
       maxWidth: {
-        column: "12rem",
-      }
+        "10xl": "104rem",
+      },
     }
   },
   variants: {
