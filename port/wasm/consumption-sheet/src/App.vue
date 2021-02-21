@@ -43,7 +43,7 @@
       <div class="text-xs text-gray-500 space-y-1">
         <p>
           The following dataset contains the outcomes of consuming each item (different rarities are
-          condisered distinct) 20 times. The consumption outcome of an individual item is considered
+          condisered distinct) 100 times. The consumption outcome of an individual item is considered
           deterministic if all trial runs produced the exact same rewards; otherwise, the item is
           marked as nondeterministic
           <svg class="inline h-3" viewBox="0 0 640 512">
