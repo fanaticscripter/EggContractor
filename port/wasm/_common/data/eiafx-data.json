@@ -37,6 +37,9 @@
           "icon_filename": "afx_puzzle_cube_1.png",
           "quality": 0.5,
           "craftable": false,
+          "base_crafting_prices": [
+            10.884288412526262
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -81,6 +84,10 @@
           "icon_filename": "afx_puzzle_cube_2.png",
           "quality": 2.6,
           "craftable": true,
+          "base_crafting_prices": [
+            90.58078159145558,
+            410.0305232591817
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -158,6 +165,10 @@
           "icon_filename": "afx_puzzle_cube_3.png",
           "quality": 6.8,
           "craftable": true,
+          "base_crafting_prices": [
+            14672.71777625263,
+            45216.73929332794
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -247,6 +258,12 @@
           "icon_filename": "afx_puzzle_cube_4.png",
           "quality": 11.1,
           "craftable": true,
+          "base_crafting_prices": [
+            110353.42219619015,
+            301602.45588412683,
+            492851.4895720635,
+            684100.5232600003
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -371,6 +388,9 @@
           "icon_filename": "afx_lunar_totem_1.png",
           "quality": 0.7,
           "craftable": false,
+          "base_crafting_prices": [
+            10.884288412526262
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -415,6 +435,10 @@
           "icon_filename": "afx_lunar_totem_2.png",
           "quality": 2.4,
           "craftable": true,
+          "base_crafting_prices": [
+            47.913865687063435,
+            164.57493587807534
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -492,6 +516,10 @@
           "icon_filename": "afx_lunar_totem_3.png",
           "quality": 5.2,
           "craftable": true,
+          "base_crafting_prices": [
+            4749.2332108829305,
+            17593.435333745667
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -569,6 +597,11 @@
           "icon_filename": "afx_lunar_totem_4.png",
           "quality": 8.1,
           "craftable": true,
+          "base_crafting_prices": [
+            28986.362701660517,
+            107517.68681351424,
+            173728.14778686856
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -683,6 +716,9 @@
           "icon_filename": "afx_demeters_necklace_1.png",
           "quality": 1.2,
           "craftable": false,
+          "base_crafting_prices": [
+            10.884288412526262
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -727,6 +763,10 @@
           "icon_filename": "afx_demeters_necklace_2.png",
           "quality": 3.2,
           "craftable": true,
+          "base_crafting_prices": [
+            383.0591740345165,
+            1530.9632903454944
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -804,6 +844,11 @@
           "icon_filename": "afx_demeters_necklace_3.png",
           "quality": 5.8,
           "craftable": true,
+          "base_crafting_prices": [
+            7628.255209965302,
+            28275.141612526757,
+            39367.54864881382
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -903,6 +948,12 @@
           "icon_filename": "afx_demeters_necklace_4.png",
           "quality": 8.9,
           "craftable": true,
+          "base_crafting_prices": [
+            41267.36017482524,
+            127210.88825380939,
+            213154.41633279357,
+            299097.9444117777
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1027,6 +1078,9 @@
           "icon_filename": "afx_vial_martian_dust_1.png",
           "quality": 1.75,
           "craftable": false,
+          "base_crafting_prices": [
+            10.884288412526262
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -1071,6 +1125,10 @@
           "icon_filename": "afx_vial_martian_dust_2.png",
           "quality": 4.8,
           "craftable": true,
+          "base_crafting_prices": [
+            3302.9795121962293,
+            10162.610762734788
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1148,6 +1206,10 @@
           "icon_filename": "afx_vial_martian_dust_3.png",
           "quality": 7.9,
           "craftable": true,
+          "base_crafting_prices": [
+            26353.836097569845,
+            136107.93610618685
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1237,6 +1299,11 @@
           "icon_filename": "afx_vial_martian_dust_4.png",
           "quality": 12.5,
           "craftable": true,
+          "base_crafting_prices": [
+            139253.5905900352,
+            429312.9978566068,
+            1009431.81238975
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1351,6 +1418,9 @@
           "icon_filename": "afx_aurelian_brooch_1.png",
           "quality": 1.9,
           "craftable": false,
+          "base_crafting_prices": [
+            10.884288412526262
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -1395,6 +1465,9 @@
           "icon_filename": "afx_aurelian_brooch_2.png",
           "quality": 3.9,
           "craftable": true,
+          "base_crafting_prices": [
+            1186.987877072454
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -1462,6 +1535,11 @@
           "icon_filename": "afx_aurelian_brooch_3.png",
           "quality": 6.7,
           "craftable": true,
+          "base_crafting_prices": [
+            13827.006445722829,
+            42609.3201081484,
+            71391.63377057397
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1561,6 +1639,12 @@
           "icon_filename": "afx_aurelian_brooch_4.png",
           "quality": 9.8,
           "craftable": true,
+          "base_crafting_prices": [
+            58753.38978017112,
+            181122.20222075604,
+            303491.014661341,
+            425859.8271019259
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1685,6 +1769,9 @@
           "icon_filename": "afx_tungsten_ankh_1.png",
           "quality": 2,
           "craftable": false,
+          "base_crafting_prices": [
+            12.984473392276133
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -1729,6 +1816,10 @@
           "icon_filename": "afx_tungsten_ankh_2.png",
           "quality": 5,
           "craftable": true,
+          "base_crafting_prices": [
+            3982.3340851195303,
+            15550.008136948381
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1806,6 +1897,11 @@
           "icon_filename": "afx_tungsten_ankh_3.png",
           "quality": 7.8,
           "craftable": true,
+          "base_crafting_prices": [
+            25099.583520452903,
+            77363.89021974104,
+            181892.5036183173
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -1905,6 +2001,11 @@
           "icon_filename": "afx_tungsten_ankh_4.png",
           "quality": 11.7,
           "craftable": true,
+          "base_crafting_prices": [
+            110546.05156578263,
+            340804.5608651872,
+            801321.5794639963
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2019,6 +2120,9 @@
           "icon_filename": "afx_ornate_gusset_1.png",
           "quality": 2.5,
           "craftable": false,
+          "base_crafting_prices": [
+            66.59445840168073
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -2063,6 +2167,10 @@
           "icon_filename": "afx_ornate_gusset_2.png",
           "quality": 5.3,
           "craftable": true,
+          "base_crafting_prices": [
+            5167.170021853153,
+            26653.052041599185
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2140,6 +2248,10 @@
           "icon_filename": "afx_ornate_gusset_3.png",
           "quality": 8.1,
           "craftable": true,
+          "base_crafting_prices": [
+            28986.362701660517,
+            89347.24936344361
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2229,6 +2341,11 @@
           "icon_filename": "afx_ornate_gusset_4.png",
           "quality": 13.1,
           "craftable": true,
+          "base_crafting_prices": [
+            163774.02398097588,
+            846050.2497839301,
+            1187188.3626854073
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2343,6 +2460,9 @@
           "icon_filename": "afx_neo_medallion_1.png",
           "quality": 3,
           "craftable": false,
+          "base_crafting_prices": [
+            252.84770529002446
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -2387,6 +2507,10 @@
           "icon_filename": "afx_neo_medallion_2.png",
           "quality": 5,
           "craftable": true,
+          "base_crafting_prices": [
+            3982.3340851195303,
+            12912.343112462666
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2464,6 +2588,10 @@
           "icon_filename": "afx_neo_medallion_3.png",
           "quality": 7,
           "craftable": true,
+          "base_crafting_prices": [
+            16466.27574895902,
+            91063.11081687585
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2553,6 +2681,12 @@
           "icon_filename": "afx_neo_medallion_4.png",
           "quality": 9.8,
           "craftable": true,
+          "base_crafting_prices": [
+            58753.38978017112,
+            181122.20222075604,
+            303491.014661341,
+            425859.8271019259
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2677,6 +2811,9 @@
           "icon_filename": "afx_mercurys_lens_1.png",
           "quality": 3.3,
           "craftable": false,
+          "base_crafting_prices": [
+            462.7556672134456
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -2721,6 +2858,10 @@
           "icon_filename": "afx_mercurys_lens_2.png",
           "quality": 5.7,
           "craftable": true,
+          "base_crafting_prices": [
+            7084.307300210088,
+            21820.85189537198
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2798,6 +2939,10 @@
           "icon_filename": "afx_mercurys_lens_3.png",
           "quality": 8.2,
           "craftable": true,
+          "base_crafting_prices": [
+            30365.963161253043,
+            93600.70627760199
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -2887,6 +3032,12 @@
           "icon_filename": "afx_mercurys_lens_4.png",
           "quality": 13.5,
           "craftable": true,
+          "base_crafting_prices": [
+            295510.5697132079,
+            673832.6687644272,
+            1052154.7678156467,
+            1430476.8668668661
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -3011,6 +3162,9 @@
           "icon_filename": "afx_beak_of_midas_1.png",
           "quality": 3.5,
           "craftable": false,
+          "base_crafting_prices": [
+            654.6462527316444
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3055,6 +3209,9 @@
           "icon_filename": "afx_beak_of_midas_2.png",
           "quality": 5.5,
           "craftable": true,
+          "base_crafting_prices": [
+            6075.3342215176235
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3122,6 +3279,10 @@
           "icon_filename": "afx_beak_of_midas_3.png",
           "quality": 7.7,
           "craftable": true,
+          "base_crafting_prices": [
+            23885.78713820905,
+            75680.32503065384
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -3211,6 +3372,11 @@
           "icon_filename": "afx_beak_of_midas_4.png",
           "quality": 10.9,
           "craftable": true,
+          "base_crafting_prices": [
+            86083.09692165616,
+            296955.71642124397,
+            655554.7925999137
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -3325,6 +3491,9 @@
           "icon_filename": "afx_carved_rainstick_1.png",
           "quality": 4.2,
           "craftable": false,
+          "base_crafting_prices": [
+            1737.1258057153536
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3369,6 +3538,9 @@
           "icon_filename": "afx_carved_rainstick_2.png",
           "quality": 6.2,
           "craftable": true,
+          "base_crafting_prices": [
+            10082.597698931942
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3448,6 +3620,9 @@
           "icon_filename": "afx_carved_rainstick_3.png",
           "quality": 8.8,
           "craftable": true,
+          "base_crafting_prices": [
+            39572.06875196083
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3527,6 +3702,11 @@
           "icon_filename": "afx_carved_rainstick_4.png",
           "quality": 13.2,
           "craftable": true,
+          "base_crafting_prices": [
+            168121.51742510966,
+            868510.3380865735,
+            1218704.7484173055
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -3641,6 +3821,9 @@
           "icon_filename": "afx_interstellar_compass_1.png",
           "quality": 4.32,
           "craftable": false,
+          "base_crafting_prices": [
+            1997.9608216045747
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3685,6 +3868,9 @@
           "icon_filename": "afx_interstellar_compass_2.png",
           "quality": 6.1,
           "craftable": true,
+          "base_crafting_prices": [
+            9425.903016579625
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -3752,6 +3938,10 @@
           "icon_filename": "afx_interstellar_compass_3.png",
           "quality": 8.7,
           "craftable": true,
+          "base_crafting_prices": [
+            37923.86568706343,
+            116902.53437675915
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -3841,6 +4031,12 @@
           "icon_filename": "afx_interstellar_compass_4.png",
           "quality": 12.5,
           "craftable": true,
+          "base_crafting_prices": [
+            226570.17270178822,
+            516629.5799683598,
+            806688.9872349314,
+            1096748.394501503
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -3965,6 +4161,9 @@
           "icon_filename": "afx_the_chalice_1.png",
           "quality": 4.5,
           "craftable": false,
+          "base_crafting_prices": [
+            2436.48740397206
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -4009,6 +4208,10 @@
           "icon_filename": "afx_the_chalice_2.png",
           "quality": 6,
           "craftable": true,
+          "base_crafting_prices": [
+            8798.389851840679,
+            43638.569016142304
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4098,6 +4301,11 @@
           "icon_filename": "afx_the_chalice_3.png",
           "quality": 8.2,
           "craftable": true,
+          "base_crafting_prices": [
+            30365.963161253043,
+            93600.70627760199,
+            156835.44939395096
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4197,6 +4405,11 @@
           "icon_filename": "afx_the_chalice_4.png",
           "quality": 12.5,
           "craftable": true,
+          "base_crafting_prices": [
+            139253.5905900352,
+            719372.4051231784,
+            1009431.81238975
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4311,6 +4524,9 @@
           "icon_filename": "afx_phoenix_feather_1.png",
           "quality": 5,
           "craftable": false,
+          "base_crafting_prices": [
+            3982.3340851195303
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -4355,6 +4571,9 @@
           "icon_filename": "afx_phoenix_feather_2.png",
           "quality": 7,
           "craftable": true,
+          "base_crafting_prices": [
+            16466.27574895902
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -4434,6 +4653,10 @@
           "icon_filename": "afx_phoenix_feather_3.png",
           "quality": 9.4,
           "craftable": true,
+          "base_crafting_prices": [
+            50473.35522948144,
+            155593.96325546651
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4523,6 +4746,11 @@
           "icon_filename": "afx_phoenix_feather_4.png",
           "quality": 14.6,
           "craftable": true,
+          "base_crafting_prices": [
+            237296.52599969838,
+            731589.9350691278,
+            1720176.7532079872
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4662,6 +4890,9 @@
           "icon_filename": "afx_quantum_metronome_1.png",
           "quality": 5.3,
           "craftable": false,
+          "base_crafting_prices": [
+            5167.170021853153
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -4706,6 +4937,10 @@
           "icon_filename": "afx_quantum_metronome_2.png",
           "quality": 7.2,
           "craftable": true,
+          "base_crafting_prices": [
+            18400.435579257086,
+            63455.62080009511
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4795,6 +5030,11 @@
           "icon_filename": "afx_quantum_metronome_3.png",
           "quality": 10.2,
           "craftable": true,
+          "base_crafting_prices": [
+            67892.95266783626,
+            209300.4596913331,
+            337004.163369746
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -4894,6 +5134,12 @@
           "icon_filename": "afx_quantum_metronome_4.png",
           "quality": 14.5,
           "craftable": true,
+          "base_crafting_prices": [
+            306621.05881638423,
+            789508.1521106493,
+            1272395.2454049143,
+            1755282.3386991795
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -5043,6 +5289,9 @@
           "icon_filename": "afx_dilithium_monocle_1.png",
           "quality": 5.45,
           "craftable": false,
+          "base_crafting_prices": [
+            5839.0495942893185
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5087,6 +5336,9 @@
           "icon_filename": "afx_dilithium_monocle_2.png",
           "quality": 7.75,
           "craftable": true,
+          "base_crafting_prices": [
+            24487.66975599118
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5166,6 +5418,9 @@
           "icon_filename": "afx_dilithium_monocle_3.png",
           "quality": 10.7,
           "craftable": true,
+          "base_crafting_prices": [
+            80590.78159145554
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5245,6 +5500,11 @@
           "icon_filename": "afx_dilithium_monocle_4.png",
           "quality": 15.2,
           "craftable": true,
+          "base_crafting_prices": [
+            271970.13787116244,
+            1405014.6975062075,
+            1971536.97732373
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -5384,6 +5644,9 @@
           "icon_filename": "afx_titanium_actuator_1.png",
           "quality": 5.5,
           "craftable": false,
+          "base_crafting_prices": [
+            6075.3342215176235
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5428,6 +5691,9 @@
           "icon_filename": "afx_titanium_actuator_2.png",
           "quality": 7.9,
           "craftable": true,
+          "base_crafting_prices": [
+            26353.836097569845
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5507,6 +5773,10 @@
           "icon_filename": "afx_titanium_actuator_3.png",
           "quality": 11,
           "craftable": true,
+          "base_crafting_prices": [
+            88920.44682929825,
+            274130.49059383944
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -5596,6 +5866,11 @@
           "icon_filename": "afx_titanium_actuator_4.png",
           "quality": 14.2,
           "craftable": true,
+          "base_crafting_prices": [
+            215900.7257144192,
+            1115348.0276652183,
+            1565071.678640618
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -5747,6 +6022,9 @@
           "icon_filename": "afx_ship_in_a_bottle_1.png",
           "quality": 6.2,
           "craftable": false,
+          "base_crafting_prices": [
+            10082.597698931942
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5791,6 +6069,9 @@
           "icon_filename": "afx_ship_in_a_bottle_2.png",
           "quality": 8.6,
           "craftable": true,
+          "base_crafting_prices": [
+            36322.08776382367
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -5870,6 +6151,10 @@
           "icon_filename": "afx_ship_in_a_bottle_3.png",
           "quality": 11.8,
           "craftable": true,
+          "base_crafting_prices": [
+            113895.40446427745,
+            351130.97685396334
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -5959,6 +6244,12 @@
           "icon_filename": "afx_ship_in_a_bottle_4.png",
           "quality": 15.2,
           "craftable": true,
+          "base_crafting_prices": [
+            442510.33730818,
+            1009032.6171257024,
+            1575554.896943225,
+            2142077.1767607476
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -6108,6 +6399,9 @@
           "icon_filename": "afx_tachyon_deflector_1.png",
           "quality": 7.25,
           "craftable": false,
+          "base_crafting_prices": [
+            25004.06272054376
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -6152,6 +6446,9 @@
           "icon_filename": "afx_tachyon_deflector_2.png",
           "quality": 9.25,
           "craftable": true,
+          "base_crafting_prices": [
+            77412.17339000841
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -6231,6 +6528,10 @@
           "icon_filename": "afx_tachyon_deflector_3.png",
           "quality": 13,
           "craftable": true,
+          "base_crafting_prices": [
+            259516.13593495343,
+            591755.4482275364
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -6320,6 +6621,12 @@
           "icon_filename": "afx_tachyon_deflector_4.png",
           "quality": 17,
           "craftable": true,
+          "base_crafting_prices": [
+            1220591.9609198547,
+            2190500.99243116,
+            2869969.122841922,
+            3694657.703802956
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -6481,6 +6788,9 @@
           "icon_filename": "afx_book_of_basan_1.png",
           "quality": 8,
           "craftable": false,
+          "base_crafting_prices": [
+            27649.208085869246
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -6525,6 +6835,9 @@
           "icon_filename": "afx_book_of_basan_2.png",
           "quality": 10.3,
           "craftable": true,
+          "base_crafting_prices": [
+            114405.16112254915
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -6604,6 +6917,10 @@
           "icon_filename": "afx_book_of_basan_3.png",
           "quality": 13.3,
           "craftable": true,
+          "base_crafting_prices": [
+            360472.9141829376,
+            1079292.0864457446
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -6693,6 +7010,11 @@
           "icon_filename": "afx_book_of_basan_4.png",
           "quality": 16.8,
           "craftable": true,
+          "base_crafting_prices": [
+            934701.7962797529,
+            2520239.325981542,
+            3313008.090832436
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -6844,6 +7166,9 @@
           "icon_filename": "afx_light_eggendil_1.png",
           "quality": 8.2,
           "craftable": false,
+          "base_crafting_prices": [
+            30365.963161253043
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0
@@ -6888,6 +7213,10 @@
           "icon_filename": "afx_light_eggendil_2.png",
           "quality": 10.2,
           "craftable": true,
+          "base_crafting_prices": [
+            67892.95266783626,
+            234201.08564302573
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -6977,6 +7306,10 @@
           "icon_filename": "afx_light_eggendil_3.png",
           "quality": 13.2,
           "craftable": true,
+          "base_crafting_prices": [
+            168121.51742510966,
+            518315.9277558416
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -7066,6 +7399,11 @@
           "icon_filename": "afx_light_eggendil_4.png",
           "quality": 16.1,
           "craftable": true,
+          "base_crafting_prices": [
+            330068.88139860204,
+            1705165.3306623492,
+            2392713.5552942227
+          ],
           "has_rarities": true,
           "possible_afx_rarities": [
             0,
@@ -7219,6 +7557,9 @@
           "icon_filename": "afx_lunar_stone_1.png",
           "quality": 1.7,
           "craftable": false,
+          "base_crafting_prices": [
+            10.8
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -7252,6 +7593,9 @@
           "icon_filename": "afx_lunar_stone_2.png",
           "quality": 3.15,
           "craftable": true,
+          "base_crafting_prices": [
+            406.73373916515897
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7318,6 +7662,9 @@
           "icon_filename": "afx_lunar_stone_3.png",
           "quality": 6.25,
           "craftable": true,
+          "base_crafting_prices": [
+            12447.66175556308
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7384,6 +7731,9 @@
           "icon_filename": "afx_lunar_stone_4.png",
           "quality": 12.25,
           "craftable": true,
+          "base_crafting_prices": [
+            155125.2824260733
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7466,6 +7816,9 @@
           "icon_filename": "afx_shell_stone_1.png",
           "quality": 2,
           "craftable": false,
+          "base_crafting_prices": [
+            12.700000000000001
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -7499,6 +7852,9 @@
           "icon_filename": "afx_shell_stone_2.png",
           "quality": 2.95,
           "craftable": true,
+          "base_crafting_prices": [
+            262.01446039016
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7565,6 +7921,9 @@
           "icon_filename": "afx_shell_stone_3.png",
           "quality": 6.85,
           "craftable": true,
+          "base_crafting_prices": [
+            18048.11950456052
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7631,6 +7990,9 @@
           "icon_filename": "afx_shell_stone_4.png",
           "quality": 12.85,
           "craftable": true,
+          "base_crafting_prices": [
+            183125.19330979357
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7725,6 +8087,9 @@
           "icon_filename": "afx_tachyon_stone_1.png",
           "quality": 3,
           "craftable": false,
+          "base_crafting_prices": [
+            229.70000000000002
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -7758,6 +8123,9 @@
           "icon_filename": "afx_tachyon_stone_2.png",
           "quality": 3.25,
           "craftable": true,
+          "base_crafting_prices": [
+            495.9365625269282
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7824,6 +8192,9 @@
           "icon_filename": "afx_tachyon_stone_3.png",
           "quality": 6.85,
           "craftable": true,
+          "base_crafting_prices": [
+            18048.11950456052
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7890,6 +8261,9 @@
           "icon_filename": "afx_tachyon_stone_4.png",
           "quality": 13.85,
           "craftable": true,
+          "base_crafting_prices": [
+            236946.43179478962
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -7972,6 +8346,9 @@
           "icon_filename": "afx_terra_stone_1.png",
           "quality": 4,
           "craftable": false,
+          "base_crafting_prices": [
+            1226.6999999999998
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -8005,6 +8382,9 @@
           "icon_filename": "afx_terra_stone_2.png",
           "quality": 5.1,
           "craftable": true,
+          "base_crafting_prices": [
+            5196.192179801517
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8071,6 +8451,9 @@
           "icon_filename": "afx_terra_stone_3.png",
           "quality": 7.8,
           "craftable": true,
+          "base_crafting_prices": [
+            29988.96267971526
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8137,6 +8520,9 @@
           "icon_filename": "afx_terra_stone_4.png",
           "quality": 14.9,
           "craftable": true,
+          "base_crafting_prices": [
+            303837.60124653333
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8232,6 +8618,9 @@
           "icon_filename": "afx_soul_stone_1.png",
           "quality": 4.5,
           "craftable": false,
+          "base_crafting_prices": [
+            2205.1999999999994
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -8265,6 +8654,9 @@
           "icon_filename": "afx_soul_stone_2.png",
           "quality": 5.1,
           "craftable": true,
+          "base_crafting_prices": [
+            5196.192179801517
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8331,6 +8723,9 @@
           "icon_filename": "afx_soul_stone_3.png",
           "quality": 9.1,
           "craftable": true,
+          "base_crafting_prices": [
+            64770.66459274569
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8397,6 +8792,9 @@
           "icon_filename": "afx_soul_stone_4.png",
           "quality": 13.1,
           "craftable": true,
+          "base_crafting_prices": [
+            250022.00660314143
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8479,6 +8877,9 @@
           "icon_filename": "afx_dilithium_stone_1.png",
           "quality": 5,
           "craftable": false,
+          "base_crafting_prices": [
+            3603.7
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -8512,6 +8913,9 @@
           "icon_filename": "afx_dilithium_stone_2.png",
           "quality": 7,
           "craftable": true,
+          "base_crafting_prices": [
+            19671.158435586985
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8578,6 +8982,9 @@
           "icon_filename": "afx_dilithium_stone_3.png",
           "quality": 10.25,
           "craftable": true,
+          "base_crafting_prices": [
+            82572.11155212428
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8644,6 +9051,9 @@
           "icon_filename": "afx_dilithium_stone_4.png",
           "quality": 16.85,
           "craftable": true,
+          "base_crafting_prices": [
+            459362.6577260761
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8739,6 +9149,9 @@
           "icon_filename": "afx_quantum_stone_1.png",
           "quality": 5,
           "craftable": false,
+          "base_crafting_prices": [
+            3603.7
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -8772,6 +9185,9 @@
           "icon_filename": "afx_quantum_stone_2.png",
           "quality": 5.5,
           "craftable": true,
+          "base_crafting_prices": [
+            7252.77796891077
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8838,6 +9254,9 @@
           "icon_filename": "afx_quantum_stone_3.png",
           "quality": 7.45,
           "craftable": true,
+          "base_crafting_prices": [
+            25118.0955165366
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8904,6 +9323,9 @@
           "icon_filename": "afx_quantum_stone_4.png",
           "quality": 13.7,
           "craftable": true,
+          "base_crafting_prices": [
+            228278.68162774845
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -8986,6 +9408,9 @@
           "icon_filename": "afx_life_stone_1.png",
           "quality": 5,
           "craftable": false,
+          "base_crafting_prices": [
+            3603.7
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -9019,6 +9444,9 @@
           "icon_filename": "afx_life_stone_2.png",
           "quality": 6,
           "craftable": true,
+          "base_crafting_prices": [
+            10507.145319547104
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9085,6 +9513,9 @@
           "icon_filename": "afx_life_stone_3.png",
           "quality": 9.52,
           "craftable": true,
+          "base_crafting_prices": [
+            63177.402251645064
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9151,6 +9582,9 @@
           "icon_filename": "afx_life_stone_4.png",
           "quality": 15.2,
           "craftable": true,
+          "base_crafting_prices": [
+            325027.91192700906
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9246,6 +9680,9 @@
           "icon_filename": "afx_clarity_stone_1.png",
           "quality": 6,
           "craftable": false,
+          "base_crafting_prices": [
+            7960.699999999999
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -9279,6 +9716,9 @@
           "icon_filename": "afx_clarity_stone_2.png",
           "quality": 8,
           "craftable": true,
+          "base_crafting_prices": [
+            36603.47977819721
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9345,6 +9785,9 @@
           "icon_filename": "afx_clarity_stone_3.png",
           "quality": 12.2,
           "craftable": true,
+          "base_crafting_prices": [
+            185026.38292691755
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9423,6 +9866,9 @@
           "icon_filename": "afx_clarity_stone_4.png",
           "quality": 17.5,
           "craftable": true,
+          "base_crafting_prices": [
+            774986.0513834521
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9554,6 +10000,9 @@
           "icon_filename": "afx_prophecy_stone_1.png",
           "quality": 6.5,
           "craftable": false,
+          "base_crafting_prices": [
+            11069.199999999999
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -9587,6 +10036,9 @@
           "icon_filename": "afx_prophecy_stone_2.png",
           "quality": 8.5,
           "craftable": true,
+          "base_crafting_prices": [
+            50259.44360952514
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9653,6 +10105,9 @@
           "icon_filename": "afx_prophecy_stone_3.png",
           "quality": 12.8,
           "craftable": true,
+          "base_crafting_prices": [
+            246536.3313467851
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9719,6 +10174,9 @@
           "icon_filename": "afx_prophecy_stone_4.png",
           "quality": 17.2,
           "craftable": true,
+          "base_crafting_prices": [
+            731674.3867735496
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": true,
@@ -9836,6 +10294,9 @@
           "icon_filename": "afx_gold_meteorite_1.png",
           "quality": 1.8,
           "craftable": false,
+          "base_crafting_prices": [
+            3.24
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -9868,6 +10329,9 @@
           "icon_filename": "afx_gold_meteorite_2.png",
           "quality": 6.8,
           "craftable": true,
+          "base_crafting_prices": [
+            3982.5299999999993
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -9923,6 +10387,9 @@
           "icon_filename": "afx_gold_meteorite_3.png",
           "quality": 11.85,
           "craftable": true,
+          "base_crafting_prices": [
+            31373.351250000007
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -9993,6 +10460,9 @@
           "icon_filename": "afx_tau_ceti_geode_1.png",
           "quality": 2.8,
           "craftable": false,
+          "base_crafting_prices": [
+            42.929999999999986
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -10025,6 +10495,9 @@
           "icon_filename": "afx_tau_ceti_geode_2.png",
           "quality": 8.1,
           "craftable": true,
+          "base_crafting_prices": [
+            7867.319999999998
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -10080,6 +10553,9 @@
           "icon_filename": "afx_tau_ceti_geode_3.png",
           "quality": 13.8,
           "craftable": true,
+          "base_crafting_prices": [
+            53149.830000000016
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -10150,6 +10626,9 @@
           "icon_filename": "afx_solar_titanium_1.png",
           "quality": 3.2,
           "craftable": false,
+          "base_crafting_prices": [
+            104.25000000000003
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -10182,6 +10661,9 @@
           "icon_filename": "afx_solar_titanium_2.png",
           "quality": 6.7,
           "craftable": true,
+          "base_crafting_prices": [
+            3753
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,
@@ -10237,6 +10719,9 @@
           "icon_filename": "afx_solar_titanium_3.png",
           "quality": 12.5,
           "craftable": true,
+          "base_crafting_prices": [
+            37794.36000000001
+          ],
           "has_rarities": false,
           "possible_afx_rarities": null,
           "has_effects": false,

@@ -42,6 +42,7 @@ type Tier struct {
 
 	Quality               float64                   `json:"quality"`
 	Craftable             bool                      `json:"craftable"`
+	BaseCraftingPrices    []float64                 `json:"base_crafting_prices"`
 	HasRarities           bool                      `json:"has_rarities"`
 	PossibleAfxRarities   []api.ArtifactSpec_Rarity `json:"possible_afx_rarities"`
 	HasEffects            bool                      `json:"has_effects"`
