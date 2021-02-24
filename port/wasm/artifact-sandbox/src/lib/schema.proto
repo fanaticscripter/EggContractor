@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+message Builds {
+  repeated Build builds = 1;
+  Config config = 2;
+}
+
+message Build {
+  repeated Artifact artifacts = 1;
+}
+
+message Artifact {
+  ArtifactSpec.Name afx_id = 1;
+  ArtifactSpec.Level afx_level = 2;
+  ArtifactSpec.Rarity afx_rarity = 3;
+  repeated Stone stones = 10;
+  bool is_empty = 20;
+}
+
+message Stone {
+  ArtifactSpec.Name afx_id = 1;
+  ArtifactSpec.Level afx_level = 2;
+  bool is_empty = 10;
+}
+
+message Config {
+  uint32 prophecy_eggs = 1;
+  double soul_eggs = 2;
+  string soul_eggs_input = 3;  // String for of SE count, as entered.
+  bool is_enlightenment = 4;
+}
+
+message ArtifactSpec {
+  enum Name {
+    LUNAR_TOTEM = 0;
+    NEODYMIUM_MEDALLION = 3;
+    BEAK_OF_MIDAS = 4;
+    LIGHT_OF_EGGENDIL = 5;
+    DEMETERS_NECKLACE = 6;
+    VIAL_MARTIAN_DUST = 7;
+    ORNATE_GUSSET = 8;
+    THE_CHALICE = 9;
+    BOOK_OF_BASAN = 10;
+    PHOENIX_FEATHER = 11;
+    TUNGSTEN_ANKH = 12;
+    AURELIAN_BROOCH = 21;
+    CARVED_RAINSTICK = 22;
+    PUZZLE_CUBE = 23;
+    QUANTUM_METRONOME = 24;
+    SHIP_IN_A_BOTTLE = 25;
+    TACHYON_DEFLECTOR = 26;
+    INTERSTELLAR_COMPASS = 27;
+    DILITHIUM_MONOCLE = 28;
+    TITANIUM_ACTUATOR = 29;
+    MERCURYS_LENS = 30;
+    TACHYON_STONE = 1;
+    DILITHIUM_STONE = 31;
+    SHELL_STONE = 32;
+    LUNAR_STONE = 33;
+    SOUL_STONE = 34;
+    PROPHECY_STONE = 39;
+    QUANTUM_STONE = 36;
+    TERRA_STONE = 37;
+    LIFE_STONE = 38;
+    CLARITY_STONE = 40;
+    EXTRATERRESTRIAL_ALUMINUM = 13;
+    ANCIENT_TUNGSTEN = 14;
+    SPACE_ROCKS = 15;
+    ALIEN_WOOD = 16;
+    GOLD_METEORITE = 17;
+    TAU_CETI_GEODE = 18;
+    CENTAURIAN_STEEL = 19;
+    ERIDANI_FEATHER = 20;
+    DRONE_PARTS = 35;
+    CELESTIAL_BRONZE = 41;
+    LALANDE_HIDE = 42;
+    SOLAR_TITANIUM = 43;
+    TACHYON_STONE_FRAGMENT = 2;
+    DILITHIUM_STONE_FRAGMENT = 44;
+    SHELL_STONE_FRAGMENT = 45;
+    LUNAR_STONE_FRAGMENT = 46;
+    SOUL_STONE_FRAGMENT = 47;
+    PROPHECY_STONE_FRAGMENT = 48;
+    QUANTUM_STONE_FRAGMENT = 49;
+    TERRA_STONE_FRAGMENT = 50;
+    LIFE_STONE_FRAGMENT = 51;
+    CLARITY_STONE_FRAGMENT = 52;
+    UNKNOWN = 10000;
+  }
+  Name name = 1;
+
+  enum Level {
+    INFERIOR = 0;
+    LESSER = 1;
+    NORMAL = 2;
+    GREATER = 3;
+    SUPERIOR = 4;
+  }
+  Level level = 2;
+
+  enum Rarity {
+    COMMON = 0;
+    RARE = 1;
+    EPIC = 2;
+    LEGENDARY = 3;
+  }
+  Rarity rarity = 3;
+
+  Egg egg = 4;
+
+  enum Type {
+    ARTIFACT = 0;
+    STONE = 1;
+    INGREDIENT = 2;
+    STONE_INGREDIENT = 3;
+  }
+}
+
+enum Egg {
+  INVALID_EGG = 0;  // proto3 requires first enum value to be 0.
+  EDIBLE = 1;
+  SUPERFOOD = 2;
+  MEDICAL = 3;
+  ROCKET_FUEL = 4;
+  SUPER_MATERIAL = 5;
+  FUSION = 6;
+  QUANTUM = 7;
+  IMMORTALITY = 8;
+  TACHYON = 9;
+  GRAVITON = 10;
+  DILITHIUM = 11;
+  PRODIGY = 12;
+  TERRAFORM = 13;
+  ANTIMATTER = 14;
+  DARK_MATTER = 15;
+  AI = 16;
+  NEBULA = 17;
+  UNIVERSE = 18;
+  ENLIGHTENMENT = 19;
+  CHOCOLATE = 100;
+  EASTER = 101;
+  WATERBALLOON = 102;
+  FIREWORK = 103;
+  PUMPKIN = 104;
+  UNKNOWN = 1000;
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <link rel="apple-touch-icon-precomposed" href="/static/favicon-180.png" />
+    <title>Artifact sandbox - EggContractor</title>
+    <meta
+      property="og:image"
+      content="https://repository-images.githubusercontent.com/325571244/306e2d00-4af2-11eb-81ec-6be9db3cbe94"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Artifact sandbox - EggContractor" />
+    <meta property="og:url" content="https://wasmegg.netlify.app/artifact-sandbox/" />
+    <meta
+      property="og:description"
+      content="Experiment, optimize, and share your artifact builds in this sandbox"
+    />
+    <link rel="stylesheet" href="@@app.css@@" />
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRL9R17P6S"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-BRL9R17P6S");
+    </script>
+  </head>
+  <body class="flex flex-col min-h-screen min-h-stretch">
+    <main class="flex-1 max-w-7xl w-full mx-auto">
+      <h1 class="mx-4 my-4 text-center text-lg leading-6 font-medium uppercase">
+        Artifact sandbox
+      </h1>
+      <div id="app" class="mt-4">
+        <div class="flex items-center justify-center">
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Loading program...
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-4 text-center text-xs text-dark-80">
+      <div>
+        Copyright &copy; 2021
+        <a href="https://wasmegg.netlify.app/" target="_blank" class="underline hover:text-dark-70"
+          >@mk2</a
+        >
+      </div>
+      <div>Image assets copyright &copy; 2016-2021 Auxbrain, Inc.</div>
+      <div>Image assets for artifact glowing effects courtesy of @mikit (Egg, Inc. Discord)</div>
+      <div>
+        Font:
+        <a
+          href="https://www.dafont.com/always-together.font"
+          target="_blank"
+          class="underline hover:text-dark-70"
+          >Always Together</a
+        >
+      </div>
+      <div>
+        <a
+          href="https://github.com/fanaticscripter/EggContractor/tree/master/port/wasm/artifact-sandbox"
+          target="_blank"
+          class="underline hover:text-dark-70"
+          >Source code</a
+        >
+        (MIT license)
+      </div>
+    </footer>
+
+    <a
+      href="https://wasmegg.netlify.app/"
+      target="_blank"
+      class="other-tools-ribbon"
+      title="@mk2's related tools for Egg, Inc."
+      >Other tools</a
+    >
+    <script src="@@app.js@@"></script>
+  </body>
+</html>

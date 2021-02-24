@@ -175,6 +175,9 @@ async function handleRequest(request) {
   const url = new URL(request.url);
   const code = url.pathname.replace(/^\/(.*?)\/?$/, "$1");
   let redirectURL = baseRedirectURL + "/";
+  if (code === "sandbox") {
+    redirectURL = "https://wasmegg.netlify.app/artifact-sandbox/";
+  }
   if (artifactIds.includes(code)) {
     redirectURL = baseRedirectURL + `/#/artifact/${code}`;
   }
