@@ -9,7 +9,7 @@
       </span>
       <span class="flex whitespace-nowrap">
         <img :src="iconURL('egginc/egg_soul.png', 64)" class="inline h-5 w-5" />
-        <span class="text-sm">{{ builds.config.soulEggsInput }}</span>
+        <span class="text-sm">{{ formatEIValue(builds.config.soulEggs) }}</span>
       </span>
     </div>
 
