@@ -7,5 +7,8 @@
 /*/app.*.wasm
   cache-control: public,max-age=2592000,immutable
 
+/*/*.otf
+  cache-control: public,max-age=2592000,immutable
+
 /*/static/*.png
   cache-control: public,max-age=2592000,immutable
