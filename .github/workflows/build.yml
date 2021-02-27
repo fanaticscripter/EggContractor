@@ -23,12 +23,20 @@ jobs:
           push: ${{ github.ref == 'refs/heads/master' }}
 
   port-wasm:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: port/wasm
     steps:
       - uses: actions/checkout@v2
+      - name: Set up protoc
+        run: |
+          sudo apt-get install -y --no-install-recommends protobuf-compiler
+          # Install protoc-gen-doc
+          basename=protoc-gen-doc-1.4.1.linux-amd64.go1.15.2
+          wget https://github.com/pseudomuto/protoc-gen-doc/releases/download/v1.4.1/$basename.tar.gz
+          tar xf $basename.tar.gz
+          echo "$PWD/$basename" >> $GITHUB_PATH
       - name: Set up Go
         uses: actions/setup-go@v2
         with:

@@ -1,0 +1,48 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+html {
+  @apply h-screen h-stretch;
+}
+
+.tippy-content {
+  @apply text-xs px-2 py-1 !important;
+}
+
+.other-tools-ribbon {
+  @apply block absolute top-0 right-0 overflow-hidden;
+  /* 15 * sqrt(2) + 70 = 91.21; add 2px for shadow */
+  width: 94px;
+  height: 94px;
+  text-indent: -9999px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.other-tools-ribbon::before {
+  @apply transform rotate-45 absolute top-0 right-0 bg-gray-600 shadow-md;
+  /* width / 2 + margin-right == height / 2 + margin-top */
+  content: "";
+  width: 150px;
+  height: 30px;
+  margin-right: -40px;
+  margin-top: 20px;
+}
+
+.other-tools-ribbon:hover::before {
+  @apply bg-gray-500 transition-colors duration-200 ease-in-out;
+}
+
+.other-tools-ribbon::after {
+  @apply transform rotate-45 absolute top-0 right-0
+    text-center align-middle text-white font-medium uppercase whitespace-nowrap
+    w-full border border-white border-dotted;
+  content: "Other tools";
+  width: 150px;
+  height: 26px;
+  margin-right: -39px;
+  margin-top: 21px;
+  font-size: 10px;
+  line-height: 24px;
+  text-indent: 0;
+}
