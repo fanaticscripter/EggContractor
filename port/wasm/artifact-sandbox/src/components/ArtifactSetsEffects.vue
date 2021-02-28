@@ -50,7 +50,7 @@
             v-if="buildValidities[0]"
             class="px-4 py-1.5 text-base text-right whitespace-nowrap Bonus"
           >
-            &times;{{ formatFloat(earningsMultipler(...buildConfig(0))) }}
+            &times;{{ formatFloat(earningsMultiplier(...buildConfig(0))) }}
           </td>
           <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
             &mdash;
@@ -94,7 +94,7 @@
             v-if="buildValidities[0]"
             class="px-4 py-1.5 text-base text-right whitespace-nowrap Bonus"
           >
-            &times;{{ formatFloat(earningsWithMaxRunningChickenBonusMultipler(...buildConfig(0))) }}
+            &times;{{ formatFloat(earningsWithMaxRunningChickenBonusMultiplier(...buildConfig(0))) }}
           </td>
           <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
             &mdash;
@@ -115,7 +115,7 @@
             v-if="buildValidities[0]"
             class="px-4 py-1.5 text-base text-right whitespace-nowrap Bonus"
           >
-            &times;{{ formatFloat(soulEggsGainMultipler(...buildConfig(0))) }}
+            &times;{{ formatFloat(soulEggsGainMultiplier(...buildConfig(0))) }}
           </td>
           <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
             &mdash;
@@ -283,11 +283,11 @@ import { Builds } from "@/lib/models";
 import {
   earningBonus,
   earningBonusMultiplier,
-  earningsMultipler,
-  earningsWithMaxRunningChickenBonusMultipler,
+  earningsMultiplier,
+  earningsWithMaxRunningChickenBonusMultiplier,
   maxRunningChickenBonus,
   maxRunningChickenBonusMultiplier,
-  soulEggsGainMultipler,
+  soulEggsGainMultiplier,
   researchPriceDiscount,
   maxHabSpace,
   habSpaceMultiplier,
@@ -350,11 +350,11 @@ export default {
   methods: {
     earningBonus,
     earningBonusMultiplier,
-    earningsMultipler,
-    earningsWithMaxRunningChickenBonusMultipler,
+    earningsMultiplier,
+    earningsWithMaxRunningChickenBonusMultiplier,
     maxRunningChickenBonus,
     maxRunningChickenBonusMultiplier,
-    soulEggsGainMultipler,
+    soulEggsGainMultiplier,
     researchPriceDiscount,
     maxHabSpace,
     habSpaceMultiplier,

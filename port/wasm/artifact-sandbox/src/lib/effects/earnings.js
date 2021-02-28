@@ -9,7 +9,7 @@ import { maxRunningChickenBonusMultiplier } from "./rcb";
  * @param {!Config} config
  * @returns {!Number}
  */
-function earningsMultipler(build, config) {
+function earningsMultiplier(build, config) {
   return (
     earningBonusMultiplier(build, config) *
     multiplicativeEffect(build, config, [
@@ -27,8 +27,8 @@ function earningsMultipler(build, config) {
  * @param {!Config} config
  * @returns {!Number}
  */
-function earningsWithMaxRunningChickenBonusMultipler(build, config) {
-  return earningsMultipler(build, config) * maxRunningChickenBonusMultiplier(build, config);
+function earningsWithMaxRunningChickenBonusMultiplier(build, config) {
+  return earningsMultiplier(build, config) * maxRunningChickenBonusMultiplier(build, config);
 }
 
-export { earningsMultipler, earningsWithMaxRunningChickenBonusMultipler };
+export { earningsMultiplier, earningsWithMaxRunningChickenBonusMultiplier };
