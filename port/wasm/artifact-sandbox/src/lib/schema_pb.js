@@ -1027,7 +1027,11 @@ proto.Config.toObject = function(includeInstance, msg) {
     prophecyEggs: jspb.Message.getFieldWithDefault(msg, 1, 0),
     soulEggs: jspb.Message.getFloatingPointFieldWithDefault(msg, 2, 0.0),
     soulEggsInput: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    isEnlightenment: jspb.Message.getBooleanFieldWithDefault(msg, 4, false)
+    isEnlightenment: jspb.Message.getBooleanFieldWithDefault(msg, 4, false),
+    birdFeedActive: jspb.Message.getBooleanFieldWithDefault(msg, 10, false),
+    tachyonPrismActive: jspb.Message.getBooleanFieldWithDefault(msg, 11, false),
+    soulBeaconActive: jspb.Message.getBooleanFieldWithDefault(msg, 12, false),
+    boostBeaconActive: jspb.Message.getBooleanFieldWithDefault(msg, 13, false)
   };
 
   if (includeInstance) {
@@ -1079,6 +1083,22 @@ proto.Config.deserializeBinaryFromReader = function(msg, reader) {
     case 4:
       var value = /** @type {boolean} */ (reader.readBool());
       msg.setIsEnlightenment(value);
+      break;
+    case 10:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setBirdFeedActive(value);
+      break;
+    case 11:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setTachyonPrismActive(value);
+      break;
+    case 12:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setSoulBeaconActive(value);
+      break;
+    case 13:
+      var value = /** @type {boolean} */ (reader.readBool());
+      msg.setBoostBeaconActive(value);
       break;
     default:
       reader.skipField();
@@ -1134,6 +1154,34 @@ proto.Config.serializeBinaryToWriter = function(message, writer) {
   if (f) {
     writer.writeBool(
       4,
+      f
+    );
+  }
+  f = message.getBirdFeedActive();
+  if (f) {
+    writer.writeBool(
+      10,
+      f
+    );
+  }
+  f = message.getTachyonPrismActive();
+  if (f) {
+    writer.writeBool(
+      11,
+      f
+    );
+  }
+  f = message.getSoulBeaconActive();
+  if (f) {
+    writer.writeBool(
+      12,
+      f
+    );
+  }
+  f = message.getBoostBeaconActive();
+  if (f) {
+    writer.writeBool(
+      13,
       f
     );
   }
@@ -1209,6 +1257,78 @@ proto.Config.prototype.getIsEnlightenment = function() {
  */
 proto.Config.prototype.setIsEnlightenment = function(value) {
   return jspb.Message.setProto3BooleanField(this, 4, value);
+};
+
+
+/**
+ * optional bool bird_feed_active = 10;
+ * @return {boolean}
+ */
+proto.Config.prototype.getBirdFeedActive = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 10, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.Config} returns this
+ */
+proto.Config.prototype.setBirdFeedActive = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 10, value);
+};
+
+
+/**
+ * optional bool tachyon_prism_active = 11;
+ * @return {boolean}
+ */
+proto.Config.prototype.getTachyonPrismActive = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 11, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.Config} returns this
+ */
+proto.Config.prototype.setTachyonPrismActive = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 11, value);
+};
+
+
+/**
+ * optional bool soul_beacon_active = 12;
+ * @return {boolean}
+ */
+proto.Config.prototype.getSoulBeaconActive = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 12, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.Config} returns this
+ */
+proto.Config.prototype.setSoulBeaconActive = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 12, value);
+};
+
+
+/**
+ * optional bool boost_beacon_active = 13;
+ * @return {boolean}
+ */
+proto.Config.prototype.getBoostBeaconActive = function() {
+  return /** @type {boolean} */ (jspb.Message.getBooleanFieldWithDefault(this, 13, false));
+};
+
+
+/**
+ * @param {boolean} value
+ * @return {!proto.Config} returns this
+ */
+proto.Config.prototype.setBoostBeaconActive = function(value) {
+  return jspb.Message.setProto3BooleanField(this, 13, value);
 };
 
 

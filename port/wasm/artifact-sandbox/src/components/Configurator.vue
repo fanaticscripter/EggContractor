@@ -30,6 +30,54 @@
       />
       <label for="is_enlightenment" class="ml-2 block text-sm">Enlightenment farm</label>
     </div>
+
+    <div class="mt-4 flex justify-center">
+      <div class="space-y-0.5">
+        <h4 class="text-center text-sm uppercase">Active boost effects</h4>
+        <div class="relative flex items-start">
+          <input
+            id="bird_feed_active"
+            name="bird_feed_active"
+            type="checkbox"
+            class="h-4 w-4 bg-dark-20 text-blue-600 focus:ring-blue-500 focus:ring-offset-dark-30 rounded"
+            v-model="conf.birdFeedActive"
+          />
+          <label for="bird_feed_active" class="ml-2 block text-sm">Bird feed (earnings)</label>
+        </div>
+        <div class="relative flex items-start">
+          <input
+            id="tachyon_prism_active"
+            name="tachyon_prism_active"
+            type="checkbox"
+            class="h-4 w-4 bg-dark-20 text-blue-600 focus:ring-blue-500 focus:ring-offset-dark-30 rounded"
+            v-model="conf.tachyonPrismActive"
+          />
+          <label for="tachyon_prism_active" class="ml-2 block text-sm"
+            >Tachyon prism (internal hatchery)</label
+          >
+        </div>
+        <div class="relative flex items-start">
+          <input
+            id="soul_beacon_active"
+            name="soul_beacon_active"
+            type="checkbox"
+            class="h-4 w-4 bg-dark-20 text-blue-600 focus:ring-blue-500 focus:ring-offset-dark-30 rounded"
+            v-model="conf.soulBeaconActive"
+          />
+          <label for="soul_beacon_active" class="ml-2 block text-sm">Soul beacon</label>
+        </div>
+        <div class="relative flex items-start">
+          <input
+            id="boost_beacon_active"
+            name="boost_beacon_active"
+            type="checkbox"
+            class="h-4 w-4 bg-dark-20 text-blue-600 focus:ring-blue-500 focus:ring-offset-dark-30 rounded"
+            v-model="conf.boostBeaconActive"
+          />
+          <label for="boost_beacon_active" class="ml-2 block text-sm">Boost beacon</label>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

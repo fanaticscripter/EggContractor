@@ -359,6 +359,10 @@ class Config {
     this.soulEggs = 0;
     this.soulEggsInput = "";
     this.isEnlightenment = false;
+    this.birdFeedActive = false;
+    this.tachyonPrismActive = false;
+    this.soulBeaconActive = false;
+    this.boostBeaconActive = false;
   }
 
   /**
@@ -382,6 +386,10 @@ class Config {
     self.soulEggs = config.getSoulEggs();
     self.soulEggsInput = config.getSoulEggsInput();
     self.isEnlightenment = config.getIsEnlightenment();
+    self.birdFeedActive = config.getBirdFeedActive();
+    self.tachyonPrismActive = config.getTachyonPrismActive();
+    self.soulBeaconActive = config.getSoulBeaconActive();
+    self.boostBeaconActive = config.getBoostBeaconActive();
     return self;
   }
 
@@ -394,7 +402,23 @@ class Config {
     config.setSoulEggs(this.soulEggs);
     config.setSoulEggsInput(this.soulEggsInput);
     config.setIsEnlightenment(this.isEnlightenment);
+    config.setBirdFeedActive(this.birdFeedActive);
+    config.setTachyonPrismActive(this.tachyonPrismActive);
+    config.setSoulBeaconActive(this.soulBeaconActive);
+    config.setBoostBeaconActive(this.boostBeaconActive);
     return config;
+  }
+
+  /**
+   * @returns {!Boolean}
+   */
+  anyBoostActive() {
+    return (
+      this.birdFeedActive ||
+      this.tachyonPrismActive ||
+      this.soulBeaconActive ||
+      this.boostBeaconActive
+    );
   }
 }
 

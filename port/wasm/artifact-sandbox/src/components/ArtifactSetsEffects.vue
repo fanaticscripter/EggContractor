@@ -2,7 +2,7 @@
   <div class="max-w-xs mx-auto my-2 space-y-2">
     <div class="text-base text-center font-medium uppercase">Selected aggregate effects</div>
 
-    <div class="flex flex-wrap itesm-center justify-center">
+    <div class="flex flex-wrap items-center justify-center">
       <span class="flex whitespace-nowrap mr-2">
         <img :src="iconURL('egginc/egg_of_prophecy.png', 64)" class="inline h-5 w-5" />
         <span class="text-sm">{{ builds.config.prophecyEggs }}</span>
@@ -13,17 +13,50 @@
       </span>
     </div>
 
-    <table class="min-w-full rounded-md overflow-hidden">
+    <div v-if="builds.config.anyBoostActive()" class="flex flex-col items-center justify-center">
+      <div v-if="builds.config.birdFeedActive" class="flex whitespace-nowrap">
+        <img
+          :src="iconURL('egginc/b_icon_jimbos_orange_big.png', 64)"
+          class="inline h-5 w-5 mr-1"
+        />
+        <span class="text-sm">Bird feed active</span>
+      </div>
+      <div v-if="builds.config.tachyonPrismActive" class="flex whitespace-nowrap">
+        <img
+          :src="iconURL('egginc/b_icon_tachyon_prism_orange_big.png', 64)"
+          class="inline h-5 w-5 mr-1"
+        />
+        <span class="text-sm">Tachyon prism active</span>
+      </div>
+      <div v-if="builds.config.soulBeaconActive" class="flex whitespace-nowrap">
+        <img
+          :src="iconURL('egginc/b_icon_soul_beacon_orange.png', 64)"
+          class="inline h-5 w-5 mr-1"
+        />
+        <span class="text-sm">Soul beacon active</span>
+      </div>
+      <div v-if="builds.config.boostBeaconActive" class="flex whitespace-nowrap">
+        <img
+          :src="iconURL('egginc/b_icon_boost_beacon_orange.png', 64)"
+          class="inline h-5 w-5 mr-1"
+        />
+        <span class="text-sm">Boost beacon active</span>
+      </div>
+    </div>
+
+    <!-- :set is not a Vue feature, it's a trick to get a scoped temporary
+    variable so that we don't need to keep track of footnote numbers manually.
+    -->
+    <table class="min-w-full rounded-md overflow-hidden" :set="(footnoteNumber = 1)">
       <tbody>
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[0][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >EB</effect-with-note
             >
-              EB<note-sup :footnoteNumber="1" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td v-if="buildValidities[0]" class="px-4 py-1.5 text-base text-right whitespace-nowrap">
             <span class="Value">{{ formatEIPercentage(earningBonus(...buildConfig(0))) }}</span>
@@ -38,13 +71,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[1][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Earnings</effect-with-note
             >
-              Earnings<note-sup :footnoteNumber="2" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td
             v-if="buildValidities[0]"
@@ -59,13 +91,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[2][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Max RCB</effect-with-note
             >
-              Max RCB<note-sup :footnoteNumber="3" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td v-if="buildValidities[0]" class="px-4 py-1.5 text-base text-right whitespace-nowrap">
             <span class="Value">{{ maxRunningChickenBonus(...buildConfig(0)) }}</span>
@@ -82,19 +113,20 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[3][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Earnings w/ Max RCB</effect-with-note
             >
-              Earnings w/ max RCB<note-sup :footnoteNumber="4" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td
             v-if="buildValidities[0]"
             class="px-4 py-1.5 text-base text-right whitespace-nowrap Bonus"
           >
-            &times;{{ formatFloat(earningsWithMaxRunningChickenBonusMultiplier(...buildConfig(0))) }}
+            &times;{{
+              formatFloat(earningsWithMaxRunningChickenBonusMultiplier(...buildConfig(0)))
+            }}
           </td>
           <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
             &mdash;
@@ -103,13 +135,13 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[4][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              :dagger="true"
+              >SE gain</effect-with-note
             >
-              SE gain<note-sup :footnoteNumber="5" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td
             v-if="buildValidities[0]"
@@ -124,13 +156,53 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[5][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              :dagger="true"
+              >SE gain w/<br />empty habs start</effect-with-note
             >
-              Research discount<note-sup :footnoteNumber="6" :showFootnote="showFootnotes" />
-            </span>
+          </td>
+          <td
+            v-if="buildValidities[0]"
+            class="px-4 py-1.5 text-base text-right whitespace-nowrap Bonus"
+          >
+            &times;{{ formatFloat(soulEggsGainWithEmptyHabsStartMultiplier(...buildConfig(0))) }}
+          </td>
+          <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
+            &mdash;
+          </td>
+        </tr>
+
+        <tr>
+          <td class="px-4 py-1.5 text-sm text-left">
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Boost duration</effect-with-note
+            >
+          </td>
+          <td
+            v-if="buildValidities[0]"
+            class="px-4 py-1.5 text-base text-right whitespace-nowrap Bonus"
+          >
+            &times;{{ formatFloat(boostDurationMultiplier(...buildConfig(0))) }}
+          </td>
+          <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
+            &mdash;
+          </td>
+        </tr>
+
+        <tr>
+          <td class="px-4 py-1.5 text-sm text-left">
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Research discount</effect-with-note
+            >
           </td>
           <td
             v-if="buildValidities[0]"
@@ -145,13 +217,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[6][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Max hab space</effect-with-note
             >
-              Max hab space<note-sup :footnoteNumber="7" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td v-if="buildValidities[0]" class="px-4 py-1.5 text-base text-right whitespace-nowrap">
             <span class="Value">{{ maxHabSpace(...buildConfig(0)).toLocaleString("en-US") }}</span>
@@ -166,13 +237,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[7][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Max IHR</effect-with-note
             >
-              Max IHR<note-sup :footnoteNumber="8" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td v-if="buildValidities[0]" class="px-4 py-1.5 text-base text-right whitespace-nowrap">
             <span class="Value"
@@ -193,13 +263,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[8][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Egg laying rate</effect-with-note
             >
-              Egg laying rate<note-sup :footnoteNumber="9" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td
             v-if="buildValidities[0]"
@@ -214,13 +283,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[9][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Max egg laying rate</effect-with-note
             >
-              Max egg laying rate<note-sup :footnoteNumber="10" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td
             v-if="buildValidities[0]"
@@ -240,13 +308,12 @@
 
         <tr>
           <td class="px-4 py-1.5 text-sm text-left">
-            <span
-              v-tippy="{
-                content: notes[10][1],
-              }"
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
+              >Max shipping capacity</effect-with-note
             >
-              Max shipping capacity<note-sup :footnoteNumber="11" :showFootnote="showFootnotes" />
-            </span>
           </td>
           <td
             v-if="buildValidities[0]"
@@ -267,7 +334,20 @@
     </table>
   </div>
 
-  <div v-if="showFootnotes">
+  <div class="mt-2 DaggerNote text-sm leading-tight">
+    <sup>&dagger;</sup> In order to maximize SE gain from boosted prestiges, you should optimize the
+    <span class="DaggerNote--highlight">“SE gain”</span> or
+    <span class="DaggerNote--highlight">“SE gain w/ empty habs start”</span> stat. If you start your
+    boosts with preloaded, almost full habs, artifact effects over your SE gain is reflected by the
+    <span class="DaggerNote--highlight">“SE gain”</span> stat, which you should attempt to maximize;
+    if you start your boosts (including at least one tachyon prism) with empty habs, commonly seen
+    in multi-prestige or all-in-one single-prestige strategies, you should instead maximize
+    <span class="DaggerNote--highlight">“SE gain w/ empty habs start”</span>. Don't forget to
+    configure <span class="uppercase">active boost effects</span> when optimizing aforementioned
+    stats.
+  </div>
+
+  <div v-if="showFootnotes" class="mt-2">
     <ol class="list-decimal list-inside">
       <li v-for="(note, index) in notes" :key="index" class="Note text-xs">
         <span class="text-gray-50">{{ note[0] }}:</span>
@@ -278,7 +358,7 @@
 </template>
 
 <script>
-import NoteSup from "@/components/NoteSup.vue";
+import EffectWithNote from "./EffectWithNote.vue";
 import { Builds } from "@/lib/models";
 import {
   earningBonus,
@@ -288,6 +368,8 @@ import {
   maxRunningChickenBonus,
   maxRunningChickenBonusMultiplier,
   soulEggsGainMultiplier,
+  soulEggsGainWithEmptyHabsStartMultiplier,
+  boostDurationMultiplier,
   researchPriceDiscount,
   maxHabSpace,
   habSpaceMultiplier,
@@ -303,7 +385,7 @@ import { formatEIValue, formatEIPercentage, formatFloat } from "@/lib/utils/util
 
 export default {
   components: {
-    NoteSup,
+    EffectWithNote,
   },
 
   props: {
@@ -320,7 +402,7 @@ export default {
         ["EB", "Earning bonus, as shown on the prestige screen."],
         [
           "Earnings",
-          "Aggregate effect on bock earning rate from earning bonus increase, egg value increase, and egg laying rate increase (not considering shipping-limited scenarios). Running chicken bonus is not taken into account here; see “Earnings w/ max RCB” instead.",
+          "Aggregate effect on bock earning rate from earning bonus increase, egg value increase, and egg laying rate increase (not considering shipping-limited scenarios). Running chicken bonus is not taken into account here; see “Earnings w/ max RCB” instead. Indirect bonus from boosted chicken population growth is not included.",
         ],
         ["Max RCB", "Max running chicken bonus."],
         [
@@ -329,7 +411,12 @@ export default {
         ],
         [
           "SE gain",
-          "Soul egg earning rate multiplier from bock earning rate bonus (with max RCB) and soul egg collection rate bonus. The late game dampening exponent (0.21) is used; may not be accurate for early game players.",
+          "Soul egg earning rate multiplier from bock earning rate bonus (with max RCB) and soul egg collection rate bonus. The late game dampening exponent (0.21) is used; may not be accurate for early game players. Indirect bonus from boosted chicken population growth is not included; see “SE gain w/ empty habs start” instead.",
+        ],
+        ["SE gain w/ empty habs start", "Same as “SE gain” except for taking into account the indirect earnings bonus from faster chicken population growth when there is a monocle-boosted tachyon prism active. Assumes the tachyon prism is activated at zero population, and population never hits the hab space cap; otherwise, the actual effect is between this stat and “SE gain”."],
+        [
+          "Boost duration",
+          "Affects the duration of any boost activated while this artifact set is equipped. Artifact changes after activation have no effect on the duration.",
         ],
         [
           "Research discount",
@@ -355,6 +442,8 @@ export default {
     maxRunningChickenBonus,
     maxRunningChickenBonusMultiplier,
     soulEggsGainMultiplier,
+    soulEggsGainWithEmptyHabsStartMultiplier,
+    boostDurationMultiplier,
     researchPriceDiscount,
     maxHabSpace,
     habSpaceMultiplier,
@@ -402,5 +491,13 @@ tr:nth-child(even) {
 
 .Note {
   color: #a6a6a6;
+}
+
+.DaggerNote {
+  color: #b38c00;
+}
+
+.DaggerNote--highlight {
+  color: #ffc601;
 }
 </style>
