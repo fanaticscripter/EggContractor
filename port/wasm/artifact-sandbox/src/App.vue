@@ -40,7 +40,7 @@ export default {
           expiry: new Date(1614784563000),
           content: `Boosts support: New <span class="uppercase">active boost effects</span>
           configuration section, new stats “SE gain w/ empty habs start” and “Boost duration”,
-          as well as a guide on optimizing SE gain from presitges.`,
+          as well as a guide on optimizing SE gain from prestiges.`,
         },
       ],
     };
