@@ -68,7 +68,7 @@
 
       <div v-if="message">
         <a
-          :href="`doc.html#ei.${message}`"
+          :href="`doc#ei.${message}`"
           target="_blank"
           class="hover:text-gray-500 border-b border-gray-500 border-dashed"
         >
