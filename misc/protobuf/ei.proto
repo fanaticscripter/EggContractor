@@ -207,6 +207,7 @@ message Backup {
 
     optional MyContracts contracts = 13;
     optional ArtifactsDB artifacts_db = 15;
+    repeated string read_mail_ids = 23;
     optional uint64 checksum = 100;
     optional string signature = 101;
 
@@ -433,6 +434,8 @@ message BasicRequestInfo {
     optional string version = 3;
     optional string build = 4;
     optional string platform = 5;
+    optional string country = 6;
+    optional string language = 7;
 }
 
 message ContractsRequest {
@@ -510,6 +513,7 @@ message LocalContract {
     optional uint32 num_goals_achieved = 14;
     optional uint32 boosts_used = 12;
     optional uint32 league = 15;
+    optional double last_nag_time = 16;
 }
 
 message MyContracts {
@@ -696,14 +700,29 @@ message LiveConfig {
             optional double se_required = 4;
         }
     }
+
+    optional GiftConfig gift_config = 3;
+    message GiftConfig {
+        optional double package_interval = 1;
+        optional double video_offer_interval = 2;
+    }
 }
 
 message InGameMail {
     optional string id = 1;
     optional string title = 2;
+    optional string date = 8;
     optional string message = 3;
     optional string action = 4;
     optional string url = 5;
+    optional uint32 platform = 7;
+    repeated string builds = 9;
+    optional uint32 min_client_version = 10;
+    optional double gold_tip = 6;
+}
+
+message MailDB {
+    repeated InGameMail mail = 1;
 }
 
 message PeriodicalsResponse {
@@ -712,7 +731,7 @@ message PeriodicalsResponse {
     optional ContractsResponse contracts = 3;
     repeated ServerGift gifts = 4;
     optional LiveConfig live_config = 5;
-    repeated InGameMail mail_bag = 6;
+    optional MailDB mail_bag = 6;
 }
 
 message GetPeriodicalsRequest {
