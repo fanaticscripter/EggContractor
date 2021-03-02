@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO: show app version -->
   <div class="flex flex-col flex-1 max-w-4xl w-full mx-auto px-4 xl:px-0 space-y-2">
     <div>
       <p class="text-sm font-medium text-gray-700">
@@ -11,6 +10,12 @@
             target="_blank"
             class="hover:text-gray-500 border-b border-gray-500 border-dashed"
             >protobuf definitions</a
+          >,
+          <a
+            href="doc"
+            target="_blank"
+            class="hover:text-gray-500 border-b border-gray-500 border-dashed"
+            >generated documentation</a
           >)
         </span>
       </p>
