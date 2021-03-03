@@ -69,14 +69,13 @@ func assemblePayload() (*payload, error) {
 		req := &api.ArtifactsConfigurationRequestPayload{
 			ClientVersion: api.ClientVersion,
 		}
-		resp := &api.ArtifactsConfigurationResponsePayload{}
-		err := api.RequestWithContext(ctx, "/ei_afx/config", req, resp)
+		config = &api.ArtifactsConfigurationResponse{}
+		err := api.RequestAuthenticatedWithContext(ctx, "/ei_afx/config", req, config)
 		if err != nil {
 			errs <- err
 			cancel()
 			return
 		}
-		config = resp.Config
 	}()
 
 	wg.Add(1)

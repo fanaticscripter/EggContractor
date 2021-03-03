@@ -44,12 +44,12 @@ func main() {
 	req := &api.ArtifactsConfigurationRequestPayload{
 		ClientVersion: api.ClientVersion,
 	}
-	resp := &api.ArtifactsConfigurationResponsePayload{}
-	err = api.Request("/ei_afx/config", req, resp)
+	resp := &api.ArtifactsConfigurationResponse{}
+	err = api.RequestAuthenticated("/ei_afx/config", req, resp)
 	if err != nil {
 		log.Errorf("API request failed: %s", err)
 	} else {
-		remoteConfig := resp.Config
+		remoteConfig := resp
 		remoteConfig.ArtifactParameters = nil
 		if diff := cmp.Diff(config, remoteConfig, protocmp.Transform()); diff != "" {
 			log.Fatalf("local and remote configs have diverged: %s", diff)
