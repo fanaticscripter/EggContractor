@@ -217,7 +217,26 @@ func rewardIconPath(r *api.Reward) string {
 	case api.RewardType_PROPHECY_EGG:
 		path = "egginc/egg_of_prophecy.png"
 	case api.RewardType_EPIC_RESEARCH:
-		path = "egginc/r_icon_" + r.Name + ".png"
+		name := r.Name
+		switch r.Name {
+		case "epic_internal_incubators":
+			name = "epic_internal_hatchery"
+		case "cheaper_research":
+			name = "lab_upgrade"
+		case "epic_silo_quality":
+			// Defunct, replaced by pro permit
+			name = "silo_quality"
+		case "int_hatch_sharing":
+			name = "internal_hatchery_sharing"
+		case "int_hatch_calm":
+			name = "internal_hatchery_calm"
+		case "soul_eggs":
+			name = "soul_food"
+		case "warp_shift":
+			// Defunct, replaced by boosts
+			name = "warp_boost"
+		}
+		path = "egginc/r_icon_" + name + ".png"
 	case api.RewardType_PIGGY_GOLDEN_EGG:
 		path = "egginc-extras/icon_piggy_golden_egg.png"
 	case api.RewardType_PIGGY_MULTIPLY:
