@@ -40,6 +40,66 @@ func Request(endpoint string, reqMsg proto.Message, respMsg proto.Message) error
 }
 
 func RequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message) error {
+	return doRequestWithContext(ctx, endpoint, reqMsg, respMsg, false)
+}
+
+func RequestAuthenticated(endpoint string, reqMsg proto.Message, respMsg proto.Message) error {
+	return RequestAuthenticatedWithContext(context.Background(), endpoint, reqMsg, respMsg)
+}
+
+func RequestAuthenticatedWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message) error {
+	return doRequestWithContext(ctx, endpoint, reqMsg, respMsg, true)
+}
+
+func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, error) {
+	return RequestFirstContactWithContext(context.Background(), payload)
+}
+
+func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRequestPayload) (*FirstContact, error) {
+	if payload.ClientVersion == 0 {
+		payload.ClientVersion = ClientVersion
+	}
+	if payload.DeviceId == "" {
+		payload.DeviceId = uuid.New().String()
+	}
+	resp := &FirstContact{}
+	err := RequestAuthenticatedWithContext(ctx, "/ei/first_contact", payload, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
+	return RequestCoopStatusWithContext(context.Background(), payload)
+}
+
+func RequestCoopStatusWithContext(ctx context.Context, payload *CoopStatusRequestPayload) (*CoopStatus, error) {
+	resp := &CoopStatus{}
+	err := RequestAuthenticatedWithContext(ctx, "/ei/coop_status", payload, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func RequestPeriodicals(payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
+	return RequestPeriodicalsWithContext(context.Background(), payload)
+}
+
+func RequestPeriodicalsWithContext(ctx context.Context, payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
+	if payload.CurrentClientVersion == 0 {
+		payload.CurrentClientVersion = ClientVersion
+	}
+	resp := &Periodicals{}
+	err := RequestAuthenticatedWithContext(ctx, "/ei/get_periodicals", payload, resp)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
+
+func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message, authenticated bool) error {
 	apiUrl := _apiPrefix + endpoint
 	reqBin, err := proto.Marshal(reqMsg)
 	if err != nil {
@@ -66,57 +126,21 @@ func RequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Messa
 	if err != nil {
 		return errors.Wrapf(err, "base64 decoding %s reponse (%#v)", apiUrl, string(body))
 	}
-	err = proto.Unmarshal(respBinBuf[:n], respMsg)
-	if err != nil {
-		return errors.Wrapf(err, "unmarshaling %s response (%#v)", apiUrl, string(body))
+	if authenticated {
+		authMsg := &AuthenticatedMessage{}
+		err = proto.Unmarshal(respBinBuf[:n], authMsg)
+		if err != nil {
+			return errors.Wrapf(err, "unmarshaling %s response as AuthenticatedMessage (%#v)", apiUrl, string(body))
+		}
+		err = proto.Unmarshal(authMsg.Message, respMsg)
+		if err != nil {
+			return errors.Wrapf(err, "unmarshaling AuthenticatedMessage payload in %s response (%#v)", apiUrl, string(body))
+		}
+	} else {
+		err = proto.Unmarshal(respBinBuf[:n], respMsg)
+		if err != nil {
+			return errors.Wrapf(err, "unmarshaling %s response (%#v)", apiUrl, string(body))
+		}
 	}
 	return nil
-}
-
-func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, error) {
-	return RequestFirstContactWithContext(context.Background(), payload)
-}
-
-func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRequestPayload) (*FirstContact, error) {
-	if payload.ClientVersion == 0 {
-		payload.ClientVersion = ClientVersion
-	}
-	if payload.DeviceId == "" {
-		payload.DeviceId = uuid.New().String()
-	}
-	resp := &FirstContactResponsePayload{}
-	err := RequestWithContext(ctx, "/ei/first_contact", payload, resp)
-	if err != nil {
-		return nil, err
-	}
-	return resp.Payload, nil
-}
-
-func RequestCoopStatus(payload *CoopStatusRequestPayload) (*CoopStatus, error) {
-	return RequestCoopStatusWithContext(context.Background(), payload)
-}
-
-func RequestCoopStatusWithContext(ctx context.Context, payload *CoopStatusRequestPayload) (*CoopStatus, error) {
-	resp := &CoopStatusResponsePayload{}
-	err := RequestWithContext(ctx, "/ei/coop_status", payload, resp)
-	if err != nil {
-		return nil, err
-	}
-	return resp.Status, nil
-}
-
-func RequestPeriodicals(payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
-	return RequestPeriodicalsWithContext(context.Background(), payload)
-}
-
-func RequestPeriodicalsWithContext(ctx context.Context, payload *GetPeriodicalsRequestPayload) (*Periodicals, error) {
-	if payload.CurrentClientVersion == 0 {
-		payload.CurrentClientVersion = ClientVersion
-	}
-	resp := &GetPeriodicalsResponsePayload{}
-	err := RequestWithContext(ctx, "/ei/get_periodicals", payload, resp)
-	if err != nil {
-		return nil, err
-	}
-	return resp.Periodicals, nil
 }

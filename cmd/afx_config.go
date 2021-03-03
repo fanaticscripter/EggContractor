@@ -19,12 +19,11 @@ var _afxConfigCommand = &cobra.Command{
 		req := &api.ArtifactsConfigurationRequestPayload{
 			ClientVersion: api.ClientVersion,
 		}
-		resp := &api.ArtifactsConfigurationResponsePayload{}
-		err := api.Request("/ei_afx/config", req, resp)
+		config := &api.ArtifactsConfigurationResponse{}
+		err := api.RequestAuthenticated("/ei_afx/config", req, config)
 		if err != nil {
 			return err
 		}
-		config := resp.Config
 
 		table := [][]string{
 			{"Ship", "Type", "Duration", "Capacity", "Quality", "Quality Range"},

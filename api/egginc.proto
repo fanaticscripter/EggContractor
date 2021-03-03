@@ -2,6 +2,11 @@ syntax = "proto3";
 
 option go_package = "github.com/fanaticscripter/EggContractor/api";
 
+message AuthenticatedMessage {
+  bytes message = 1;
+  string code = 2;
+}
+
 // http://afx-2-dot-auxbrainhome.appspot.com/ei/first_contact
 message FirstContactRequestPayload {
   BasicRequestInfo rinfo = 8;
@@ -28,11 +33,6 @@ enum Platform {
   INVALID_PLATFORM = 0;  // proto3 requires first enum value to be 0.
   IOS = 1;
   DROID = 2;
-}
-
-message FirstContactResponsePayload {
-  FirstContact payload = 1;
-  string _2 = 2;  // unknown, a 256-bit signature/MAC
 }
 
 // Partially reverse engineered.
@@ -453,11 +453,6 @@ message CoopStatusRequestPayload {
   string player_id = 3;
 }
 
-message CoopStatusResponsePayload {
-  CoopStatus status = 1;
-  string _2 = 2;  // unknown, a 256-bit signature/MAC
-}
-
 message CoopStatus {
   string contract_id = 1;
   double eggs_laid = 2;
@@ -512,11 +507,6 @@ message GetPeriodicalsRequestPayload {
   BasicRequestInfo rinfo = 12;
 }
 
-message GetPeriodicalsResponsePayload {
-  Periodicals periodicals = 1;
-  string _2 = 2;  // unknown, a 256-bit signature/MAC
-}
-
 message Periodicals {
   message Sales {
     repeated Sale sales = 1;
@@ -556,11 +546,6 @@ message Event {
 message ArtifactsConfigurationRequestPayload {
   BasicRequestInfo rinfo = 2;
   uint32 client_version = 1;
-}
-
-message ArtifactsConfigurationResponsePayload {
-  ArtifactsConfigurationResponse config = 1;
-  string _2 = 2;  // unknown, a 256-bit signature/MAC
 }
 
 message ArtifactsConfigurationResponse {
