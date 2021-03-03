@@ -1,4 +1,4 @@
-FROM golang:1.15-buster AS builder
+FROM golang:1.16-buster AS builder
 WORKDIR /src
 
 RUN curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
