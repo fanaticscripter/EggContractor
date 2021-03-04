@@ -17,7 +17,7 @@
         >GitHub</a
       >.
     </div>
-    <div class="text-green-500">
+    <div v-if="activeNews.length > 0" class="text-green-500">
       <p class="uppercase">What's New</p>
       <ul v-for="(news, index) in activeNews" :key="index">
         <li>
