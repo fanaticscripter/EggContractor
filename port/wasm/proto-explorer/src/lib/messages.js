@@ -25,6 +25,8 @@ const messages = {
     "SetArtifactResponse",
   ],
   otherCoopRequestResponse: [
+    "QueryCoopRequest",
+    "QueryCoopResponse",
     "CreateCoopRequest",
     "CreateCoopResponse",
     "JoinCoopRequest",
@@ -44,7 +46,7 @@ const messages = {
 const seen = [].concat(
   messages.commonlyInspected,
   messages.otherArtifactRequestResponse,
-  messages.otherArtifactRequestResponse
+  messages.otherCoopRequestResponse
 );
 for (const name in ei) {
   // Make sure we only pick up capitalized names just in case some lower case

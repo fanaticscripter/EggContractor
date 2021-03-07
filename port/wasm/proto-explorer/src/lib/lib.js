@@ -1,7 +1,7 @@
+export * from "./api";
 export * from "./decode";
+export * from "./encode";
 export * from "./messages";
 export * from "./units";
-
-const APP_VERSION = "1.20.5";
-
-export { APP_VERSION };
+export * from "./version";
+export { ei, aux } from "./proto";
