@@ -60,7 +60,7 @@ const routes = [
 
 const router = createRouter({
   routes,
-  history: createWebHistory(),
+  history: createWebHistory("/proto-explorer/"),
 });
 
 export default router;
