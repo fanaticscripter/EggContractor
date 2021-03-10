@@ -9,7 +9,6 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/google/uuid"
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"golang.org/x/net/context/ctxhttp"
@@ -60,7 +59,7 @@ func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRe
 		payload.ClientVersion = ClientVersion
 	}
 	if payload.DeviceId == "" {
-		payload.DeviceId = uuid.New().String()
+		payload.DeviceId = payload.EiUserId
 	}
 	resp := &FirstContact{}
 	err := RequestAuthenticatedWithContext(ctx, "/ei/first_contact", payload, resp)
