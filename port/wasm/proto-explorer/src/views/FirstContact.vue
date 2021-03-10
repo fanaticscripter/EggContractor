@@ -17,7 +17,7 @@
       <parameter-input
         name="device_id"
         label="Device ID"
-        placeholder="Optional; default: a random UUID v4"
+        placeholder="Optional; default is the User ID you entered"
         v-model.trim="deviceId"
       />
       <parameter-input
@@ -38,7 +38,7 @@ import RequestButton from "@/components/RequestButton.vue";
 
 import { computed, ref } from "vue";
 import { CLIENT_VERSION, PLATFORM, basicRequestInfo } from "@/lib/lib";
-import { getLocalStorage, setLocalStorage, uuid4 } from "@/utils";
+import { getLocalStorage, setLocalStorage } from "@/utils";
 
 const USER_ID_LOCALSTORAGE_KEY = "user_id";
 const DEVICE_ID_LOCALSTORAGE_KEY = "device_id";
@@ -67,7 +67,7 @@ export default {
       clientVersion: CLIENT_VERSION,
       platform: PLATFORM,
       eiUserId: userId.value,
-      deviceId: deviceId.value || uuid4(),
+      deviceId: deviceId.value || userId.value,
       gameServicesId: gameServicesId.value || null,
       rinfo: basicRequestInfo(userId.value),
     });
