@@ -20,14 +20,14 @@ const (
 	AppVersion    = "1.20.5"
 )
 
-var _apiPrefix = "http://afx-2-dot-auxbrainhome.appspot.com"
+var _apiPrefix = "https://afx-2-dot-auxbrainhome.appspot.com"
 
 var _client *http.Client
 
 func init() {
 	if runtime.GOOS == "js" && runtime.GOARCH == "wasm" {
 		// Use CORS proxy in the browser setting.
-		_apiPrefix = "https://wasmegg.zw.workers.dev/?url=http://afx-2-dot-auxbrainhome.appspot.com"
+		_apiPrefix = "https://wasmegg.zw.workers.dev/?url=https://afx-2-dot-auxbrainhome.appspot.com"
 	}
 	_client = &http.Client{
 		Timeout: 5 * time.Second,
