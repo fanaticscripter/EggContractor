@@ -163,6 +163,7 @@ message Backup {
         repeated uint32 train_length = 21;
         repeated ResearchItem common_research = 18;
         repeated ActiveBoost active_boosts = 22;
+        optional double last_cash_boost_time = 31;
         optional uint32 time_cheats_detected = 23;
         optional double time_cheat_debt = 24;
         optional uint32 boost_tokens_received = 25;
@@ -699,12 +700,20 @@ message LiveConfig {
             optional uint32 token_price = 3;
             optional double se_required = 4;
         }
+
+        optional double cash_boost_cooloff_time = 2;
     }
 
     optional GiftConfig gift_config = 3;
     message GiftConfig {
         optional double package_interval = 1;
         optional double video_offer_interval = 2;
+        optional double video_offer_interval_contract = 3;
+        optional double video_offer_interval_piggy_full = 4;
+        optional double video_offer_interval_piggy_extra_full = 5;
+        optional double package_interval_contract = 6;
+        optional double package_interval_piggy_full = 7;
+        optional double package_interval_piggy_extra_full = 8;
     }
 }
 

@@ -1,7 +1,7 @@
 import { aux } from "./proto";
 
-const APP_VERSION = "1.20.5";
-const APP_BUILD = "1.20.5.1";
+const APP_VERSION = "1.20.6";
+const APP_BUILD = "1.20.6";
 const CLIENT_VERSION = 28;
 const PLATFORM_STRING = "IOS";
 const PLATFORM = aux.Platform.IOS;
