@@ -1,9 +1,17 @@
 <template>
   <spoiler-alert />
-  <mission-selector :initialMissionId="$route.params.missionId" :missions="missions" :key="$route.path" />
-  <router-view name="mission" :missions="missions" :artifacts="artifacts" />
-  <artifact-selector :initialArtifactId="$route.params.artifactId" :artifacts="artifacts" :key="$route.path" />
-  <router-view name="artifact" :missions="missions" :artifacts="artifacts" />
+  <mission-selector
+    :initialMissionId="$route.params.missionId"
+    :missions="missions"
+    :key="$route.path"
+  />
+  <router-view name="mission" :missions="missions" :artifacts="artifacts" :lootTable="lootTable" />
+  <artifact-selector
+    :initialArtifactId="$route.params.artifactId"
+    :artifacts="artifacts"
+    :key="$route.path"
+  />
+  <router-view name="artifact" :missions="missions" :artifacts="artifacts" :lootTable="lootTable" />
   <artifact-grid :artifacts="artifacts" />
 </template>
 
@@ -24,6 +32,7 @@ export default {
   props: {
     missions: Array,
     artifacts: Array,
+    lootTable: Object,
   },
 };
 </script>

@@ -21,6 +21,7 @@ type payload struct {
 	Ships        []*ship     `json:"ships"`
 	Missions     []*mission  `json:"missions"`
 	Artifacts    []*artifact `json:"artifacts"`
+	LootTable    lootTable   `json:"lootTable"`
 	MissionsCSV  string      `json:"missionsCSV"`
 	ArtifactsCSV string      `json:"artifactsCSV"`
 }
@@ -34,15 +35,20 @@ type ship struct {
 type missionParams = api.ArtifactsConfigurationResponse_MissionParameters_Duration
 
 type mission struct {
-	Id           string         `json:"id"`
-	Display      string         `json:"display"`
-	ShipName     string         `json:"shipName"`
-	ShipIconPath string         `json:"shipIconPath"`
-	Type         string         `json:"type"`
-	AbbrevType   string         `json:"abbrevType"`
-	MinQuality   float64        `json:"minQuality"`
-	MaxQuality   float64        `json:"maxQuality"`
-	Params       *missionParams `json:"params"`
+	Id              string                       `json:"id"`
+	Display         string                       `json:"display"`
+	ShipId          api.MissionInfo_Spaceship    `json:"shipId"`
+	ShipName        string                       `json:"shipName"`
+	ShipIconPath    string                       `json:"shipIconPath"`
+	TypeId          api.MissionInfo_DurationType `json:"typeId"`
+	Type            string                       `json:"type"`
+	AbbrevType      string                       `json:"abbrevType"`
+	Capacity        int                          `json:"capacity"`
+	DurationSeconds float64                      `json:"durationSeconds"`
+	DurationDisplay string                       `json:"durationDisplay"`
+	MinQuality      float64                      `json:"minQuality"`
+	MaxQuality      float64                      `json:"maxQuality"`
+	Params          *missionParams               `json:"params"`
 }
 
 type artifactParams = api.ArtifactsConfigurationResponse_ArtifactParameters
@@ -54,7 +60,22 @@ type artifact struct {
 	Rarity    string                  `json:"rarity"`
 	Quality   float64                 `json:"quality"`
 	IconPath  string                  `json:"iconPath"`
+	Odds      *odds                   `json:"odds"`
 	Params    *artifactParams         `json:"params"`
+}
+
+type odds struct {
+	Total    float64                             `json:"total"`
+	Rarities map[api.ArtifactSpec_Rarity]float64 `json:"rarities"`
+}
+
+// map key is mission.Id
+type lootTable map[string]*missionLootTable
+
+type missionLootTable struct {
+	MissionCount int `json:"missionCount"`
+	// map key is artifact.Id
+	Items map[string]*ItemCount `json:"items"`
 }
 
 func assemblePayload() (*payload, error) {
@@ -88,6 +109,18 @@ func assemblePayload() (*payload, error) {
 			return
 		}
 	}()
+
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		err := loadLootData()
+		if err != nil {
+			errs <- err
+			cancel()
+			return
+		}
+	}()
+
 	wg.Wait()
 
 	select {
@@ -112,26 +145,70 @@ func assemblePayload() (*payload, error) {
 			shipName := s.Ship.Name()
 			typ := d.DurationType.Display()
 			missions = append(missions, &mission{
-				Id:           missionId(s.Ship, d.DurationType),
-				Display:      shipName + ", " + typ,
-				ShipName:     shipName,
-				ShipIconPath: "egginc/" + s.Ship.IconFilename(),
-				Type:         typ,
-				AbbrevType:   abbreviatedMissionType(d.DurationType),
-				MinQuality:   float64(d.MinQuality),
-				MaxQuality:   float64(d.MaxQuality),
-				Params:       d,
+				Id:              missionId(s.Ship, d.DurationType),
+				Display:         shipName + ", " + typ,
+				ShipId:          s.Ship,
+				ShipName:        shipName,
+				ShipIconPath:    "egginc/" + s.Ship.IconFilename(),
+				TypeId:          d.DurationType,
+				Type:            typ,
+				AbbrevType:      abbreviatedMissionType(d.DurationType),
+				Capacity:        int(d.Capacity),
+				DurationSeconds: d.Seconds,
+				DurationDisplay: util.FormatDurationWhole(util.DoubleToDuration(d.Seconds)),
+				MinQuality:      float64(d.MinQuality),
+				MaxQuality:      float64(d.MaxQuality),
+				Params:          d,
 			})
 		}
 	}
 
 	artifacts := make([]*artifact, 0)
+	id2odds := make(map[string]*odds)
 	for _, p := range config.ArtifactParameters {
 		a, err := newArtifact(p)
 		if err != nil {
 			return nil, err
 		}
 		artifacts = append(artifacts, a)
+		if id2odds[a.Id] == nil {
+			id2odds[a.Id] = &odds{Rarities: make(map[api.ArtifactSpec_Rarity]float64)}
+		}
+		id2odds[a.Id].Total += p.OddsMultiplier
+		id2odds[a.Id].Rarities[a.AfxRarity] = p.OddsMultiplier
+	}
+	for _, a := range artifacts {
+		a.Odds = id2odds[a.Id]
+	}
+
+	loot := make(lootTable)
+	for _, m := range missions {
+		missionId := m.Id
+		data := _lootData.MissionLoot(m.ShipId, m.TypeId)
+		if data.TotalArtifactsCount%m.Capacity != 0 {
+			log.Fatalf("%s loot data: invalid total artifacts count: %d not divisible by %d",
+				missionId, data.TotalArtifactsCount, m.Capacity)
+		}
+		missionCount := data.TotalArtifactsCount / m.Capacity
+		items := make(map[string]*ItemCount)
+		for _, a := range artifacts {
+			if a.Quality < m.MinQuality || a.Quality > m.MaxQuality {
+				continue
+			}
+			possibleAfxRarities := a.PossibleAfxRarities
+			if possibleAfxRarities == nil {
+				possibleAfxRarities = []api.ArtifactSpec_Rarity{api.ArtifactSpec_COMMON}
+			}
+			counts, err := data.ItemCount(a.AfxId, a.AfxLevel, possibleAfxRarities)
+			if err != nil {
+				log.Fatalf("%s: %s", missionId, err)
+			}
+			items[a.Id] = counts
+		}
+		loot[missionId] = &missionLootTable{
+			MissionCount: missionCount,
+			Items:        items,
+		}
 	}
 
 	// CSV exports
@@ -198,6 +275,7 @@ func assemblePayload() (*payload, error) {
 		Ships:        ships,
 		Missions:     missions,
 		Artifacts:    artifacts,
+		LootTable:    loot,
 		MissionsCSV:  missionsCSV,
 		ArtifactsCSV: artifactsCSV,
 	}, nil

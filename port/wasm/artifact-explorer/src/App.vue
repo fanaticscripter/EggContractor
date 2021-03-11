@@ -1,6 +1,6 @@
 <template>
   <div class="flex-1 max-w-7xl w-full mx-auto px-4 xl:px-0 my-4">
-    <router-view :missions="missions" :artifacts="artifacts"></router-view>
+    <router-view :missions="missions" :artifacts="artifacts" :lootTable="lootTable"></router-view>
   </div>
 
   <div class="my-4">
@@ -52,16 +52,17 @@ export default {
   },
 
   data() {
-    const { ships, missions, artifacts, missionsCSV, artifactsCSV } = data;
-    return {
+    const { ships, missions, artifacts, lootTable, missionsCSV, artifactsCSV } = data;
+    return Object.freeze({
       ships,
       missions,
       artifacts,
+      lootTable,
       missionsCSVBlobURL: window.URL.createObjectURL(new Blob([missionsCSV], { type: "text/csv" })),
       artifactsCSVBlobURL: window.URL.createObjectURL(
         new Blob([artifactsCSV], { type: "text/csv" })
       ),
-    };
+    });
   },
 };
 </script>

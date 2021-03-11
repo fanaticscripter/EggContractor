@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"io/ioutil"
 
-	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/pkg/errors"
+
+	"github.com/fanaticscripter/EggContractor/api"
 )
 
 const _eiafxDataFile = "../_common/data/eiafx-data.json"

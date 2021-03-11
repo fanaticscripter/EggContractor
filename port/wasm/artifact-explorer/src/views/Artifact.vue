@@ -153,10 +153,56 @@
       <template v-if="obtainableMissions.length > 0">
         <div class="text-sm font-medium text-gray-500">Available from the following missions:</div>
         <ul class="grid grid-cols-1 gap-x-4 gap-y-1 sm:grid-cols-2 xl:grid-cols-3">
-          <li v-for="mission in obtainableMissions" :key="mission.id">
-            <mission-name :mission="mission" />
+          <li
+            v-for="mission in obtainableMissions"
+            :key="mission.id"
+            class="flex flex-row items-start flex-wrap"
+          >
+            <mission-name class="mr-1" :mission="mission" />
+            <tippy>
+              <span
+                class="flex flex-row items-center text-sm"
+                :class="mission.notEnoughData ? 'text-gray-500' : null"
+                >({{ mission.itemsPerMission.toPrecision(mission.precision)
+                }}<sup v-if="mission.notEnoughData" class="-top-0.5">?</sup>/<img
+                  class="h-4 w-4"
+                  :src="iconURL(mission.shipIconPath, 32)"
+                />, {{ mission.itemsPerDay.toPrecision(mission.precision)
+                }}<sup v-if="mission.notEnoughData" class="-top-0.5">?</sup>/d)</span
+              >
+
+              <template #content>
+                <p>
+                  Received {{ mission.itemCount.total }} from {{ mission.missionCount }} missions.
+                </p>
+                <p v-if="mission.notEnoughData">Not enough data, rate likely far from accurate.</p>
+                <ul v-if="mission.itemCount.total > 0" :set="(total = mission.itemCount.total)">
+                  <template v-for="rarity in artifact.effects" :key="rarity.afxRarity">
+                    <li
+                      v-if="rarity.afx_rarity !== 0"
+                      :set="(count = mission.itemCount.rarities[rarity.afx_rarity])"
+                    >
+                      <span :class="rarityFgClassOnDarkBg(rarity.afx_rarity)"
+                        >{{ rarity.rarity }}:</span
+                      >
+                      {{ count }}/{{ total }},
+                      {{ formatPercentage(count, total) }}
+                      (theoretical percentage
+                      {{
+                        formatPercentage(
+                          artifact.odds.rarities[rarity.afx_rarity],
+                          artifact.odds.total,
+                          3
+                        )
+                      }})
+                    </li>
+                  </template>
+                </ul>
+              </template>
+            </tippy>
           </li>
         </ul>
+        <loot-data-credit />
       </template>
       <template v-else>
         <div class="text-sm font-medium text-gray-500">Not available from missions :(</div>
@@ -239,9 +285,7 @@
           </svg>
         </a>
       </div>
-      <div
-        v-if="artifact.type === 'Stone' || artifact.type === 'Stone ingredient'"
-      >
+      <div v-if="artifact.type === 'Stone' || artifact.type === 'Stone ingredient'">
         <span class="text-sm font-medium text-gray-500 mr-1">
           Consuming which items yields this
           {{ artifact.type === "Stone" ? "stone" : "stone fragment" }}?
@@ -270,8 +314,9 @@
 
 <script>
 import ArtifactName from "@/components/ArtifactName.vue";
-import MissionName from "@/components/MissionName.vue";
 import Info from "@/components/Info.vue";
+import LootDataCredit from "@/components/LootDataCredit.vue";
+import MissionName from "@/components/MissionName.vue";
 import Share from "@/components/Share.vue";
 
 import { iconURL, stringCmp } from "@/utils";
@@ -279,8 +324,9 @@ import { iconURL, stringCmp } from "@/utils";
 export default {
   components: {
     ArtifactName,
-    MissionName,
     Info,
+    LootDataCredit,
+    MissionName,
     Share,
   },
 
@@ -288,6 +334,7 @@ export default {
     artifactId: String,
     missions: Array,
     artifacts: Array,
+    lootTable: Object,
   },
 
   data() {
@@ -341,10 +388,31 @@ export default {
       if (!this.artifact) {
         return [];
       }
-      return this.missions.filter(
-        mission =>
-          mission.minQuality <= this.artifact.quality && this.artifact.quality <= mission.maxQuality
-      );
+      const missions = this.missions
+        .filter(
+          mission =>
+            mission.minQuality <= this.artifact.quality &&
+            this.artifact.quality <= mission.maxQuality
+        )
+        .map(mission => {
+          const missionLoot = this.lootTable[mission.id];
+          const missionCount = missionLoot.missionCount;
+          const itemCount = missionLoot.items[this.artifactId];
+          const itemsPerMission = missionCount === 0 ? 0 : itemCount.total / missionCount;
+          const itemsPerDay = (itemsPerMission * 3600 * 24) / mission.durationSeconds;
+          const precision = Math.min(itemCount.total.toString().length, 3);
+          const notEnoughData = itemCount.total < 20;
+          return {
+            ...mission,
+            missionCount,
+            itemCount,
+            itemsPerMission,
+            itemsPerDay,
+            precision,
+            notEnoughData,
+          };
+        });
+      return missions.sort((m1, m2) => m2.itemsPerDay - m1.itemsPerDay);
     },
 
     dependents() {
@@ -408,6 +476,19 @@ export default {
       }
     },
 
+    rarityFgClassOnDarkBg(rarity) {
+      switch (rarity) {
+        case 1:
+          return "text-blue-400";
+        case 2:
+          return "text-purple-400";
+        case 3:
+          return "text-yellow-400";
+        default:
+          return "";
+      }
+    },
+
     calculateDependents(item) {
       const dependents = [];
       for (const it of this.artifacts) {
@@ -425,6 +506,18 @@ export default {
         }
       }
       return dependents;
+    },
+
+    // precision is optional.
+    formatPercentage(x, total, precision) {
+      const percentage = (x / total) * 100;
+      if (!precision) {
+        precision = Math.max(
+          Math.min(x.toString().length, 3),
+          Math.round(percentage).toString().length
+        );
+      }
+      return `${percentage.toPrecision(precision)}%`;
     },
   },
 };

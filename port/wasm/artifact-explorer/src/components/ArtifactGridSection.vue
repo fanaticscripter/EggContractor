@@ -96,10 +96,6 @@ export default {
     families: Array,
   },
 
-  data() {
-    console.log(this.families[0]);
-  },
-
   methods: {
     iconURL,
 

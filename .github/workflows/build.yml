@@ -1,9 +1,12 @@
-
 name: build
 on:
   push:
   pull_request_target:
   workflow_dispatch:
+  schedule:
+    # Regenerate every day to incorporate updated mission outcome data.
+    # Scheduled after https://github.com/ei-labo/cold-api/blob/f46659b12592200621a2f27adb031e9ed0b87cbf/.github/workflows/build.yml#L5-L6.
+    - cron: "30 3 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -40,15 +43,15 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.16.0'
+          go-version: "1.16.0"
       - name: Set up Node
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
       - name: Initialize dependencies
         run: |
           make init -j1
@@ -82,7 +85,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: '^1.16'
+          go-version: "^1.16"
       - name: Build
         run: |
           make
