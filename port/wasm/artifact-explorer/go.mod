@@ -1,6 +1,6 @@
 module github.com/fanaticscripter/EggContractor/port/wasm/artifact-explorer
 
-go 1.15
+go 1.16
 
 replace github.com/fanaticscripter/EggContractor => ../../..
 
