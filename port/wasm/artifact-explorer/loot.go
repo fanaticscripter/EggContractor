@@ -11,7 +11,7 @@ import (
 	"github.com/fanaticscripter/EggContractor/api"
 )
 
-const _lootDataFile = "src/mission_reward_count.json"
+const _lootDataFile = "../_common/data/mission_reward_count.json"
 
 var _lootData LootStore
 
