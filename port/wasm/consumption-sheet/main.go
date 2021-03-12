@@ -7,8 +7,10 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/fanaticscripter/EggContractor/api"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 )
 
 const _appDataFile = "src/app-data.json"
@@ -18,20 +20,20 @@ type AppPayload struct {
 }
 
 type AppFamily struct {
-	CoreFamily
+	eiafx.CoreFamily
 
 	Tiers []*AppTier `json:"tiers"`
 }
 
 type AppTier struct {
-	CoreTier
+	eiafx.CoreTier
 
 	Rarities []ConsumptionOutcome `json:"rarities"`
 	Sources  []Source             `json:"sources"`
 }
 
 type Source struct {
-	CoreTier
+	eiafx.CoreTier
 	AfxRarity     api.ArtifactSpec_Rarity `json:"afx_rarity"`
 	Rarity        string                  `json:"rarity"`
 	Deterministic bool                    `json:"deterministic"`
@@ -39,7 +41,7 @@ type Source struct {
 }
 
 func main() {
-	if err := loadEiAfxData(); err != nil {
+	if err := eiafx.LoadData(); err != nil {
 		log.Fatal(err)
 	}
 	if err := loadConsumptionData(); err != nil {
@@ -51,7 +53,7 @@ func main() {
 	}
 
 	payload := &AppPayload{}
-	for _, f := range _eiafxData.ArtifactFamilies {
+	for _, f := range eiafx.Data.ArtifactFamilies {
 		af := &AppFamily{
 			CoreFamily: f.CoreFamily,
 		}

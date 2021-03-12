@@ -2,10 +2,10 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 	"github.com/pkg/errors"
 )
 
@@ -55,9 +55,9 @@ func loadConsumptionData() error {
 }
 
 func (it *Item) Complete() {
-	tier := getTier(it.AfxId, it.AfxLevel)
-	if tier == nil {
-		panic(fmt.Sprintf("tier (%s, %s) not found", it.AfxId, it.AfxLevel))
+	tier, err := eiafx.GetTier(&api.ArtifactSpec{Name: it.AfxId, Level: it.AfxLevel})
+	if err != nil {
+		panic(err)
 	}
 	it.Id = tier.Id
 	it.IconFilename = tier.IconFilename
