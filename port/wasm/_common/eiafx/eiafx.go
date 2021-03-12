@@ -1,17 +1,18 @@
-package main
+package eiafx
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 
 	"github.com/pkg/errors"
 
 	"github.com/fanaticscripter/EggContractor/api"
 )
 
-const _eiafxDataFile = "../_common/data/eiafx-data.json"
+//go:embed eiafx-data.json
+var _eiafxDataJSON []byte
 
-var _eiafxData *Store
+var Data *Store
 
 type Store struct {
 	Schema           string    `json:"$schema"`
@@ -102,15 +103,28 @@ type CraftingPrice struct {
 	Minimum uint32  `json:"minimum"`
 }
 
-func loadEiAfxData() error {
-	body, err := ioutil.ReadFile(_eiafxDataFile)
+func LoadData() error {
+	Data = &Store{}
+	err := json.Unmarshal(_eiafxDataJSON, Data)
 	if err != nil {
-		return errors.Wrapf(err, "error reading %s", _eiafxDataFile)
-	}
-	_eiafxData = &Store{}
-	err = json.Unmarshal(body, _eiafxData)
-	if err != nil {
-		return errors.Wrapf(err, "error unmarshalling %s", _eiafxDataFile)
+		return errors.Wrap(err, "error unmarshalling eiafx-data.json")
 	}
 	return nil
+}
+
+func GetTier(spec *api.ArtifactSpec) (*Tier, error) {
+	afxId := spec.Name
+	afxLevel := spec.Level
+	familyAfxId := spec.Family()
+	for _, f := range Data.ArtifactFamilies {
+		if f.AfxId == familyAfxId {
+			for _, t := range f.Tiers {
+				if t.AfxId == afxId && t.AfxLevel == afxLevel {
+					return t, nil
+				}
+			}
+			break
+		}
+	}
+	return nil, errors.Errorf("artifact (%s, %s) not found in data.json", afxId, afxLevel)
 }

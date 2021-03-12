@@ -12,6 +12,7 @@ import (
 	"sync"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 	"github.com/fanaticscripter/EggContractor/port/wasm/_common/loot"
 	"github.com/fanaticscripter/EggContractor/util"
 )
@@ -55,7 +56,7 @@ type mission struct {
 type artifactParams = api.ArtifactsConfigurationResponse_ArtifactParameters
 
 type artifact struct {
-	*Tier
+	*eiafx.Tier
 	SortKey   string                  `json:"sortKey"`
 	AfxRarity api.ArtifactSpec_Rarity `json:"afxRarity"`
 	Rarity    string                  `json:"rarity"`
@@ -103,7 +104,7 @@ func assemblePayload() (*payload, error) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		err := loadEiAfxData()
+		err := eiafx.LoadData()
 		if err != nil {
 			errs <- err
 			cancel()
@@ -326,23 +327,9 @@ func abbreviatedMissionType(t api.MissionInfo_DurationType) string {
 
 func newArtifact(p *artifactParams) (*artifact, error) {
 	a := p.Spec
-	afxId := a.Name
-	afxLevel := a.Level
-	familyAfxId := a.Family()
-	var tier *Tier
-	for _, f := range _eiafxData.ArtifactFamilies {
-		if f.AfxId == familyAfxId {
-			for _, t := range f.Tiers {
-				if t.AfxId == afxId && t.AfxLevel == afxLevel {
-					tier = t
-					break
-				}
-			}
-			break
-		}
-	}
-	if tier == nil {
-		return nil, fmt.Errorf("artifact (%s, %s) not found in data.json", afxId, afxLevel)
+	tier, err := eiafx.GetTier(a)
+	if err != nil {
+		return nil, err
 	}
 	return &artifact{
 		Tier:      tier,
