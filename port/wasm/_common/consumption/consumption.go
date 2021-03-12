@@ -1,17 +1,18 @@
-package main
+package consumption
 
 import (
+	_ "embed"
 	"encoding/json"
-	"io/ioutil"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 	"github.com/pkg/errors"
 )
 
-const _consumptionDataFile = "../_common/data/consumption-data.json"
+//go:embed consumption-data.json
+var _consumptionDataJSON []byte
 
-var _consumptionOutcomes []ConsumptionOutcome
+var Outcomes []ConsumptionOutcome
 
 type ConsumptionOutcome struct {
 	Item               Item                `json:"item"`
@@ -42,14 +43,14 @@ type Byproduct struct {
 	Count int `json:"count"`
 }
 
-func loadConsumptionData() error {
-	body, err := ioutil.ReadFile(_consumptionDataFile)
+func LoadData() error {
+	err := json.Unmarshal(_consumptionDataJSON, &Outcomes)
 	if err != nil {
-		return errors.Wrapf(err, "error reading %s", _consumptionDataFile)
+		return errors.Wrap(err, "error unmarshalling consumption-data.json")
 	}
-	err = json.Unmarshal(body, &_consumptionOutcomes)
-	if err != nil {
-		return errors.Wrapf(err, "error unmarshalling %s", _consumptionDataFile)
+	for i, c := range Outcomes {
+		c.Complete()
+		Outcomes[i] = c
 	}
 	return nil
 }

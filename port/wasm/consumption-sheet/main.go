@@ -10,6 +10,7 @@ import (
 	log "github.com/sirupsen/logrus"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/port/wasm/_common/consumption"
 	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 )
 
@@ -28,8 +29,8 @@ type AppFamily struct {
 type AppTier struct {
 	eiafx.CoreTier
 
-	Rarities []ConsumptionOutcome `json:"rarities"`
-	Sources  []Source             `json:"sources"`
+	Rarities []consumption.ConsumptionOutcome `json:"rarities"`
+	Sources  []Source                         `json:"sources"`
 }
 
 type Source struct {
@@ -44,12 +45,8 @@ func main() {
 	if err := eiafx.LoadData(); err != nil {
 		log.Fatal(err)
 	}
-	if err := loadConsumptionData(); err != nil {
+	if err := consumption.LoadData(); err != nil {
 		log.Fatal(err)
-	}
-	for i, c := range _consumptionOutcomes {
-		c.Complete()
-		_consumptionOutcomes[i] = c
 	}
 
 	payload := &AppPayload{}
@@ -61,7 +58,7 @@ func main() {
 			at := &AppTier{
 				CoreTier: t.CoreTier,
 			}
-			for _, c := range _consumptionOutcomes {
+			for _, c := range consumption.Outcomes {
 				if c.Item.AfxId == t.AfxId && c.Item.AfxLevel == t.AfxLevel {
 					at.Rarities = append(at.Rarities, c)
 				}
