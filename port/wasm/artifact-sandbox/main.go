@@ -9,8 +9,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/fanaticscripter/EggContractor/api"
 	log "github.com/sirupsen/logrus"
+
+	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 )
 
 const _appDataFile = "src/lib/data.json"
@@ -75,13 +77,13 @@ type Stone struct {
 }
 
 func main() {
-	if err := loadEiAfxData(); err != nil {
+	if err := eiafx.LoadData(); err != nil {
 		log.Fatal(err)
 	}
 
 	var artifacts []Artifact
 	var stones []Stone
-	for _, f := range _eiafxData.ArtifactFamilies {
+	for _, f := range eiafx.Data.ArtifactFamilies {
 		for _, t := range f.Tiers {
 			if t.AfxType == api.ArtifactSpec_ARTIFACT {
 				for i, r := range t.Effects {
