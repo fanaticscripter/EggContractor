@@ -1,9 +1,9 @@
-package main
+package loot
 
 import (
+	_ "embed"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"strings"
 
 	"github.com/pkg/errors"
@@ -11,9 +11,10 @@ import (
 	"github.com/fanaticscripter/EggContractor/api"
 )
 
-const _lootDataFile = "../_common/data/mission_reward_count.json"
+//go:embed mission_reward_count.json
+var _lootDataJSON []byte
 
-var _lootData LootStore
+var Data LootStore
 
 type (
 	ShipName         string
@@ -85,14 +86,10 @@ func (r RarityName) AfxRarity() api.ArtifactSpec_Rarity {
 	return api.ArtifactSpec_Rarity(api.ArtifactSpec_Rarity_value[s])
 }
 
-func loadLootData() error {
-	body, err := ioutil.ReadFile(_lootDataFile)
+func LoadData() error {
+	err := json.Unmarshal(_lootDataJSON, &Data)
 	if err != nil {
-		return errors.Wrapf(err, "error reading %s", _lootDataFile)
-	}
-	err = json.Unmarshal(body, &_lootData)
-	if err != nil {
-		return errors.Wrapf(err, "error unmarshalling %s", _lootDataFile)
+		return errors.Wrapf(err, "error unmarshalling mission_reward_count.json")
 	}
 	return nil
 }

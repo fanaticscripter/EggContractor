@@ -11,7 +11,7 @@ all: $(targets)
 init: $(init-targets) update-loot-data
 
 update-loot-data:
-	curl -o _common/data/mission_reward_count.json https://api.ei.mikit.app/mission_reward_count.json
+	curl -o _common/loot/mission_reward_count.json https://api.ei.mikit.app/mission_reward_count.json
 
 clean: $(clean-targets)
 

@@ -12,6 +12,7 @@ import (
 	"sync"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/port/wasm/_common/loot"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
@@ -75,7 +76,7 @@ type lootTable map[string]*missionLootTable
 type missionLootTable struct {
 	MissionCount int `json:"missionCount"`
 	// map key is artifact.Id
-	Items map[string]*ItemCount `json:"items"`
+	Items map[string]*loot.ItemCount `json:"items"`
 }
 
 func assemblePayload() (*payload, error) {
@@ -113,7 +114,7 @@ func assemblePayload() (*payload, error) {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		err := loadLootData()
+		err := loot.LoadData()
 		if err != nil {
 			errs <- err
 			cancel()
@@ -181,16 +182,16 @@ func assemblePayload() (*payload, error) {
 		a.Odds = id2odds[a.Id]
 	}
 
-	loot := make(lootTable)
+	loots := make(lootTable)
 	for _, m := range missions {
 		missionId := m.Id
-		data := _lootData.MissionLoot(m.ShipId, m.TypeId)
+		data := loot.Data.MissionLoot(m.ShipId, m.TypeId)
 		if data.TotalArtifactsCount%m.Capacity != 0 {
 			log.Fatalf("%s loot data: invalid total artifacts count: %d not divisible by %d",
 				missionId, data.TotalArtifactsCount, m.Capacity)
 		}
 		missionCount := data.TotalArtifactsCount / m.Capacity
-		items := make(map[string]*ItemCount)
+		items := make(map[string]*loot.ItemCount)
 		for _, a := range artifacts {
 			if a.Quality < m.MinQuality || a.Quality > m.MaxQuality {
 				continue
@@ -205,7 +206,7 @@ func assemblePayload() (*payload, error) {
 			}
 			items[a.Id] = counts
 		}
-		loot[missionId] = &missionLootTable{
+		loots[missionId] = &missionLootTable{
 			MissionCount: missionCount,
 			Items:        items,
 		}
@@ -275,7 +276,7 @@ func assemblePayload() (*payload, error) {
 		Ships:        ships,
 		Missions:     missions,
 		Artifacts:    artifacts,
-		LootTable:    loot,
+		LootTable:    loots,
 		MissionsCSV:  missionsCSV,
 		ArtifactsCSV: artifactsCSV,
 	}, nil
