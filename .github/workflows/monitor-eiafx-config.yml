@@ -1,0 +1,22 @@
+name: monitor /ei_afx/config
+on:
+  push:
+  pull_request_target:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: port/wasm/_common/eiafx
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: "^1.16"
+      - name: Build and monitor
+        run: |
+          make alert
