@@ -2,14 +2,12 @@ package main
 
 import (
 	"bytes"
-	"context"
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"strings"
-	"sync"
 
 	"github.com/fanaticscripter/EggContractor/api"
 	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
@@ -81,60 +79,24 @@ type missionLootTable struct {
 }
 
 func assemblePayload() (*payload, error) {
-	ctx, cancel := context.WithCancel(context.Background())
-	errs := make(chan error, 2)
-	var wg sync.WaitGroup
-	var config *api.ArtifactsConfigurationResponse
-
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		req := &api.ArtifactsConfigurationRequestPayload{
-			ClientVersion: api.ClientVersion,
-		}
-		config = &api.ArtifactsConfigurationResponse{}
-		err := api.RequestAuthenticatedWithContext(ctx, "/ei_afx/config", req, config)
-		if err != nil {
-			errs <- err
-			cancel()
-			return
-		}
-	}()
-
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		err := eiafx.LoadData()
-		if err != nil {
-			errs <- err
-			cancel()
-			return
-		}
-	}()
-
-	wg.Add(1)
-	go func() {
-		defer wg.Done()
-		err := loot.LoadData()
-		if err != nil {
-			errs <- err
-			cancel()
-			return
-		}
-	}()
-
-	wg.Wait()
-
-	select {
-	case err := <-errs:
+	err := eiafx.LoadConfig()
+	if err != nil {
 		return nil, err
-	default:
-		// No error
+	}
+
+	err = eiafx.LoadData()
+	if err != nil {
+		return nil, err
+	}
+
+	err = loot.LoadData()
+	if err != nil {
+		return nil, err
 	}
 
 	ships := make([]*ship, 0)
 	missions := make([]*mission, 0)
-	for _, s := range config.MissionParameters {
+	for _, s := range eiafx.Config.MissionParameters {
 		ships = append(ships, &ship{
 			Name:       s.Ship.Name(),
 			AbbrevName: abbreviatedShipName(s.Ship),
@@ -167,7 +129,7 @@ func assemblePayload() (*payload, error) {
 
 	artifacts := make([]*artifact, 0)
 	id2odds := make(map[string]*odds)
-	for _, p := range config.ArtifactParameters {
+	for _, p := range eiafx.Config.ArtifactParameters {
 		a, err := newArtifact(p)
 		if err != nil {
 			return nil, err
@@ -237,7 +199,7 @@ func assemblePayload() (*payload, error) {
 	b.Reset()
 	w = csv.NewWriter(&b)
 	header := []string{"Item", "Tier", "Base quality", "Odds multiplier"}
-	for _, s := range config.MissionParameters {
+	for _, s := range eiafx.Config.MissionParameters {
 		for _, d := range s.Durations {
 			header = append(header, abbreviatedShipName(s.Ship)+" "+abbreviatedMissionType(d.DurationType))
 		}
