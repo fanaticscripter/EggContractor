@@ -25,6 +25,7 @@ COPY --from=builder /src/migrations /migrations
 COPY --from=builder /src/static /static
 COPY --from=builder /src/templates /templates
 COPY --from=builder /usr/share/zoneinfo /usr/share/zoneinfo
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 # The cgo DNS resolver could be problematic in the scratch image.
 ENV GODEBUG=netdns=go
 ENV EGGCONTRACTOR_CONFIG_FILE=/config.toml
