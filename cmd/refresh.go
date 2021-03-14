@@ -128,7 +128,6 @@ var _refreshCommand = &cobra.Command{
 					status, err := api.RequestCoopStatus(&api.CoopStatusRequestPayload{
 						ContractId: c.ContractId,
 						Code:       c.Code,
-						PlayerId:   playerId,
 					})
 					resultCh <- result{
 						index:     index,
