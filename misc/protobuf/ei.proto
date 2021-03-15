@@ -706,6 +706,19 @@ message LiveConfig {
 
     optional GiftConfig gift_config = 3;
     message GiftConfig {
+        repeated GiftValueConfig gift_configs = 9;
+        message GiftValueConfig {
+            optional string gift_id = 1;
+            optional double amount = 4;
+            optional double rand_min = 2;
+            optional double rand_max = 3;
+            optional double video_min = 5;
+            optional double video_max = 6;
+        }
+
+        optional double gift_mu_min_spent = 10;
+        optional double gift_mu_max_spent = 11;
+        optional double gift_mu_overall_mult = 12;
         optional double package_interval = 1;
         optional double video_offer_interval = 2;
         optional double video_offer_interval_contract = 3;
@@ -754,6 +767,15 @@ message GetPeriodicalsRequest {
     optional double soul_eggs = 8;
     optional uint32 current_client_version = 10;
     optional bool debug = 11;
+}
+
+message ConfigRequest {
+    optional BasicRequestInfo rinfo = 1;
+}
+
+message ConfigResponse {
+    optional LiveConfig live_config = 1;
+    optional MailDB mail_bag = 2;
 }
 
 message AdAttributionRawData {
@@ -1029,6 +1051,7 @@ message ConsumeArtifactRequest {
     optional BasicRequestInfo rinfo = 4;
     optional string ei_user_id = 3;
     optional ArtifactSpec spec = 1;
+    optional string artifact_server_id = 5;
     optional uint64 original_item_id = 2;
 }
 
