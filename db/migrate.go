@@ -3,6 +3,7 @@ package db
 import (
 	"database/sql"
 	"fmt"
+	"time"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database"
@@ -16,12 +17,18 @@ import (
 	"github.com/fanaticscripter/EggContractor/api"
 )
 
-const _schemaVersion = 4
+const _schemaVersion = 5
 
 func runMigrations(dbPath string) (err error) {
 	sql.Register("sqlite3_with_migration_funcs", &sqlite3.SQLiteDriver{
 		ConnectHook: func(conn *sqlite3.SQLiteConn) error {
 			if err := conn.RegisterFunc("contract_expiry_timestamp", contractExpiryTimestamp, true); err != nil {
+				return err
+			}
+			if err := conn.RegisterFunc("contract_expiry_year", contractExpiryYear, true); err != nil {
+				return err
+			}
+			if err := conn.RegisterFunc("contract_expiry_month", contractExpiryMonth, true); err != nil {
 				return err
 			}
 			return nil
@@ -68,4 +75,28 @@ func contractExpiryTimestamp(textId string, props []byte) float64 {
 		panic(msg)
 	}
 	return contract.ExpiryTimestamp
+}
+
+// Used in migration #5 (5_add_contract_expiry_month.up.sql)
+func contractExpiryYear(textId string, props []byte) int {
+	contract := &api.ContractProperties{}
+	if err := proto.Unmarshal(props, contract); err != nil {
+		msg := fmt.Sprintf("cannot unmarshal props for contract %s", textId)
+		log.Error(msg)
+		panic(msg)
+	}
+	expiry := contract.ExpiryTime().In(time.UTC)
+	return int(expiry.Year())
+}
+
+// Used in migration #5 (5_add_contract_expiry_month.up.sql)
+func contractExpiryMonth(textId string, props []byte) int {
+	contract := &api.ContractProperties{}
+	if err := proto.Unmarshal(props, contract); err != nil {
+		msg := fmt.Sprintf("cannot unmarshal props for contract %s", textId)
+		log.Error(msg)
+		panic(msg)
+	}
+	expiry := contract.ExpiryTime().In(time.UTC)
+	return int(expiry.Month())
 }

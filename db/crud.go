@@ -16,14 +16,17 @@ import (
 
 // ContractSignature is used to determine contract uniqueness.
 type ContractSignature struct {
-	Id         string
-	ExpiryYear int
+	Id          string
+	ExpiryYear  int
+	ExpiryMonth int
 }
 
 func GetContractSignature(c *api.ContractProperties) ContractSignature {
+	expiry := c.ExpiryTime().In(time.UTC)
 	return ContractSignature{
-		Id:         c.Id,
-		ExpiryYear: c.ExpiryTime().Year(),
+		Id:          c.Id,
+		ExpiryYear:  expiry.Year(),
+		ExpiryMonth: int(expiry.Month()),
 	}
 }
 
@@ -39,12 +42,14 @@ func InsertContract(now time.Time, c *api.ContractProperties, checkExistence boo
 		err = errors.Wrap(err, action)
 		return
 	}
-	expiryYear := c.ExpiryTime().Year()
+	sig := GetContractSignature(c)
 	err = transact(
 		action,
 		func(tx *sql.Tx) error {
 			if checkExistence {
-				row := tx.QueryRow(`SELECT id FROM contract WHERE text_id = ? AND expiry_year = ?`, c.Id, expiryYear)
+				row := tx.QueryRow(`SELECT id FROM contract
+					WHERE text_id = ? AND expiry_year = ? AND expiry_month = ?`,
+					c.Id, sig.ExpiryYear, sig.ExpiryMonth)
 				var rowid int64
 				err := row.Scan(&rowid)
 				switch {
@@ -57,15 +62,15 @@ func InsertContract(now time.Time, c *api.ContractProperties, checkExistence boo
 				}
 			}
 			if _, err := tx.Exec(`INSERT INTO
-				contract(text_id, expiry_year, coop_allowed, props, first_seen_timestamp, expiry_timestamp)
-				VALUES(?, ?, ?, ?, ?, ?)
-				ON CONFLICT(text_id, expiry_year)
+				contract(text_id, expiry_year, expiry_month, coop_allowed, props, first_seen_timestamp, expiry_timestamp)
+				VALUES(?, ?, ?, ?, ?, ?, ?)
+				ON CONFLICT(text_id, expiry_year, expiry_month)
 				DO UPDATE SET
 					coop_allowed = excluded.coop_allowed,
 					props = excluded.props,
 					expiry_timestamp = excluded.expiry_timestamp
 				WHERE excluded.expiry_timestamp < expiry_timestamp`,
-				c.Id, expiryYear, c.CoopAllowed, marshalledProps, util.TimeToDouble(now), c.ExpiryTimestamp); err != nil {
+				c.Id, sig.ExpiryYear, sig.ExpiryMonth, c.CoopAllowed, marshalledProps, util.TimeToDouble(now), c.ExpiryTimestamp); err != nil {
 				return err
 			}
 			return nil
@@ -74,10 +79,10 @@ func InsertContract(now time.Time, c *api.ContractProperties, checkExistence boo
 	return
 }
 
-// expiryYear is optional. When left unspecified, the latest iteration is
-// retrieved. If no matching contract is found in the database, the return value
-// is (nil, nil), i.e., error is not set in that case.
-func GetContract(id string, expiryYear int) (*api.ContractProperties, error) {
+// expiryYear and expiryMonth are optional. When expiryYear is 0, the latest
+// iteration is retrieved. If no matching contract is found in the database, the
+// return value is (nil, nil), i.e., error is not set in that case.
+func GetContract(id string, expiryYear int, expiryMonth int) (*api.ContractProperties, error) {
 	action := fmt.Sprintf("query contract %s", id)
 	var foundRow bool
 	var props []byte
@@ -86,11 +91,13 @@ func GetContract(id string, expiryYear int) (*api.ContractProperties, error) {
 		func(tx *sql.Tx) error {
 			var row *sql.Row
 			if expiryYear == 0 {
-				row = tx.QueryRow("SELECT props FROM contract WHERE text_id = ? ORDER BY expiry_year DESC LIMIT 1",
+				row = tx.QueryRow(`SELECT props FROM contract
+					WHERE text_id = ? ORDER BY expiry_year DESC, expiry_month DESC LIMIT 1`,
 					id)
 			} else {
-				row = tx.QueryRow("SELECT props FROM contract WHERE text_id = ? AND expiry_year = ?",
-					id, expiryYear)
+				row = tx.QueryRow(`SELECT props FROM contract
+					WHERE text_id = ? AND expiry_year = ? AND expiry_month = ?`,
+					id, expiryYear, expiryMonth)
 			}
 			err := row.Scan(&props)
 			switch {
