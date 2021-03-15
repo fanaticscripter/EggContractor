@@ -16,8 +16,8 @@ import (
 )
 
 const (
-	ClientVersion = 29
-	AppVersion    = "1.20.6"
+	ClientVersion = 30
+	AppVersion    = "1.20.7"
 )
 
 var _apiPrefix = "https://afx-2-dot-auxbrainhome.appspot.com"
