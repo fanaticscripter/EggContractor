@@ -6,6 +6,8 @@ const messages = {
     "EggIncFirstContactResponse",
     "GetPeriodicalsRequest",
     "PeriodicalsResponse",
+    "ConfigRequest",
+    "ConfigResponse",
     "MissionRequest",
     "MissionResponse",
     "CompleteMissionResponse",
