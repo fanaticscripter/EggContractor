@@ -10,9 +10,16 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
-func (c *SoloContract) Display(now time.Time) {
+func (c *SoloContract) Display(now time.Time, multiPlayerMode bool) {
 	fmt.Printf("%s (%s)\n", c.GetName(), c.GetId())
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
+	if multiPlayerMode {
+		playerName := c.GetPlayerNickname()
+		if playerName == "" {
+			playerName = "Unknown player"
+		}
+		fmt.Fprintf(w, "Player:\t%s\n", playerName)
+	}
 	contractType := "Standard"
 	if c.GetIsElite() {
 		contractType = "Elite"

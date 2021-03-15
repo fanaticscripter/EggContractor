@@ -229,9 +229,8 @@ func processSolosFromSaves(refreshTime time.Time, refreshId int64, saves []*api.
 	for _, save := range saves {
 		solos = append(solos, solo.GetActiveSoloContracts(save)...)
 	}
-	// TODO: record and display user id and nickname for solo contracts.
 	for _, c := range solos {
-		c.Display(refreshTime)
+		c.Display(refreshTime, _config.MultiPlayerMode())
 		err := db.InsertSoloStatus(refreshTime, refreshId, c)
 		if err != nil {
 			log.Error(err)

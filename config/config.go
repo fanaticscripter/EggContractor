@@ -119,6 +119,10 @@ func (c *Config) ResolveAndValidate() error {
 	return nil
 }
 
+func (c Config) MultiPlayerMode() bool {
+	return len(c.Players) > 1
+}
+
 func (c Config) HasLegacyPlayerField() bool {
 	return c.Player.Id != ""
 }

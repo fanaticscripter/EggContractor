@@ -35,7 +35,7 @@ This command does not touch the network, only the database.`,
 			fmt.Println(util.MsgNoActiveContracts)
 		}
 		for _, solo := range solos {
-			solo.Display(timestamp)
+			solo.Display(timestamp, _config.MultiPlayerMode())
 		}
 		for _, coop := range coops {
 			// Apparently GetCoopMemberActivityStats is not in the same
