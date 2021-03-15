@@ -7,11 +7,15 @@ import (
 )
 
 type Player struct {
+	Id       string
+	Nickname string
 	Progress *api.FirstContact_Payload_Progress
 }
 
 func GetPlayer(backup *api.FirstContact_Payload) *Player {
 	return &Player{
+		Id:       backup.EiUserId,
+		Nickname: backup.UserName,
 		Progress: backup.Progress,
 	}
 }

@@ -5,6 +5,8 @@ option go_package = "github.com/fanaticscripter/EggContractor/solo/pb";
 import "api/egginc.proto";
 
 message SoloContract {
+  string player_id = 13;
+  string player_nickname = 14;
   string id = 1;
   string name = 2;
   bool is_elite = 3;

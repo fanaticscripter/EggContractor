@@ -28,6 +28,8 @@ import (
 // the database.
 
 type BaseSoloContract interface {
+	GetPlayerId() string
+	GetPlayerNickname() string
 	GetId() string
 	GetName() string
 	GetIsElite() bool
@@ -101,6 +103,8 @@ func (c *SoloContract) GetOfflineAdjustedExpectedDurationUntilFinish(clientRefre
 
 func (c *SoloContract) ToPBSoloContract() *pb.SoloContract {
 	return &pb.SoloContract{
+		PlayerId:                       c.GetPlayerId(),
+		PlayerNickname:                 c.GetPlayerNickname(),
 		Id:                             c.GetId(),
 		Name:                           c.GetName(),
 		IsElite:                        c.GetIsElite(),
@@ -177,6 +181,14 @@ func GetActiveSoloContracts(backup *api.FirstContact_Payload) []*SoloContract {
 		})
 	}
 	return solos
+}
+
+func (c *soloContract) GetPlayerId() string {
+	return c.Player.Id
+}
+
+func (c *soloContract) GetPlayerNickname() string {
+	return c.Player.Nickname
 }
 
 func (c *soloContract) GetId() string {
