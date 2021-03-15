@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/pkg/errors"
+	log "github.com/sirupsen/logrus"
 )
 
 const (
@@ -58,6 +59,7 @@ const _defaultDatabasePath = "~/.local/share/" + ProgName + "/data.db"
 
 type Config struct {
 	Player       PlayerConfig
+	Players      []PlayerConfig
 	Database     DatabaseConfig
 	Notification NotificationConfig
 }
@@ -81,8 +83,23 @@ type NotificationConfig struct {
 
 func (c *Config) ResolveAndValidate() error {
 	var err error
-	if c.Player.Id == "" {
-		return errors.New("player.id required")
+	if c.Player.Id != "" {
+		// Prepend Player to Players, if the player isn't already in Players.
+		player := c.Player
+		duplicate := false
+		for _, p := range c.Players {
+			if p.Id == player.Id {
+				duplicate = true
+				break
+			}
+		}
+		if !duplicate {
+			c.Players = append([]PlayerConfig{player}, c.Players...)
+		}
+		log.Warn("DeprecationWarning: player deprecated, use players instead; see `EggContractor config-template`")
+	}
+	if len(c.Players) == 0 {
+		return errors.New("at least one player required")
 	}
 	if c.Database.Path == "" {
 		c.Database.Path = _defaultDatabasePath
@@ -100,6 +117,10 @@ func (c *Config) ResolveAndValidate() error {
 		}
 	}
 	return nil
+}
+
+func (c Config) HasLegacyPlayerField() bool {
+	return c.Player.Id != ""
 }
 
 func tildeExpand(path string) (string, error) {

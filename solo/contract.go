@@ -141,17 +141,17 @@ type soloContract struct {
 	Farm     *api.Farm
 }
 
-func GetActiveSoloContracts(fc *api.FirstContact) []*SoloContract {
-	player := GetPlayer(fc)
-	contracts := fc.Data.Contracts.ActiveContracts
+func GetActiveSoloContracts(backup *api.FirstContact_Payload) []*SoloContract {
+	player := GetPlayer(backup)
+	contracts := backup.Contracts.ActiveContracts
 
 	activeCoopContractIds := make(map[string]struct{})
-	for _, c := range fc.Data.Contracts.ActiveCoopStatuses {
+	for _, c := range backup.Contracts.ActiveCoopStatuses {
 		activeCoopContractIds[c.ContractId] = struct{}{}
 	}
 
 	solos := make([]*SoloContract, 0)
-	for _, farm := range fc.Data.Farms {
+	for _, farm := range backup.Farms {
 		if farm.ContractId == "" {
 			continue
 		}

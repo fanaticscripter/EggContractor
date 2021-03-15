@@ -10,9 +10,9 @@ type Player struct {
 	Progress *api.FirstContact_Payload_Progress
 }
 
-func GetPlayer(fc *api.FirstContact) *Player {
+func GetPlayer(backup *api.FirstContact_Payload) *Player {
 	return &Player{
-		Progress: fc.Data.Progress,
+		Progress: backup.Progress,
 	}
 }
 

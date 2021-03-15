@@ -14,6 +14,19 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
+// ContractSignature is used to determine contract uniqueness.
+type ContractSignature struct {
+	Id         string
+	ExpiryYear int
+}
+
+func GetContractSignature(c *api.ContractProperties) ContractSignature {
+	return ContractSignature{
+		Id:         c.Id,
+		ExpiryYear: c.ExpiryTime().Year(),
+	}
+}
+
 // InsertContract upserts the contract into the database. If checkExistence is
 // true, perform an additional query beforehand to determine whether the
 // contract already exists in the database, and if so, set exists to true in the
