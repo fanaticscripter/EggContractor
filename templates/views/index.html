@@ -14,8 +14,7 @@
         {{end}}
         {{template "auto_refresh_toggle"}}
       </div>
-      {{range .Solos}}{{template "solo" .}}{{end}}
-      {{range .Coops}}{{template "coop" .}}{{end}}
+      {{range .Statuses}}{{template "solo_coop" .}}{{end}}
       {{template "peeker" .Peeker}}
     </main>
     {{template "footer"}}

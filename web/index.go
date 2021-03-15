@@ -2,7 +2,9 @@ package web
 
 import (
 	"net/http"
+	"sort"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/labstack/echo/v4"
@@ -19,8 +21,7 @@ type indexPayload struct {
 	Warnings []string
 
 	RefreshTime time.Time
-	Solos       []*SoloStatus
-	Coops       []*CoopStatus
+	Statuses    []*SoloCoopStatus
 
 	Peeker *peekerPayload
 }
@@ -33,6 +34,16 @@ type SoloStatus struct {
 type CoopStatus struct {
 	*coop.CoopStatus
 	Activities map[string]*coop.CoopMemberActivity
+}
+
+// SoloCoopStatus is a unified type for solos and coops to facilitate sorting.
+// For solos, Solo is set and Coop is nil; and vice versa.
+type SoloCoopStatus struct {
+	ContractId   string
+	ContractName string
+	IsSolo       bool
+	Solo         *SoloStatus
+	Coop         *CoopStatus
 }
 
 // GET /?by=<timestamp>
@@ -74,6 +85,19 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		}
 	}
 
+	// sort.Slice(wrappedSolos, func(i, j int) bool {
+	// 	s1 := wrappedSolos[i]
+	// 	s2 := wrappedSolos[j]
+	// 	switch strings.Compare(s1.GetName(), s2.GetName()) {
+	// 	case -1:
+	// 		return true
+	// 	case 1:
+	// 		return false
+	// 	default:
+	// 		return s1.GetPlayerNickname() < s2.GetPlayerNickname()
+	// 	}
+	// })
+
 	wrappedCoops := make([]*CoopStatus, len(coops))
 	for i, c := range coops {
 		activities, err := db.GetCoopMemberActivityStats(c, timestamp)
@@ -87,12 +111,65 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		}
 	}
 
-	contractIds := make([]string, 0)
-	for _, c := range solos {
-		contractIds = append(contractIds, c.GetId())
+	// sort.Slice(wrappedCoops, func(i, j int) bool {
+	// 	c1 := wrappedCoops[i]
+	// 	c2 := wrappedCoops[j]
+	// 	switch strings.Compare(c1.Contract.Name, c2.Contract.Name) {
+	// 	case -1:
+	// 		return true
+	// 	case 1:
+	// 		return false
+	// 	default:
+	// 		return c1.Code < c2.Code
+	// 	}
+	// })
+
+	statuses := make([]*SoloCoopStatus, 0, len(solos)+len(coops))
+	for _, s := range wrappedSolos {
+		statuses = append(statuses, &SoloCoopStatus{
+			ContractId:   s.GetId(),
+			ContractName: s.GetName(),
+			IsSolo:       true,
+			Solo:         s,
+		})
 	}
-	for _, c := range coops {
-		contractIds = append(contractIds, c.ContractId)
+	for _, c := range wrappedCoops {
+		statuses = append(statuses, &SoloCoopStatus{
+			ContractId:   c.ContractId,
+			ContractName: c.Contract.Name,
+			IsSolo:       false,
+			Coop:         c,
+		})
+	}
+	sort.Slice(statuses, func(i, j int) bool {
+		s1 := statuses[i]
+		s2 := statuses[j]
+		switch strings.Compare(s1.ContractName, s2.ContractName) {
+		case -1:
+			return true
+		case 1:
+			return false
+		}
+		switch {
+		case s1.IsSolo && s2.IsSolo:
+			// Both are solos, compare player nickname.
+			return s1.Solo.GetPlayerNickname() < s2.Solo.GetPlayerNickname()
+		case s1.IsSolo && !s2.IsSolo:
+			// Coops before solos.
+			return false
+		case !s1.IsSolo && s2.IsSolo:
+			// Coops before solos.
+			return true
+		case !s1.IsSolo && !s2.IsSolo:
+			// Both are coops, compare coop code.
+			return s1.Coop.Code < s2.Coop.Code
+		}
+		return false
+	})
+
+	contractIds := make([]string, len(statuses))
+	for i, s := range statuses {
+		contractIds[i] = s.ContractId
 	}
 	peeker, err := newPeekerPayloadFromPresetList(contractIds)
 	if err != nil {
@@ -103,8 +180,7 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		Errors:      errs,
 		Warnings:    warnings,
 		RefreshTime: timestamp,
-		Solos:       wrappedSolos,
-		Coops:       wrappedCoops,
+		Statuses:    statuses,
 		Peeker:      peeker,
 	}
 }

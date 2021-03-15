@@ -1,0 +1,7 @@
+{{define "solo_coop"}}
+  {{if .IsSolo}}
+    {{template "solo" .Solo}}
+  {{else}}
+    {{template "coop" .Coop}}
+  {{end}}
+{{end}}
