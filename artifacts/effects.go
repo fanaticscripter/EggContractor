@@ -51,6 +51,13 @@ func LayingRateEffect(artifacts []*api.CompleteArtifact) float64 {
 	})
 }
 
+func ShippingCapacityEffect(artifacts []*api.CompleteArtifact) float64 {
+	return MultiplicativeEffect(artifacts, []api.ArtifactSpec_Name{
+		api.ArtifactSpec_INTERSTELLAR_COMPASS,
+		api.ArtifactSpec_QUANTUM_STONE,
+	})
+}
+
 // A stripped down ArtifactSpec that is comparable.
 type item struct {
 	Name   api.ArtifactSpec_Name

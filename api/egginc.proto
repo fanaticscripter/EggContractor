@@ -140,7 +140,7 @@ message Farm {
   int32 silos_owned = 11;
   repeated int32 habitat_types = 12;
   repeated int64 habitat_populations = 13;
-  repeated int32 vehicle_types = 17;
+  repeated VehicleType vehicle_types = 17;
   repeated int32 train_lengths = 21;
   repeated Research researches = 18;
   string contract_id = 20;  // empty for home farm
@@ -180,6 +180,21 @@ enum EggType {
 
   // Placeholder for undiscovered eggs.
   UNKNOWN = 1000;
+}
+
+enum VehicleType {
+  TRIKE = 0;
+  TRANSIT_VAN = 1;
+  PICKUP = 2;
+  TEN_FOOT = 3;
+  TWENTY_FOUR_FOOT = 4;
+  SEMI = 5;
+  DOUBLE_SEMI = 6;
+  FUTURE_SEMI = 7;
+  MEGA_SEMI = 8;
+  HOVER_SEMI = 9;
+  QUANTUM_TRANSPORTER = 10;
+  HYPERLOOP_TRAIN = 11;
 }
 
 enum TrophyType {

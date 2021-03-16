@@ -1,6 +1,7 @@
 package solo
 
 import (
+	"math"
 	"time"
 
 	"github.com/fanaticscripter/EggContractor/api"
@@ -238,9 +239,11 @@ func (c *soloContract) GetEggsLaid() float64 {
 }
 
 func (c *soloContract) GetEggsPerSecond() float64 {
-	return float64(c.Farm.ChickenCount) *
+	layingRate := float64(c.Farm.ChickenCount) *
 		eggsPerChickenPerSecond(c.Farm.Researches, c.Player.Progress.EpicResearches) *
 		artifacts.LayingRateEffect(c.Artifacts)
+	maxShippingRate := maxEggsShippedPerSecond(c.Farm, c.Player.Progress.EpicResearches)
+	return math.Min(layingRate, maxShippingRate)
 }
 
 func (c *soloContract) GetDurationUntilProductionDeadline() time.Duration {
