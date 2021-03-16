@@ -58,9 +58,6 @@ func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRe
 	if payload.ClientVersion == 0 {
 		payload.ClientVersion = ClientVersion
 	}
-	if payload.DeviceId == "" {
-		payload.DeviceId = payload.EiUserId
-	}
 	resp := &FirstContact{}
 	err := RequestAuthenticatedWithContext(ctx, "/ei/first_contact", payload, resp)
 	if err != nil {
