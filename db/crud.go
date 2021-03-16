@@ -405,6 +405,11 @@ func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
 					if err := proto.Unmarshal(marshalledStatus, status); err != nil {
 						return err
 					}
+					offlineTime := refreshTime.Sub(lastStatusUpdateTime)
+					membersNotSeenInThisRrefresh := make(map[string]*api.CoopStatus_Member, len(unaccountedForMembers))
+					for id, m := range unaccountedForMembers {
+						membersNotSeenInThisRrefresh[id] = m
+					}
 					for _, m := range status.Members {
 						mm, exists := unaccountedForMembers[m.Id]
 						if !exists {
@@ -415,11 +420,26 @@ func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
 								PlayerId:         mm.Id,
 								PlayerName:       mm.Name,
 								LastUpdateTime:   lastStatusUpdateTime,
-								OfflineTime:      refreshTime.Sub(lastStatusUpdateTime),
+								OfflineTime:      offlineTime,
 								EggsPerHourSince: mm.EggsPerHour(),
 							}
 							delete(unaccountedForMembers, m.Id)
 						}
+						delete(membersNotSeenInThisRrefresh, m.Id)
+					}
+					// Members in membersNotSeenInThisRrefresh only appeared in
+					// the next refresh, indicating they only joined between
+					// this refresh and the next.
+					for _, m := range membersNotSeenInThisRrefresh {
+						activities[m.Id] = &coop.CoopMemberActivity{
+							PlayerId:           m.Id,
+							PlayerName:         m.Name,
+							LastUpdateTime:     lastStatusUpdateTime,
+							OfflineTime:        offlineTime,
+							EggsPerHourSince:   m.EggsPerHour(),
+							NoActivityRecorded: true,
+						}
+						delete(unaccountedForMembers, m.Id)
 					}
 					lastStatusUpdateTime = util.DoubleToTime(timestamp)
 				}
@@ -428,12 +448,13 @@ func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
 				}
 				offset += pageSize
 			}
+			offlineTime := refreshTime.Sub(lastStatusUpdateTime)
 			for _, m := range unaccountedForMembers {
 				activities[m.Id] = &coop.CoopMemberActivity{
 					PlayerId:           m.Id,
 					PlayerName:         m.Name,
 					LastUpdateTime:     lastStatusUpdateTime,
-					OfflineTime:        refreshTime.Sub(lastStatusUpdateTime),
+					OfflineTime:        offlineTime,
 					EggsPerHourSince:   m.EggsPerHour(),
 					NoActivityRecorded: true,
 				}
