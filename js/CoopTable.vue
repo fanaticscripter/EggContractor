@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr v-for="(member, index) in sortedMembers" :key="member.id" :class="index % 2 === 1 ? 'bg-gray-50' : 'bg-white'">
-        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500 hover:text-gray-400 cursor-pointer" :class="{ 'CoopTable__member--snoozing': !member.isActive }" :title="`${member.id} (click to copy)`" @click="copy(member.id, `Copied ID of ${member.name}`)">{{ member.name }}</td>
+        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500 hover:text-gray-400 cursor-pointer" :class="{ 'CoopTable__member--snoozing': !member.isActive }" v-tippy="{ content: `${member.id} (click to copy)` }" @click="copy(member.id, `Copied ID of ${member.name}`)">{{ member.name }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsLaidStr }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsPerHourStr }}</td>
         <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.earningBonusPercentageStr }}</td>
@@ -28,9 +28,14 @@
 </template>
 
 <script>
+import { directive } from "vue-tippy";
 import copyTextToClipboard from 'copy-text-to-clipboard';
 
 export default {
+  directives: {
+    tippy: directive,
+  },
+
   props: {
     members: Array,
   },
