@@ -2,6 +2,8 @@ import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/themes/translucent.css";
 
+import copyTextToClipboard from "copy-text-to-clipboard";
+
 (() => {
   const navMenuToggle = document.getElementById("nav__menu-toggle");
   const navMenuToggleClosedIcon = document.getElementById("nav__menu-toggle-closed-icon");
@@ -26,6 +28,14 @@ import "tippy.js/themes/translucent.css";
       theme: "translucent",
     });
     el.removeAttribute("title");
+  }
+
+  for (const el of document.querySelectorAll("[data-copy]")) {
+    let content = el.dataset.copy;
+    if (!content) {
+      continue;
+    }
+    el.addEventListener("click", () => copyTextToClipboard(content));
   }
 
   const autoRefreshToggle = document.getElementById("AutoRefreshToggle");
