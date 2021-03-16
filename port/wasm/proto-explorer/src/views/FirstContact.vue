@@ -17,7 +17,7 @@
       <parameter-input
         name="device_id"
         label="Device ID"
-        placeholder="Optional; default is the User ID you entered"
+        placeholder="Optional"
         v-model.trim="deviceId"
       />
       <parameter-input
@@ -67,7 +67,7 @@ export default {
       clientVersion: CLIENT_VERSION,
       platform: PLATFORM,
       eiUserId: userId.value,
-      deviceId: deviceId.value || userId.value,
+      deviceId: deviceId.value || null,
       gameServicesId: gameServicesId.value || null,
       rinfo: basicRequestInfo(userId.value),
     });
