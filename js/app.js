@@ -1,6 +1,6 @@
 import tippy from "tippy.js";
 import "tippy.js/dist/tippy.css";
-import 'tippy.js/themes/translucent.css';
+import "tippy.js/themes/translucent.css";
 
 (() => {
   const navMenuToggle = document.getElementById("nav__menu-toggle");
@@ -13,25 +13,25 @@ import 'tippy.js/themes/translucent.css';
     navMenu?.classList.toggle("hidden");
   });
 
+  for (const el of document.querySelectorAll("[data-tooltip]")) {
+    let content = el.dataset.tooltip;
+    if (!content) {
+      content = el.title;
+    }
+    if (!content) {
+      continue;
+    }
+    tippy(el, {
+      content,
+      theme: "translucent",
+    });
+    el.removeAttribute("title");
+  }
+
   const autoRefreshToggle = document.getElementById("AutoRefreshToggle");
   if (autoRefreshToggle) {
     const key = `auto-refresh-${window.location.pathname}`;
     let refreshTimeout;
-
-    for (const el of document.querySelectorAll("[data-tooltip]")) {
-      let content = el.dataset.tooltip;
-      if (!content) {
-        content = el.title;
-      }
-      if (!content) {
-        continue;
-      }
-      tippy(el, {
-        content,
-        theme: "translucent",
-      });
-      el.removeAttribute("title");
-    }
 
     function toggleAutoRefresh() {
       const currentlyOn = autoRefreshToggle.classList.contains("AutoRefreshToggle--on");
