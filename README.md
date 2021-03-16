@@ -119,14 +119,16 @@ services:
 `config.toml`:
 
 ```toml
-[player]
+[[players]]
 # player.id, required.
 #
-# Your unique player ID. To view your player ID, go to Main Menu -> Settings ->
-# Privacy & Data, and the ID should be in the bottom left corner. On iOS (at
-# least when signed in via Game Center) this would be of the format G:1234567890.
-# Copy the string verbatim for this field.
-id = "G:1234567890"
+# A unique account ID. To view your account ID, go to Main Menu -> Settings ->
+# Privacy & Data, and the ID should be in the bottom left corner.
+#id = "EI1234567890123456"
+
+# Another account, if you want to use multiple accounts.
+#[[players]]
+#id = "EI9876543210987654"
 
 [database]
 path = "/data/data.db"

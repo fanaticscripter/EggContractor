@@ -17,15 +17,23 @@ const (
 # variable EGGCONTRACTOR_CONFIG_FILE=<config-file> to load config placed
 # elsewhere.
 
-[player]
+[[players]]
+
+# Player identifiers are configured here. Multiple accounts are supported. To
+# add another account, use another [[players]] section, as demonstrated below.
+
 # player.id, required.
 #
-# Your unique player ID. To view your player ID, go to Main Menu -> Settings ->
+# A unique account ID. To view your account ID, go to Main Menu -> Settings ->
 # Privacy & Data, and the ID should be in the bottom left corner.
 #id = "EI1234567890123456"
 
 # player.device_id, optional.
 #divice_id = "880684B9-756B-451D-944D-48D3453822B7"
+
+# Example of another account:
+#[[players]]
+#id = "EI9876543210987654"
 
 [database]
 # database.path, optional.
