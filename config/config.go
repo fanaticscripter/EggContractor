@@ -24,9 +24,6 @@ const (
 #id = "EI1234567890123456"
 
 # player.device_id, optional.
-#
-# A UUID. Cannot be obtained from UI, must be scraped from API requests. If not
-# specified, a random UUID would be used instead, with unknown caveats.
 #divice_id = "880684B9-756B-451D-944D-48D3453822B7"
 
 [database]
