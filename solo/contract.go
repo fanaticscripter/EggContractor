@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/artifacts"
 	"github.com/fanaticscripter/EggContractor/contract"
 	"github.com/fanaticscripter/EggContractor/solo/pb"
 	"github.com/fanaticscripter/EggContractor/util"
@@ -140,9 +141,10 @@ func (c *SoloContract) ProgressInfoWithProjection(projectedEggsLaid float64) *co
 }
 
 type soloContract struct {
-	Player   *Player
-	Contract *api.Contract
-	Farm     *api.Farm
+	Player    *Player
+	Contract  *api.Contract
+	Farm      *api.Farm
+	Artifacts []*api.CompleteArtifact
 }
 
 func GetActiveSoloContracts(backup *api.FirstContact_Payload) []*SoloContract {
@@ -154,8 +156,13 @@ func GetActiveSoloContracts(backup *api.FirstContact_Payload) []*SoloContract {
 		activeCoopContractIds[c.ContractId] = struct{}{}
 	}
 
+	inventory := make(map[uint64]*api.CompleteArtifact)
+	for _, item := range backup.ArtifactsDb.InventoryItems {
+		inventory[item.ItemId] = item.Artifact
+	}
+
 	solos := make([]*SoloContract, 0)
-	for _, farm := range backup.Farms {
+	for i, farm := range backup.Farms {
 		if farm.ContractId == "" {
 			continue
 		}
@@ -172,11 +179,18 @@ func GetActiveSoloContracts(backup *api.FirstContact_Payload) []*SoloContract {
 		if contract == nil {
 			continue
 		}
+		artifacts := make([]*api.CompleteArtifact, 0)
+		for _, slot := range backup.ArtifactsDb.ActiveArtifactSets[i].Slots {
+			if slot.Occupied {
+				artifacts = append(artifacts, inventory[slot.ItemId])
+			}
+		}
 		solos = append(solos, &SoloContract{
 			&soloContract{
-				Player:   player,
-				Contract: contract,
-				Farm:     farm,
+				Player:    player,
+				Contract:  contract,
+				Farm:      farm,
+				Artifacts: artifacts,
 			},
 		})
 	}
@@ -225,7 +239,8 @@ func (c *soloContract) GetEggsLaid() float64 {
 
 func (c *soloContract) GetEggsPerSecond() float64 {
 	return float64(c.Farm.ChickenCount) *
-		eggsPerChickenPerSecond(c.Farm.Researches, c.Player.Progress.EpicResearches)
+		eggsPerChickenPerSecond(c.Farm.Researches, c.Player.Progress.EpicResearches) *
+		artifacts.LayingRateEffect(c.Artifacts)
 }
 
 func (c *soloContract) GetDurationUntilProductionDeadline() time.Duration {
