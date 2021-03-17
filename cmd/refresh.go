@@ -1,11 +1,12 @@
 package cmd
 
 import (
-	"errors"
 	"fmt"
 	"sync"
 	"time"
 
+	"github.com/gofrs/flock"
+	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
@@ -26,6 +27,18 @@ var _refreshCommand = &cobra.Command{
 	Args:    cobra.NoArgs,
 	PreRunE: subcommandPreRunE,
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// Make sure only one instance of stash is running.
+		lockpath := _config.LockPath("refresh")
+		f := flock.New(lockpath)
+		locked, err := f.TryLock()
+		if err != nil {
+			return errors.Wrapf(err, "error locking %s", lockpath)
+		}
+		if !locked {
+			return errors.Errorf("another instance already running (%s locked)", lockpath)
+		}
+		defer func() { _ = f.Unlock() }()
+
 		notificationsDone := make(chan bool)
 		_notifications = make(chan notify.Notification, 4)
 		go func() {

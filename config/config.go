@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -129,6 +130,10 @@ func (c *Config) ResolveAndValidate() error {
 		}
 	}
 	return nil
+}
+
+func (c Config) LockPath(lockName string) string {
+	return filepath.Join(filepath.Dir(c.Database.Path), fmt.Sprintf("%s.lock", lockName))
 }
 
 func (c Config) MultiAccountMode() bool {
