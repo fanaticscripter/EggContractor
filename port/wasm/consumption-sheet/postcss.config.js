@@ -2,6 +2,7 @@ const path = require("path");
 
 module.exports = {
   plugins: [
+    require("@tailwindcss/jit"),
     require("postcss-import"),
     require("tailwindcss"),
     require("autoprefixer"),

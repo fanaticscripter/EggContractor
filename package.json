@@ -1,11 +1,12 @@
 {
   "license": "MIT",
   "devDependencies": {
+    "@tailwindcss/jit": "^0.1.1",
     "@vue/compiler-sfc": "^3.0.4",
     "autoprefixer": "^10.1.0",
     "css-loader": "^5.0.1",
     "cssnano": "^4.1.10",
-    "postcss": "^8.2.1",
+    "postcss": "^8.2.6",
     "postcss-cli": "^8.3.1",
     "postcss-hash": "^2.0.0",
     "postcss-import": "^14.0.0",
@@ -22,7 +23,7 @@
     "copy-text-to-clipboard": "^2.2.0",
     "google-protobuf": "^3.15.0-rc.1",
     "html2canvas": "^1.0.0-rc.7",
-    "tailwindcss": "^2.0.2",
+    "tailwindcss": "^2.0.3",
     "tippy.js": "^6.2.7",
     "vue": "^3.0.4",
     "vue-router": "^4.0.3",
