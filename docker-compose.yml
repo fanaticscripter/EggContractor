@@ -28,7 +28,7 @@ services:
       # instead of "* * * * *", and so on.
       ofelia.job-exec.refresh.schedule: "@every 2m"
       ofelia.job-exec.refresh.user: 0
-      ofelia.job-exec.refresh.command: "/EggContractor refresh"
+      ofelia.job-exec.refresh.command: "/EggContractor refresh --no-display"
       ofelia.job-exec.refresh.save-folder: /logs
       ofelia.job-exec.refresh.save-only-on-error: true
       # Scheduling daily database backups.
