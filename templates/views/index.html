@@ -13,6 +13,7 @@
           </div>
         {{end}}
         {{template "auto_refresh_toggle"}}
+        {{template "hide_solos_toggle" .HideSolos}}
         {{template "contract_filter" .ContractFilterConfig}}
       </div>
       {{range .Statuses}}{{template "solo_coop" .}}{{end}}

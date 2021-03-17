@@ -9,7 +9,7 @@ with tons of stored messages even less. Therefore, we'll have to live with this
 indistinguishability in the UI. */ -}}
 {{define "solo"}}
   {{if .}}
-    <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg" data-contract="{{.GetId}}" {{if statusisfiltered .}}style="display:none"{{end}}>
+    <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg" data-contract="{{.GetId}}" data-type="solo" {{if statusisfiltered .}}style="display:none"{{end}}>
       <div class="px-4 py-4 sm:px-6 bg-gray-50">
         <div class="-ml-4 -mt-2 flex items-start justify-between flex-wrap sm:flex-nowrap">
           <div class="flex-grow ml-4 mt-2">

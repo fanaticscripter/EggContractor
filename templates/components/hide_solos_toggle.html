@@ -1,0 +1,7 @@
+{{- /* The hide_solos_toggle template takes a bool for the checked state. */ -}}
+{{define "hide_solos_toggle"}}
+  <div class="flex items-center justify-center mt-2">
+    <span class="mr-2">Hide solos</span>
+    <input id="hide_solos" name="hide_solos" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-500 border-gray-300 rounded" {{if .}}checked{{end}}>
+  </div>
+{{end}}
