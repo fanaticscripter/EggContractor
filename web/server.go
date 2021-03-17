@@ -24,7 +24,7 @@ const (
 	_devStaticDir                 = "public"
 	_prodStaticDir                = "static"
 	_devStaticCacheControlHeader  = "no-cache"
-	_prodStaticCacheControlHeader = "max-age=2592000"
+	_prodStaticCacheControlHeader = "public,max-age=2592000,immutable"
 )
 
 var (
