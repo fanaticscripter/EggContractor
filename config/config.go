@@ -131,7 +131,7 @@ func (c *Config) ResolveAndValidate() error {
 	return nil
 }
 
-func (c Config) MultiPlayerMode() bool {
+func (c Config) MultiAccountMode() bool {
 	return len(c.Players) > 1
 }
 

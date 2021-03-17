@@ -10,10 +10,10 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
-func (c *SoloContract) Display(now time.Time, multiPlayerMode bool) {
+func (c *SoloContract) Display(now time.Time, multiAccountMode bool) {
 	fmt.Printf("%s (%s)\n", c.GetName(), c.GetId())
 	w := tabwriter.NewWriter(os.Stdout, 0, 0, 2, ' ', 0)
-	if multiPlayerMode {
+	if multiAccountMode {
 		playerName := c.GetPlayerNickname()
 		if playerName == "" {
 			playerName = "Unknown player"

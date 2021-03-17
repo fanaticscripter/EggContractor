@@ -230,7 +230,7 @@ func processSolosFromSaves(refreshTime time.Time, refreshId int64, saves []*api.
 		solos = append(solos, solo.GetActiveSoloContracts(save)...)
 	}
 	for _, c := range solos {
-		c.Display(refreshTime, _config.MultiPlayerMode())
+		c.Display(refreshTime, _config.MultiAccountMode())
 		err := db.InsertSoloStatus(refreshTime, refreshId, c)
 		if err != nil {
 			log.Error(err)
