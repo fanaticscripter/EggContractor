@@ -20,8 +20,9 @@ type indexPayload struct {
 	Errors   []error
 	Warnings []string
 
-	RefreshTime time.Time
-	Statuses    []*SoloCoopStatus
+	RefreshTime          time.Time
+	Statuses             []*SoloCoopStatus
+	ContractFilterConfig ContractFilterConfig
 
 	Peeker *peekerPayload
 }
@@ -29,11 +30,13 @@ type indexPayload struct {
 type SoloStatus struct {
 	*solo.SoloContract
 	ClientRefreshTime time.Time
+	Filtered          bool
 }
 
 type CoopStatus struct {
 	*coop.CoopStatus
 	Activities map[string]*coop.CoopMemberActivity
+	Filtered   bool
 }
 
 // SoloCoopStatus is a unified type for solos and coops to facilitate sorting.
@@ -46,6 +49,14 @@ type SoloCoopStatus struct {
 	Coop         *CoopStatus
 }
 
+type ContractFilterConfig struct {
+	Contracts []struct {
+		Id   string
+		Name string
+	}
+	Filter string
+}
+
 // GET /?by=<timestamp>
 func indexHandler(c echo.Context) error {
 	byThisTime := time.Now()
@@ -55,11 +66,13 @@ func indexHandler(c echo.Context) error {
 		byThisTime = util.DoubleToTime(byTimestamp)
 	}
 
-	payload := getIndexPayload(byThisTime)
+	contractFilter := c.QueryParam("c")
+
+	payload := getIndexPayload(byThisTime, contractFilter)
 	return c.Render(http.StatusOK, "index.html", payload)
 }
 
-func getIndexPayload(byThisTime time.Time) *indexPayload {
+func getIndexPayload(byThisTime time.Time, contractFilter string) *indexPayload {
 	errs := make([]error, 0)
 	warnings := make([]string, 0)
 	timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(byThisTime)
@@ -77,26 +90,36 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		warnings = append(warnings, util.MsgNoActiveContracts)
 	}
 
+	isFiltered := func(contractId string) bool { return false }
+	contractFilterIsValid := false
+	if contractFilter != "" {
+		// Make sure contract filter is valid -- do not filter if there's nothing
+		// matching it.
+		for _, s := range solos {
+			if contractFilter == s.GetId() {
+				contractFilterIsValid = true
+				break
+			}
+		}
+		for _, c := range coops {
+			if contractFilter == c.ContractId {
+				contractFilterIsValid = true
+				break
+			}
+		}
+		if contractFilterIsValid {
+			isFiltered = func(contractId string) bool { return contractId != contractFilter }
+		}
+	}
+
 	wrappedSolos := make([]*SoloStatus, len(solos))
 	for i, s := range solos {
 		wrappedSolos[i] = &SoloStatus{
 			SoloContract:      s,
 			ClientRefreshTime: timestamp,
+			Filtered:          isFiltered(s.GetId()),
 		}
 	}
-
-	// sort.Slice(wrappedSolos, func(i, j int) bool {
-	// 	s1 := wrappedSolos[i]
-	// 	s2 := wrappedSolos[j]
-	// 	switch strings.Compare(s1.GetName(), s2.GetName()) {
-	// 	case -1:
-	// 		return true
-	// 	case 1:
-	// 		return false
-	// 	default:
-	// 		return s1.GetPlayerNickname() < s2.GetPlayerNickname()
-	// 	}
-	// })
 
 	wrappedCoops := make([]*CoopStatus, len(coops))
 	for i, c := range coops {
@@ -108,21 +131,9 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		wrappedCoops[i] = &CoopStatus{
 			CoopStatus: c,
 			Activities: activities,
+			Filtered:   isFiltered(c.ContractId),
 		}
 	}
-
-	// sort.Slice(wrappedCoops, func(i, j int) bool {
-	// 	c1 := wrappedCoops[i]
-	// 	c2 := wrappedCoops[j]
-	// 	switch strings.Compare(c1.Contract.Name, c2.Contract.Name) {
-	// 	case -1:
-	// 		return true
-	// 	case 1:
-	// 		return false
-	// 	default:
-	// 		return c1.Code < c2.Code
-	// 	}
-	// })
 
 	statuses := make([]*SoloCoopStatus, 0, len(solos)+len(coops))
 	for _, s := range wrappedSolos {
@@ -167,6 +178,24 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 		return false
 	})
 
+	filterConfig := ContractFilterConfig{}
+	if contractFilterIsValid {
+		filterConfig.Filter = contractFilter
+	}
+	lastContractId := ""
+	for _, s := range statuses {
+		if s.ContractId != lastContractId {
+			filterConfig.Contracts = append(filterConfig.Contracts, struct {
+				Id   string
+				Name string
+			}{
+				Id:   s.ContractId,
+				Name: s.ContractName,
+			})
+			lastContractId = s.ContractId
+		}
+	}
+
 	contractIds := make([]string, len(statuses))
 	for i, s := range statuses {
 		contractIds[i] = s.ContractId
@@ -177,11 +206,12 @@ func getIndexPayload(byThisTime time.Time) *indexPayload {
 	}
 
 	return &indexPayload{
-		Errors:      errs,
-		Warnings:    warnings,
-		RefreshTime: timestamp,
-		Statuses:    statuses,
-		Peeker:      peeker,
+		Errors:               errs,
+		Warnings:             warnings,
+		RefreshTime:          timestamp,
+		Statuses:             statuses,
+		ContractFilterConfig: filterConfig,
+		Peeker:               peeker,
 	}
 }
 
@@ -207,4 +237,18 @@ func (c *CoopStatus) OfflineAdjustedExpectedDurationUntilFinish() time.Duration 
 
 func (c *CoopStatus) ProgressInfo() *contract.ProgressInfo {
 	return c.CoopStatus.ProgressInfoWithProjection(c.OfflineAdjustedEggsLaid())
+}
+
+// Tests whether a SoloStatus/CoopStatus is filtered. Returns false for any
+// other type.
+func statusIsFiltered(s interface{}) bool {
+	ss, ok := s.(*SoloStatus)
+	if ok {
+		return ss.Filtered
+	}
+	cc, ok := s.(*CoopStatus)
+	if ok {
+		return cc.Filtered
+	}
+	return false
 }

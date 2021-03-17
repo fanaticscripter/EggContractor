@@ -177,6 +177,7 @@ func loadTemplates(opts ServerOptions) *Template {
 			"reltime":          humanize.Time,
 			"rewardiconpath":   rewardIconPath,
 			"static":           staticAssetURL,
+			"statusisfiltered": statusIsFiltered,
 		}).ParseGlob("templates/*/*.html")),
 	}
 }

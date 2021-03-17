@@ -1,0 +1,12 @@
+{{- /* The contract_filter template takes a []*web.ContractFilterConfig. */ -}}
+{{define "contract_filter"}}
+  {{$filter := .Filter}}
+  <div class="max-w-xs mx-auto my-2">
+    <select id="contract_filter" name="contract_filter" class="mt-1 block w-full pl-3 pr-10 py-1 text-base bg-gray-50 border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+      <option value="" {{if eq $filter ""}}selected{{end}}>All contracts</option>
+      {{range .Contracts}}
+      <option value="{{.Id}}"  {{if eq $filter .Id}}selected{{end}}>{{.Name}}</option>
+      {{end}}
+    </select>
+  </div>
+{{end}}

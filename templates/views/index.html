@@ -13,6 +13,7 @@
           </div>
         {{end}}
         {{template "auto_refresh_toggle"}}
+        {{template "contract_filter" .ContractFilterConfig}}
       </div>
       {{range .Statuses}}{{template "solo_coop" .}}{{end}}
       {{template "peeker" .Peeker}}
@@ -20,5 +21,6 @@
     {{template "footer"}}
     <script src="{{static "coop.js"}}"></script>
     <script src="{{static "peeker.js"}}"></script>
+    <script src="{{static "index.js"}}"></script>
   </body>
 </html>
