@@ -89,6 +89,10 @@ type NotificationConfig struct {
 	}
 }
 
+type Deprecations struct {
+	HasLegacyPlayerField bool
+}
+
 func (c *Config) ResolveAndValidate() error {
 	var err error
 	if c.Player.Id != "" {
@@ -129,6 +133,12 @@ func (c *Config) ResolveAndValidate() error {
 
 func (c Config) MultiPlayerMode() bool {
 	return len(c.Players) > 1
+}
+
+func (c Config) Deprecations() Deprecations {
+	return Deprecations{
+		HasLegacyPlayerField: c.HasLegacyPlayerField(),
+	}
 }
 
 func (c Config) HasLegacyPlayerField() bool {

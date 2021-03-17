@@ -18,8 +18,9 @@ var _serveCommand = &cobra.Command{
 	PreRunE: subcommandPreRunE,
 	Run: func(cmd *cobra.Command, args []string) {
 		web.Serve(web.ServerOptions{
-			BindAddr: _serveBindAddr,
-			Dev:      _serveDevMode || _debug,
+			BindAddr:           _serveBindAddr,
+			Dev:                _serveDevMode || _debug,
+			ConfigDeprecations: _config.Deprecations(),
 		})
 	},
 }

@@ -17,6 +17,7 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/fanaticscripter/EggContractor/api"
+	"github.com/fanaticscripter/EggContractor/config"
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
@@ -30,11 +31,14 @@ const (
 var (
 	_staticMap   map[string]string
 	_iconPathSet map[string]struct{}
+
+	_configDeprecations config.Deprecations
 )
 
 type ServerOptions struct {
-	BindAddr string
-	Dev      bool
+	BindAddr           string
+	Dev                bool
+	ConfigDeprecations config.Deprecations
 }
 
 type Template struct {
@@ -46,6 +50,8 @@ func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Con
 }
 
 func Serve(opts ServerOptions) {
+	_configDeprecations = opts.ConfigDeprecations
+
 	if !opts.Dev {
 		if err := preloadStaticManifests(); err != nil {
 			log.Fatal(err)

@@ -1,6 +1,7 @@
 package web
 
 import (
+	"html/template"
 	"net/http"
 	"sort"
 	"strconv"
@@ -18,7 +19,7 @@ import (
 
 type indexPayload struct {
 	Errors   []error
-	Warnings []string
+	Warnings []template.HTML
 
 	RefreshTime          time.Time
 	Statuses             []*SoloCoopStatus
@@ -76,7 +77,7 @@ func indexHandler(c echo.Context) error {
 
 func getIndexPayload(byThisTime time.Time, contractFilter string, hideSolos bool) *indexPayload {
 	errs := make([]error, 0)
-	warnings := make([]string, 0)
+	warnings := make([]template.HTML, 0)
 	timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(byThisTime)
 	if err != nil {
 		errs = append(errs, err)
@@ -85,11 +86,17 @@ func getIndexPayload(byThisTime time.Time, contractFilter string, hideSolos bool
 			Peeker: &peekerPayload{},
 		}
 	}
+	if _configDeprecations.HasLegacyPlayerField {
+		warnings = append(warnings, template.HTML(`Config key <code>player</code> has been deprecated
+		in favor of <code>players</code> since the introduction of multi-account support. See
+		<a href="https://github.com/fanaticscripter/EggContractor/wiki/Multi-account-migration" target="_blank" class="text-blue-500 hover:text-blue-400">this guide</a>
+		for how to migrate and take advantage of new features.`))
+	}
 	if timestamp.IsZero() {
 		warnings = append(warnings,
 			"no refresh found in the database, try using the refresh subcommand of EggContractor")
 	} else if len(solos) == 0 && len(coops) == 0 {
-		warnings = append(warnings, util.MsgNoActiveContracts)
+		warnings = append(warnings, util.HTMLMsgNoActiveContracts)
 	}
 
 	isFiltered := func(contractId string) bool { return false }
