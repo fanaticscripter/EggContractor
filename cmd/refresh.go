@@ -21,6 +21,8 @@ import (
 
 var _notifications chan notify.Notification
 
+var _refreshNoDisplay bool
+
 var _refreshCommand = &cobra.Command{
 	Use:     "refresh",
 	Short:   "Refresh game state and print statuses of active solo contracts & coops",
@@ -104,8 +106,8 @@ var _refreshCommand = &cobra.Command{
 }
 
 func init() {
-	// TODO: option to suppress status display
 	_rootCmd.AddCommand(_refreshCommand)
+	_refreshCommand.Flags().BoolVarP(&_refreshNoDisplay, "no-display", "n", false, "do not display refreshed statuses")
 }
 
 func refreshPeriodicals() (activeEvents []*api.Event, activeContracts []*api.ContractProperties, err error) {
@@ -243,7 +245,9 @@ func processSolosFromSaves(refreshTime time.Time, refreshId int64, saves []*api.
 		solos = append(solos, solo.GetActiveSoloContracts(save)...)
 	}
 	for _, c := range solos {
-		c.Display(refreshTime, _config.MultiAccountMode())
+		if !_refreshNoDisplay {
+			c.Display(refreshTime, _config.MultiAccountMode())
+		}
 		err := db.InsertSoloStatus(refreshTime, refreshId, c)
 		if err != nil {
 			log.Error(err)
@@ -336,13 +340,15 @@ func processCoopsFromSaves(refreshId int64, saves []*api.FirstContact_Payload, c
 		}
 		c := coop.WrapCoopStatusWithContractList(res.status, contractList)
 		coops = append(coops, c)
-		activities, err := db.GetCoopMemberActivityStats(c, res.timestamp)
-		if err != nil {
-			log.Error(err)
-			errored = true
-			c.Display(_sortBy.by, nil)
-		} else {
-			c.Display(_sortBy.by, activities)
+		if !_refreshNoDisplay {
+			activities, err := db.GetCoopMemberActivityStats(c, res.timestamp)
+			if err != nil {
+				log.Error(err)
+				errored = true
+				c.Display(_sortBy.by, nil)
+			} else {
+				c.Display(_sortBy.by, activities)
+			}
 		}
 		if err := db.InsertCoopStatus(res.timestamp, refreshId, res.status); err != nil {
 			log.Error(err)
