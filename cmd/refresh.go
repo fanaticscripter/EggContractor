@@ -317,7 +317,10 @@ func processCoopsFromSaves(refreshId int64, saves []*api.FirstContact_Payload, c
 	}
 
 	for i := range savedStatuses {
-		res := results[i]
+		res, ok := results[i]
+		if !ok {
+			continue
+		}
 		c := coop.WrapCoopStatusWithContractList(res.status, contractList)
 		coops = append(coops, c)
 		activities, err := db.GetCoopMemberActivityStats(c, res.timestamp)
