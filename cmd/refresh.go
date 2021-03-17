@@ -119,6 +119,9 @@ func refreshPeriodicals() (activeEvents []*api.Event, activeContracts []*api.Con
 	if err != nil {
 		return
 	}
+	if p == nil || p.Events == nil || p.Contracts == nil {
+		return nil, nil, errors.Errorf("invalid /ei/get_periodicals response: %+v", p)
+	}
 	activeEvents = p.Events.Events
 	activeContracts = p.Contracts.Contracts
 	seen := now
