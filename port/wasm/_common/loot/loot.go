@@ -81,6 +81,16 @@ func (s *MissionLootStore) ItemCount(
 	}, nil
 }
 
+func (s *MissionLootStore) ItemRarityCount(
+	afxId api.ArtifactSpec_Name,
+	afxLevel api.ArtifactSpec_Level,
+	afxRarity api.ArtifactSpec_Rarity,
+) int {
+	artifactName := ArtifactName(strings.ToLower(afxId.String()))
+	rarityName := RarityName(strings.ToLower(afxRarity.String()))
+	return s.LootCounts[artifactName][afxLevel][rarityName]
+}
+
 func (r RarityName) AfxRarity() api.ArtifactSpec_Rarity {
 	s := strings.ToUpper(string(r))
 	return api.ArtifactSpec_Rarity(api.ArtifactSpec_Rarity_value[s])
