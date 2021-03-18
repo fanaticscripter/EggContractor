@@ -50,7 +50,7 @@ body {
 .other-tools-ribbon::after {
   @apply font-default transform rotate-45 absolute top-0 right-0
     text-center align-middle text-white font-medium uppercase whitespace-nowrap
-    w-full border border-white border-dotted;
+    border border-white border-dotted;
   content: "Other tools";
   width: 150px;
   height: 26px;
