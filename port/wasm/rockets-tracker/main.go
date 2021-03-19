@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"regexp"
+	"sort"
 	"strings"
 	"syscall/js"
 
@@ -69,21 +70,27 @@ func retrieveMissions(playerId string) *result {
 		}
 	}
 	launched = append(launched, artifactsDB.MissionArchive...)
+	launchArchive := make([]*mission, len(launched))
+	for i, m := range launched {
+		launchArchive[i] = newMission(m)
+	}
+	sort.SliceStable(launchArchive, func(i, j int) bool {
+		return launchArchive[i].StartTimestamp > launchArchive[j].StartTimestamp
+	})
 	stats, progress := generateStatsFromMissionArchive(launched, hasProPermit)
-	log := generateLaunchLogFromMissionArchive(launched)
 	afxProgress := getArtifactsProgress(artifactsDB)
 	return dataResult(struct {
 		ActiveMissions    []*mission                `json:"activeMissions"`
+		LaunchArchive     []*mission                `json:"launchArchive"`
 		MissionStats      *missionStats             `json:"missionStats"`
 		UnlockProgress    *unlockProgress           `json:"unlockProgress"`
-		LaunchLog         *launchLog                `json:"launchLog"`
 		ArtifactsProgress *artifactsProgress        `json:"artifactsProgress"`
 		Save              *api.FirstContact_Payload `json:"save"`
 	}{
 		ActiveMissions:    activeMissions,
+		LaunchArchive:     launchArchive,
 		MissionStats:      stats,
 		UnlockProgress:    progress,
-		LaunchLog:         log,
 		ArtifactsProgress: afxProgress,
 		Save:              fc.Data,
 	})

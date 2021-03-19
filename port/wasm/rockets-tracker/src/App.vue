@@ -114,9 +114,9 @@
   <template v-else>
     <mission-info
       :activeMissions="activeMissions"
+      :launchArchive="launchArchive"
       :missionStats="missionStats"
       :unlockProgress="unlockProgress"
-      :launchLog="launchLog"
     ></mission-info>
 
     <artifact-info :progress="artifactsProgress" :save="save"></artifact-info>
@@ -126,7 +126,7 @@
 <script>
 import ArtifactInfo from "./ArtifactInfo.vue";
 import MissionInfo from "./MissionInfo.vue";
-import Info from '../../artifact-explorer/src/components/Info.vue';
+import Info from "../../artifact-explorer/src/components/Info.vue";
 
 import { getLocalStorage, setLocalStorage } from "./utils";
 
@@ -170,9 +170,9 @@ export default {
       playerId,
       playerIdSubmitted: false,
       activeMissions: [],
+      launchArchive: [],
       missionStats: null,
       unlockProgress: null,
-      launchLog: null,
       artifactsProgress: null,
       save: null,
       loading: false,
@@ -205,16 +205,16 @@ export default {
       try {
         const {
           activeMissions,
+          launchArchive,
           missionStats,
           unlockProgress,
-          launchLog,
           artifactsProgress,
           save,
         } = await this.retrieveMissions(playerId);
         this.activeMissions = activeMissions;
+        this.launchArchive = launchArchive;
         this.missionStats = missionStats;
         this.unlockProgress = unlockProgress;
-        this.launchLog = launchLog;
         this.artifactsProgress = artifactsProgress;
         this.save = save;
         this.loading = false;

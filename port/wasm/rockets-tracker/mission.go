@@ -71,15 +71,6 @@ type unlockProgressShip struct {
 	AccumulativeMissionTimeRequired string                    `json:"accumulativeMissionTimeRequired"`
 }
 
-type launchLog struct {
-	Dates []*launchLogDate `json:"dates"`
-}
-
-type launchLogDate struct {
-	Date     string     `json:"date"`
-	Missions []*mission `json:"missions"`
-}
-
 func newMission(m *api.MissionInfo) *mission {
 	startTimestamp := m.StartTimeDerived
 	returnTimestamp := 0.0
@@ -245,35 +236,6 @@ func generateStatsFromMissionArchive(archive []*api.MissionInfo, hasProPermit bo
 	}
 
 	return stats, progress
-}
-
-func generateLaunchLogFromMissionArchive(archive []*api.MissionInfo) *launchLog {
-	sort.SliceStable(archive, func(i, j int) bool {
-		return archive[i].StartTime().After(archive[j].StartTime())
-	})
-	date2missions := make(map[string][]*mission)
-	for _, m := range archive {
-		if m.StartTime().IsZero() {
-			continue
-		}
-		date := util.FormatDate(m.StartTime())
-		date2missions[date] = append(date2missions[date], newMission(m))
-	}
-	dates := make([]string, 0)
-	for d := range date2missions {
-		dates = append(dates, d)
-	}
-	sort.SliceStable(dates, func(i, j int) bool {
-		return dates[i] > dates[j]
-	})
-	log := &launchLog{}
-	for _, d := range dates {
-		log.Dates = append(log.Dates, &launchLogDate{
-			Date:     d,
-			Missions: date2missions[d],
-		})
-	}
-	return log
 }
 
 func shipIconPath(ship api.MissionInfo_Spaceship) string {

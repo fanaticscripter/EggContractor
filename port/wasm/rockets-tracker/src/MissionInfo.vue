@@ -193,7 +193,7 @@
       </select>
     </div>
     <div>
-      <template v-for="date in filteredLaunchLogDates" :key="date.date">
+      <template v-for="date in filteredLaunchLog" :key="date.date">
         <div class="my-2 text-sm font-medium text-gray-900">{{ date.date }}</div>
         <div class="grid grid-cols-1 gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
           <div v-for="(mission, index) in date.missions" :key="index" class="text-xs tabular-nums">
@@ -212,6 +212,7 @@
 <script>
 import CountdownTimer from "./CountdownTimer.vue";
 import ProgressRing from "./ProgressRing.vue";
+import dayjs from "dayjs";
 import { getLocalStorage, setLocalStorage, iconURL } from "./utils";
 
 // Note: This component must be recreated for notifications to properly
@@ -224,9 +225,9 @@ export default {
 
   props: {
     activeMissions: Array,
+    launchArchive: Array,
     missionStats: Object,
     unlockProgress: Object,
-    launchLog: Object,
   },
 
   data() {
@@ -253,7 +254,7 @@ export default {
   notificationTimeoutIds: [],
 
   computed: {
-    filteredLaunchLogDates () {
+    filteredLaunchLog () {
       let days = 0;
       switch (this.launchLogFilter) {
         case "3d":
@@ -266,16 +267,28 @@ export default {
           days = 30;
           break;
       }
-      if (days === 0) {
-        // Do not filter.
-        return this.launchLog.dates;
+      let timestampCutoff = 0;
+      if (days > 0) {
+        const now = new Date();
+        const earliestDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (days - 1));
+        timestampCutoff = earliestDay.getTime() / 1000;
       }
-      const now = new Date();
-      const earliestDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (days - 1));
-      return this.launchLog.dates.filter(date => {
-        const [yy, mm, dd] = date.date.split("-").map(parseFloat);
-        return new Date(yy, mm - 1, dd) >= earliestDay;
-      })
+      const date2missions = {};
+      for (const mission of this.launchArchive) {
+        if (mission.startTimestamp < timestampCutoff) {
+          continue;
+        }
+        const date = this.formatDate(mission.startTimestamp);
+        if (date in date2missions) {
+          date2missions[date].push(mission);
+        } else {
+          date2missions[date] = [mission];
+        }
+      }
+      return Object.keys(date2missions).sort().reverse().map(date => ({
+        date,
+        missions: date2missions[date],
+      }))
     }
   },
 
@@ -342,13 +355,12 @@ export default {
       }
     },
 
+    formatDate(timestamp) {
+      return dayjs(timestamp * 1000).format("YYYY-MM-DD");
+    },
+
     formatTime(timestamp) {
-      return new Intl.DateTimeFormat("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hourCycle: "h23",
-      }).format(new Date(timestamp * 1000));
+      return dayjs(timestamp * 1000).format("HH:mm:ss");
     },
 
     durationTypeFgClass(durationType) {
