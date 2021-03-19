@@ -78,7 +78,7 @@ func indexHandler(c echo.Context) error {
 func getIndexPayload(byThisTime time.Time, contractFilter string, hideSolos bool) *indexPayload {
 	errs := make([]error, 0)
 	warnings := make([]template.HTML, 0)
-	timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(byThisTime)
+	timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(byThisTime, true)
 	if err != nil {
 		errs = append(errs, err)
 		return &indexPayload{

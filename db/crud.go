@@ -278,7 +278,11 @@ func InsertSoloStatus(timestamp time.Time, refreshId int64, c *solo.SoloContract
 // refresh by the specified cutoff time. If no such refresh can be found in the
 // database, all return values will be set to the corresponding zero values
 // (including nil err).
-func GetSoloAndCoopStatusesFromRefresh(byThisTime time.Time) (
+//
+// If dedupe is true, filter out coops where the user has apparently joined a
+// tracked coop already (coop status can be more up-to-date than contract farm
+// backup).
+func GetSoloAndCoopStatusesFromRefresh(byThisTime time.Time, dedupe bool) (
 	timestamp time.Time,
 	solos []*solo.SoloContract,
 	coops []*coop.CoopStatus,
@@ -351,6 +355,32 @@ func GetSoloAndCoopStatusesFromRefresh(byThisTime time.Time) (
 			return nil
 		},
 	)
+	if dedupe && len(coops) > 0 {
+		type coopMember struct {
+			contractId string
+			userId     string
+		}
+		members := make(map[coopMember]struct{})
+		for _, coop := range coops {
+			for _, m := range coop.Members {
+				members[coopMember{
+					contractId: coop.ContractId,
+					userId:     m.Id,
+				}] = struct{}{}
+			}
+		}
+		dedupedSolos := make([]*solo.SoloContract, 0)
+		for _, solo := range solos {
+			_, exists := members[coopMember{
+				contractId: solo.GetId(),
+				userId:     solo.GetPlayerId(),
+			}]
+			if !exists {
+				dedupedSolos = append(dedupedSolos, solo)
+			}
+		}
+		solos = dedupedSolos
+	}
 	return
 }
 

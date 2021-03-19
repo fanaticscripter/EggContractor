@@ -21,7 +21,7 @@ This command does not touch the network, only the database.`,
 	Args:    cobra.NoArgs,
 	PreRunE: subcommandPreRunE,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(time.Now())
+		timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(time.Now(), true)
 		if err != nil {
 			return err
 		}
