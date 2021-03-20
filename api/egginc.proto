@@ -593,3 +593,72 @@ message ArtifactsConfigurationResponse {
     double crafting_price_curve = 8;
   }
 }
+
+// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_config
+message ConfigRequest {
+  BasicRequestInfo rinfo = 1;
+}
+
+message ConfigResponse {
+  LiveConfig live_config = 1;
+  MailDB mail_bag = 2;
+}
+
+message LiveConfig {
+  string config_id = 1;
+
+  BoostsConfig boosts_config = 2;
+  message BoostsConfig {
+    repeated ItemConfig item_configs = 1;
+    message ItemConfig {
+      string boost_id = 1;
+      uint32 price = 2;
+      uint32 token_price = 3;
+      double se_required = 4;
+    }
+
+    double cash_boost_cooloff_time = 2;
+  }
+
+  GiftConfig gift_config = 3;
+  message GiftConfig {
+    repeated GiftValueConfig gift_configs = 9;
+    message GiftValueConfig {
+      string gift_id = 1;
+      double amount = 4;
+      double rand_min = 2;
+      double rand_max = 3;
+      double video_min = 5;
+      double video_max = 6;
+    }
+
+    double gift_mu_min_spent = 10;
+    double gift_mu_max_spent = 11;
+    double gift_mu_overall_mult = 12;
+    double package_interval = 1;
+    double video_offer_interval = 2;
+    double video_offer_interval_contract = 3;
+    double video_offer_interval_piggy_full = 4;
+    double video_offer_interval_piggy_extra_full = 5;
+    double package_interval_contract = 6;
+    double package_interval_piggy_full = 7;
+    double package_interval_piggy_extra_full = 8;
+  }
+}
+
+message InGameMail {
+  string id = 1;
+  string title = 2;
+  string date = 8;
+  string message = 3;
+  string action = 4;
+  string url = 5;
+  uint32 platform = 7;
+  repeated string builds = 9;
+  uint32 min_client_version = 10;
+  double gold_tip = 6;
+}
+
+message MailDB {
+  repeated InGameMail mail = 1;
+}
