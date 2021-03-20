@@ -6,7 +6,6 @@ require (
 	github.com/dustin/go-humanize v1.0.0
 	github.com/gofrs/flock v0.8.0
 	github.com/golang-migrate/migrate/v4 v4.14.1
-	github.com/golang/protobuf v1.4.3
 	github.com/labstack/echo/v4 v4.1.17
 	github.com/mattn/go-sqlite3 v1.14.5
 	github.com/pkg/errors v0.9.1
