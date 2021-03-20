@@ -25,6 +25,31 @@ function setLocalStorage(key, val) {
 
 /**
  * @param {!string} key
+ * @returns {string|undefined}
+ */
+function getSessionStorage(key) {
+  try {
+    return sessionStorage[`${window.location.pathname}_${key}`];
+  } catch (err) {
+    console.error(err);
+    return undefined;
+  }
+}
+
+/**
+ * @param {!string} key
+ * @param {any} val
+ */
+function setSessionStorage(key, val) {
+  try {
+    sessionStorage[`${window.location.pathname}_${key}`] = val;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+/**
+ * @param {!string} key
  * @returns {string}
  */
 function getCurrentQueryParam(key) {
@@ -59,4 +84,11 @@ function replaceStateSetQueryParam(key, val) {
 
 window.replaceStateSetQueryParam = replaceStateSetQueryParam;
 
-export { setLocalStorage, getLocalStorage, getCurrentQueryParam, replaceStateSetQueryParam };
+export {
+  setLocalStorage,
+  getLocalStorage,
+  setSessionStorage,
+  getSessionStorage,
+  getCurrentQueryParam,
+  replaceStateSetQueryParam,
+};

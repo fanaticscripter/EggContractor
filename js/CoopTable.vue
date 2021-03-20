@@ -3,7 +3,7 @@
     <thead class="bg-gray-50">
       <tr>
         <template v-for="label in labels" :key="label.sortBy">
-          <th v-if="label.name !== 'Offline' || displayOfflineColumn" @click="sortBy = label.sortBy" scope="col" class="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" :class="label.name === 'Player' ? 'text-left' : 'text-center'">
+          <th v-if="label.name !== 'Offline' || displayOfflineColumn" @click="setSortBy(label.sortBy)" scope="col" class="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" :class="label.name === 'Player' ? 'text-left' : 'text-center'">
             {{ label.name }}
             <!-- Use visibility for the arrow so that column widths don't change when sorting a different column. -->
             <span class="inline-block w-0 text-gray-400" :class="{ invisible: label.sortBy != sortBy }">&nbsp;&#x25BC;</span>
@@ -30,6 +30,7 @@
 <script>
 import { directive } from "vue-tippy";
 import copyTextToClipboard from 'copy-text-to-clipboard';
+import { getSessionStorage, setSessionStorage } from "./utils";
 
 export default {
   directives: {
@@ -37,20 +38,30 @@ export default {
   },
 
   props: {
+    contractId: String,
+    code: String,
     members: Array,
   },
 
   data() {
+    const labels = [
+      { sortBy: "name", name: "Player" },
+      { sortBy: "eggsLaid", name: "Laid" },
+      { sortBy: "eggsPerHour", name: "Rate/hr" },
+      { sortBy: "earningBonusPercentage", name: "EB%" },
+      { sortBy: "tokens", name: "Tokens" },
+      { sortBy: "offlineSeconds", name: "Offline" },
+    ];
+    const validSortBys = labels.map(l => l.sortBy);
+    const sortBySessionStorageKey = `${this.contractId}:${this.code}_sortBy`;
+    let sortBy = getSessionStorage(sortBySessionStorageKey);
+    if (!validSortBys.includes(sortBy)) {
+      sortBy = "eggsLaid"
+    }
     return {
-      labels: [
-        { sortBy: "name", name: "Player" },
-        { sortBy: "eggsLaid", name: "Laid" },
-        { sortBy: "eggsPerHour", name: "Rate/hr" },
-        { sortBy: "earningBonusPercentage", name: "EB%" },
-        { sortBy: "tokens", name: "Tokens" },
-        { sortBy: "offlineSeconds", name: "Offline" },
-      ],
-      sortBy: "eggsLaid",
+      labels,
+      sortBy,
+      sortBySessionStorageKey,
       popupTimeoutId: null,
       popupShow: false,
       popupMessage: "",
@@ -78,6 +89,10 @@ export default {
   },
 
   methods: {
+    setSortBy(sortBy) {
+      this.sortBy = sortBy;
+      setSessionStorage(this.sortBySessionStorageKey, sortBy);
+    },
     copy (s, msg) {
       copyTextToClipboard(s);
       this.popupMessage = msg;
