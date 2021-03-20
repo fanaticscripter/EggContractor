@@ -27,11 +27,22 @@
         font-size: 1rem;
         line-height: 1.2;
       }
+      pre {
+        background-color: #eee;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        white-space: pre-wrap;
+        word-break: break-all;
+      }
       .new::before {
         content: "NEW!";
         color: green;
         font-weight: bold;
         margin-right: 0.25rem;
+      }
+      .cursor-pointer {
+        cursor: pointer;
       }
       #privacy {
         font-size: 0.875rem;
@@ -71,6 +82,8 @@
     <p>All tools above are open source.</p>
 
     <p>You can find the author on the <a href="https://discord.gg/egginc" target="_blank">Egg, Inc. Discord server</a>.</p>
+    <p>For technical inquiries you may also use the following email address (<span id="reveal-email" class="cursor-pointer">click to reveal</span>).</p>
+    <pre id="email" style="display:none">base64 -d &lt;&lt;&lt;U2FsdGVkX19gitYe+JNTR92EYJdfUuwzMutMBoPcTM36gQad6Qez/807l0Qih+/4 | openssl aes-256-cbc -d -pbkdf2 -iter 10000 -pass pass:70b6234f544af0132629aa6ec4be926dab59bb0b</pre>
 
     <script>
       const now = Date.now();
@@ -79,6 +92,9 @@
           el.classList.add("new");
         }
       });
+      document.querySelector("#reveal-email").addEventListener("click", () => {
+        document.querySelector("#email").style.display = "";
+      })
     </script>
 
     <script data-goatcounter="https://wasmegg.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
