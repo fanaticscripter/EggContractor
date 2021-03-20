@@ -27,10 +27,7 @@
     </button>
   </div>
 
-  <div
-    id="builds"
-    class="max-w-3xl w-full mx-auto px-4 py-4 overflow-hidden bg-dark-25 rounded-xl"
-  >
+  <div id="builds" class="max-w-3xl w-full mx-auto px-4 py-4 overflow-hidden bg-dark-25 rounded-xl">
     <artifact-set-display :key="key" :build="builds.builds[0]" :config="builds.config" />
     <hr class="border-dark-30" />
     <artifact-sets-effects

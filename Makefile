@@ -32,6 +32,10 @@ postcss-dev:
 fmt:
 	gofumpt -w .
 	clang-format -i api/egginc.proto solo/pb/solo.proto
+	yarn prettier -w $$(git ls-files | grep -E '(\.html|\.js|\.css|\.vue)$$' | grep -Ev '(templates|demo)/')
+
+fmt-changed:
+	yarn prettier -w $$(git diff --diff-filter=AM --name-only HEAD | grep -E '(\.html|\.js|\.css|\.vue)$$' | grep -Ev '(templates|demo)/')
 
 # Hot-reloading server based on entr(1).
 serve:

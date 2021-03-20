@@ -3,33 +3,72 @@
     <thead class="bg-gray-50">
       <tr>
         <template v-for="label in labels" :key="label.sortBy">
-          <th v-if="label.name !== 'Offline' || displayOfflineColumn" @click="setSortBy(label.sortBy)" scope="col" class="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" :class="label.name === 'Player' ? 'text-left' : 'text-center'">
+          <th
+            v-if="label.name !== 'Offline' || displayOfflineColumn"
+            @click="setSortBy(label.sortBy)"
+            scope="col"
+            class="px-6 py-2 text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+            :class="label.name === 'Player' ? 'text-left' : 'text-center'"
+          >
             {{ label.name }}
             <!-- Use visibility for the arrow so that column widths don't change when sorting a different column. -->
-            <span class="inline-block w-0 text-gray-400" :class="{ invisible: label.sortBy != sortBy }">&nbsp;&#x25BC;</span>
+            <span
+              class="inline-block w-0 text-gray-400"
+              :class="{ invisible: label.sortBy != sortBy }"
+              >&nbsp;&#x25BC;</span
+            >
           </th>
         </template>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(member, index) in sortedMembers" :key="member.id" :class="index % 2 === 1 ? 'bg-gray-50' : 'bg-white'">
-        <td class="px-6 py-1 whitespace-nowrap text-sm text-gray-500 hover:text-gray-400 cursor-pointer" :class="{ 'CoopTable__member--snoozing': !member.isActive }" v-tippy="{ content: `${member.id} (click to copy)` }" @click="copy(member.id, `Copied ID of ${member.name}`)">{{ member.name }}</td>
-        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsLaidStr }}</td>
-        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.eggsPerHourStr }}</td>
-        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.earningBonusPercentageStr }}</td>
-        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.tokens }}</td>
-        <td v-if="displayOfflineColumn" class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">{{ member.offlineTimeStr }}</td>
+      <tr
+        v-for="(member, index) in sortedMembers"
+        :key="member.id"
+        :class="index % 2 === 1 ? 'bg-gray-50' : 'bg-white'"
+      >
+        <td
+          class="px-6 py-1 whitespace-nowrap text-sm text-gray-500 hover:text-gray-400 cursor-pointer"
+          :class="{ 'CoopTable__member--snoozing': !member.isActive }"
+          v-tippy="{ content: `${member.id} (click to copy)` }"
+          @click="copy(member.id, `Copied ID of ${member.name}`)"
+        >
+          {{ member.name }}
+        </td>
+        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">
+          {{ member.eggsLaidStr }}
+        </td>
+        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">
+          {{ member.eggsPerHourStr }}
+        </td>
+        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">
+          {{ member.earningBonusPercentageStr }}
+        </td>
+        <td class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500">
+          {{ member.tokens }}
+        </td>
+        <td
+          v-if="displayOfflineColumn"
+          class="px-6 py-1 whitespace-nowrap text-center text-sm text-gray-500"
+        >
+          {{ member.offlineTimeStr }}
+        </td>
       </tr>
     </tbody>
   </table>
   <transition name="fade">
-    <div v-show="popupShow" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded text-sm text-green-500 bg-white bg-opacity-80">{{ popupMessage }}</div>
+    <div
+      v-show="popupShow"
+      class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded text-sm text-green-500 bg-white bg-opacity-80"
+    >
+      {{ popupMessage }}
+    </div>
   </transition>
 </template>
 
 <script>
 import { directive } from "vue-tippy";
-import copyTextToClipboard from 'copy-text-to-clipboard';
+import copyTextToClipboard from "copy-text-to-clipboard";
 import { getSessionStorage, setSessionStorage } from "./utils";
 
 export default {
@@ -56,7 +95,7 @@ export default {
     const sortBySessionStorageKey = `${this.contractId}:${this.code}_sortBy`;
     let sortBy = getSessionStorage(sortBySessionStorageKey);
     if (!validSortBys.includes(sortBy)) {
-      sortBy = "eggsLaid"
+      sortBy = "eggsLaid";
     }
     return {
       labels,
@@ -72,17 +111,18 @@ export default {
     displayOfflineColumn() {
       for (const m of this.members) {
         if (m.offlineTimeStr !== "") {
-          return true
+          return true;
         }
       }
-      return false
+      return false;
     },
+
     sortedMembers() {
       return [...this.members].sort((m1, m2) => {
         if (this.sortBy === "name") {
-          return m1[this.sortBy].localeCompare(m2[this.sortBy])
+          return m1[this.sortBy].localeCompare(m2[this.sortBy]);
         } else {
-          return m2[this.sortBy] - m1[this.sortBy]
+          return m2[this.sortBy] - m1[this.sortBy];
         }
       });
     },
@@ -93,7 +133,8 @@ export default {
       this.sortBy = sortBy;
       setSessionStorage(this.sortBySessionStorageKey, sortBy);
     },
-    copy (s, msg) {
+
+    copy(s, msg) {
       copyTextToClipboard(s);
       this.popupMessage = msg;
       this.popupShow = true;
@@ -103,22 +144,22 @@ export default {
       this.popupTimeoutId = setTimeout(() => {
         this.popupShow = false;
       }, 3000);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-  .fade-enter-active {
-    transition: opacity 0.1s ease;
-  }
+.fade-enter-active {
+  transition: opacity 0.1s ease;
+}
 
-  .fade-leave-active {
-    transition: opacity 0.5s ease;
-  }
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
 
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-  }
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>

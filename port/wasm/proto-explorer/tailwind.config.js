@@ -1,10 +1,7 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  purge: [
-    "src/*.html",
-    "src/**/*.vue",
-  ],
+  purge: ["src/*.html", "src/**/*.vue"],
   darkMode: false,
   theme: {
     extend: {
@@ -23,9 +20,7 @@ module.exports = {
   variants: {
     extend: {
       opacity: ["disabled"],
-    }
+    },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-  ],
+  plugins: [require("@tailwindcss/forms")],
 };

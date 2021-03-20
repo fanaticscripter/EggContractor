@@ -10,6 +10,7 @@
     "postcss-cli": "^8.3.1",
     "postcss-hash": "^2.0.0",
     "postcss-import": "^14.0.0",
+    "prettier": "^2.2.1",
     "protobufjs": "^6.10.2",
     "style-loader": "^2.0.0",
     "vue-loader": "^16.1.2",

@@ -3,7 +3,11 @@
     <section id="index" class="mt-4 mb-6 hide-in-screenshot-mode">
       <h2 class="my-2">Index</h2>
 
-      <p><a href="#consumption" class="text-sm text-gray-700 hover:text-gray-500 underline">What do I get from consuming ...?</a></p>
+      <p>
+        <a href="#consumption" class="text-sm text-gray-700 hover:text-gray-500 underline"
+          >What do I get from consuming ...?</a
+        >
+      </p>
       <div
         class="my-2 grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 3xl:grid-cols-8"
       >
@@ -19,7 +23,9 @@
       </div>
 
       <p>
-        <a href="#sources" class="text-sm text-gray-700 hover:text-gray-500 underline">Consuming which items yields ... stone?</a>
+        <a href="#sources" class="text-sm text-gray-700 hover:text-gray-500 underline"
+          >Consuming which items yields ... stone?</a
+        >
       </p>
       <div
         class="my-2 grid grid-cols-2 gap-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 3xl:grid-cols-8"
@@ -43,9 +49,9 @@
       <div class="text-xs text-gray-500 space-y-1">
         <p>
           The following dataset contains the outcomes of consuming each item (different rarities are
-          condisered distinct) 100 times. The consumption outcome of an individual item is considered
-          deterministic if all trial runs produced the exact same rewards; otherwise, the item is
-          marked as nondeterministic
+          condisered distinct) 100 times. The consumption outcome of an individual item is
+          considered deterministic if all trial runs produced the exact same rewards; otherwise, the
+          item is marked as nondeterministic
           <svg class="inline h-3" viewBox="0 0 640 512">
             <path
               fill="currentColor"
@@ -68,7 +74,9 @@
         </p>
       </div>
 
-      <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
+      <div
+        class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5"
+      >
         <div
           v-for="family in data.families"
           :key="family.id"
@@ -136,7 +144,9 @@
         </p>
       </div>
 
-      <div class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5">
+      <div
+        class="my-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5"
+      >
         <template v-for="family in data.families" :key="family.id">
           <div
             v-if="family.type === 'Stone'"

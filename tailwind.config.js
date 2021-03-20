@@ -1,8 +1,5 @@
 module.exports = {
-  purge: [
-    "templates/**/*.html",
-    "js/**/*.vue",
-  ],
+  purge: ["templates/**/*.html", "js/**/*.vue"],
   darkMode: false,
   theme: {
     extend: {
@@ -17,7 +14,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/forms"),
-  ],
+  plugins: [require("@tailwindcss/forms")],
 };

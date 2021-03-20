@@ -1,6 +1,8 @@
 <template>
   <template v-if="days > 0">
-    {{ days }}:{{ hours.toString().padStart(2, "0") }}:{{ minutes.toString().padStart(2, "0") }}:{{ seconds.toString().padStart(2, "0") }}
+    {{ days }}:{{ hours.toString().padStart(2, "0") }}:{{ minutes.toString().padStart(2, "0") }}:{{
+      seconds.toString().padStart(2, "0")
+    }}
   </template>
   <template v-else>
     {{ hours }}:{{ minutes.toString().padStart(2, "0") }}:{{ seconds.toString().padStart(2, "0") }}
@@ -33,7 +35,7 @@ export default {
     }, 200);
   },
   computed: {
-    days () {
+    days() {
       return Math.floor(this.remainingSeconds / 86400);
     },
     hours() {

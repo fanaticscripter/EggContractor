@@ -7,10 +7,10 @@
 @import "components/EventTable.css";
 
 html {
-    height: 100vh;
-    height: -webkit-fill-available;
+  height: 100vh;
+  height: -webkit-fill-available;
 }
 
 .tippy-content {
-    @apply text-xs px-2 py-1 !important;
+  @apply text-xs px-2 py-1 !important;
 }

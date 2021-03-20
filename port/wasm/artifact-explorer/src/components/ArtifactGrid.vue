@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="mt-4 mb-2 text-sm font-medium text-gray-700">Visual artifacts picker</div>
-    <div class="my-2 text-xs text-gray-500">
-      &dagger; Not available from missions.
-    </div>
+    <div class="my-2 text-xs text-gray-500">&dagger; Not available from missions.</div>
     <div class="my-2 text-sm text-gray-700">Artifacts</div>
     <artifact-grid-section :families="sectionArtifacts" />
     <div class="my-2 text-sm text-gray-700">Stones &amp; fragments</div>

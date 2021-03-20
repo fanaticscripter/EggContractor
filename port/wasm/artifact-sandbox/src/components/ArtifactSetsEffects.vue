@@ -413,7 +413,10 @@ export default {
           "SE gain",
           "Soul egg earning rate multiplier from bock earning rate bonus (with max RCB) and soul egg collection rate bonus. The late game dampening exponent (0.21) is used; may not be accurate for early game players. Indirect bonus from boosted chicken population growth is not included; see “SE gain w/ empty habs start” instead.",
         ],
-        ["SE gain w/ empty habs start", "Same as “SE gain” except for taking into account the indirect earnings bonus from faster chicken population growth when there is a monocle-boosted tachyon prism active. Assumes the tachyon prism is activated at zero population, and population never hits the hab space cap; otherwise, the actual effect is between this stat and “SE gain”."],
+        [
+          "SE gain w/ empty habs start",
+          "Same as “SE gain” except for taking into account the indirect earnings bonus from faster chicken population growth when there is a monocle-boosted tachyon prism active. Assumes the tachyon prism is activated at zero population, and population never hits the hab space cap; otherwise, the actual effect is between this stat and “SE gain”.",
+        ],
         [
           "Boost duration",
           "Affects the duration of any boost activated while this artifact set is equipped. Artifact changes after activation have no effect on the duration.",
