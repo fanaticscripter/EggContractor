@@ -95,6 +95,10 @@ export default {
         name: "get_periodicals",
         display: "<code>/get_periodicals</code>",
       },
+      {
+        name: "coop_status",
+        display: "<code>/coop_status</code>",
+      },
     ];
     const selectedRoute = ref(props.route);
 

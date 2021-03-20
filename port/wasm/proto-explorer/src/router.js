@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import AppHeader from "@/views/AppHeader.vue";
 import ArbitraryPayload from "@/views/ArbitraryPayload.vue";
+import CoopStatus from "@/views/CoopStatus.vue";
 import FirstContact from "@/views/FirstContact.vue";
 import GetPeriodicals from "@/views/GetPeriodicals.vue";
 
@@ -41,6 +42,18 @@ const routes = [
     path: "/get_periodicals/",
     components: {
       default: GetPeriodicals,
+      header: AppHeader,
+    },
+    props: {
+      default: routeNameProp,
+      header: routeNameProp,
+    },
+  },
+  {
+    name: "coop_status",
+    path: "/coop_status/",
+    components: {
+      default: CoopStatus,
       header: AppHeader,
     },
     props: {
