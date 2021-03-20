@@ -4,6 +4,7 @@ import AppHeader from "@/views/AppHeader.vue";
 import ArbitraryPayload from "@/views/ArbitraryPayload.vue";
 import CoopStatus from "@/views/CoopStatus.vue";
 import FirstContact from "@/views/FirstContact.vue";
+import GetConfig from "@/views/GetConfig.vue";
 import GetPeriodicals from "@/views/GetPeriodicals.vue";
 
 function routeNameProp(route) {
@@ -42,6 +43,18 @@ const routes = [
     path: "/get_periodicals/",
     components: {
       default: GetPeriodicals,
+      header: AppHeader,
+    },
+    props: {
+      default: routeNameProp,
+      header: routeNameProp,
+    },
+  },
+  {
+    name: "get_config",
+    path: "/get_config/",
+    components: {
+      default: GetConfig,
       header: AppHeader,
     },
     props: {

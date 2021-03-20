@@ -44,7 +44,7 @@
         </div>
         <div class="hidden sm:block">
           <div class="">
-            <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+            <nav class="-mb-px flex space-x-6" aria-label="Tabs">
               <router-link
                 v-for="tab in tabs"
                 :key="tab.name"
@@ -94,6 +94,10 @@ export default {
       {
         name: "get_periodicals",
         display: "<code>/get_periodicals</code>",
+      },
+      {
+        name: "get_config",
+        display: "<code>/get_config</code>",
       },
       {
         name: "coop_status",
