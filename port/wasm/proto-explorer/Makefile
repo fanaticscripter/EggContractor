@@ -7,6 +7,8 @@ all: clean
 
 init:
 	yarn install
+	# Install devDependencies of the pbjs cli.
+	yarn run pbjs --help || true
 
 dist: html doc
 	../_tools/build.py dist --additional doc
