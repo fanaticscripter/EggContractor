@@ -4,7 +4,10 @@
       Proto explorer
     </h1>
     <div class="max-w-4xl w-full mx-auto px-4 xl:px-0 space-y-2">
-      <div>
+      <div class="space-y-1">
+        <p class="text-xs text-red-500">
+          Be forewarned that this tool puts great power into the hands of even non-technical folk. As such it can facilitate the infliction of chaos and damage in the wrong hands. Unless you want to see this tool taken down by the author, <strong>please do not discuss or share the URL in the public or where naughty kiddies are around</strong>. If you're not sure whether there are naughty kiddies lurking in your audience, assume there are.
+        </p>
         <p class="text-sm font-medium text-gray-700">
           App version:
           <code class="text-xs font-mono">{{ appVersion }}</code>
