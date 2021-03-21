@@ -1,5 +1,8 @@
 MAKEFLAGS += -j4
 
+BUILD = $(shell date -u +%Y-%m-%d).$(shell git rev-parse --short=8 HEAD 2>/dev/null || echo 'snapshot')
+GITCOMMIT = $(shell git rev-parse HEAD 2>/dev/null || echo 'master')
+
 .PHONY: all dev go protobuf webpack webpack-dev postcss postcss-dev fmt serve serve-prod docker clean
 
 all: go webpack postcss
@@ -10,7 +13,7 @@ dev: go webpack-dev postcss-dev
 	ln -sf ../static/egginc-extras public/egginc-extras
 
 go: protobuf
-	GOFLAGS=-trimpath go build
+	GOFLAGS=-trimpath go build -ldflags "-X github.com/fanaticscripter/EggContractor/web.AppBuild=$(BUILD) -X github.com/fanaticscripter/EggContractor/web.GitCommit=$(GITCOMMIT)"
 
 protobuf:
 	protoc --proto_path=. --go_out=paths=source_relative:. api/egginc.proto

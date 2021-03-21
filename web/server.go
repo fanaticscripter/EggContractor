@@ -21,6 +21,11 @@ import (
 	"github.com/fanaticscripter/EggContractor/util"
 )
 
+var (
+	AppBuild  string
+	GitCommit string
+)
+
 const (
 	_devStaticDir                 = "public"
 	_prodStaticDir                = "static"
@@ -159,7 +164,9 @@ func loadTemplates(opts ServerOptions) *Template {
 	}
 	return &Template{
 		templates: template.Must(template.New("").Funcs(template.FuncMap{
+			"appbuild":         func() string { return AppBuild },
 			"css":              func(s string) template.CSS { return template.CSS(s) },
+			"gitcommit":        func() string { return GitCommit },
 			"eggiconpath":      eggIconPath,
 			"eggname":          func(e api.EggType) string { return e.Display() },
 			"eggvalue":         func(e api.EggType) string { return e.ValueDisplay() },
