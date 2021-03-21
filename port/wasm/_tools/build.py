@@ -97,7 +97,7 @@ def get_build_number():
     except subprocess.CalledProcessError:
         commit = "snapshot"
     dirty = False
-    if commit != "snapshot":
+    if not os.getenv("CI") and commit != "snapshot":
         status = subprocess.check_output(
             ["git", "status", "--short"], text=True
         ).strip()
