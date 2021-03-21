@@ -16,7 +16,11 @@ RUN yarn webpack --config webpack.prod.js && \
     yarn postcss --env=production css/app.css -o static/app.css
 
 COPY . /src/
-RUN CGO_ENABLED=1 GOOS=linux go build -a -ldflags '-linkmode external -extldflags "-static"'
+ARG BUILD
+ARG GIT_COMMIT
+RUN CGO_ENABLED=1 GOOS=linux go build -a -ldflags "-linkmode external -extldflags \"-static\" \
+    -X github.com/fanaticscripter/EggContractor/web.AppBuild=$BUILD \
+    -X github.com/fanaticscripter/EggContractor/web.GitCommit=$GIT_COMMIT"
 
 FROM scratch
 WORKDIR /

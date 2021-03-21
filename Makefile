@@ -49,7 +49,7 @@ serve-prod:
 	while true; do { echo EggContractor; find templates; find static; } | entr -dr ./EggContractor serve; [ $$? = 2 ] || break; done
 
 docker:
-	docker build -t fanaticscripter/eggcontractor .
+	docker build -t fanaticscripter/eggcontractor --build-arg BUILD=$(BUILD) --build-arg GIT_COMMIT=$(GITCOMMIT) .
 
 clean:
 	@$(RM) EggContractor static/*.*.js static/*.*.css static/manifest.*.json
