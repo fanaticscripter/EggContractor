@@ -373,9 +373,13 @@ func retrieveContractList(playerId string) *result {
 		log.Warnf("unexpected number of trophy levels: %d instead of %d", len(trophyLevels), 19)
 	}
 
+	peGiftsCollected := int(fc.Data.Progress.NumDailyGiftsCollected) / 28
+	if peGiftsCollected > 24 {
+		peGiftsCollected = 24
+	}
 	gifts := &peProgress{
 		Total:     24,
-		Collected: int(fc.Data.Progress.NumDailyGiftsCollected) / 28,
+		Collected: peGiftsCollected,
 	}
 
 	return dataResult(struct {
