@@ -102,6 +102,7 @@ func Serve(opts ServerOptions) {
 	e.GET("/peek/:contractId/:code/", peekHandler)
 	e.GET("/peeked/", peekedHandler)
 	e.GET("/events/", eventsHandler)
+	e.GET("/api/events/", apiEventsHandler)
 
 	staticDir := _prodStaticDir
 	staticCacheControlHeader := _prodStaticCacheControlHeader
