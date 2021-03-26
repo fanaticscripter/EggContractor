@@ -1,4 +1,10 @@
 import events from "@/events.json";
+import legacyEvents from "@/legacy_events.json";
+
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 // Version history extracted from https://apps.apple.com/us/app/egg-inc/id993492744:
 //
@@ -129,58 +135,174 @@ import events from "@/events.json";
 //     "releaseDate": "2019-10-10"
 //   }
 // ]
+
+const utcDateToTimestamp = date => dayjs.utc(date).unix();
+
 const eventsAndAppUpdates = [
+  ...legacyEvents,
   ...events,
+  // {
+  //   type: "app-update",
+  //   version: "1.11.4",
+  //   startTimestamp: utcDateToTimestamp("2019-10-10"),
+  //   releaseNotes:
+  //     "- Contract onboarding improvements\n- Piggy cap starts lower but grows faster and ends up increasing the cap significantly\n* fixes contract screen crash when no contracts are available",
+  // },
+  // {
+  //   type: "app-update",
+  //   version: "1.11.5",
+  //   startTimestamp: utcDateToTimestamp("2019-10-22"),
+  //   releaseNotes:
+  //     "- New Help screen!\n- Different purchases increment the piggy different amounts\n",
+  // },
+  // {
+  //   type: "app-update",
+  //   version: "1.11.6",
+  //   startTimestamp: utcDateToTimestamp("2019-10-24"),
+  //   releaseNotes: "- Numerous small improvements and bug fixes",
+  // },
+  // {
+  //   type: "app-update",
+  //   version: "1.12",
+  //   startTimestamp: utcDateToTimestamp("2019-12-10"),
+  //   releaseNotes:
+  //     "- Missions update: Complete 3 missions simultaneously\n- Boost Tokens! A new fun way boosts are regulated in Contracts\n- New Boost: Soul Mirror - Mirror the Earnings Bonus of the top player in your co-op!\n- Balance changes: Some cash have increased BUT while the MAX running chicken bonus reduced, but it now increases farm value AND drone rewards!\n- Numerous improvements and bug fixes with more to come!",
+  // },
+  // {
+  //   type: "app-update",
+  //   version: "1.12.1",
+  //   startTimestamp: utcDateToTimestamp("2019-12-14"),
+  //   releaseNotes:
+  //     "* fix for a restore backup crash\n- Missions update: Complete 3 missions simultaneously\n- Boost Tokens! A new fun way boosts are regulated in Contracts\n- New Boost: Soul Mirror - Mirror the Earnings Bonus of the top player in your co-op!\n- Balance changes: Some cash have increased BUT while the MAX running chicken bonus reduced, but it now increases farm value AND drone rewards!\n- Numerous improvements and bug fixes with more to come!",
+  // },
+  // {
+  //   type: "app-update",
+  //   version: "1.12.2",
+  //   startTimestamp: utcDateToTimestamp("2019-12-16"),
+  //   releaseNotes:
+  //     "* crash fix, ads fix, instant cash boost bug fix, running chicken bonus increase\n- Missions update: Complete 3 missions simultaneously\n- Boost Tokens! A new fun way boosts are regulated in Contracts\n- New Boost: Soul Mirror - Mirror the Earnings Bonus of the top player in your co-op!\n- Balance changes: Some cash have increased BUT while the MAX running chicken bonus reduced, but it now increases farm value AND drone rewards!\n- Numerous improvements and bug fixes with more to come!",
+  // },
+  {
+    type: "app-update",
+    version: "1.12.3",
+    startTimestamp: utcDateToTimestamp("2020-01-10"),
+    releaseNotes:
+      "- CCPA Compliance and data consent is now expanded to ALL Players\n- Players who do not consent to data collection can now watch *untracked* ads for rewards!\n- Piggy grows faster\n- Bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.12.4",
+    startTimestamp: utcDateToTimestamp("2020-01-11"),
+    releaseNotes:
+      "* Alleviates coop kick bug and age restriction bug *\n- CCPA Compliance and data consent is now expanded to ALL Players\n- Players who do not consent to data collection can now watch *untracked* ads for rewards!\n- Piggy grows faster\n- Bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.12.5",
+    startTimestamp: utcDateToTimestamp("2020-01-29"),
+    releaseNotes: "- Minor improvements and bug fixes\n- Enhanced Privacy Controls\n",
+  },
+  {
+    type: "app-update",
+    version: "1.12.6",
+    startTimestamp: utcDateToTimestamp("2020-02-21"),
+    releaseNotes:
+      "- See boost tokens of your coop mates!\n- Several minor improvements and bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.12.7",
+    startTimestamp: utcDateToTimestamp("2020-03-16"),
+    releaseNotes:
+      "- Exponential contract progress bars to give a better feel on progress (tap to toggle)\n- Press and hold boost token gift buttons\n- Get a Boost token as a video reward or as a random delivery!\n- Elite Contract Goals & Rewards - Contract goals & rewards are now split into standard and elite. Beginning players will have more achievable goals, and expert players will have more fun and earn larger rewards, Egg of Prophecy rewards will be the same between both types!",
+  },
+  {
+    type: "app-update",
+    version: "1.12.8",
+    startTimestamp: utcDateToTimestamp("2020-03-17"),
+    releaseNotes:
+      "- Contract progress details now displayed on contract egg screen\n- Exponential contract progress bars to give a better feel on progress (tap to toggle)\n- Press and hold boost token gift buttons\n- Get a Boost token as a video reward or as a random delivery!\n- Elite Contract Goals & Rewards - Contract goals & rewards are now split into standard and elite. Beginning players will have more achievable goals, and expert players will have more fun and earn larger rewards, Egg of Prophecy rewards will be the same between both types!",
+  },
+  {
+    type: "app-update",
+    version: "1.12.9",
+    startTimestamp: utcDateToTimestamp("2020-06-11"),
+    releaseNotes: "- small improvements and bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.12.10",
+    startTimestamp: utcDateToTimestamp("2020-06-30"),
+    releaseNotes: "- small improvements and bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.12.11",
+    startTimestamp: utcDateToTimestamp("2020-07-05"),
+    releaseNotes: "- bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.12.12",
+    startTimestamp: utcDateToTimestamp("2020-10-27"),
+    releaseNotes: "- iPhone 12 display bug fix",
+  },
+  {
+    type: "app-update",
+    version: "1.12.13",
+    startTimestamp: utcDateToTimestamp("2020-11-11"),
+    releaseNotes: "- Addresses ad bugs",
+  },
   {
     type: "app-update",
     version: "1.20",
-    startTimestamp: 1611100800,
+    startTimestamp: utcDateToTimestamp("2021-01-20"),
     releaseNotes:
       "ARTIFACTS IS HERE!\nAt long last, the largest update ever to Egg, Inc!\nCommission deep space exploration missions to uncover over 100 artifacts from long lost civilizations around the galaxy\nEXPORE. CRAFT. CUSTOMIZE.\nUnlock the secrets of the universe.",
   },
   {
     type: "app-update",
     version: "1.20.1",
-    startTimestamp: 1611187200,
+    startTimestamp: utcDateToTimestamp("2021-01-21"),
     releaseNotes:
       "ARTIFACTS IS HERE!\nAt long last, the largest update ever to Egg, Inc!\nCommission deep space exploration missions to uncover over 100 artifacts from long lost civilizations around the galaxy\nEXPORE. CRAFT. CUSTOMIZE.\nUnlock the secrets of the universe.",
   },
   {
     type: "app-update",
     version: "1.20.2",
-    startTimestamp: 1611878400,
+    startTimestamp: utcDateToTimestamp("2021-01-29"),
     releaseNotes: "- Stability improvements and bug fixes",
   },
   {
     type: "app-update",
     version: "1.20.3",
-    startTimestamp: 1612483200,
+    startTimestamp: utcDateToTimestamp("2021-02-05"),
     releaseNotes: "- Stability improvements and bug fixes",
   },
   {
     type: "app-update",
     version: "1.20.4",
-    startTimestamp: 1613433600,
+    startTimestamp: utcDateToTimestamp("2021-02-16"),
     releaseNotes:
       "- Large increases to rewards for challenges, trophies, and daily gifts\n- Bug fixes",
   },
   {
     type: "app-update",
     version: "1.20.5",
-    startTimestamp: 1614556800,
+    startTimestamp: utcDateToTimestamp("2021-03-01"),
     releaseNotes:
       "- Many small/medium improvements and bug fixes\n- Increased rewards for random gifts and video gifts\n- Slightly reduced rewards for some trophies and daily gifts",
   },
   {
     type: "app-update",
     version: "1.20.6",
-    startTimestamp: 1615420800,
+    startTimestamp: utcDateToTimestamp("2021-03-11"),
     releaseNotes: "- Small improvements and bug fixes",
   },
   {
     type: "app-update",
     version: "1.20.7",
-    startTimestamp: 1615766400,
+    startTimestamp: utcDateToTimestamp("2021-03-15"),
     releaseNotes: "- Small improvements and bug fixes",
   },
 ].sort((e1, e2) => e1.startTimestamp - e2.startTimestamp);

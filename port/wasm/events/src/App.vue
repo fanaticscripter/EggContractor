@@ -121,6 +121,11 @@
 
     <div>
       <p class="text-center text-xs text-gray-500">
+        Data for 2020 events were extracted from spreadsheet provided by Discord user @lamCube.
+        Start timestamps and durations are provided on a best-effort basis and not accurate. 2019 or
+        earlier events are omitted due to event scarcity and data incompleteness.
+      </p>
+      <p class="text-center text-xs text-gray-700">
         Tip: Hover over / click on event labels to reveal details.
       </p>
     </div>
