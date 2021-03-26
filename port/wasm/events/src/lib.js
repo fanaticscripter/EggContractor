@@ -307,6 +307,8 @@ const eventsAndAppUpdates = [
   },
 ].sort((e1, e2) => e1.startTimestamp - e2.startTimestamp);
 
+const existingEventTypes = new Set(eventsAndAppUpdates.map(e => e.type));
+
 const eventTypes = [
   ["app-update", "APP UPDATE"],
   // epic-research-sale is hoisted to the top (from before research-sale) in order to
@@ -328,7 +330,7 @@ const eventTypes = [
   ["mission-fuel", "MISSION FUEL BOOST"],
   ["mission-capacity", "MISSION CAPACITY BOOST"],
   ["mission-duration", "MISSION DURATION CUT"],
-];
+].filter(([type, name]) => existingEventTypes.has(type));
 
 const baseColors = [
   "gray",
