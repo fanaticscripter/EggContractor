@@ -41,6 +41,8 @@ Advantages:
 
 - **All the info about all your active contracts (solos & coops) is right on the home page**. Even the coop "peeker" widget is right there. **No clicking around**.
 
+- **Track multiple accounts at once.**
+
 - **Sort coop members by EB, egg laying rate, etc.** Very handy.
 
 - View a list of coops you recently "peeked". [Demo page](https://egg-contractor-static-demo.netlify.app/peeked/).
