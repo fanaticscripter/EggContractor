@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 
@@ -35,6 +36,12 @@ var _eiConfigCommand = &cobra.Command{
 		}.Marshal(config)
 		if err != nil {
 			return errors.Wrap(err, "error marshalling response")
+		}
+
+		var rm json.RawMessage = encoded
+		encoded, err = json.MarshalIndent(rm, "", "  ")
+		if err != nil {
+			return errors.Wrap(err, "error re-marshalling response")
 		}
 		encoded = append(encoded, '\n')
 
