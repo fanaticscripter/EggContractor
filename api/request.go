@@ -16,8 +16,10 @@ import (
 )
 
 const (
-	ClientVersion = 30
-	AppVersion    = "1.20.7"
+	AppVersion     = "1.20.7"
+	AppBuild       = "1.20.5.1"
+	ClientVersion  = 30
+	PlatformString = "IOS"
 )
 
 var _apiPrefix = "https://afx-2-dot-auxbrainhome.appspot.com"
@@ -93,6 +95,16 @@ func RequestPeriodicalsWithContext(ctx context.Context, payload *GetPeriodicalsR
 		return nil, err
 	}
 	return resp, nil
+}
+
+func NewBasicRequestInfo(userId string) *BasicRequestInfo {
+	return &BasicRequestInfo{
+		EiUserId:      userId,
+		ClientVersion: ClientVersion,
+		Version:       AppVersion,
+		Build:         AppBuild,
+		Platform:      PlatformString,
+	}
 }
 
 func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message, authenticated bool) error {

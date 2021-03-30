@@ -218,9 +218,12 @@ Usage:
   EggContractor [command]
 
 Available Commands:
+  afx-config      Explore /afx_config
+  backup          Backup database
   config          Print current configurations
   config-template Print a config file template
   contracts       Print a list of current and past contracts
+  ei-config       Dump /ei/get_config response in JSON
   events          Print current and past events
   help            Help about any command
   peek            Peek at a coop
