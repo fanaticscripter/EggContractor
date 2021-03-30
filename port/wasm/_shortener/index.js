@@ -177,11 +177,12 @@ async function handleRequest(request) {
   let redirectURL = baseRedirectURL + "/";
   if (code === "sandbox") {
     redirectURL = "https://wasmegg.netlify.app/artifact-sandbox/";
-  }
-  if (artifactIds.includes(code)) {
+  } else if (code === "config-changelog") {
+    redirectURL =
+      "https://gist.github.com/fanaticscripter/ea462d5abf9716efb6053ff9a0ca5758/revisions";
+  } else if (artifactIds.includes(code)) {
     redirectURL = baseRedirectURL + `/#/artifact/${code}`;
-  }
-  if (missionIds.includes(code)) {
+  } else if (missionIds.includes(code)) {
     redirectURL = baseRedirectURL + `/#/mission/${code}`;
   }
   return Response.redirect(redirectURL, 302);
