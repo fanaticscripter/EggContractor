@@ -10,7 +10,7 @@
       <parameter-input
         name="user_id"
         label="User ID"
-        placeholder="Optional, random by default"
+        placeholder="Ex: EI1234567890123456"
         :required="true"
         v-model.trim="userId"
       />
