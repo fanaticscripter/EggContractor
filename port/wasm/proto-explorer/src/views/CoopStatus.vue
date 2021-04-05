@@ -69,7 +69,7 @@ export default {
         contractIdentifier: contractId.value,
         coopIdentifier: coopCode.value,
         userId: uid,
-        currentClientVersion: CLIENT_VERSION,
+        clientVersion: CLIENT_VERSION,
         rinfo: basicRequestInfo(uid),
       };
     };
