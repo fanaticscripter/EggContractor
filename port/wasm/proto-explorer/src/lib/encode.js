@@ -20,7 +20,11 @@ function encodeMessage(messageName, messageObj, authenticated) {
 
   try {
     const buf = message.encode(messageObj).finish();
-    return btoa(String.fromCharCode(...buf));
+    return btoa(
+      Array.from(buf)
+        .map(c => String.fromCharCode(c))
+        .join("")
+    );
   } catch (e) {
     throw new Error(`Encoding ${messageName} ${JSON.stringify(messageObj)}: ${e}.`);
   }
