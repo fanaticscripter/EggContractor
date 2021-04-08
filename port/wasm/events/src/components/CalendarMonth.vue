@@ -16,7 +16,9 @@
       <div v-for="index in month.day()" :key="index"></div>
 
       <div v-for="d in dates" :key="d.date.date()">
-        <div class="text-center text-sm">{{ d.date.format("D") }}</div>
+        <div class="text-center text-sm" :class="{ 'text-gray-400': d.date > now }">
+          {{ d.date.format("D") }}
+        </div>
         <div class="space-y-1">
           <template v-for="(event, index) in d.events" :key="index">
             <tippy
@@ -58,7 +60,10 @@
                 <template v-else>
                   <div :class="eventBrightFgClass(event.type)">
                     <p class="flex items-center space-x-1">
-                      <img :src="iconURL('egginc/ei_app_icon.png', 64)" class="h-4 w-4 rounded-sm" />
+                      <img
+                        :src="iconURL('egginc/ei_app_icon.png', 64)"
+                        class="h-4 w-4 rounded-sm"
+                      />
                       <span>App version {{ event.version }}</span>
                     </p>
                     <p>
@@ -154,6 +159,7 @@ export default {
     };
 
     return {
+      now: dayjs(),
       month,
       dates,
       eventCaption,
