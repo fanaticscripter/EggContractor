@@ -180,6 +180,8 @@ async function handleRequest(request) {
   } else if (code === "config-changelog") {
     redirectURL =
       "https://gist.github.com/fanaticscripter/ea462d5abf9716efb6053ff9a0ca5758/revisions";
+  } else if (code === "tips") {
+    redirectURL = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
   } else if (artifactIds.includes(code)) {
     redirectURL = baseRedirectURL + `/#/artifact/${code}`;
   } else if (missionIds.includes(code)) {
