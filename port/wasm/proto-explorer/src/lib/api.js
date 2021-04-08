@@ -35,6 +35,7 @@ class APIClient {
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: `data=${encodedPayload}`,
+        signal: controller.signal,
       });
       const text = await resp.text();
       if (resp.status < 200 || resp.status >= 300) {
