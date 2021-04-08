@@ -1,5 +1,5 @@
 const API_ROOT = "https://wasmegg.zw.workers.dev/?url=https://afx-2-dot-auxbrainhome.appspot.com";
-const TIMEOUT = 5000;
+const TIMEOUT = 10000;
 
 class APIClient {
   constructor() {
