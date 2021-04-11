@@ -73,6 +73,7 @@ function accessControlAllowOriginHeader(origin) {
 function isAllowedOrigin(origin) {
   return (
     origin?.match(/^https:\/\/([0-9a-f]+--)?wasmegg.netlify.app$/) ||
+    origin?.match(/^https:\/\/([0-9a-f]+--)?eicoop.netlify.app$/) ||
     origin?.match(/^http:\/\/localhost(:\d+)?$/) ||
     origin?.match(/^http:\/\/127\.0\.0\.1(:\d+)?$/) ||
     origin?.match(/^http:\/\/192\.168\.\d+\.\d+(:\d+)?$/)
