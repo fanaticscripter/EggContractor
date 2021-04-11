@@ -15,18 +15,22 @@
         color: #444;
         padding: 0 10px;
       }
+
       h1 {
         font-size: 1.5rem;
         line-height: 1.2;
       }
+
       h2 {
         font-size: 1.25rem;
         line-height: 1.2;
       }
+
       h3 {
         font-size: 1rem;
         line-height: 1.2;
       }
+
       pre {
         background-color: #eee;
         padding: 0.25rem 0.5rem;
@@ -35,15 +39,37 @@
         white-space: pre-wrap;
         word-break: break-all;
       }
+
       .new::before {
         content: "NEW!";
         color: green;
         font-weight: bold;
         margin-right: 0.25rem;
       }
+
       .cursor-pointer {
         cursor: pointer;
       }
+
+      #whatsnew {
+        padding: 1rem;
+        border-radius: 0.375rem;
+        color: #065f46;
+        background-color: #ecfdf5;
+      }
+
+      #whatsnew > * {
+        margin: 0;
+      }
+
+      #whatsnew > h2 {
+        font-size: 1.125rem;
+      }
+
+      #whatsnew > ul {
+        margin-left: -1rem;
+      }
+
       #privacy {
         font-size: 0.875rem;
         line-height: 1.4;
@@ -53,6 +79,24 @@
   </head>
   <body>
     <h1>@mk2's public utilities for Egg, Inc.</h1>
+
+    <div id="whatsnew" style="display: none">
+      <h2>What's new</h2>
+      <ul>
+        <li data-new-until="1620755560000" style="display: none">
+          <a href="https://eicoop.netlify.app/" target="_blank">CoopTracker</a>
+        </li>
+      </ul>
+    </div>
+
+    <h2>Hosted at independent domains</h2>
+    <ul>
+      <li>
+        <span data-new-until="1620755560000"></span
+        ><a href="https://eicoop.netlify.app/" target="_blank">CoopTracker</a> &mdash; Coop tracker
+        and contract master list.
+      </li>
+    </ul>
 
     <h2>Hosted at this domain</h2>
     <h3>Interactive apps</h3>
@@ -151,7 +195,20 @@ base64 -d &lt;&lt;&lt;U2FsdGVkX19gitYe+JNTR92EYJdfUuwzMutMBoPcTM36gQad6Qez/807l0
 
     <script>
       const now = Date.now();
-      document.querySelectorAll("[data-new-until]").forEach(el => {
+      let somethingIsNew = false;
+      document.querySelectorAll("#whatsnew li[data-new-until]").forEach(el => {
+        if (now < parseInt(el.dataset.newUntil)) {
+          el.style.display = "";
+          somethingIsNew = true;
+        }
+      });
+      if (somethingIsNew) {
+        const whatsnew = document.querySelector("#whatsnew");
+        if (whatsnew) {
+          whatsnew.style.display = "";
+        }
+      }
+      document.querySelectorAll("span[data-new-until]").forEach(el => {
         if (now < parseInt(el.dataset.newUntil)) {
           el.classList.add("new");
         }
