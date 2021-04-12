@@ -242,7 +242,8 @@ func (c *soloContract) GetEggsPerSecond() float64 {
 	layingRate := float64(c.Farm.ChickenCount) *
 		eggsPerChickenPerSecond(c.Farm.Researches, c.Player.Progress.EpicResearches) *
 		artifacts.LayingRateEffect(c.Artifacts)
-	maxShippingRate := maxEggsShippedPerSecond(c.Farm, c.Player.Progress.EpicResearches)
+	maxShippingRate := maxEggsShippedPerSecond(c.Farm, c.Player.Progress.EpicResearches) *
+		artifacts.ShippingCapacityEffect(c.Artifacts)
 	return math.Min(layingRate, maxShippingRate)
 }
 
