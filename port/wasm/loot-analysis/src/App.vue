@@ -80,7 +80,7 @@
               {{ mission.info.display }}
             </h2>
           </a>
-          <p class="text-center text-xs text-gray-700">{{ mission.missionCount }} missions</p>
+          <mission-summary :mission="mission" />
         </header>
         <loot-chart :items="items" :missionStats="mission" />
       </section>
@@ -89,12 +89,14 @@
 </template>
 
 <script>
+import MissionSummary from "./components/MissionSummary.vue";
 import LootChart from "./components/LootChart.vue";
 
 import data from "@/app-data.json";
 
 export default {
   components: {
+    MissionSummary,
     LootChart,
   },
 
