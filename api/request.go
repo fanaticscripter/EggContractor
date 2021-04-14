@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/pkg/errors"
@@ -138,17 +139,28 @@ func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Mes
 		authMsg := &AuthenticatedMessage{}
 		err = proto.Unmarshal(respBinBuf[:n], authMsg)
 		if err != nil {
-			return errors.Wrapf(err, "unmarshaling %s response as AuthenticatedMessage (%#v)", apiUrl, string(body))
+			err = errors.Wrapf(err, "unmarshaling %s response as AuthenticatedMessage (%#v)", apiUrl, string(body))
+			return interpretUnmarshalError(err)
 		}
 		err = proto.Unmarshal(authMsg.Message, respMsg)
 		if err != nil {
-			return errors.Wrapf(err, "unmarshaling AuthenticatedMessage payload in %s response (%#v)", apiUrl, string(body))
+			err = errors.Wrapf(err, "unmarshaling AuthenticatedMessage payload in %s response (%#v)", apiUrl, string(body))
+			return interpretUnmarshalError(err)
 		}
 	} else {
 		err = proto.Unmarshal(respBinBuf[:n], respMsg)
 		if err != nil {
-			return errors.Wrapf(err, "unmarshaling %s response (%#v)", apiUrl, string(body))
+			err = errors.Wrapf(err, "unmarshaling %s response (%#v)", apiUrl, string(body))
+			return interpretUnmarshalError(err)
 		}
 	}
 	return nil
+}
+
+func interpretUnmarshalError(err error) error {
+	if strings.Contains(err.Error(), "contains invalid UTF-8") {
+		return errors.Wrap(err, "API returned corrupted data (invalid UTF-8 in one or more string fields); "+
+			"this is a known issue affecting some players, and it can only be resolved when Auxbrain fixes their server bug")
+	}
+	return err
 }
