@@ -68,14 +68,14 @@ jobs:
           yarn global add netlify-cli
       - name: Preview
         run: |
-          "$(yarn global bin)/netlify" deploy --dir=port/wasm/dist
+          "$(yarn global bin)/netlify" deploy --dir=dist
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WASM_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
         if: github.ref != 'refs/heads/master'
       - name: Deploy
         run: |
-          "$(yarn global bin)/netlify" deploy --dir=port/wasm/dist --prod
+          "$(yarn global bin)/netlify" deploy --dir=dist --prod
         env:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WASM_SITE_ID }}
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
