@@ -9,7 +9,7 @@ init:
 	yarn install
 
 dist: html static
-	../_tools/build.py dist --additional 'Always Together.otf'
+	../_tools/build.py dist --additional static
 
 html: webpack postcss
 	../_tools/build.py html
@@ -27,11 +27,11 @@ data:
 	go run .
 
 static:
-	mkdir -p dist
-	cp -f 'static/Always Together.otf' 'dist/Always Together.otf'
+	mkdir -p dist/static
+	cp -f 'static/Always Together.otf' static/favicon* dist/static
 
 clean:
-	@$(RM) -r dist/index.html dist/*.*.css dist/*.*.js dist/manifest.*.json
+	@$(RM) -r dist/index.html dist/*.*.css dist/*.*.js dist/manifest.*.json dist/static
 
 serve:
 	cd dist && npx serve

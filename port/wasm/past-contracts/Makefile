@@ -1,6 +1,6 @@
 MAKEFLAGS += -j4
 
-.PHONY: all init dist html wasm webpack postcss clean serve
+.PHONY: all init dist html wasm webpack postcss static clean serve
 
 all: clean
 	$(MAKE) dist
@@ -8,8 +8,8 @@ all: clean
 init:
 	yarn install
 
-dist: html dist/contracts.csv
-	../_tools/build.py dist --additional contracts.csv
+dist: html dist/contracts.csv static
+	../_tools/build.py dist --additional contracts.csv --additional static
 
 html: webpack postcss
 	cp -f "$$(go env GOROOT)/misc/wasm/wasm_exec.js" dist
@@ -27,6 +27,10 @@ postcss:
 dist/contracts.csv: ../../../misc/ContractAggregator/data/contracts.csv
 	mkdir -p dist
 	cp -f ../../../misc/ContractAggregator/data/contracts.csv dist
+
+static:
+	mkdir -p dist/static
+	cp -f static/favicon* dist/static
 
 clean:
 	@$(RM) dist/index.html dist/*.*.js dist/wasm_exec.js dist/*.*.css dist/*.*.wasm dist/manifest.*.json dist/contracts.csv

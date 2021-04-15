@@ -1,6 +1,6 @@
 MAKEFLAGS += -j4
 
-.PHONY: all init dist html webpack proto postcss doc clean serve
+.PHONY: all init dist html webpack proto postcss static doc clean serve
 
 all: clean
 	$(MAKE) dist
@@ -10,8 +10,8 @@ init:
 	# Install devDependencies of the pbjs cli.
 	yarn run pbjs --help || true
 
-dist: html doc
-	../_tools/build.py dist --additional doc
+dist: html doc static
+	../_tools/build.py dist --additional doc --additional static
 
 html: webpack postcss
 	../_tools/build.py html
@@ -24,6 +24,10 @@ proto:
 
 postcss:
 	yarn postcss --env=production src/app.css -o dist/app.css
+
+static:
+	mkdir -p dist/static
+	cp -f static/favicon* dist/static
 
 doc:
 	mkdir -p dist/doc

@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="apple-touch-icon-precomposed" href="/static/favicon-180.png" />
+    <link rel="icon" type="image/x-icon" href="static/index/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="static/index/favicon-180.png" />
     <title>@mk2's public utilities for Egg, Inc.</title>
     <style>
       body {
@@ -45,6 +46,20 @@
         color: green;
         font-weight: bold;
         margin-right: 0.25rem;
+      }
+
+      img.icon {
+        width: 1rem;
+        height: 1rem;
+        display: inline;
+        position: relative;
+        vertical-align: middle;
+        top: -1px;
+        margin-right: 0.25rem;
+      }
+
+      img.favicon.shadow {
+        filter: drop-shadow(0 0 1px #aaa);
       }
 
       .cursor-pointer {
@@ -93,8 +108,13 @@
     <ul>
       <li>
         <span data-new-until="1620755560000"></span
-        ><a href="https://eicoop.netlify.app/" target="_blank">CoopTracker</a> &mdash; Coop tracker
-        and contract master list.
+        ><a href="https://eicoop.netlify.app/" target="_blank"
+          ><img
+            src="https://eicoop.netlify.app/logo-small.svg"
+            class="icon"
+            style="width: auto; height: 1.5rem; top: -3px; margin-right: -3px"
+        /></a>
+        &mdash; Coop tracker and contract master list
       </li>
     </ul>
 
@@ -102,21 +122,38 @@
     <h3>Interactive apps</h3>
     <ul>
       <li>
-        <a href="/artifact-explorer/" target="_blank">Artifact explorer</a> &mdash; Explorer for
-        everything artifacts
+        <img src="/artifact-explorer/static/favicon.svg" class="icon" /><a
+          href="/artifact-explorer/"
+          target="_blank"
+          >Artifact explorer</a
+        >
+        &mdash; Explorer for everything artifacts
       </li>
       <li>
         <span data-new-until="1614782795000"></span
-        ><a href="/artifact-sandbox/" target="_blank">Artifact sandbox</a> &mdash; Experiment,
-        optimize, and share your artifact builds all within this sandbox
+        ><img src="/artifact-sandbox/static/favicon.svg" class="icon" /><a
+          href="/artifact-sandbox/"
+          target="_blank"
+          >Artifact sandbox</a
+        >
+        &mdash; Experiment, optimize, and share your artifact builds all within this sandbox
       </li>
       <li>
-        <a href="/rockets-tracker/" target="_blank">Rockets tracker</a> &mdash; Tracker for active
-        rocket missions, historical mission statistics, progress on artifact collection, etc.
+        <img src="/rockets-tracker/static/favicon.svg" class="icon shadow" /><a
+          href="/rockets-tracker/"
+          target="_blank"
+          >Rockets tracker</a
+        >
+        &mdash; Tracker for active rocket missions, historical mission statistics, progress on
+        artifact collection, etc.
       </li>
       <li>
-        <a href="/past-contracts/" target="_blank">Past contracts viewer</a> &mdash; Past contracts
-        and prophecy egg completion tracker
+        <img src="/past-contracts/static/favicon.svg" class="icon" /><a
+          href="/past-contracts/"
+          target="_blank"
+          >Past contracts viewer</a
+        >
+        &mdash; Past contracts and prophecy egg completion tracker
       </li>
     </ul>
     <h3>Data sheets</h3>
