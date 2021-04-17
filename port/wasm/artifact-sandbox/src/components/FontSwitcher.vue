@@ -18,10 +18,13 @@
 </template>
 
 <script>
+import { setLocalStorage } from "@/utils";
+
 export default {
   methods: {
     toggleFontMode() {
       document.body.classList.toggle("font-default");
+      setLocalStorage("enhancedReadabilityMode", document.body.classList.contains("font-default"));
     },
   },
 };
