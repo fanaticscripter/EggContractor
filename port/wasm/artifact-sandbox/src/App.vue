@@ -28,10 +28,17 @@
     </div>
   </div>
   <router-view />
+  <font-switcher />
 </template>
 
 <script>
+import FontSwitcher from "@/components/FontSwitcher.vue";
+
 export default {
+  components: {
+    FontSwitcher,
+  },
+
   data() {
     return {
       news: [
