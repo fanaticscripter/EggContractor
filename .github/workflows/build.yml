@@ -65,8 +65,7 @@ jobs:
           make
       - name: Install netlify cli
         run: |
-          # Pin netlify-cli to v3.21.6 due to https://github.com/netlify/cli/issues/2219.
-          yarn global add netlify-cli@3.21.6
+          yarn global add netlify-cli
       - name: Preview
         run: |
           "$(yarn global bin)/netlify" deploy --dir=dist
