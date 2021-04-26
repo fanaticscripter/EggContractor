@@ -77,7 +77,7 @@ func FormatDurationWhole(d time.Duration) string {
 	if d == InfDuration {
 		return "forever"
 	}
-	if d == 0 {
+	if d < time.Minute {
 		return "0m"
 	}
 	dd := d / (24 * time.Hour)
