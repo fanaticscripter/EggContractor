@@ -50,8 +50,9 @@
                       class="flex h-4 w-4 items-center justify-center rounded bg-gray-400"
                     >
                       <img
-                        class="h-3 w-3"
-                        :src="iconURL('egginc/icon_afx_stone_add_large.png', 32)"
+                        class="h-5 w-5 max-w-none"
+                        :src="iconURL('egginc-extras/icon_afx_stone_slot.png', 64)"
+                        :style="{ filter: 'brightness(10)' }"
                       />
                     </div>
                   </td>
