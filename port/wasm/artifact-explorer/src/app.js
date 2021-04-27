@@ -10,7 +10,17 @@ import router from "./router";
 const app = createApp(App);
 app.use(router);
 app.use(VueTippy, {
-  defaultProps: { theme: "translucent" },
+  defaultProps: {
+    theme: "translucent",
+    onShow: instance => {
+      // Image lazyloading.
+      for (const img of instance.popper.querySelectorAll("img")) {
+        if (!img.src && img.dataset.src) {
+          img.src = img.dataset.src;
+        }
+      }
+    },
+  },
 });
 app.component("tippy", Tippy);
 app.mount("#app");

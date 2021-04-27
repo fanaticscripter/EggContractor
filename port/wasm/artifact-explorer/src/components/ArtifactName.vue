@@ -14,7 +14,7 @@
         <div
           class="flex items-center"
           v-tippy="{
-            content: `<img src='${iconURL(artifact.iconPath, 256)}' class='h-32 w-32'>`,
+            content: `<img data-src='${iconURL(artifact.iconPath, 256)}' class='h-32 w-32'>`,
             allowHTML: true,
           }"
         >

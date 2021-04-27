@@ -19,7 +19,10 @@
                     <div
                       class="flex items-center space-x-2"
                       v-tippy="{
-                        content: `<img src='${iconURL(tier.iconPath, 256)}' class='h-32 w-32'>`,
+                        content: `<img data-src='${iconURL(
+                          tier.iconPath,
+                          256
+                        )}' class='h-32 w-32'>`,
                         allowHTML: true,
                       }"
                     >

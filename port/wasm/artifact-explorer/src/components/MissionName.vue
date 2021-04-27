@@ -7,7 +7,7 @@
       <div
         class="flex-shrink-0 h-4 w-4"
         v-tippy="{
-          content: `<img src='${iconURL(mission.shipIconPath, 256)}' class='h-32 w-32'>`,
+          content: `<img data-src='${iconURL(mission.shipIconPath, 256)}' class='h-32 w-32'>`,
           allowHTML: true,
         }"
       >
