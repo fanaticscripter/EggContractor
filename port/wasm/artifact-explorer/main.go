@@ -1,8 +1,6 @@
 package main
 
 import (
-	"bytes"
-	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -18,12 +16,10 @@ import (
 const _appDataFile = "src/app-data.json"
 
 type payload struct {
-	Ships        []*ship     `json:"ships"`
-	Missions     []*mission  `json:"missions"`
-	Artifacts    []*artifact `json:"artifacts"`
-	LootTable    lootTable   `json:"lootTable"`
-	MissionsCSV  string      `json:"missionsCSV"`
-	ArtifactsCSV string      `json:"artifactsCSV"`
+	Ships     []*ship     `json:"ships"`
+	Missions  []*mission  `json:"missions"`
+	Artifacts []*artifact `json:"artifacts"`
+	LootTable lootTable   `json:"lootTable"`
 }
 
 type ship struct {
@@ -175,73 +171,11 @@ func assemblePayload() (*payload, error) {
 		}
 	}
 
-	// CSV exports
-	var b bytes.Buffer
-	w := csv.NewWriter(&b)
-	_ = w.Write([]string{
-		"Ship", "Type", "Duration", "Duration seconds", "Capacity", "Quality", "Min quality", "Max quality",
-	})
-	for _, m := range missions {
-		_ = w.Write([]string{
-			m.ShipName,
-			m.Params.DurationType.Display(),
-			util.FormatDurationWhole(util.DoubleToDuration(m.Params.Seconds)),
-			fmt.Sprintf("%.0f", m.Params.Seconds),
-			fmt.Sprintf("%d", m.Params.Capacity),
-			fmt.Sprintf("%f", m.Params.Quality),
-			fmt.Sprintf("%f", m.MinQuality),
-			fmt.Sprintf("%f", m.MaxQuality),
-		})
-	}
-	w.Flush()
-	missionsCSV := b.String()
-
-	b.Reset()
-	w = csv.NewWriter(&b)
-	header := []string{"Item", "Tier", "Base quality", "Odds multiplier"}
-	for _, s := range eiafx.Config.MissionParameters {
-		for _, d := range s.Durations {
-			header = append(header, abbreviatedShipName(s.Ship)+" "+abbreviatedMissionType(d.DurationType))
-		}
-	}
-	header = append(header, []string{
-		"value", "crafting price base", "crafting price low", "crafting price domain", "crafting price curve",
-	}...)
-	_ = w.Write(header)
-	for _, a := range artifacts {
-		name := a.Name
-		if a.AfxRarity > 0 {
-			name += ", " + a.Rarity
-		}
-		row := []string{
-			name,
-			fmt.Sprintf("%d", a.TierNumber),
-			fmt.Sprintf("%f", a.Quality),
-			fmt.Sprintf("%f", a.Params.OddsMultiplier),
-		}
-		for _, m := range missions {
-			withinRange := m.MinQuality <= a.Quality && a.Quality <= m.MaxQuality
-			row = append(row, fmt.Sprintf("%t", withinRange))
-		}
-		row = append(row, []string{
-			fmt.Sprintf("%f", a.Params.Value),
-			fmt.Sprintf("%f", a.Params.CraftingPrice),
-			fmt.Sprintf("%f", a.Params.CraftingPriceLow),
-			fmt.Sprintf("%d", a.Params.CraftingPriceDomain),
-			fmt.Sprintf("%f", a.Params.CraftingPriceCurve),
-		}...)
-		_ = w.Write(row)
-	}
-	w.Flush()
-	artifactsCSV := b.String()
-
 	return &payload{
-		Ships:        ships,
-		Missions:     missions,
-		Artifacts:    artifacts,
-		LootTable:    loots,
-		MissionsCSV:  missionsCSV,
-		ArtifactsCSV: artifactsCSV,
+		Ships:     ships,
+		Missions:  missions,
+		Artifacts: artifacts,
+		LootTable: loots,
 	}, nil
 }
 
