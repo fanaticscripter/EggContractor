@@ -7,7 +7,7 @@
             <th
               scope="col"
               rowspan="2"
-              class="sticky top-0 z-10 left-0 px-4 py-1 text-left text-xs font-medium text-gray-500 bg-gray-50"
+              class="sticky top-0 z-10 sm:left-0 px-4 py-1 text-left text-xs font-medium text-gray-500 bg-gray-50"
             >
               <div
                 class="flex items-center justify-center cursor-pointer"
@@ -145,7 +145,7 @@
         </thead>
         <tbody class="divide-y">
           <tr v-for="artifact in sortedArtifacts" :key="artifact.sortKey" class="divide-x">
-            <td class="sticky left-0 px-4 py-1 whitespace-nowrap text-sm text-gray-500 bg-white">
+            <td class="sm:sticky left-0 px-4 py-1 whitespace-nowrap text-sm text-gray-500 bg-white">
               <artifact-name :artifact="artifact" />
             </td>
 
