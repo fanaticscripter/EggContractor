@@ -28,9 +28,11 @@
                         <div
                           class="text-xs"
                           :class="
-                            tier.available_from_missions
-                              ? 'text-gray-500'
-                              : ['text-red-900', 'dagger']
+                            !tier.available_from_missions
+                              ? 'text-red-900 dagger'
+                              : tier.notDroppableInPractice
+                              ? 'text-red-900 Dagger'
+                              : 'text-gray-500'
                           "
                         >
                           {{ tier.tier_name }}
@@ -125,5 +127,9 @@ export default {
 <style scoped>
 .dagger:after {
   content: "\2020";
+}
+
+.Dagger:after {
+  content: "\2021";
 }
 </style>

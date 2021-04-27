@@ -11,6 +11,21 @@
     :artifacts="artifacts"
     :key="$route.path"
   />
+  <div class="my-4 text-xs text-red-900">
+    <p class="font-medium">Artifact notes:</p>
+    <p>
+      * Certain effect values shown may be 1% higher than the corresponding in-game values; those
+      are caused by erroneous floating point handling in the game, i.e. values here are correct.
+    </p>
+    <p>
+      &dagger; Artifacts marked with &dagger; are not available from missions, backed by both sound
+      theory and observation.
+    </p>
+    <p>
+      &Dagger; Artifacts marked with &Dagger; are not available from missions, backed by observation
+      only.
+    </p>
+  </div>
   <router-view name="artifact" :missions="missions" :artifacts="artifacts" :lootTable="lootTable" />
   <artifact-grid :artifacts="artifacts" />
 </template>

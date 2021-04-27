@@ -51,18 +51,30 @@ type artifactParams = api.ArtifactsConfigurationResponse_ArtifactParameters
 
 type artifact struct {
 	*eiafx.Tier
-	SortKey   string                  `json:"sortKey"`
-	AfxRarity api.ArtifactSpec_Rarity `json:"afxRarity"`
-	Rarity    string                  `json:"rarity"`
-	Quality   float64                 `json:"quality"`
-	IconPath  string                  `json:"iconPath"`
-	Odds      *odds                   `json:"odds"`
-	Params    *artifactParams         `json:"params"`
+	SortKey                string                  `json:"sortKey"`
+	AfxRarity              api.ArtifactSpec_Rarity `json:"afxRarity"`
+	Rarity                 string                  `json:"rarity"`
+	Quality                float64                 `json:"quality"`
+	IconPath               string                  `json:"iconPath"`
+	Odds                   *odds                   `json:"odds"`
+	Params                 *artifactParams         `json:"params"`
+	NotDroppableInPractice bool                    `json:"notDroppableInPractice"`
 }
 
 type odds struct {
 	Total    float64                             `json:"total"`
 	Rarities map[api.ArtifactSpec_Rarity]float64 `json:"rarities"`
+}
+
+var suspectedNotDroppableArtifacts = []*api.ArtifactSpec{
+	{
+		Name:  api.ArtifactSpec_DEMETERS_NECKLACE,
+		Level: api.ArtifactSpec_GREATER,
+	},
+	{
+		Name:  api.ArtifactSpec_TUNGSTEN_ANKH,
+		Level: api.ArtifactSpec_GREATER,
+	},
 }
 
 // map key is mission.Id
@@ -227,15 +239,32 @@ func newArtifact(p *artifactParams) (*artifact, error) {
 	if err != nil {
 		return nil, err
 	}
+	notDroppable := false
+	for _, aa := range suspectedNotDroppableArtifacts {
+		if a.Name == aa.Name && a.Level == aa.Level {
+			notDroppable = artifactNotDroppableInPractice(a)
+		}
+	}
 	return &artifact{
-		Tier:      tier,
-		SortKey:   fmt.Sprintf("%3d-T%d-R%d-%s", tier.Family.SortKey, tier.TierNumber, a.Rarity, tier.Name),
-		AfxRarity: a.Rarity,
-		Rarity:    a.Rarity.Display(),
-		Quality:   p.BaseQuality,
-		IconPath:  "egginc/" + tier.IconFilename,
-		Params:    p,
+		Tier:                   tier,
+		SortKey:                fmt.Sprintf("%3d-T%d-R%d-%s", tier.Family.SortKey, tier.TierNumber, a.Rarity, tier.Name),
+		AfxRarity:              a.Rarity,
+		Rarity:                 a.Rarity.Display(),
+		Quality:                p.BaseQuality,
+		IconPath:               "egginc/" + tier.IconFilename,
+		Params:                 p,
+		NotDroppableInPractice: notDroppable,
 	}, nil
+}
+
+func artifactNotDroppableInPractice(a *api.ArtifactSpec) bool {
+	recordedTotal := 0
+	for _, shipStore := range loot.Data {
+		for _, missionStore := range shipStore {
+			recordedTotal += missionStore.ItemTotal(a.Name, a.Level)
+		}
+	}
+	return recordedTotal == 0
 }
 
 func main() {

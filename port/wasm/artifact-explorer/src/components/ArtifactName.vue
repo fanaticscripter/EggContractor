@@ -25,9 +25,7 @@
             class="ml-1 text-sm"
             :class="[
               rarityFgClass(artifact.afxRarity),
-              ...(!noAvailabilityMarker && artifact.available_from_missions === false
-                ? ['text-red-900', 'dagger']
-                : []),
+              noAvailabilityMarker ? null : availabilityClass,
             ]"
           >
             <span>{{ artifact.name }}</span>
@@ -56,6 +54,16 @@ export default {
     noAvailabilityMarker: Boolean,
   },
 
+  computed: {
+    availabilityClass() {
+      return !this.artifact.available_from_missions
+        ? "text-red-900 dagger"
+        : this.artifact.notDroppableInPractice
+        ? "text-red-900 Dagger"
+        : "";
+    },
+  },
+
   methods: {
     iconURL,
 
@@ -78,5 +86,9 @@ export default {
 <style scoped>
 .dagger:after {
   content: "\2020";
+}
+
+.Dagger:after {
+  content: "\2021";
 }
 </style>
