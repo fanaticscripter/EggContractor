@@ -2,12 +2,11 @@
   <div class="max-w-7xl mx-auto px-4 mb-3 text-sm space-y-1">
     <div v-if="showIntroduction">
       <p>
-        The loot simulator simulates loot drops for a set of missions of your
-        choice (collectively called a trial) a large number of times, checking
-        whether the dropped items are enough to satisfy a set of items of your
-        choice (crafting and demotions allowed) for each trial, in order to
-        estimate the probability of gathering these items after running the
-        specified set of missions.
+        The loot simulator simulates loot drops for a set of missions of your choice (collectively
+        called a trial) a large number of times, checking whether the dropped items are enough to
+        satisfy a set of items of your choice (crafting and demotions allowed) for each trial, in
+        order to estimate the probability of gathering these items after running the specified set
+        of missions.
       </p>
       <p>
         Drop rates are based on data submitted to
