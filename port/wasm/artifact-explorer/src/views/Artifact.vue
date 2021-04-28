@@ -164,17 +164,23 @@
               <span
                 class="flex flex-row items-center text-sm"
                 :class="mission.notEnoughData ? 'text-gray-500' : null"
-                >({{ mission.itemsPerMission.toPrecision(mission.precision)
+                >({{ formatToPrecision(mission.itemsPerMission, mission.precision)
                 }}<sup v-if="mission.notEnoughData" class="-top-0.5">?</sup>/<img
                   class="h-4 w-4"
                   :src="iconURL(mission.shipIconPath, 32)"
-                />, {{ mission.itemsPerDay.toPrecision(mission.precision)
+                />, {{ formatToPrecision(mission.itemsPerDay, mission.precision)
                 }}<sup v-if="mission.notEnoughData" class="-top-0.5">?</sup>/d)</span
               >
 
               <template #content>
                 <p>
                   Received {{ mission.itemCount.total }} from {{ mission.missionCount }} missions.
+                </p>
+                <p v-if="mission.itemsPerMission > 0">
+                  1 item per
+                  {{ formatToPrecision(1 / mission.itemsPerMission, mission.precision) }} missions,
+                  or 1 item per
+                  {{ formatToPrecision(1 / mission.itemsPerDay, mission.precision) }} days.
                 </p>
                 <p v-if="mission.notEnoughData">Not enough data, rate likely far from accurate.</p>
                 <ul v-if="mission.itemCount.total > 0" :set="(total = mission.itemCount.total)">
@@ -186,16 +192,14 @@
                       <span :class="rarityFgClassOnDarkBg(rarity.afx_rarity)"
                         >{{ rarity.rarity }}:</span
                       >
-                      {{ count }}/{{ total }},
-                      {{ formatPercentage(count, total) }}
-                      (theoretical percentage
-                      {{
-                        formatPercentage(
-                          artifact.odds.rarities[rarity.afx_rarity],
-                          artifact.odds.total,
-                          3
-                        )
-                      }})
+                      {{ count }}/{{ total }}, {{ formatPercentage(count, total)
+                      }}<template v-if="count > 0"
+                        >, 1 per
+                        <span :class="rarityFgClassOnDarkBg(rarity.afx_rarity)">
+                          {{ formattedNumMissionsPerItem(count, mission.missionCount) }}
+                        </span>
+                        missions</template
+                      >
                     </li>
                   </template>
                 </ul>
@@ -517,6 +521,27 @@ export default {
         );
       }
       return `${percentage.toPrecision(precision)}%`;
+    },
+
+    formatToPrecision(x, precision) {
+      const s = x.toPrecision(precision);
+      // If the formatted string is a decimal without exponent, or one with a
+      // negative exponent, return as is.
+      if (s.match(/^\d+\.\d+$/) || s.includes("e-")) {
+        return s;
+      }
+      // If the formatted string is an integer, or has a positive exponent,
+      // convert it to non-scientific notation, and add a ~ in front to mark it
+      // as an approximate.
+      return "~" + parseFloat(s).toFixed();
+    },
+
+    formattedNumMissionsPerItem(count, missionCount) {
+      if (count === 0) {
+        return "\u221e";
+      }
+      const precision = Math.min(count.toString().length, 3);
+      return this.formatToPrecision(missionCount / count, precision);
     },
   },
 };
