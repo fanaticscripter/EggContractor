@@ -12,3 +12,7 @@ body {
   min-height: stretch;
   @apply flex flex-col;
 }
+
+.tippy-content {
+  @apply text-xs px-2 py-1 !important;
+}
