@@ -1,0 +1,30 @@
+{
+  "name": "enlightenment",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "dayjs": "^1.10.4",
+    "vue": "^3.0.5",
+    "vue-tippy": "^6.0.0-alpha.28"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.3.2",
+    "@tailwindcss/jit": "^0.1.18",
+    "@types/lunr": "^2.3.3",
+    "@types/uuid": "^8.3.0",
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vue/compiler-sfc": "^3.0.5",
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.10",
+    "protobufjs": "^6.10.2",
+    "tailwindcss": "^2.1.1",
+    "typescript": "^4.1.3",
+    "vite": "^2.1.5",
+    "vue-tsc": "^0.0.24"
+  }
+}
