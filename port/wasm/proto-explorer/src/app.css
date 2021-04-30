@@ -3,7 +3,14 @@
 @import "tailwindcss/utilities";
 
 html {
-  @apply h-screen h-stretch;
+  height: 100vh;
+  height: stretch;
+}
+
+body {
+  min-height: 100vh;
+  min-height: stretch;
+  @apply flex flex-col;
 }
 
 .tippy-content {
