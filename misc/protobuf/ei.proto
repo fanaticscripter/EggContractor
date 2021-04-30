@@ -459,6 +459,15 @@ message ContractCoopStatusRequest {
     optional uint32 client_version = 4;
 }
 
+message FarmProductionParams {
+    optional double farm_population = 1;
+    optional double farm_capacity = 2;
+    optional double elr = 3;
+    optional double ihr = 4;
+    optional double sr = 5;
+    optional double delivered = 6;
+}
+
 message ContractCoopStatusResponse {
     optional string contract_identifier = 1;
     optional double total_amount = 2;
@@ -471,13 +480,17 @@ message ContractCoopStatusResponse {
         optional double contribution_amount = 3;
         optional double contribution_rate = 6;
         optional double soul_power = 11;
+        optional FarmProductionParams production_params = 15;
         optional int32 rank_change = 8;
         optional bool active = 4;
+        optional bool leech = 16;
         optional bool time_cheat_detected = 7;
         optional aux.Platform platform = 5;
         optional string push_id = 9;
         optional uint32 ban_votes = 10;
+        optional bool autojoined = 17;
         optional uint32 boost_tokens = 12;
+        optional uint32 boost_tokens_spent = 14;
         repeated CoopBuffState buff_history = 13;
     }
 
@@ -496,6 +509,14 @@ message ContractCoopStatusResponse {
     }
 
     optional double local_timestamp = 12;
+
+    enum MemberStatus {
+        VALID = 0;
+        KICKED_INACTIVE = 1;
+        KICKED_PRIVATE = 2;
+        KICKED_CHEATS = 3;
+        KICKED_LEECH = 4;
+    }
 }
 
 message LocalContract {
@@ -535,6 +556,7 @@ message QueryCoopRequest {
 message QueryCoopResponse {
     optional bool exists = 1;
     optional bool full = 2;
+    optional bool expired = 5;
     optional bool different_league = 4;
     optional bool banned = 3;
 }
@@ -547,6 +569,7 @@ message CreateCoopRequest {
     optional string user_id = 4;
     optional string user_name = 5;
     optional double soul_power = 8;
+    optional double eop = 11;
     optional uint32 league = 9;
     optional aux.Platform platform = 6;
     optional uint32 client_version = 7;
@@ -564,6 +587,7 @@ message JoinCoopRequest {
     optional string user_id = 3;
     optional string user_name = 4;
     optional double soul_power = 8;
+    optional double eop = 12;
     optional uint32 league = 9;
     optional aux.Platform platform = 5;
     optional double seconds_remaining = 11;
@@ -576,6 +600,8 @@ message JoinCoopResponse {
     optional bool banned = 4;
     optional string coop_identifier = 5;
     optional double seconds_remaining = 3;
+    optional double match_percent = 6;
+    optional uint32 num_members = 7;
 }
 
 message AutoJoinCoopRequest {
@@ -584,6 +610,7 @@ message AutoJoinCoopRequest {
     optional string user_id = 2;
     optional string user_name = 3;
     optional double soul_power = 4;
+    optional double eop = 10;
     optional uint32 league = 8;
     optional double seconds_remaining = 5;
     optional aux.Platform platform = 6;
@@ -629,6 +656,16 @@ message KickPlayerCoopRequest {
     optional string coop_identifier = 2;
     optional string player_identifier = 3;
     optional string requesting_user_id = 4;
+
+    optional Reason reason = 9;
+    enum Reason {
+        INVALID = 0;
+        CHEATER = 1;
+        IDLE = 2;
+        LEECH = 3;
+        PRIVATE = 4;
+    }
+
     optional uint32 client_version = 7;
 }
 
@@ -642,13 +679,18 @@ message ContractCoopStatusUpdateRequest {
     optional double rate = 5;
     optional uint32 time_cheats_detected = 6;
     optional double soul_power = 7;
+    optional uint32 eop = 15;
     optional uint32 boost_tokens = 9;
+    optional uint32 boost_tokens_spent = 13;
+    optional FarmProductionParams production_params = 14;
     optional double egg_laying_rate_buff = 10 [default = 1];
     optional double earnings_buff = 11 [default = 1];
 }
 
 message ContractCoopStatusUpdateResponse {
     optional bool finalized = 1;
+    optional bool exists = 2;
+    optional ContractCoopStatusResponse.MemberStatus status = 3;
 }
 
 message CoopBuffState {
@@ -727,6 +769,11 @@ message LiveConfig {
         optional double package_interval_contract = 6;
         optional double package_interval_piggy_full = 7;
         optional double package_interval_piggy_extra_full = 8;
+    }
+
+    optional MiscConfig misc_config = 4;
+    message MiscConfig {
+        optional bool ask_to_track = 1;
     }
 }
 
@@ -1031,6 +1078,14 @@ message CompleteMissionResponse {
     optional string ei_user_id = 5;
 }
 
+message CollectContractArtifactRewardsRequest {
+    optional BasicRequestInfo rinfo = 1;
+    optional string contract_identifier = 2;
+    optional uint32 league = 5;
+    optional uint32 goal_index = 3;
+    optional MissionInfo.Spaceship best_ship = 4;
+}
+
 message CraftArtifactRequest {
     optional BasicRequestInfo rinfo = 5;
     optional string ei_user_id = 1;
@@ -1210,5 +1265,7 @@ enum RewardType {
     PIGGY_LEVEL_BUMP = 8;
     BOOST = 9;
     BOOST_TOKEN = 10;
+    ARTIFACT = 11;
+    ARTIFACT_CASE = 12;
     UNKNOWN_REWARD = 100;
 }
