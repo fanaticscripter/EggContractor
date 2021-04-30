@@ -218,7 +218,7 @@ export default {
         this.placeholderAspectRatio = target.offsetHeight / target.offsetWidth;
       }
       try {
-        const offsetY = target.getBoundingClientRect().y;
+        const { x: offsetX, y: offsetY, width, height } = target.getBoundingClientRect();
         const canvas = await html2canvas(target, {
           allowTaint: false,
           useCORS: true,
@@ -238,9 +238,10 @@ export default {
             // Using html2canvas has always been shots in the dark like this.
             const clone = doc.getElementById("builds");
             clone.style.position = "fixed";
-            clone.style.left = 0;
-            clone.style.right = 0;
+            clone.style.left = `${offsetX}px`;
             clone.style.top = `${offsetY}px`;
+            clone.style.width = `${width}px`;
+            clone.style.height = `${height}px`;
           },
         });
 
