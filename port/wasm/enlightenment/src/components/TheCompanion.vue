@@ -8,7 +8,7 @@
       </span>
     </p>
     <p
-      class="inline-flex items-center space-x-1"
+      class="flex items-center space-x-1"
       v-tippy="{
         content: `
           <p>The game, while active, saves to Egg, Inc.&rsquo;s server every couple of minutes if network condition allows.
