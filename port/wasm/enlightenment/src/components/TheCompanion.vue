@@ -35,7 +35,7 @@
         Current population:
         <span class="text-green-500">{{ formatWithThousandSeparators(currentPopulation) }}</span>
       </p>
-      <p class="text-sm">
+      <p v-if="!completed" class="text-sm">
         <template v-if="totalHabSpaceSufficient">Enlightenment Diamond Trophy forecast: </template>
         <template v-else>
           Enlightenment Diamond Trophy forecast, assuming sufficient hab space can be unlocked in
