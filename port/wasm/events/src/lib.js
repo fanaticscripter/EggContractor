@@ -10,6 +10,11 @@ dayjs.extend(utc);
 //
 // [
 //   {
+//     "versionDisplay": "1.20.8",
+//     "releaseNotes": "- New Contracts UI and features",
+//     "releaseDate": "2021-04-30"
+//   },
+//   {
 //     "versionDisplay": "1.20.7",
 //     "releaseNotes": "- Small improvements and bug fixes",
 //     "releaseDate": "2021-03-15"
@@ -304,6 +309,12 @@ const eventsAndAppUpdates = [
     version: "1.20.7",
     startTimestamp: utcDateToTimestamp("2021-03-15"),
     releaseNotes: "- Small improvements and bug fixes",
+  },
+  {
+    type: "app-update",
+    version: "1.20.8",
+    startTimestamp: utcDateToTimestamp("2021-04-30"),
+    releaseNotes: "- New Contracts UI and features",
   },
 ].sort((e1, e2) => e1.startTimestamp - e2.startTimestamp);
 
