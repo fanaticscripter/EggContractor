@@ -32,8 +32,23 @@
     </p>
     <template v-else>
       <p class="text-sm">
+        Last save population:
+        <span class="text-green-500 tabular-nums">
+          {{ formatWithThousandSeparators(lastRefreshedPopulation) }}
+        </span>
+      </p>
+      <p class="text-sm">
         Current population:
-        <span class="text-green-500">{{ formatWithThousandSeparators(currentPopulation) }}</span>
+        <span class="text-green-500 tabular-nums mr-0.5">
+          {{ formatWithThousandSeparators(currentPopulation) }}
+        </span>
+        <base-info
+          class="inline relative -top-px"
+          v-tippy="{
+            content:
+              'The current population is calculated based on the population and offline IHR from the last save. Assuming your IHR did not change since the last save, this number should be slightly ahead of your actual population at the moment, depending on how long you remained active since the last save.',
+          }"
+        />
       </p>
       <p v-if="!completed" class="text-sm">
         <template v-if="totalHabSpaceSufficient">Enlightenment Diamond Trophy forecast: </template>
@@ -118,7 +133,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onBeforeUnmount, ref } from "vue";
+import { computed, defineComponent, onBeforeUnmount, ref } from "vue";
 import dayjs, { Dayjs } from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -182,12 +197,16 @@ export default defineComponent({
     const eggIconURL = iconURL(eggIconPath(egg), 128);
     const enlightenmentEgg = ei.Egg.ENLIGHTENMENT;
     const enlightenmentEggIconURL = iconURL(eggIconPath(enlightenmentEgg), 128);
-    const lastRefreshed = dayjs(Math.min(farm.lastStepTime! * 1000, Date.now()));
+    const lastRefreshedTimestamp = farm.lastStepTime! * 1000;
+    const lastRefreshed = dayjs(Math.min(lastRefreshedTimestamp, Date.now()));
+    const currentTimestamp = ref(Date.now());
     const lastRefreshedRelative = ref(lastRefreshed.fromNow());
-    refreshIntervalId = setInterval(() => {
-      lastRefreshedRelative.value = lastRefreshed.fromNow();
-    }, 30000);
     const artifacts = homeFarmArtifacts(backup);
+
+    refreshIntervalId = setInterval(() => {
+      currentTimestamp.value = Date.now();
+      lastRefreshedRelative.value = lastRefreshed.fromNow();
+    }, 200);
 
     const habs = farmHabs(farm);
     const habSpaceResearches = farmHabSpaceResearches(farm);
@@ -203,14 +222,20 @@ export default defineComponent({
       offlineRate: offlineIHR,
     } = farmInternalHatcheryRates(internalHatcheryResearches, artifacts);
 
-    const currentPopulation = farm.numChickens! as number;
+    const lastRefreshedPopulation = farm.numChickens! as number;
     const targetPopulation = 1e10;
-    const completed = currentPopulation >= targetPopulation;
+    const completed = lastRefreshedPopulation >= targetPopulation;
     let completionForecast: Dayjs | undefined;
     if (!completed && offlineIHR > 0) {
-      const timeToCompleteSeconds = ((targetPopulation - currentPopulation) / offlineIHR) * 60;
-      completionForecast = dayjs((farm.lastStepTime! + timeToCompleteSeconds) * 1000);
+      const timeToCompleteSeconds =
+        ((targetPopulation - lastRefreshedPopulation) / offlineIHR) * 60;
+      completionForecast = dayjs(lastRefreshedTimestamp + timeToCompleteSeconds * 1000);
     }
+    const currentPopulation = computed(
+      () =>
+        lastRefreshedPopulation +
+        (offlineIHR / 60_000) * (currentTimestamp.value - lastRefreshedTimestamp)
+    );
 
     return {
       nickname,
@@ -231,6 +256,7 @@ export default defineComponent({
       onlineIHR,
       onlineIHRPerHab,
       offlineIHR,
+      lastRefreshedPopulation,
       currentPopulation,
       completed,
       completionForecast,
