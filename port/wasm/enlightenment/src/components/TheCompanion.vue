@@ -66,7 +66,7 @@
 
       <section class="my-2 text-sm">
         <h2 class="font-medium">Habs</h2>
-        <div class="flex gap-2 my-2">
+        <div class="flex my-2 space-x-2">
           <img
             v-for="(hab, index) in habs"
             :key="index"
