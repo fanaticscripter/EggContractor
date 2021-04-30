@@ -172,6 +172,14 @@ export default defineComponent({
   },
   // This async component does not respond to playerId changes.
   async setup({ playerId }) {
+    // Validate and sanitize player ID.
+    if (!playerId.match(/^EI\d+$/i)) {
+      throw new Error(
+        `ID ${playerId} is not in the form EI1234567890123456; please consult "Where do I find my ID?"`
+      );
+    }
+    playerId = playerId.toUpperCase();
+
     // Interval id used for refreshing lastRefreshedRelative.
     let refreshIntervalId: number | undefined;
     onBeforeUnmount(() => {
