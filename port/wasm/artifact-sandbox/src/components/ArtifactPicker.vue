@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-sm w-full mx-auto my-2">
-    <label :for="domId" class="block text-sm font-medium">Artifact #{{ artifactIndex }}</label>
+    <label class="block text-sm font-medium">Artifact #{{ artifactIndex }}</label>
     <artifact-picker-item-select v-model="selectedArtifact.id" type="artifact" class="mt-1" />
     <template v-for="i in 3" :key="i">
       <div class="flex items-center space-x-1 mt-1" :class="i > numSlots ? 'opacity-50' : null">
@@ -33,10 +33,6 @@ export default {
   props: {
     artifactIndex: {
       type: Number,
-      required: true,
-    },
-    domId: {
-      type: String,
       required: true,
     },
     artifact: {

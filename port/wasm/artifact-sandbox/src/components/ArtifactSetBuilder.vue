@@ -1,29 +1,9 @@
 <template>
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-    <artifact-picker
-      :key="key"
-      :artifactIndex="1"
-      :domId="'artifact-1'"
-      v-model:artifact="buildProps[0]"
-    />
-    <artifact-picker
-      :key="key"
-      :artifactIndex="2"
-      :domId="'artifact-2'"
-      v-model:artifact="buildProps[1]"
-    />
-    <artifact-picker
-      :key="key"
-      :artifactIndex="3"
-      :domId="'artifact-3'"
-      v-model:artifact="buildProps[2]"
-    />
-    <artifact-picker
-      :key="key"
-      :artifactIndex="4"
-      :domId="'artifact-4'"
-      v-model:artifact="buildProps[3]"
-    />
+    <artifact-picker :key="key" :artifactIndex="1" v-model:artifact="buildProps[0]" />
+    <artifact-picker :key="key" :artifactIndex="2" v-model:artifact="buildProps[1]" />
+    <artifact-picker :key="key" :artifactIndex="3" v-model:artifact="buildProps[2]" />
+    <artifact-picker :key="key" :artifactIndex="4" v-model:artifact="buildProps[3]" />
   </div>
 
   <div class="my-2 text-center">
