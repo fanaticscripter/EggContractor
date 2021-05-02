@@ -75,6 +75,29 @@
               :noteList="notes"
               :number="footnoteNumber++"
               :showFootnote="showFootnotes"
+              >Role</effect-with-note
+            >
+          </td>
+          <td
+            v-if="buildValidities[0]"
+            class="px-4 py-1.5 text-base text-right whitespace-nowrap"
+            :set="(role = earningBonusToFarmerRole(earningBonus(...buildConfig(0))))"
+          >
+            <span :style="{ color: role.color }">
+              {{ role.name }}
+            </span>
+          </td>
+          <td v-else class="px-4 py-1.5 text-base text-right text-red-500 whitespace-nowrap">
+            &mdash;
+          </td>
+        </tr>
+
+        <tr>
+          <td class="px-4 py-1.5 text-sm text-left">
+            <effect-with-note
+              :noteList="notes"
+              :number="footnoteNumber++"
+              :showFootnote="showFootnotes"
               >Earnings</effect-with-note
             >
           </td>
@@ -381,6 +404,7 @@ import {
   shippingCapacityMultiplier,
   maxHourlyShippingCapacity,
 } from "@/lib/effects/effects";
+import { earningBonusToFarmerRole } from "@/lib/role";
 import { formatEIValue, formatEIPercentage, formatFloat } from "@/lib/utils/utils";
 
 export default {
@@ -400,6 +424,10 @@ export default {
     return {
       notes: [
         ["EB", "Earning bonus, as shown on the prestige screen."],
+        [
+          "Role",
+          "This is the role (rank) corresponding to the earning bonus, as used in the Egg, Inc. Discord.",
+        ],
         [
           "Earnings",
           "Aggregate effect on bock earning rate from earning bonus increase, egg value increase, and egg laying rate increase (not considering shipping-limited scenarios). Running chicken bonus is not taken into account here; see “Earnings w/ max RCB” instead. Indirect bonus from boosted chicken population growth is not included.",
@@ -440,6 +468,7 @@ export default {
   methods: {
     earningBonus,
     earningBonusMultiplier,
+    earningBonusToFarmerRole,
     earningsMultiplier,
     earningsWithMaxRunningChickenBonusMultiplier,
     maxRunningChickenBonus,
