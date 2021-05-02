@@ -1,3 +1,4 @@
+const colors = require("tailwindcss/colors");
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
@@ -25,6 +26,7 @@ module.exports = {
         sans: ["Always Together", ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        gray: colors.trueGray,
         dark: {
           20: "hsl(0, 0%, 20%)",
           21: "hsl(0, 0%, 21%)",
