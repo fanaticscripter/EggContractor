@@ -26,6 +26,8 @@
     "echarts": "^5.0.2",
     "google-protobuf": "^3.15.0-rc.1",
     "html2canvas": "^1.0.0-rc.7",
+    "lunr": "^2.3.9",
+    "scroll-into-view-if-needed": "^2.2.28",
     "tailwindcss": "^2.0.3",
     "tippy.js": "^6.2.7",
     "vue": "^3.0.4",
