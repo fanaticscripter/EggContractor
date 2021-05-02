@@ -27,6 +27,17 @@ body {
   font-variant-ligatures: none;
 }
 
+/* Disable spin button for number input */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .tippy-content {
   @apply text-xs px-2 py-1 !important;
 }
@@ -66,8 +77,4 @@ body {
   font-size: 10px;
   line-height: 24px;
   text-indent: 0;
-}
-
-body.comic .other-tools-ribbon {
-  @apply font-sans tracking-normal !important;
 }

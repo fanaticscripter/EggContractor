@@ -2,10 +2,10 @@
   <input
     :id="id"
     :name="id"
-    type="text"
-    pattern="\d+"
-    :value="modelValue"
-    @input="emitValue"
+    type="number"
+    :min="min"
+    :max="max"
+    v-model.number="value"
     class="bg-dark-20 block w-full pl-10 pt-2.5 pb-2 sm:text-sm rounded-md"
     :class="
       invalid
@@ -26,28 +26,37 @@ export default {
 
   data() {
     return {
-      invalid: false,
+      value: this.modelValue,
     };
   },
 
   emits: ["update:modelValue"],
 
-  methods: {
-    emitValue(e) {
-      const value = e.target.value.trim();
-      if (value.match(/^\d+$/) !== null) {
-        const intValue = parseInt(value);
-        if (this.max !== undefined && intValue > this.max) {
-          this.invalid = true;
-        } else if (this.min !== undefined && intValue < this.min) {
-          this.invalid = true;
-        } else {
-          this.invalid = false;
-          this.$emit("update:modelValue", intValue);
-        }
-      } else {
-        this.invalid = true;
+  computed: {
+    invalid() {
+      if (!Number.isInteger(this.value)) {
+        return true;
       }
+      if (this.max !== undefined && this.value > this.max) {
+        return true;
+      }
+      if (this.min !== undefined && this.value < this.min) {
+        return true;
+      }
+      return false;
+    },
+  },
+
+  watch: {
+    modelValue() {
+      this.value = this.modelValue;
+    },
+
+    value() {
+      if (this.invalid) {
+        return;
+      }
+      this.$emit("update:modelValue", this.value);
     },
   },
 };

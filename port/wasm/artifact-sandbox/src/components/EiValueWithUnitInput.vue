@@ -4,11 +4,10 @@
     :name="id"
     type="text"
     :pattern="valueWithUnitRegExpPattern"
-    :value="raw"
-    @input="emitValue"
+    v-model="input"
     class="bg-dark-20 block w-full pl-10 pt-2.5 pb-2 sm:text-sm rounded-md"
     :class="
-      invalid
+      !parsed
         ? 'border-red-300 text-red-500 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'
         : 'focus:outline-none focus:ring-blue-500 focus:border-blue-500'
     "
@@ -27,6 +26,7 @@ export default {
 
   data() {
     return {
+      input: this.raw,
       invalid: false,
     };
   },
@@ -34,6 +34,22 @@ export default {
   emits: ["update:raw", "update:value"],
 
   valueWithUnitRegExpPattern,
+
+  computed: {
+    parsed() {
+      return parseValueWithUnit(this.input);
+    },
+  },
+
+  watch: {
+    input() {
+      if (this.parsed === null) {
+        return;
+      }
+      this.$emit("update:raw", this.input);
+      this.$emit("update:value", this.parsed);
+    },
+  },
 
   methods: {
     emitValue(e) {
