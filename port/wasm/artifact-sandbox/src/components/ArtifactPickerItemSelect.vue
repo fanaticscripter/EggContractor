@@ -243,6 +243,10 @@ export default defineComponent({
       switch (event.key) {
         case "Enter":
           event.preventDefault();
+          // Do nothing if there are no matching entries.
+          if (filteredItems.value.length === 0) {
+            return;
+          }
           // Select the active entry, or the first entry.
           const item = active.value ? active.value : filteredItems.value[0];
           if (item !== null) {
@@ -257,6 +261,10 @@ export default defineComponent({
         case "ArrowDown":
         case "ArrowUp":
           event.preventDefault();
+          // Do nothing if there are no matching entries.
+          if (filteredItems.value.length === 0) {
+            return;
+          }
           const entries = filteredItems.value;
           let currentIndex = active.value ? dropdownListEntryIndex(active.value.id) : -1;
           if (currentIndex === -1) {
