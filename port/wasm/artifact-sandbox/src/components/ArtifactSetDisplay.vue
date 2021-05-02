@@ -33,7 +33,7 @@
   <template v-else>
     <div v-if="!build.isEmpty()" class="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 mt-4">
       <template v-for="(artifact, index) in build.artifacts" :key="index">
-        <div v-if="artifact.isEmpty()" class="p-2 bg-dark-23 rounded-lg shadow-inner"></div>
+        <div v-if="artifact.isEmpty()" class="bg-dark-23 rounded-lg shadow-inner"></div>
         <div v-else class="text-sm text-center p-2 bg-dark-23 rounded-lg shadow-inner">
           <div class="uppercase leading-relaxed space-x-1">
             <span>{{ artifact.name }}</span>
