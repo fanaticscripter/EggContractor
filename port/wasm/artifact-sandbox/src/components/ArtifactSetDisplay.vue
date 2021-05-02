@@ -13,11 +13,15 @@
     <span class="text-sm">{{ config.isEnlightenment ? "Enlightenment" : "Regular" }} farm</span>
   </div>
 
-  <div class="flex items-center justify-between space-x-2">
-    <div class="Artifact"><artifact-display :artifact="build.artifacts[0]" :config="config" /></div>
-    <div class="Artifact"><artifact-display :artifact="build.artifacts[1]" :config="config" /></div>
-    <div class="Artifact"><artifact-display :artifact="build.artifacts[2]" :config="config" /></div>
-    <div class="Artifact"><artifact-display :artifact="build.artifacts[3]" :config="config" /></div>
+  <div class="grid grid-cols-4 gap-2 sm:gap-4">
+    <div v-for="index of [0, 1, 2, 3]" :key="index">
+      <artifact-display
+        :artifact="build.artifacts[index]"
+        :config="config"
+        class="mx-auto"
+        :style="{ maxWidth: '8rem' }"
+      />
+    </div>
   </div>
 
   <template v-if="build.hasDuplicates()">
@@ -27,10 +31,11 @@
   </template>
 
   <template v-else>
-    <div class="grid grid-cols-2 gap-4 mt-4">
+    <div v-if="!build.isEmpty()" class="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 mt-4">
       <template v-for="(artifact, index) in build.artifacts" :key="index">
-        <div v-if="!artifact.isEmpty()" class="text-sm">
-          <div class="uppercase leading-relaxed whitespace-nowrap truncate space-x-1">
+        <div v-if="artifact.isEmpty()" class="p-2 bg-dark-23 rounded-lg shadow-inner"></div>
+        <div v-else class="text-sm text-center p-2 bg-dark-23 rounded-lg shadow-inner">
+          <div class="uppercase leading-relaxed space-x-1">
             <span>{{ artifact.name }}</span>
             <span v-if="artifact.afx_rarity > 0" :class="artifact.rarity">
               {{ artifact.rarity }}
@@ -44,7 +49,7 @@
           <div
             v-for="(stone, index) in artifact.activeStones"
             :key="index"
-            class="flex flex-wrap items-center"
+            class="flex flex-wrap items-center justify-center"
           >
             <span class="mr-1">
               <span class="EffectSize mr-1">{{ stone.effect_size }}</span>
@@ -84,18 +89,18 @@
 
             <template v-else>
               <!-- Regular farm -->
-              <div v-if="!artifact.isEffectiveOnRegular()" class="flex items-start">
+              <div v-if="!artifact.isEffectiveOnRegular()" class="">
                 <img
-                  class="inline h-3.5 w-3.5"
+                  class="inline h-3.5 w-4 pr-0.5 relative -top-px"
                   :src="iconURL('egginc-extras/icon_warning.png', 64)"
                 />
                 <span class="Warning text-xs uppercase"
                   >Not compatible with non-enlightenment egg</span
                 >
               </div>
-              <div v-if="artifact.hasClarityStones()" class="flex items-start">
+              <div v-if="artifact.hasClarityStones()" class="">
                 <img
-                  class="inline h-3.5 w-3.5"
+                  class="inline h-3.5 w-4 pr-0.5 relative -top-px"
                   :src="iconURL('egginc-extras/icon_warning.png', 64)"
                 />
                 <span class="Warning text-xs uppercase"
@@ -107,7 +112,7 @@
         </div>
       </template>
     </div>
-    <div class="flex items-center justify-center my-2">
+    <div class="flex items-center justify-center mt-3 mb-2">
       <span class="text-sm">Total stone-setting costs:</span>
       <img class="inline h-3 w-3" :src="iconURL('egginc-extras/icon_golden_egg.png', 64)" />
       <span class="text-xs text-dark-60">{{
@@ -149,10 +154,6 @@ export default {
 </script>
 
 <style scoped>
-.Artifact {
-  max-width: 8rem;
-}
-
 .EffectSize {
   color: #1e9c11;
 }

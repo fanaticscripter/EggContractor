@@ -118,6 +118,18 @@ class Build {
   /**
    * @returns {!Boolean}
    */
+  isEmpty() {
+    for (const artifact of this.artifacts) {
+      if (!artifact.isEmpty()) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * @returns {!Boolean}
+   */
   hasDuplicates() {
     const families = new Set();
     for (const artifact of this.artifacts) {
