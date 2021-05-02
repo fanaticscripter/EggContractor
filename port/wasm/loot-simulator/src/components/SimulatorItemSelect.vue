@@ -217,6 +217,7 @@ export default defineComponent({
           scrollMode: "if-needed",
           block,
           inline: "nearest",
+          boundary: dropdownList.value,
         });
       }
     };
