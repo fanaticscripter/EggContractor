@@ -6,7 +6,7 @@
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <img :src="iconURL('egginc/egg_of_prophecy.png', 64)" class="h-5 w-5" />
       </div>
-      <integer-input :id="'prophecy_eggs'" :max="9999" v-model="conf.prophecyEggs" />
+      <integer-input id="prophecy_eggs" :min="0" :max="9999" v-model="conf.prophecyEggs" />
     </div>
 
     <div class="mt-1 relative rounded-md shadow-sm">
@@ -14,7 +14,7 @@
         <img :src="iconURL('egginc/egg_soul.png', 64)" class="h-5 w-5" />
       </div>
       <ei-value-with-unit-input
-        :id="soul_eggs"
+        id="soul_eggs"
         v-model:raw="conf.soulEggsInput"
         v-model:value="conf.soulEggs"
       />
@@ -78,6 +78,39 @@
         </div>
       </div>
     </div>
+
+    <div class="mt-4 flex justify-center">
+      <div class="space-y-0.5">
+        <h4 class="text-center text-sm uppercase">Other bonuses</h4>
+        <div>
+          <label
+            for="tachyon_deflector_percentage"
+            class="block text-center"
+            v-tippy="{
+              content:
+                'This is the total tachyon deflector bonus from other players in your coop. Note that the value displayed in-game may be 1% less than the actual value due to a long standing floating-point representation bug in the game. You can always find the correct value from https://eicoop.netlify.app/.',
+            }"
+          >
+            Tachyon deflector bonus<sup class="px-0.5">?</sup>
+          </label>
+          <div class="mt-1 relative rounded-md shadow-sm">
+            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+              <img :src="iconURL('egginc/afx_tachyon_deflector_4.png', 64)" class="h-5 w-5" />
+            </div>
+            <integer-input
+              id="tachyon_deflector_percentage"
+              :min="0"
+              :modelValue="round(conf.tachyonDeflectorBonus * 100)"
+              @update:modelValue="value => (conf.tachyonDeflectorBonus = value / 100)"
+              class="pr-4"
+            />
+            <div class="absolute inset-y-px right-0 pr-2 pt-2.5 pb-2 sm:text-sm text-gray-200">
+              %
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -115,5 +148,17 @@ export default {
       deep: true,
     },
   },
+
+  methods: {
+    round(x) {
+      return Math.round(x);
+    },
+  },
 };
 </script>
+
+<style scoped>
+sup {
+  color: #a6a6a6;
+}
+</style>

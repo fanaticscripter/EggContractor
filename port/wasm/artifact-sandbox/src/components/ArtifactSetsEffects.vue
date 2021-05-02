@@ -44,6 +44,18 @@
       </div>
     </div>
 
+    <div
+      v-if="builds.config.tachyonDeflectorBonus > 0"
+      class="flex flex-wrap items-center justify-center"
+    >
+      <span class="flex whitespace-nowrap">
+        <img :src="iconURL('egginc/afx_tachyon_deflector_4.png', 64)" class="inline h-5 w-5 mr-1" />
+        <span class="text-sm">
+          Tachyon deflector +{{ formatEIPercentage(builds.config.tachyonDeflectorBonus) }}
+        </span>
+      </span>
+    </div>
+
     <!-- :set is not a Vue feature, it's a trick to get a scoped temporary
     variable so that we don't need to keep track of footnote numbers manually.
     -->
@@ -458,8 +470,14 @@ export default {
           "Max IHR",
           "Internal hatchery rate as shown on the stats page, without taking internal hatchery calm into account.",
         ],
-        ["Egg laying rate", "Per-chicken multiplier from egg laying rate bonuses."],
-        ["Max egg laying rate", "Total hourly egg laying rate with full habs."],
+        [
+          "Egg laying rate",
+          "Per-chicken multiplier from egg laying rate bonuses. Tachyon deflector bonus included.",
+        ],
+        [
+          "Max egg laying rate",
+          "Total hourly egg laying rate with full habs. Tachyon deflector bonus included.",
+        ],
         ["Max shipping capacity", "Actual egg shipping rate is capped at this value."],
       ],
     };

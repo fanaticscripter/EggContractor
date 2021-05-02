@@ -9,10 +9,13 @@ import { maxHabSpace, baseMaxHabSpace, habSpaceMultiplier } from "./hab_space";
  * @returns {!Number}
  */
 function layingRateMultiplier(build, config) {
-  return multiplicativeEffect(build, config, [
-    proto.ArtifactSpec.Name.QUANTUM_METRONOME,
-    proto.ArtifactSpec.Name.TACHYON_STONE,
-  ]);
+  return (
+    multiplicativeEffect(build, config, [
+      proto.ArtifactSpec.Name.QUANTUM_METRONOME,
+      proto.ArtifactSpec.Name.TACHYON_STONE,
+    ]) *
+    (1 + config.tachyonDeflectorBonus)
+  );
 }
 
 /**

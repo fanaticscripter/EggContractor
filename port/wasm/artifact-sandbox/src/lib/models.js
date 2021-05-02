@@ -375,6 +375,7 @@ class Config {
     this.tachyonPrismActive = false;
     this.soulBeaconActive = false;
     this.boostBeaconActive = false;
+    this.tachyonDeflectorBonus = 0;
   }
 
   /**
@@ -402,6 +403,7 @@ class Config {
     self.tachyonPrismActive = config.getTachyonPrismActive();
     self.soulBeaconActive = config.getSoulBeaconActive();
     self.boostBeaconActive = config.getBoostBeaconActive();
+    self.tachyonDeflectorBonus = config.getTachyonDeflectorBonus();
     return self;
   }
 
@@ -418,6 +420,7 @@ class Config {
     config.setTachyonPrismActive(this.tachyonPrismActive);
     config.setSoulBeaconActive(this.soulBeaconActive);
     config.setBoostBeaconActive(this.boostBeaconActive);
+    config.setTachyonDeflectorBonus(this.tachyonDeflectorBonus);
     return config;
   }
 
