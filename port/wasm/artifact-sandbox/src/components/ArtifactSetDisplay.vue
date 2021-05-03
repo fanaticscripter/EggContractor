@@ -34,8 +34,11 @@
     <div v-if="!build.isEmpty()" class="grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-4 mt-4">
       <template v-for="(artifact, index) in build.artifacts" :key="index">
         <div v-if="artifact.isEmpty()" class="bg-dark-23 rounded-lg shadow-inner"></div>
-        <div v-else class="text-sm text-center p-2 bg-dark-23 rounded-lg shadow-inner">
-          <div class="uppercase leading-relaxed space-x-1">
+        <div
+          v-else
+          class="text-sm text-center p-2 pt-2.5 bg-dark-23 rounded-lg shadow-inner leading-snug space-y-1"
+        >
+          <div class="uppercase space-x-1">
             <span>{{ artifact.name }}</span>
             <span v-if="artifact.afx_rarity > 0" :class="artifact.rarity">
               {{ artifact.rarity }}
@@ -46,26 +49,29 @@
             <span class="EffectSize">{{ artifact.effect_size }}</span> {{ artifact.effect_target }}
           </div>
 
-          <div
-            v-for="(stone, index) in artifact.activeStones"
-            :key="index"
-            class="flex flex-wrap items-center justify-center"
-          >
-            <span class="mr-1">
-              <span class="EffectSize mr-1">{{ stone.effect_size }}</span>
-              <span>{{ stone.effect_target }}</span>
-            </span>
-            <span class="inline-flex items-center text-xs text-dark-60 whitespace-nowrap"
-              >(<img
-                class="inline h-3 w-3"
-                :src="iconURL('egginc-extras/icon_golden_egg.png', 64)"
-              />{{ stoneSettingCost(artifact, stone).toLocaleString("en-US") }})</span
+          <div class="space-y-0.5">
+            <div
+              v-for="(stone, index) in artifact.activeStones"
+              :key="index"
+              class="flex flex-wrap items-center justify-center"
             >
+              <span class="mr-1">
+                <span class="EffectSize mr-1">{{ stone.effect_size }}</span>
+                <span>{{ stone.effect_target }}</span>
+              </span>
+              <span
+                class="inline-flex items-center text-xs text-dark-60 whitespace-nowrap leading-normal"
+                >(<img
+                  class="inline h-3 w-3"
+                  :src="iconURL('egginc-extras/icon_golden_egg.png', 64)"
+                />{{ stoneSettingCost(artifact, stone).toLocaleString("en-US") }})</span
+              >
+            </div>
           </div>
 
           <template v-if="config.isEnlightenment">
             <!-- Enlightenment farm -->
-            <div v-if="artifact.isEffectiveOnEnlightenment()" class="flex items-start mt-1">
+            <div v-if="artifact.isEffectiveOnEnlightenment()" class="flex items-start">
               <img
                 class="inline h-3.5 w-3.5"
                 :src="iconURL('egginc-extras/icon_lightning_green.png', 64)"
@@ -74,7 +80,7 @@
                 >{{ formatPercentage(artifact.clarityEffect) }} effective on enlightenment egg</span
               >
             </div>
-            <div v-else class="flex items-start mt-1">
+            <div v-else class="flex items-start">
               <img
                 class="inline h-3.5 w-3.5"
                 :src="iconURL('egginc-extras/icon_warning.png', 64)"
@@ -88,7 +94,7 @@
 
           <template v-else>
             <!-- Regular farm -->
-            <div v-if="!artifact.isEffectiveOnRegular()" class="mt-1">
+            <div v-if="!artifact.isEffectiveOnRegular()">
               <img
                 class="inline h-3.5 w-4 pr-0.5 relative -top-px"
                 :src="iconURL('egginc-extras/icon_warning.png', 64)"
@@ -97,7 +103,7 @@
                 >Not compatible with non-enlightenment egg</span
               >
             </div>
-            <div v-if="artifact.hasClarityStones()" class="mt-1">
+            <div v-if="artifact.hasClarityStones()">
               <img
                 class="inline h-3.5 w-4 pr-0.5 relative -top-px"
                 :src="iconURL('egginc-extras/icon_warning.png', 64)"
