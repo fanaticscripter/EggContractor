@@ -365,12 +365,17 @@ class Stone {
   }
 }
 
+const maxSoulFood = 140;
+const maxProphecyBonus = 5;
+
 class Config {
   constructor() {
     this.prophecyEggs = 0;
     this.soulEggs = 0;
     this.soulEggsInput = "";
     this.isEnlightenment = false;
+    this.soulFood = maxSoulFood;
+    this.prophecyBonus = maxProphecyBonus;
     this.birdFeedActive = false;
     this.tachyonPrismActive = false;
     this.soulBeaconActive = false;
@@ -399,6 +404,8 @@ class Config {
     self.soulEggs = config.getSoulEggs();
     self.soulEggsInput = config.getSoulEggsInput();
     self.isEnlightenment = config.getIsEnlightenment();
+    self.soulFood = maxSoulFood - config.getMissingSoulFood();
+    self.prophecyBonus = maxProphecyBonus - config.getMissingProphecyBonus();
     self.birdFeedActive = config.getBirdFeedActive();
     self.tachyonPrismActive = config.getTachyonPrismActive();
     self.soulBeaconActive = config.getSoulBeaconActive();
@@ -416,12 +423,21 @@ class Config {
     config.setSoulEggs(this.soulEggs);
     config.setSoulEggsInput(this.soulEggsInput);
     config.setIsEnlightenment(this.isEnlightenment);
+    config.setMissingSoulFood(maxSoulFood - this.soulFood);
+    config.setMissingProphecyBonus(maxProphecyBonus - this.prophecyBonus);
     config.setBirdFeedActive(this.birdFeedActive);
     config.setTachyonPrismActive(this.tachyonPrismActive);
     config.setSoulBeaconActive(this.soulBeaconActive);
     config.setBoostBeaconActive(this.boostBeaconActive);
     config.setTachyonDeflectorBonus(this.tachyonDeflectorBonus);
     return config;
+  }
+
+  /**
+   * @returns {!Boolean}
+   */
+  epicResearchMaxed() {
+    return this.soulFood === maxSoulFood && this.prophecyBonus === maxProphecyBonus;
   }
 
   /**

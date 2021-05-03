@@ -29,6 +29,9 @@ message Config {
   string soul_eggs_input = 3;  // String for of SE count, as entered.
   bool is_enlightenment = 4;
 
+  uint32 missing_soul_food = 20;
+  uint32 missing_prophecy_bonus = 21;
+
   bool bird_feed_active = 10;
   bool tachyon_prism_active = 11;
   bool soul_beacon_active = 12;

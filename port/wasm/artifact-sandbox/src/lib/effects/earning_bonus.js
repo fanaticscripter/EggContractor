@@ -48,8 +48,7 @@ function prophecyEggBonus(build, config) {
  * @returns {!Number}
  */
 function baseProphecyEggBonus(config) {
-  // Assume max prophecy bonus epic research.
-  return 0.1;
+  return 0.05 + 0.01 * config.prophecyBonus;
 }
 
 /**
@@ -68,8 +67,7 @@ function soulEggBonus(build, config) {
  * @returns {!Number}
  */
 function baseSoulEggBonus(config) {
-  // Assume max soul food epic research.
-  return 1.5;
+  return 0.1 + 0.01 * config.soulFood;
 }
 
 export { earningBonus, earningBonusMultiplier };

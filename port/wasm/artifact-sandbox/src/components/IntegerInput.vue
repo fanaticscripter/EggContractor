@@ -6,7 +6,7 @@
     :min="min"
     :max="max"
     v-model.number="value"
-    class="bg-dark-20 block w-full pl-10 pt-2.5 pb-2 sm:text-sm rounded-md"
+    class="bg-dark-20 block w-full sm:text-sm rounded-md"
     :class="
       invalid
         ? 'border-red-300 text-red-500 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500'

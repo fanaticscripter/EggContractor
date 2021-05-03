@@ -6,7 +6,13 @@
       <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         <img :src="iconURL('egginc/egg_of_prophecy.png', 64)" class="h-5 w-5" />
       </div>
-      <integer-input id="prophecy_eggs" :min="0" :max="9999" v-model="conf.prophecyEggs" />
+      <integer-input
+        id="prophecy_eggs"
+        :min="0"
+        :max="9999"
+        v-model="conf.prophecyEggs"
+        class="pl-10 pt-2.5 pb-2"
+      />
     </div>
 
     <div class="mt-1 relative rounded-md shadow-sm">
@@ -17,6 +23,7 @@
         id="soul_eggs"
         v-model:raw="conf.soulEggsInput"
         v-model:value="conf.soulEggs"
+        class="pl-10 pt-2.5 pb-2"
       />
     </div>
 
@@ -32,7 +39,53 @@
     </div>
 
     <div class="mt-4 flex justify-center">
-      <div class="space-y-0.5">
+      <div class="space-y-1">
+        <h4 class="text-center text-sm uppercase">Epic research</h4>
+        <div class="relative flex items-center justify-end">
+          <label for="soul_food" class="flex items-center text-sm whitespace-nowrap mr-2">
+            <img
+              :src="iconURL('egginc/r_icon_soul_food.png', 64)"
+              class="h-8 w-8 relative -top-px"
+            />
+            Soul food
+          </label>
+          <integer-input
+            id="soul_food"
+            :min="0"
+            :max="140"
+            v-model="conf.soulFood"
+            class="pl-2.5 pt-1 pb-0.5"
+            :style="{ width: '5rem' }"
+          />
+          <div class="absolute inset-y-0.5 right-0 pr-2.5 pt-1 pb-0.5 sm:text-sm text-gray-200">
+            / 140
+          </div>
+        </div>
+        <div class="relative flex items-center justify-end">
+          <label for="prophecy_bonus" class="flex items-center text-sm whitespace-nowrap mr-2">
+            <img
+              :src="iconURL('egginc/r_icon_prophecy_bonus.png', 64)"
+              class="h-8 w-8 relative -top-px mr-px"
+            />
+            Prophecy bonus
+          </label>
+          <integer-input
+            id="prophecy_bonus"
+            :min="0"
+            :max="5"
+            v-model="conf.prophecyBonus"
+            class="pl-2.5 pt-1 pb-0.5"
+            :style="{ width: '5rem' }"
+          />
+          <div class="absolute inset-y-0.5 right-0 pr-2.5 pt-1 pb-0.5 sm:text-sm text-gray-200">
+            / 5
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 flex justify-center">
+      <div class="space-y-1">
         <h4 class="text-center text-sm uppercase">Active boost effects</h4>
         <div class="relative flex items-start">
           <input
@@ -102,9 +155,9 @@
               :min="0"
               :modelValue="round(conf.tachyonDeflectorBonus * 100)"
               @update:modelValue="value => (conf.tachyonDeflectorBonus = value / 100)"
-              class="pr-4"
+              class="pl-10 pr-4 pt-2.5 pb-2"
             />
-            <div class="absolute inset-y-px right-0 pr-2 pt-2.5 pb-2 sm:text-sm text-gray-200">
+            <div class="absolute inset-y-0.5 right-0 pr-2 pt-2.5 pb-2 sm:text-sm text-gray-200">
               %
             </div>
           </div>

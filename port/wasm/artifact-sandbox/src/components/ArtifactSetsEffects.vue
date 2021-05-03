@@ -1,16 +1,42 @@
 <template>
-  <div class="max-w-xs mx-auto my-2 space-y-2">
+  <div class="max-w-xs mx-auto mt-3 mb-2 space-y-2">
     <div class="text-base text-center font-medium uppercase">Selected aggregate effects</div>
 
-    <div class="flex flex-wrap items-center justify-center">
-      <span class="flex whitespace-nowrap mr-2">
-        <img :src="iconURL('egginc/egg_of_prophecy.png', 64)" class="inline h-5 w-5" />
-        <span class="text-sm">{{ builds.config.prophecyEggs }}</span>
-      </span>
-      <span class="flex whitespace-nowrap">
-        <img :src="iconURL('egginc/egg_soul.png', 64)" class="inline h-5 w-5" />
-        <span class="text-sm">{{ formatEIValue(builds.config.soulEggs) }}</span>
-      </span>
+    <div>
+      <div class="flex flex-wrap items-center justify-center">
+        <span class="flex whitespace-nowrap mr-2">
+          <img :src="iconURL('egginc/egg_of_prophecy.png', 64)" class="inline h-5 w-5" />
+          <span class="text-sm Prophecy">{{ builds.config.prophecyEggs }}</span>
+        </span>
+        <span class="flex whitespace-nowrap">
+          <img :src="iconURL('egginc/egg_soul.png', 64)" class="inline h-5 w-5" />
+          <span class="text-sm Soul">{{ formatEIValue(builds.config.soulEggs) }}</span>
+        </span>
+      </div>
+
+      <div class="flex flex-col items-center justify-center">
+        <template v-if="builds.config.epicResearchMaxed()">Max epic research</template>
+        <template v-else>
+          <div>Max epic research except:</div>
+          <div v-if="builds.config.soulFood < 140" class="flex whitespace-nowrap">
+            <img :src="iconURL('egginc/r_icon_soul_food.png', 64)" class="inline h-6 w-6 -mt-0.5" />
+            <span class="text-sm">
+              Soul food
+              <span class="Soul">{{ builds.config.soulFood }} / 140</span>
+            </span>
+          </div>
+          <div v-if="builds.config.prophecyBonus < 5" class="flex whitespace-nowrap">
+            <img
+              :src="iconURL('egginc/r_icon_prophecy_bonus.png', 64)"
+              class="inline h-6 w-6 -mt-0.5 mr-0.5"
+            />
+            <span class="text-sm">
+              Prophecy bonus
+              <span class="Prophecy">{{ builds.config.prophecyBonus }} / 5</span>
+            </span>
+          </div>
+        </template>
+      </div>
     </div>
 
     <div v-if="builds.config.anyBoostActive()" class="flex flex-col items-center justify-center">
@@ -51,7 +77,8 @@
       <span class="flex whitespace-nowrap">
         <img :src="iconURL('egginc/afx_tachyon_deflector_4.png', 64)" class="inline h-5 w-5 mr-1" />
         <span class="text-sm">
-          Tachyon deflector +{{ formatEIPercentage(builds.config.tachyonDeflectorBonus) }}
+          Tachyon deflector
+          <span class="Bonus">+{{ formatEIPercentage(builds.config.tachyonDeflectorBonus) }}</span>
         </span>
       </span>
     </div>
@@ -529,6 +556,14 @@ tr:nth-child(odd) {
 
 tr:nth-child(even) {
   background-color: hsl(0, 0%, 22%);
+}
+
+.Prophecy {
+  color: #ffcc00;
+}
+
+.Soul {
+  color: #c64eef;
 }
 
 .Value {
