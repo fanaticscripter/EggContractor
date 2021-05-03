@@ -10,7 +10,7 @@ dayjs.extend(utc);
 //
 // [
 //   {
-//     "versionDisplay": "1.20.8",
+//     "versionDisplay": "1.20.9",
 //     "releaseNotes": "- New Contracts UI and features",
 //     "releaseDate": "2021-04-30"
 //   },
@@ -312,7 +312,7 @@ const eventsAndAppUpdates = [
   },
   {
     type: "app-update",
-    version: "1.20.8",
+    version: "1.20.9",
     startTimestamp: utcDateToTimestamp("2021-04-30"),
     releaseNotes: "- New Contracts UI and features",
   },
