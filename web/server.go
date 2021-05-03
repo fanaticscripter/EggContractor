@@ -260,6 +260,8 @@ func rewardIconPath(r *api.Reward) string {
 		path = "egginc-extras/icon_piggy_level_up.png"
 	case api.RewardType_BOOST:
 		path = "egginc/b_icon_" + r.Name + ".png"
+	case api.RewardType_ARTIFACT_CASE:
+		path = "egginc/icon_afx_chest_3.png"
 	}
 	_, ok := _iconPathSet[path]
 	if ok {

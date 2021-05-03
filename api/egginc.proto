@@ -278,6 +278,10 @@ enum RewardType {
                        // (type:7, name:"subtype", count:2)
   PIGGY_LEVEL_UP = 8;
   BOOST = 9;
+  BOOST_TOKEN = 10;
+  ARTIFACT = 11;
+  ARTIFACT_CASE = 12;
+  UNKNOWN_REWARD = 100;
 }
 
 message ArtifactsDB {
