@@ -63,52 +63,50 @@
             >
           </div>
 
-          <div class="mt-1">
-            <template v-if="config.isEnlightenment">
-              <div v-if="artifact.isEffectiveOnEnlightenment()" class="flex items-start">
-                <img
-                  class="inline h-3.5 w-3.5"
-                  :src="iconURL('egginc-extras/icon_lightning_green.png', 64)"
-                />
-                <span class="EffectSize text-xs uppercase"
-                  >{{ formatPercentage(artifact.clarityEffect) }} effective on enlightenment
-                  egg</span
-                >
-              </div>
-              <div v-else class="flex items-start">
-                <img
-                  class="inline h-3.5 w-3.5"
-                  :src="iconURL('egginc-extras/icon_warning.png', 64)"
-                />
-                <span class="Warning text-xs uppercase"
-                  >Not compatible with enlightenment egg
-                  <template v-if="artifact.afx_rarity > 0">as configured</template></span
-                >
-              </div>
-            </template>
+          <template v-if="config.isEnlightenment">
+            <!-- Enlightenment farm -->
+            <div v-if="artifact.isEffectiveOnEnlightenment()" class="flex items-start mt-1">
+              <img
+                class="inline h-3.5 w-3.5"
+                :src="iconURL('egginc-extras/icon_lightning_green.png', 64)"
+              />
+              <span class="EffectSize text-xs uppercase"
+                >{{ formatPercentage(artifact.clarityEffect) }} effective on enlightenment egg</span
+              >
+            </div>
+            <div v-else class="flex items-start mt-1">
+              <img
+                class="inline h-3.5 w-3.5"
+                :src="iconURL('egginc-extras/icon_warning.png', 64)"
+              />
+              <span class="Warning text-xs uppercase"
+                >Not compatible with enlightenment egg
+                <template v-if="artifact.afx_rarity > 0">as configured</template></span
+              >
+            </div>
+          </template>
 
-            <template v-else>
-              <!-- Regular farm -->
-              <div v-if="!artifact.isEffectiveOnRegular()" class="">
-                <img
-                  class="inline h-3.5 w-4 pr-0.5 relative -top-px"
-                  :src="iconURL('egginc-extras/icon_warning.png', 64)"
-                />
-                <span class="Warning text-xs uppercase"
-                  >Not compatible with non-enlightenment egg</span
-                >
-              </div>
-              <div v-if="artifact.hasClarityStones()" class="">
-                <img
-                  class="inline h-3.5 w-4 pr-0.5 relative -top-px"
-                  :src="iconURL('egginc-extras/icon_warning.png', 64)"
-                />
-                <span class="Warning text-xs uppercase"
-                  >Clarity stone not compatible with non-enlightenment egg</span
-                >
-              </div>
-            </template>
-          </div>
+          <template v-else>
+            <!-- Regular farm -->
+            <div v-if="!artifact.isEffectiveOnRegular()" class="mt-1">
+              <img
+                class="inline h-3.5 w-4 pr-0.5 relative -top-px"
+                :src="iconURL('egginc-extras/icon_warning.png', 64)"
+              />
+              <span class="Warning text-xs uppercase"
+                >Not compatible with non-enlightenment egg</span
+              >
+            </div>
+            <div v-if="artifact.hasClarityStones()" class="mt-1">
+              <img
+                class="inline h-3.5 w-4 pr-0.5 relative -top-px"
+                :src="iconURL('egginc-extras/icon_warning.png', 64)"
+              />
+              <span class="Warning text-xs uppercase"
+                >Clarity stone not compatible with non-enlightenment egg</span
+              >
+            </div>
+          </template>
         </div>
       </template>
     </div>
