@@ -57,7 +57,7 @@
           time:
         </template>
         <span class="text-green-500 whitespace-nowrap">
-          <template v-if="completionForecast">{{ completionForecast.format("LLL") }}</template>
+          <template v-if="completionForecast">{{ completionForecast.format("LLL z") }}</template>
           <template v-else>Never</template>
         </span>
       </p>
@@ -146,8 +146,13 @@
 <script lang="ts">
 import { computed, defineComponent, onBeforeUnmount, ref } from "vue";
 import dayjs, { Dayjs } from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
+
+window.dayjs = dayjs;
 
 import {
   eggIconPath,
@@ -167,8 +172,14 @@ import ArtifactsGallery from "./ArtifactsGallery.vue";
 import UnfinishedResearches from "./UnfinishedResearches.vue";
 import BaseInfo from "./BaseInfo.vue";
 
+// Note that timezone abbreviation may not work due to
+// https://github.com/iamkun/dayjs/issues/1154, in which case the GMT offset is
+// shown.
+dayjs.extend(advancedFormat);
 dayjs.extend(localizedFormat);
 dayjs.extend(relativeTime);
+dayjs.extend(timezone);
+dayjs.extend(utc);
 
 export default defineComponent({
   components: {
