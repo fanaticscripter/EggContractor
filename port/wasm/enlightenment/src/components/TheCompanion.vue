@@ -82,17 +82,28 @@
           <span class="text-green-500">{{ formatWithThousandSeparators(totalHabSpace) }}</span>
         </p>
         <unfinished-researches :researches="habSpaceResearches" class="my-1" />
-        <p v-if="!totalHabSpaceSufficient">
-          Required Wormhole Dampening level:
-          <span class="text-blue-500 mr-0.5">{{ requiredWDLevel }}/25</span>
-          <base-info
-            class="inline relative -top-px"
-            v-tippy="{
-              content:
-                'Minimum Wormhole Dampening level to reach 10B hab space, assuming all habs are final tier, and all other hab space-related researches have been finished.',
-            }"
-          />
-        </p>
+        <template v-if="!totalHabSpaceSufficient">
+          <p>
+            Required Wormhole Dampening level:
+            <span class="text-blue-500 mr-0.5">{{ requiredWDLevel }}/25</span>
+            <base-info
+              class="inline relative -top-px"
+              v-tippy="{
+                content:
+                  'Minimum Wormhole Dampening level to reach 10B hab space, assuming all habs are final tier, and all other hab space-related researches have been finished.',
+              }"
+            />
+          </p>
+          <template v-if="minimumRequiredWDLevel < requiredWDLevel">
+            <p>
+              Note that the level above assumes your current set of artifacts. The minimum WD level
+              required is <span class="text-blue-500 mr-0.5">{{ minimumRequiredWDLevel }}/25</span>,
+              assuming you equip your most effective gusset as pictured below (stone rearrangement
+              possibly needed):
+            </p>
+            <artifacts-gallery :artifacts="bestPossibleGussetSet" class="mt-2 mb-3" />
+          </template>
+        </template>
       </section>
 
       <hr />
@@ -149,6 +160,7 @@ import {
   requiredWDLevelForEnlightenmentDiamond,
   farmInternalHatcheryResearches,
   farmInternalHatcheryRates,
+  bestPossibleGussetForEnlightenment,
 } from "@/lib";
 import { iconURL } from "@/utils";
 import ArtifactsGallery from "./ArtifactsGallery.vue";
@@ -222,6 +234,11 @@ export default defineComponent({
     const totalHabSpace = Math.round(habSpaces.reduce((total, s) => total + s));
     const totalHabSpaceSufficient = totalHabSpace >= 1e10;
     const requiredWDLevel = requiredWDLevelForEnlightenmentDiamond(artifacts);
+    const bestPossibleGusset = bestPossibleGussetForEnlightenment(backup);
+    const bestPossibleGussetSet = bestPossibleGusset ? [bestPossibleGusset] : [];
+    const minimumRequiredWDLevel = bestPossibleGusset
+      ? requiredWDLevelForEnlightenmentDiamond([bestPossibleGusset])
+      : requiredWDLevel;
 
     const internalHatcheryResearches = farmInternalHatcheryResearches(farm, progress);
     const {
@@ -260,6 +277,8 @@ export default defineComponent({
       totalHabSpaceSufficient,
       habSpaces,
       requiredWDLevel,
+      bestPossibleGussetSet,
+      minimumRequiredWDLevel,
       internalHatcheryResearches,
       onlineIHR,
       onlineIHRPerHab,

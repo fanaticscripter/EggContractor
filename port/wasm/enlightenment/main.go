@@ -29,6 +29,7 @@ type item struct {
 	EffectTarget string                  `json:"effectTarget"`
 	EffectSize   string                  `json:"effectSize"`
 	EffectDelta  float64                 `json:"effectDelta"`
+	Slots        uint32                  `json:"slots"`
 	IconPath     string                  `json:"iconPath"`
 }
 
@@ -41,6 +42,10 @@ func main() {
 	for _, f := range eiafx.Data.ArtifactFamilies {
 		for _, t := range f.Tiers {
 			for _, r := range t.Effects {
+				slots := uint32(0)
+				if r.Slots != nil {
+					slots = *r.Slots
+				}
 				payload = append(payload, item{
 					Key:          fmt.Sprintf("%d:%d:%d", t.AfxId, t.AfxLevel, r.AfxRarity),
 					AfxId:        t.AfxId,
@@ -51,6 +56,7 @@ func main() {
 					EffectTarget: r.EffectTarget,
 					EffectSize:   r.EffectSize,
 					EffectDelta:  effectDelta(r.EffectSize),
+					Slots:        slots,
 					IconPath:     "egginc/" + t.IconFilename,
 				})
 			}

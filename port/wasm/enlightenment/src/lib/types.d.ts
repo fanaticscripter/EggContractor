@@ -27,6 +27,7 @@ export interface Item {
   effectTarget: string;
   effectSize: string;
   effectDelta: number;
+  slots: number;
   iconPath: string;
 }
 
