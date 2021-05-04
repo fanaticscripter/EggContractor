@@ -62,6 +62,13 @@
         </span>
       </p>
 
+      <p v-if="!completed" class="text-sm">
+        Current Time Left:
+        <span class="text-green-500 whitespace-nowrap">
+          <countdown-timer :deadline="currentCompletionTimeleft"></countdown-timer>
+        </span>
+      </p>
+
       <hr class="mt-2" />
 
       <section class="my-2 text-sm">
@@ -137,6 +144,7 @@ import { computed, defineComponent, onBeforeUnmount, ref } from "vue";
 import dayjs, { Dayjs } from "dayjs";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
+import CountdownTimer from "./CountdownTimer.vue";
 
 import {
   eggIconPath,
@@ -163,6 +171,7 @@ export default defineComponent({
     ArtifactsGallery,
     UnfinishedResearches,
     BaseInfo,
+    CountdownTimer,
   },
   props: {
     playerId: {
@@ -233,17 +242,20 @@ export default defineComponent({
     const lastRefreshedPopulation = farm.numChickens! as number;
     const targetPopulation = 1e10;
     const completed = lastRefreshedPopulation >= targetPopulation;
-    let completionForecast: Dayjs | undefined;
-    if (!completed && offlineIHR > 0) {
-      const timeToCompleteSeconds =
-        ((targetPopulation - lastRefreshedPopulation) / offlineIHR) * 60;
-      completionForecast = dayjs(lastRefreshedTimestamp + timeToCompleteSeconds * 1000);
-    }
     const currentPopulation = computed(
       () =>
         lastRefreshedPopulation +
         (offlineIHR / 60_000) * (currentTimestamp.value - lastRefreshedTimestamp)
     );
+    let completionForecast: Dayjs | undefined;
+    let currentCompletionTimeleft: number | undefined;
+    if (!completed && offlineIHR > 0) {
+      const timeToCompleteSeconds =
+        ((targetPopulation - lastRefreshedPopulation) / offlineIHR) * 60;
+      completionForecast = dayjs(lastRefreshedTimestamp + timeToCompleteSeconds * 1000);
+      currentCompletionTimeleft = 
+        (((targetPopulation - currentPopulation.value) / offlineIHR * 60) * 1000 + currentTimestamp.value) / 1000;
+    }
 
     return {
       nickname,
@@ -270,6 +282,7 @@ export default defineComponent({
       completionForecast,
       formatWithThousandSeparators,
       iconURL,
+      currentCompletionTimeleft,
     };
   },
 });
