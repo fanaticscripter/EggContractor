@@ -152,8 +152,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
 
-window.dayjs = dayjs;
-
 import {
   eggIconPath,
   ei,
