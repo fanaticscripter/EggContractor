@@ -1,4 +1,4 @@
-import { ProtobufType } from "./types";
+import { ProtobufType } from "../types";
 import { uint8ArrayToBinaryString } from "./utils";
 
 /**

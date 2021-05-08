@@ -1,7 +1,7 @@
 import * as $protobuf from "protobufjs/minimal";
 
-import { ei } from "./proto";
-import { ProtobufType } from "./types";
+import { ei } from "../proto";
+import { ProtobufType } from "../types";
 import { uint8ArrayToBinaryString, binaryStringToUint8Array } from "./utils";
 
 /**
