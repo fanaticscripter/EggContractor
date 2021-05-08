@@ -1,0 +1,4 @@
+- Research descriptions from https://egg-inc.fandom.com/wiki/Research.
+- Common research prices from https://docs.google.com/spreadsheets/d/12H31kkHUA2dCjOvqi3N_n3FvoT1rBF0hMWKFYTo5-tc/edit#gid=1144916227 by I don't know who.
+- Epic research prices from https://royalphysique.net/eggs/.
+- Other data as well as validation of the sources above by me (@mk2).
