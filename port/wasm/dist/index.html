@@ -4,14 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="format-detection" content="telephone=no" />
-    <link rel="icon" type="image/x-icon" href="static/index/favicon.ico" />
-    <link rel="apple-touch-icon-precomposed" href="static/index/favicon-180.png" />
+    <link rel="icon" type="image/x-icon" href="/static/index/favicon.ico" />
+    <link rel="apple-touch-icon-precomposed" href="/static/index/favicon-180.png" />
     <title>@mk2's public utilities for Egg, Inc.</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css"
+    />
     <style>
       body {
-        margin: 40px auto;
+        margin: 3.5rem auto 40px auto;
         max-width: 650px;
         line-height: 1.6;
+        font-family: revert;
         font-size: 16px;
         color: #444;
         padding: 0 10px;
@@ -30,6 +35,49 @@
       h3 {
         font-size: 1rem;
         line-height: 1.2;
+      }
+
+      nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        color: white;
+        background-color: #444;
+      }
+
+      nav .nav__wrapper {
+        max-width: 650px;
+        margin: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      @media (min-width: 670px) {
+        nav .nav__wrapper {
+          padding: 0;
+        }
+      }
+
+      nav .nav__entry {
+        display: block;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+      }
+
+      nav .nav__entry ~ .nav__entry {
+        padding-left: 1rem;
+      }
+
+      nav a.nav__entry {
+        color: white;
+        text-decoration: none;
+      }
+
+      nav a.nav__entry:hover {
+        color: #ddd;
       }
 
       pre {
@@ -84,15 +132,16 @@
       #whatsnew > ul {
         margin-left: -1rem;
       }
-
-      #privacy {
-        font-size: 0.875rem;
-        line-height: 1.4;
-        color: green;
-      }
     </style>
   </head>
   <body>
+    <nav>
+      <div class="nav__wrapper">
+        <a class="nav__entry" href="privacy">Privacy policy</a>
+        <a class="nav__entry" href="donate">Donate</a>
+      </div>
+    </nav>
+
     <h1>@mk2's public utilities for Egg, Inc.</h1>
 
     <div id="whatsnew" style="display: none">
@@ -215,17 +264,6 @@
         >source directory</a
       >
       to find them.
-    </p>
-
-    <p id="privacy">
-      Note that pages on this domain use
-      <a href="https://www.goatcounter.com/" target="_blank">goatcounter.com</a> for
-      privacy-friendly analytics. Basic information about your visit and your browser is recorded to
-      gauge interest and guide development. No personal information is recorded, no fingerprinting
-      is performed, and recorded data are only available to the author as aggregate statistics. You
-      can "opt out" of analytics by blocking the gc.zgo.at domain with a content blocker, e.g.
-      uBlock Origin, but as a very privacy-conscious person myself, I don't believe that's
-      warranted.
     </p>
 
     <h2>Self-hosted</h2>
