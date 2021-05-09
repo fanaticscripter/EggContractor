@@ -3514,7 +3514,7 @@
   },
   {
     "serial_id": 66,
-    "id": "epic_silo_quality",
+    "id": "silo_capacity",
     "name": "Silo Capacity",
     "type": "epic",
     "categories": "",
