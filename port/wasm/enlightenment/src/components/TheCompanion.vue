@@ -155,7 +155,7 @@
           </li>
           <li>
             Regular tier 2:
-            <base-e-i-value class="text-green-500" :value="droneValuesAtMaxRCB.tier2" />({{
+            <base-e-i-value class="text-green-500" :value="droneValuesAtMaxRCB.tier2" /> ({{
               formatPercentage(droneValuesAtMaxRCB.tier2 / droneValuesAtMaxRCB.elite)
             }}
             of elite),
@@ -163,7 +163,7 @@
           </li>
           <li>
             Regular tier 3:
-            <base-e-i-value class="text-green-500" :value="droneValuesAtMaxRCB.tier3" />({{
+            <base-e-i-value class="text-green-500" :value="droneValuesAtMaxRCB.tier3" /> ({{
               formatPercentage(droneValuesAtMaxRCB.tier3 / droneValuesAtMaxRCB.elite)
             }}
             of elite),
