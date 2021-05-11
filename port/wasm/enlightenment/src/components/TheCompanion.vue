@@ -50,16 +50,17 @@
           }"
         />
       </p>
-      <trophy-forecast
-        v-for="trophy in trophies"
-        :key="trophy.level"
-        :trophyLevel="trophy.level"
-        :lastRefreshedPopulation="lastRefreshedPopulation"
-        :lastRefreshedTimestamp="lastRefreshedTimestamp"
-        :targetPopulation="trophy.targetPopulation"
-        :habSpace="totalHabSpace"
-        :offlineIHR="offlineIHR"
-      />
+      <template v-for="trophy in trophies" :key="trophy.level">
+        <trophy-forecast
+          v-if="trophy.level > existingTrophyLevel"
+          :trophyLevel="trophy.name"
+          :lastRefreshedPopulation="lastRefreshedPopulation"
+          :lastRefreshedTimestamp="lastRefreshedTimestamp"
+          :targetPopulation="trophy.targetPopulation"
+          :habSpace="totalHabSpace"
+          :offlineIHR="offlineIHR"
+        />
+      </template>
 
       <hr class="mt-2" />
 
@@ -322,11 +323,11 @@ dayjs.extend(timezone);
 dayjs.extend(utc);
 
 const trophies = [
-  { level: "Bronze", targetPopulation: 10e6 },
-  { level: "Silver", targetPopulation: 50e6 },
-  { level: "Gold", targetPopulation: 250e6 },
-  { level: "Platinum", targetPopulation: 1e9 },
-  { level: "Diamond", targetPopulation: 10e9 },
+  { level: 1, name: "Bronze", targetPopulation: 10e6 },
+  { level: 2, name: "Silver", targetPopulation: 50e6 },
+  { level: 3, name: "Gold", targetPopulation: 250e6 },
+  { level: 4, name: "Platinum", targetPopulation: 1e9 },
+  { level: 5, name: "Diamond", targetPopulation: 10e9 },
 ];
 
 export default defineComponent({
@@ -391,6 +392,9 @@ export default defineComponent({
         (offlineIHR / 60_000) * (currentTimestamp.value - lastRefreshedTimestamp)
     );
     const artifacts = homeFarmArtifacts(backup);
+    // Cap existing trophy level at platinum for people doing a legit diamond
+    // run after cheating it first.
+    const existingTrophyLevel = Math.min(backup.game!.eggMedalLevel![18], 4);
 
     refreshIntervalId = setInterval(() => {
       currentTimestamp.value = Date.now();
@@ -520,6 +524,7 @@ export default defineComponent({
       artifacts,
       lastRefreshedPopulation,
       trophies,
+      existingTrophyLevel,
       currentPopulation,
       habs,
       habSpaceResearches,
