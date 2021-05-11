@@ -347,6 +347,13 @@ base64 -d &lt;&lt;&lt;U2FsdGVkX19v3DZElItSN+euK0LsuLwSx211cXmgoRQk91egKYAC7AcuVP
           } catch (e) {
             console.error("failed to persist secretsExpiresAt to localStorage");
           }
+          try {
+            window.goatcounter?.count({
+              path: "ei.tcl.sh/tips",
+              title: "Rickrolled",
+              event: true,
+            });
+          } catch (e) {}
           link.innerText = "You have been enlightened.";
         });
       }
