@@ -33,7 +33,7 @@ export function calculateFarmValue(
   const totalHabCapacity = farmHabSpaces(farmHabs(farm), farmHabSpaceResearches(farm), []).reduce(
     (total, s) => total + s
   );
-  const populationV = totalHabCapacity - population;
+  const populationV = Math.max(totalHabCapacity - population, 0);
   const internalHatcheryRate = farmInternalHatcheryRates(
     farmInternalHatcheryResearches(farm, progress),
     []
