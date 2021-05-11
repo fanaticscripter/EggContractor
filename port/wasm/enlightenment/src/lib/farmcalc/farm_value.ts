@@ -28,17 +28,19 @@ export function calculateFarmValue(
   const population = farm.numChickens! as number;
   const shippingCapacity = farmShippingCapacity(farm, progress, []);
   const eggLayingRate = farmEggLayingRate(farm, progress, []);
-  const populationE = Math.floor(population * Math.min(1, shippingCapacity / eggLayingRate));
-  const populationU = population - populationE;
+  const populationEffective = Math.floor(
+    population * Math.min(1, shippingCapacity / eggLayingRate)
+  );
+  const populationUndeliverable = population - populationEffective;
   const totalHabCapacity = farmHabSpaces(farmHabs(farm), farmHabSpaceResearches(farm), []).reduce(
     (total, s) => total + s
   );
-  const populationV = Math.max(totalHabCapacity - population, 0);
+  const populationVacant = Math.max(totalHabCapacity - population, 0);
   const internalHatcheryRate = farmInternalHatcheryRates(
     farmInternalHatcheryResearches(farm, progress),
     []
   ).onlineRate;
-  const populationP = internalHatcheryRate * maxAwayTime(farm, progress);
+  const populationProjected = internalHatcheryRate * maxAwayTime(farm, progress);
   const eggConstMultiplier = 20; // 20 for the enlightenment egg.
   const eggValue = farmEggValue(farmEggValueResearches(farm), []);
   const eggLayingRatePerChicken = farmEggLayingRatePerChicken(
@@ -55,7 +57,10 @@ export function calculateFarmValue(
     (earningBonus + 1) *
     (maxRCB - 4) ** 0.25 *
     eggConstMultiplier *
-    (populationE + 0.2 * populationU + populationV ** 0.6 + 0.25 * populationP) *
+    (populationEffective +
+      0.2 * populationUndeliverable +
+      populationVacant ** 0.6 +
+      0.25 * populationProjected) *
     farmValueMultiplier(artifacts)
   );
 }
