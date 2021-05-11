@@ -34,6 +34,8 @@
       </div>
     </template>
   </div>
+
+  <the-calculator-wrapper />
 </template>
 
 <script lang="ts">
@@ -43,7 +45,8 @@ import { getLocalStorage, setLocalStorage } from "@/utils";
 import BaseErrorBoundary from "@/components/BaseErrorBoundary.vue";
 import BaseLoading from "@/components/BaseLoading.vue";
 import ThePlayerIdForm from "@/components/ThePlayerIdForm.vue";
-import TheCompanion from "./components/TheCompanion.vue";
+import TheCompanion from "@/components/TheCompanion.vue";
+import TheCalculatorWrapper from "@/components/TheCalculatorWrapper.vue";
 
 const PLAYER_ID_LOCALSTORAGE_KEY = "playerId";
 
@@ -53,6 +56,7 @@ export default defineComponent({
     BaseLoading,
     ThePlayerIdForm,
     TheCompanion,
+    TheCalculatorWrapper,
   },
   setup() {
     const playerIdPreload =

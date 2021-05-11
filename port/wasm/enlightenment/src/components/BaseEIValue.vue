@@ -12,7 +12,6 @@
 import { formatEIValue } from "@/lib";
 import { defineComponent } from "@vue/runtime-core";
 
-// TODO: click to copy
 export default defineComponent({
   props: {
     value: {

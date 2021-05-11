@@ -1,7 +1,7 @@
 import { trimTrailingZeros } from "./utils";
 
 // https://egg-inc.fandom.com/wiki/Order_of_Magnitude
-const units = [
+export const units = [
   { symbol: "K", oom: 3 },
   { symbol: "M", oom: 6 },
   { symbol: "B", oom: 9 },
@@ -36,8 +36,25 @@ const units = [
 ];
 
 const oom2symbol = new Map(units.map(u => [u.oom, u.symbol]));
+const symbol2oom = new Map(units.map(u => [u.symbol, u.oom]));
 const minOom = units[0].oom;
 const maxOom = units[units.length - 1].oom;
+
+const valueWithUnitRegExpPattern = `\\b(?<value>\\d+(\\.(\\d+)?)?)\\s*(?<unit>${units
+  .map(u => u.symbol)
+  .join("|")})\\b`;
+export const valueWithUnitRegExp = new RegExp(valueWithUnitRegExpPattern);
+export const valueWithUnitRegExpGlobal = new RegExp(valueWithUnitRegExpPattern, "g");
+
+export function parseValueWithUnit(s: string): number | null {
+  const match = s.match(valueWithUnitRegExp);
+  if (match === null) {
+    return null;
+  }
+  const value = match.groups!.value;
+  const unit = match.groups!.unit;
+  return parseFloat(value) * 10 ** symbol2oom.get(unit)!;
+}
 
 // When scientific on, the value is formatted as HTML.
 export function formatEIValue(
@@ -71,8 +88,8 @@ export function formatEIValue(
   if (oomFloor > maxOom) {
     oomFloor = maxOom;
   }
-  const principal = x / Math.pow(10, oomFloor);
-  let numpart = principal.toFixed(decimals);
+  const principal = x / 10 ** oomFloor;
+  let numpart = principal < 1e21 ? principal.toFixed(decimals) : principal.toPrecision(4);
   if (trim) {
     numpart = trimTrailingZeros(numpart);
   }
