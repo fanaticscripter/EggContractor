@@ -125,6 +125,19 @@
       #whatsnew > ul {
         margin-left: -1rem;
       }
+
+      #secrets {
+        font-style: italic;
+      }
+
+      #secrets > a {
+        color: #34d399;
+        text-decoration: none;
+      }
+
+      #secrets > a:hover {
+        color: #10b981;
+      }
     </style>
   </head>
   <body>
@@ -148,6 +161,11 @@
         </li>
         <li data-new-until="1620318061000" style="display: none">
           <a href="/enlightenment/" target="_blank">Enlightenment companion</a>
+        </li>
+        <li id="secrets" style="display: none">
+          <a href="https://ei.tcl.sh/tips" target="_blank">
+            Secrets of the Universe (don't click, you have been warned)
+          </a>
         </li>
       </ul>
     </div>
@@ -294,6 +312,45 @@ base64 -d &lt;&lt;&lt;U2FsdGVkX19v3DZElItSN+euK0LsuLwSx211cXmgoRQk91egKYAC7AcuVP
 
     <script>
       const now = Date.now();
+
+      // Mark #secrets as new if not already seen, or didn't get a click after a day.
+      const secretsLocalStorageKey = "/_rickrollExpiresAt";
+      const secretsEl = document.getElementById("secrets");
+      let secretsExpiresAt = (() => {
+        // null if never set, the stored timestamp if set, and 0 on error.
+        try {
+          const stored = localStorage.getItem(secretsLocalStorageKey);
+          if (stored === null) {
+            return null;
+          }
+          const timestamp = JSON.parse(stored);
+          return isFinite(timestamp) ? timestamp : 0;
+        } catch (e) {
+          return 0;
+        }
+      })();
+      if (secretsEl && (secretsExpiresAt === null || secretsExpiresAt > now)) {
+        if (secretsExpiresAt === null) {
+          secretsExpiresAt = now + 86400 * 1000;
+          try {
+            localStorage.setItem(secretsLocalStorageKey, JSON.stringify(secretsExpiresAt));
+          } catch (e) {
+            console.error("failed to persist secretsExpiresAt to localStorage");
+          }
+        }
+        secretsEl.dataset.newUntil = secretsExpiresAt.toString();
+        const link = secretsEl.querySelector("a");
+        link?.addEventListener("click", () => {
+          secretsExpiresAt = now;
+          try {
+            localStorage.setItem(secretsLocalStorageKey, JSON.stringify(secretsExpiresAt));
+          } catch (e) {
+            console.error("failed to persist secretsExpiresAt to localStorage");
+          }
+          link.innerText = "You have been enlightened.";
+        });
+      }
+
       let somethingIsNew = false;
       document.querySelectorAll("#whatsnew li[data-new-until]").forEach(el => {
         if (now < parseInt(el.dataset.newUntil)) {
