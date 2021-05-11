@@ -1,6 +1,7 @@
-import { internalHatcheryRateMultiplier } from "./effects";
-import { ei } from "./proto";
-import { Artifact, Research, ResearchInstance } from "./types";
+import { internalHatcheryRateMultiplier } from "../effects";
+import { ei } from "../proto";
+import { Artifact, Research, ResearchInstance } from "../types";
+import { farmResearches } from "./common";
 
 export interface InternalHatcheryResearch extends Research {
   multiplicative?: boolean;
@@ -72,18 +73,7 @@ export function farmInternalHatcheryResearches(
   farm: ei.Backup.ISimulation,
   progress: ei.Backup.IGame
 ): InternalHatcheryResearchInstance[] {
-  const researches: InternalHatcheryResearchInstance[] = [];
-  for (const r of farm.commonResearch!.concat(progress.epicResearch!)) {
-    for (const rr of availableInternalHatcheryResearches) {
-      if (r.id === rr.id) {
-        researches.push({
-          ...rr,
-          level: r.level!,
-        });
-      }
-    }
-  }
-  return researches;
+  return farmResearches(farm, progress, availableInternalHatcheryResearches);
 }
 
 // Rates are measured in chickens/min.

@@ -39,19 +39,19 @@ const oom2symbol = new Map(units.map(u => [u.oom, u.symbol]));
 const minOom = units[0].oom;
 const maxOom = units[units.length - 1].oom;
 
-/**
- * Format a number in EI OoM units.
- * @param x - Number to be formatted.
- * @param trim - Whether to trim trailing zeros and possibly the decimal point.
- * @param decimals - Number of decimal digits to round to (before trimming).
- * @returns
- */
-export function formatEIValue(x: number, trim = false, decimals = 3): string {
+// When scientific on, the value is formatted as HTML.
+export function formatEIValue(
+  x: number,
+  options?: { trim?: boolean; decimals?: number; scientific?: boolean }
+): string {
+  const trim = options?.trim === undefined ? false : options?.trim;
+  const decimals = options?.decimals === undefined ? 3 : options?.decimals;
+  const scientific = options?.scientific === undefined ? false : options?.scientific;
   if (isNaN(x)) {
     return "NaN";
   }
   if (x < 0) {
-    return "-" + formatEIValue(-x);
+    return "-" + formatEIValue(-x, options);
   }
   if (!isFinite(x)) {
     return "infinity";
@@ -76,5 +76,9 @@ export function formatEIValue(x: number, trim = false, decimals = 3): string {
   if (trim) {
     numpart = trimTrailingZeros(numpart);
   }
-  return numpart + oom2symbol.get(oomFloor)!;
+  if (scientific) {
+    return `${numpart}&times;10<sup>${oomFloor}</sup>`;
+  } else {
+    return numpart + oom2symbol.get(oomFloor)!;
+  }
 }
