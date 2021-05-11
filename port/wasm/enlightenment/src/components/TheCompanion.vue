@@ -50,22 +50,16 @@
           }"
         />
       </p>
-      <p v-if="!completed" class="text-sm">
-        <template v-if="totalHabSpaceSufficient">Enlightenment Diamond Trophy forecast: </template>
-        <template v-else>
-          Enlightenment Diamond Trophy forecast, assuming sufficient hab space can be unlocked in
-          time:
-        </template>
-        <template v-if="completionForecast">
-          <span class="text-green-500 whitespace-nowrap">
-            {{ completionForecast.format("LLL z") }}
-          </span>
-          <template v-if="completionForecastDays > 0">
-            ({{ completionForecastDays.toFixed(1) }} days)
-          </template>
-        </template>
-        <template v-else>Never</template>
-      </p>
+      <trophy-forecast
+        v-for="trophy in trophies"
+        :key="trophy.level"
+        :trophyLevel="trophy.level"
+        :lastRefreshedPopulation="lastRefreshedPopulation"
+        :lastRefreshedTimestamp="lastRefreshedTimestamp"
+        :targetPopulation="trophy.targetPopulation"
+        :habSpace="totalHabSpace"
+        :offlineIHR="offlineIHR"
+      />
 
       <hr class="mt-2" />
 
@@ -311,6 +305,7 @@ import {
   setLocalStorage,
 } from "@/utils";
 import CollapsibleSection from "@/components/CollapsibleSection.vue";
+import TrophyForecast from "@/components/TrophyForecast.vue";
 import ArtifactsGallery from "@/components/ArtifactsGallery.vue";
 import UnfinishedResearches from "@/components/UnfinishedResearches.vue";
 import TargetCashMatrix from "@/components/TargetCashMatrix.vue";
@@ -326,9 +321,18 @@ dayjs.extend(relativeTime);
 dayjs.extend(timezone);
 dayjs.extend(utc);
 
+const trophies = [
+  { level: "Bronze", targetPopulation: 10e6 },
+  { level: "Silver", targetPopulation: 50e6 },
+  { level: "Gold", targetPopulation: 250e6 },
+  { level: "Platinum", targetPopulation: 1e9 },
+  { level: "Diamond", targetPopulation: 10e9 },
+];
+
 export default defineComponent({
   components: {
     CollapsibleSection,
+    TrophyForecast,
     ArtifactsGallery,
     UnfinishedResearches,
     TargetCashMatrix,
@@ -380,6 +384,12 @@ export default defineComponent({
     const lastRefreshed = dayjs(Math.min(lastRefreshedTimestamp, Date.now()));
     const currentTimestamp = ref(Date.now());
     const lastRefreshedRelative = ref(lastRefreshed.fromNow());
+    const lastRefreshedPopulation = farm.numChickens! as number;
+    const currentPopulation = computed(
+      () =>
+        lastRefreshedPopulation +
+        (offlineIHR / 60_000) * (currentTimestamp.value - lastRefreshedTimestamp)
+    );
     const artifacts = homeFarmArtifacts(backup);
 
     refreshIntervalId = setInterval(() => {
@@ -488,24 +498,6 @@ export default defineComponent({
       offlineRate: offlineIHR,
     } = farmInternalHatcheryRates(internalHatcheryResearches, artifacts);
 
-    const lastRefreshedPopulation = farm.numChickens! as number;
-    const targetPopulation = 1e10;
-    const completed = lastRefreshedPopulation >= targetPopulation;
-    const now = dayjs();
-    let completionForecast: Dayjs | undefined;
-    let completionForecastDays = 0;
-    if (!completed && offlineIHR > 0) {
-      const timeToCompleteSeconds =
-        ((targetPopulation - lastRefreshedPopulation) / offlineIHR) * 60;
-      completionForecast = dayjs(lastRefreshedTimestamp + timeToCompleteSeconds * 1000);
-      completionForecastDays = completionForecast.diff(now, "day", true);
-    }
-    const currentPopulation = computed(
-      () =>
-        lastRefreshedPopulation +
-        (offlineIHR / 60_000) * (currentTimestamp.value - lastRefreshedTimestamp)
-    );
-
     const sectionVisibility = ref(loadSectionVisibilityFromLocalStorage());
     const isVisibleSection = (section: string) => {
       return sectionVisibility.value[section] !== false;
@@ -519,15 +511,16 @@ export default defineComponent({
     return {
       nickname,
       lastRefreshed,
+      lastRefreshedTimestamp,
       lastRefreshedRelative,
       egg,
       eggIconURL,
       enlightenmentEgg,
       enlightenmentEggIconURL,
       artifacts,
-      completed,
-      completionForecast,
-      completionForecastDays,
+      lastRefreshedPopulation,
+      trophies,
+      currentPopulation,
       habs,
       habSpaceResearches,
       totalHabSpace,
@@ -556,8 +549,6 @@ export default defineComponent({
       onlineIHR,
       onlineIHRPerHab,
       offlineIHR,
-      lastRefreshedPopulation,
-      currentPopulation,
       sectionVisibility,
       isVisibleSection,
       toggleSectionVisibility,
