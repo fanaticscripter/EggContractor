@@ -130,12 +130,17 @@
         <p>Cash on hand: <base-e-i-value class="text-green-500" :value="cashOnHand" /></p>
         <p>Egg value: <base-e-i-value class="text-green-500" :value="eggValue" /></p>
         <p>
-          Earning rate (active, no running chicken):
-          <base-e-i-value class="text-green-500" :value="earningRateOnlineBaseline" suffix="/s" />
+          Earning rate (active, no running chicken, video doubler on):
+          <base-e-i-value
+            class="text-green-500"
+            :value="earningRateOnlineBaseline * 2"
+            suffix="/s"
+          />
         </p>
         <p>
-          Earning rate (active, max RCB <span class="text-green-500">{{ maxRCB }}x</span>):
-          <base-e-i-value class="text-green-500" :value="earningRateOnlineMaxRCB" suffix="/s" />
+          Earning rate (active, max RCB <span class="text-green-500">{{ maxRCB }}x</span>, video
+          doubler on):
+          <base-e-i-value class="text-green-500" :value="earningRateOnlineMaxRCB * 2" suffix="/s" />
         </p>
         <p>
           Earning rate (offline):
@@ -479,8 +484,8 @@ export default defineComponent({
     };
     const cashMeans = [
       {
-        rate: earningRateOnlineMaxRCB,
-        description: "Active earnings at max RCB",
+        rate: earningRateOnlineMaxRCB * 2,
+        description: "Active earnings w/ max RCB, video 2x",
         calc: calculateAndFormatDuration,
       },
       {
