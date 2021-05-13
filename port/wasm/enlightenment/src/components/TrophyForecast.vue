@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, toRefs } from "vue";
+import { computed, defineComponent, onBeforeUnmount, ref, toRefs } from "vue";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import localizedFormat from "dayjs/plugin/localizedFormat";
@@ -79,9 +79,18 @@ export default defineComponent({
         return null;
       }
     });
+    const now = ref(dayjs());
     const completionForecastDays = computed(() =>
-      completionForecast.value !== null ? completionForecast.value.diff(dayjs(), "day", true) : null
+      completionForecast.value !== null
+        ? completionForecast.value.diff(now.value, "day", true)
+        : null
     );
+    const refreshIntervalId = setInterval(() => {
+      now.value = dayjs();
+    }, 60000);
+    onBeforeUnmount(() => {
+      clearInterval(refreshIntervalId);
+    });
     return {
       completionForecast,
       completionForecastDays,
