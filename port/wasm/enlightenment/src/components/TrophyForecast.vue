@@ -16,6 +16,17 @@
     </template>
     <template v-else>Never</template>
   </p>
+  <p
+    v-if="
+      trophyLevel === 'Diamond' &&
+      completionForecastDays !== null &&
+      completionForecastDays > 0 &&
+      completionForecastDays < 1
+    "
+    class="text-base"
+  >
+    &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
+  </p>
 </template>
 
 <script lang="ts">
