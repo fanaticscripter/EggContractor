@@ -14,17 +14,25 @@
     </template>
     <template v-else>Never</template>
   </p>
-  <template
+  <p
     v-if="
       trophyLevel === 'Diamond' &&
       completionForecastDays !== null &&
       completionForecastDays > 0 &&
       completionForecastDays < 1
     "
+    class="text-base"
   >
-    <p class="text-base">
-      &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
-    </p>
+    &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
+  </p>
+  <!-- Nobel Prize in Animal Husbandry -->
+  <template
+    v-if="
+      trophyLevel === 'Diamond' &&
+      (lastRefreshedPopulation >= targetPopulation ||
+        (completionForecastDays !== null && completionForecastDays < 1))
+    "
+  >
     <trophy-forecast
       trophyLevel="Nobel"
       trophyName="Nobel Price in Animal Husbandry&reg;"
@@ -37,8 +45,8 @@
     <p class="text-xs text-gray-500">
       The Nobel Price in Animal Husbandry&reg; is conferred by the Royal Mk.II Society of
       Sciences&reg; on legendary farmers who manage to reach 19,845,000,000 population on their
-      enlightenment farm. A legendary jeweled gusset with three Eggceptional clarity stones is
-      required for such a feat.
+      enlightenment farm. A legendary jeweled gusset with three Eggceptional clarity stones and all
+      Wormhole Dampening levels are required for such a feat.
     </p>
   </template>
 </template>
