@@ -1,11 +1,8 @@
 <template>
   <p v-if="lastRefreshedPopulation < targetPopulation" class="text-sm">
-    <template v-if="habSpace >= targetPopulation"
-      >Enlightenment {{ trophyLevel }} Trophy forecast:
-    </template>
+    <template v-if="habSpace >= targetPopulation">{{ trophyDisplayName }} forecast: </template>
     <template v-else>
-      Enlightenment {{ trophyLevel }} Trophy forecast, assuming sufficient hab space can be unlocked
-      in time:
+      {{ trophyDisplayName }} forecast, assuming sufficient hab space can be unlocked in time:
     </template>
     <template v-if="completionForecast">
       <span class="text-green-500 whitespace-nowrap">
@@ -17,17 +14,33 @@
     </template>
     <template v-else>Never</template>
   </p>
-  <p
+  <template
     v-if="
       trophyLevel === 'Diamond' &&
       completionForecastDays !== null &&
       completionForecastDays > 0 &&
       completionForecastDays < 1
     "
-    class="text-base"
   >
-    &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
-  </p>
+    <p class="text-base">
+      &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
+    </p>
+    <trophy-forecast
+      trophyLevel="Nobel"
+      trophyName="Nobel Price in Animal Husbandry&reg;"
+      :lastRefreshedPopulation="lastRefreshedPopulation"
+      :lastRefreshedTimestamp="lastRefreshedTimestamp"
+      :targetPopulation="19_845_000_000"
+      :habSpace="habSpace"
+      :offlineIHR="offlineIHR"
+    />
+    <p class="text-xs text-gray-500">
+      The Nobel Price in Animal Husbandry&reg; is conferred by the Royal Mk.II Society of
+      Sciences&reg; on legendary farmers who manage to reach 19,845,000,000 population on their
+      enlightenment farm. A legendary jeweled gusset with three Eggceptional clarity stones is
+      required for such a feat.
+    </p>
+  </template>
 </template>
 
 <script lang="ts">
@@ -49,10 +62,15 @@ dayjs.extend(timezone);
 dayjs.extend(utc);
 
 export default defineComponent({
+  name: "trophy-forecast",
   props: {
     trophyLevel: {
       type: String,
       required: true,
+    },
+    trophyName: {
+      type: String,
+      required: false,
     },
     lastRefreshedPopulation: {
       type: Number,
@@ -77,11 +95,16 @@ export default defineComponent({
   },
   setup(props) {
     const {
+      trophyLevel,
+      trophyName,
       lastRefreshedPopulation,
       lastRefreshedTimestamp,
       targetPopulation,
       offlineIHR,
     } = toRefs(props);
+    const trophyDisplayName = computed(() =>
+      trophyName !== undefined ? trophyName.value : `Enlightenment ${trophyLevel.value} Trophy`
+    );
     const completionForecast = computed(() => {
       if (lastRefreshedPopulation.value < targetPopulation.value && offlineIHR.value > 0) {
         const timeToCompleteSeconds =
@@ -104,6 +127,7 @@ export default defineComponent({
       clearInterval(refreshIntervalId);
     });
     return {
+      trophyDisplayName,
       completionForecast,
       completionForecastDays,
     };
