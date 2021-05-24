@@ -4,7 +4,8 @@
       >Enlightenment {{ trophyLevel }} Trophy forecast:
     </template>
     <template v-else>
-      Enlightenment Diamond Trophy forecast, assuming sufficient hab space can be unlocked in time:
+      Enlightenment {{ trophyLevel }} Trophy forecast, assuming sufficient hab space can be unlocked
+      in time:
     </template>
     <template v-if="completionForecast">
       <span class="text-green-500 whitespace-nowrap">
