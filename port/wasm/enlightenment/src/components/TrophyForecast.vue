@@ -35,7 +35,7 @@
   >
     <trophy-forecast
       trophyLevel="Nobel"
-      trophyName="Nobel Price in Animal Husbandry&reg;"
+      trophyName="Nobel Prize in Animal Husbandry&reg;"
       :lastRefreshedPopulation="lastRefreshedPopulation"
       :lastRefreshedTimestamp="lastRefreshedTimestamp"
       :targetPopulation="19_845_000_000"
@@ -43,7 +43,7 @@
       :offlineIHR="offlineIHR"
     />
     <p class="text-xs text-gray-500">
-      The Nobel Price in Animal Husbandry&reg; is conferred by the Royal Mk.II Society of
+      The Nobel Prize in Animal Husbandry&reg; is conferred by the Royal Mk.II Society of
       Sciences&reg; on legendary farmers who manage to reach 19,845,000,000 population on their
       enlightenment farm. A legendary jeweled gusset with three Eggceptional clarity stones and all
       Wormhole Dampening levels are required for such a feat.
