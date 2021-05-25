@@ -9,7 +9,10 @@
         {{ completionForecast.format("LLL z") }}
       </span>
       <template v-if="completionForecastDays !== null && completionForecastDays > 0">
-        ({{ completionForecastDays.toFixed(1) }} days)
+        <template v-if="completionForecastDays > 1">
+          ({{ completionForecastDays.toFixed(1) }} days)
+        </template>
+        <template v-else> (in {{ completionForecastFormattedDuration }})</template>
       </template>
     </template>
     <template v-else>Never</template>
@@ -71,6 +74,8 @@ import localizedFormat from "dayjs/plugin/localizedFormat";
 import relativeTime from "dayjs/plugin/relativeTime";
 import timezone from "dayjs/plugin/timezone";
 import utc from "dayjs/plugin/utc";
+
+import { formatDuration } from "@/lib";
 
 // Note that timezone abbreviation may not work due to
 // https://github.com/iamkun/dayjs/issues/1154, in which case the GMT offset is
@@ -140,9 +145,14 @@ export default defineComponent({
         ? completionForecast.value.diff(now.value, "day", true)
         : null
     );
+    const completionForecastFormattedDuration = computed(() =>
+      completionForecast.value !== null
+        ? formatDuration(completionForecast.value.diff(now.value, "second", true), true)
+        : null
+    );
     const refreshIntervalId = setInterval(() => {
       now.value = dayjs();
-    }, 60000);
+    }, 30000);
     onBeforeUnmount(() => {
       clearInterval(refreshIntervalId);
     });
@@ -150,6 +160,7 @@ export default defineComponent({
       trophyDisplayName,
       completionForecast,
       completionForecastDays,
+      completionForecastFormattedDuration,
     };
   },
 });
