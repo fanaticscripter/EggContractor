@@ -23,7 +23,19 @@
     "
     class="text-base"
   >
-    &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
+    <span
+      :style="{
+        maskImage: `linear-gradient(
+          90deg,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 1) ${completionForecastDays * 100}%,
+          rgba(0, 0, 0, 0.25) ${completionForecastDays * 100}%,
+          rgba(0, 0, 0, 0.25) 100%
+        )`,
+      }"
+    >
+      &#x1f90f;&#x1f90f;&#x1f3fb;&#x1f90f;&#x1f3fc;&#x1f90f;&#x1f3fd;&#x1f90f;&#x1f3fe;&#x1f90f;&#x1f3ff;
+    </span>
   </p>
   <!-- Nobel Prize in Animal Husbandry -->
   <template
