@@ -767,9 +767,11 @@ message LiveConfig {
     optional double video_offer_interval_contract = 3;
     optional double video_offer_interval_piggy_full = 4;
     optional double video_offer_interval_piggy_extra_full = 5;
+    optional bool video_reset_on_idle = 14;
     optional double package_interval_contract = 6;
     optional double package_interval_piggy_full = 7;
     optional double package_interval_piggy_extra_full = 8;
+    optional bool package_reset_on_idle = 13;
   }
 
   optional MiscConfig misc_config = 4;
@@ -1093,6 +1095,7 @@ message CraftArtifactRequest {
   optional ArtifactSpec spec = 2;
   optional uint64 item_id = 3;
   optional double gold_price_paid = 6;
+  optional uint32 crafting_count = 7;
   repeated ArtifactInventoryItem ingredients = 4;
 }
 
