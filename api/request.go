@@ -130,27 +130,32 @@ func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Mes
 	if !(resp.StatusCode >= 200 && resp.StatusCode < 300) {
 		return errors.Errorf("POST %s: HTTP %d: %#v", apiUrl, resp.StatusCode, string(body))
 	}
-	respBinBuf := make([]byte, enc.DecodedLen(len(body)))
-	n, err := enc.Decode(respBinBuf, body)
+	return DecodeAPIResponse(apiUrl, body, respMsg, authenticated)
+}
+
+func DecodeAPIResponse(apiUrl string, payload []byte, msg proto.Message, authenticated bool) error {
+	enc := base64.StdEncoding
+	buf := make([]byte, enc.DecodedLen(len(payload)))
+	n, err := enc.Decode(buf, payload)
 	if err != nil {
-		return errors.Wrapf(err, "base64 decoding %s reponse (%#v)", apiUrl, string(body))
+		return errors.Wrapf(err, "base64 decoding %s reponse (%#v)", apiUrl, string(payload))
 	}
 	if authenticated {
 		authMsg := &AuthenticatedMessage{}
-		err = proto.Unmarshal(respBinBuf[:n], authMsg)
+		err = proto.Unmarshal(buf[:n], authMsg)
 		if err != nil {
-			err = errors.Wrapf(err, "unmarshaling %s response as AuthenticatedMessage (%#v)", apiUrl, string(body))
+			err = errors.Wrapf(err, "unmarshaling %s response as AuthenticatedMessage (%#v)", apiUrl, string(payload))
 			return interpretUnmarshalError(err)
 		}
-		err = proto.Unmarshal(authMsg.Message, respMsg)
+		err = proto.Unmarshal(authMsg.Message, msg)
 		if err != nil {
-			err = errors.Wrapf(err, "unmarshaling AuthenticatedMessage payload in %s response (%#v)", apiUrl, string(body))
+			err = errors.Wrapf(err, "unmarshaling AuthenticatedMessage payload in %s response (%#v)", apiUrl, string(payload))
 			return interpretUnmarshalError(err)
 		}
 	} else {
-		err = proto.Unmarshal(respBinBuf[:n], respMsg)
+		err = proto.Unmarshal(buf[:n], msg)
 		if err != nil {
-			err = errors.Wrapf(err, "unmarshaling %s response (%#v)", apiUrl, string(body))
+			err = errors.Wrapf(err, "unmarshaling %s response (%#v)", apiUrl, string(payload))
 			return interpretUnmarshalError(err)
 		}
 	}
