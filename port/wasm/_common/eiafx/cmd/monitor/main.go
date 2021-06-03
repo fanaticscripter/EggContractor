@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"io/ioutil"
 
 	"github.com/google/go-cmp/cmp"
@@ -10,10 +11,12 @@ import (
 	"google.golang.org/protobuf/testing/protocmp"
 
 	"github.com/fanaticscripter/EggContractor/api"
-	"github.com/fanaticscripter/EggContractor/port/wasm/_common/eiafx"
 )
 
-const _dataFilePath = "eiafx-config.json"
+const (
+	_rawDataFilePath  = "eiafx-config.txt"
+	_jsonDataFilePath = "eiafx-config.json"
+)
 
 func main() {
 	var errorOnDiff bool
@@ -22,11 +25,21 @@ func main() {
 	flag.Parse()
 
 	log.SetLevel(log.InfoLevel)
-	err := eiafx.LoadConfig()
+
+	cachedRaw, err := ioutil.ReadFile(_rawDataFilePath)
 	if err != nil {
-		log.Fatalf("error loading cached config: %s", err)
+		log.Fatalf("error reading cached config: %s", err)
 	}
-	existingConfig := eiafx.Config
+	existingConfig := &api.ArtifactsConfigurationResponse{}
+	err = api.DecodeAPIResponse("/ei_afx/config", cachedRaw, existingConfig, true)
+	if err != nil {
+		log.Fatalf("error decoding cached config: %s", err)
+	}
+
+	cachedJson, err := ioutil.ReadFile(_jsonDataFilePath)
+	if err != nil {
+		log.Fatalf("error reading cached JSON config: %s", err)
+	}
 
 	req := &api.ArtifactsConfigurationRequestPayload{
 		ClientVersion: api.ClientVersion,
@@ -37,7 +50,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	if diff := cmp.Diff(config, existingConfig, protocmp.Transform()); diff != "" {
+	if diff := cmp.Diff(existingConfig, config, protocmp.Transform()); diff != "" {
 		reportFunc := log.Warnf
 		if errorOnDiff {
 			reportFunc = log.Fatalf
@@ -45,19 +58,34 @@ func main() {
 		reportFunc("config has diverged from cached version: %s", diff)
 	} else {
 		log.Info("config has not changed")
-		return
 	}
 
-	marshaller := protojson.MarshalOptions{
-		Indent: "  ",
-	}
-	encoded, err := marshaller.Marshal(config)
+	// Marshal with protojson first, then marshal with json.MarshalIndent again
+	// to remove protojson-introduced indeterminism (double spaces in some
+	// places).
+	encoded, err := protojson.Marshal(config)
 	if err != nil {
 		log.Fatalf("error marshalling %+v: %s", config, err)
 	}
-	err = ioutil.WriteFile(_dataFilePath, encoded, 0o644)
+	var rawJson json.RawMessage = encoded
+	encoded, err = json.MarshalIndent(rawJson, "", "  ")
 	if err != nil {
-		log.Fatalf("error writing to %s: %s", _dataFilePath, err)
+		log.Fatalf("error re-marshalling %+v: %s", config, err)
 	}
-	log.Infof("config written to %s", _dataFilePath)
+	encoded = append(encoded, '\n')
+
+	if diff := cmp.Diff(cachedJson, encoded); diff != "" {
+		if errorOnDiff {
+			log.Fatalf("JSON-encoded config has diverged from cached version: %s", diff)
+		}
+	} else {
+		log.Info("JSON-encoded config has not changed")
+		return
+	}
+
+	err = ioutil.WriteFile(_jsonDataFilePath, encoded, 0o644)
+	if err != nil {
+		log.Fatalf("error writing to %s: %s", _jsonDataFilePath, err)
+	}
+	log.Infof("config written to %s", _jsonDataFilePath)
 }
