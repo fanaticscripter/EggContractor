@@ -411,10 +411,10 @@ func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
 				return err
 			}
 
-			pageSize := 60
+			pageSize := 1080 // 36 hours at 2 min per refresh
 			offset := 0
 			lastStatusUpdateTime := refreshTime
-			for len(unaccountedForMembers) > 0 {
+			for len(unaccountedForMembers) > 0 && offset < 2160 {
 				rows, err := tx.Query(`SELECT timestamp, status FROM coop_status
 					WHERE coop_status.coop_id = ? AND timestamp < ?
 					ORDER BY timestamp DESC LIMIT ? OFFSET ?`,
@@ -472,8 +472,11 @@ func GetCoopMemberActivityStats(c *coop.CoopStatus, refreshTime time.Time) (
 						delete(unaccountedForMembers, m.Id)
 					}
 					lastStatusUpdateTime = util.DoubleToTime(timestamp)
+					if len(unaccountedForMembers) == 0 {
+						break
+					}
 				}
-				if numRows < pageSize {
+				if len(unaccountedForMembers) == 0 || numRows < pageSize {
 					break
 				}
 				offset += pageSize
