@@ -71,9 +71,9 @@ const HIDE_FULL_LOCALSTORAGE_KEY = "hide_full";
   const hideSolosCheckbox = document.getElementById("hide_solos");
   if (hideSolosCheckbox) {
     const updateHideSolos = () => {
-      hideFull = hideSolosCheckbox.checked;
-      replaceStateSetQueryParam(HIDE_SOLOS_QUERY_PARAM_KEY, hideFull ? 1 : null);
-      setLocalStorage(HIDE_SOLOS_LOCALSTORAGE_KEY, hideFull);
+      hideSolos = hideSolosCheckbox.checked;
+      replaceStateSetQueryParam(HIDE_SOLOS_QUERY_PARAM_KEY, hideSolos ? 1 : null);
+      setLocalStorage(HIDE_SOLOS_LOCALSTORAGE_KEY, hideSolos);
     };
 
     hideSolosCheckbox.addEventListener("change", () => {
