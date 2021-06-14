@@ -14,6 +14,7 @@
         {{end}}
         {{template "auto_refresh_toggle"}}
         {{template "hide_solos_toggle" .HideSolos}}
+        {{template "hide_full_toggle" .HideFull}}
         {{template "contract_filter" .ContractFilterConfig}}
       </div>
       {{range .Statuses}}{{template "solo_coop" .}}{{end}}

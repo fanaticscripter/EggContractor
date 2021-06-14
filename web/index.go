@@ -25,6 +25,7 @@ type indexPayload struct {
 	Statuses             []*SoloCoopStatus
 	ContractFilterConfig ContractFilterConfig
 	HideSolos            bool
+	HideFull             bool
 
 	Peeker *peekerPayload
 }
@@ -70,12 +71,13 @@ func indexHandler(c echo.Context) error {
 
 	contractFilter := c.QueryParam("c")
 	hideSolos := c.QueryParam("hide_solos") != ""
+	hideFull := c.QueryParam("hide_full") != ""
 
-	payload := getIndexPayload(byThisTime, contractFilter, hideSolos)
+	payload := getIndexPayload(byThisTime, contractFilter, hideSolos, hideFull)
 	return c.Render(http.StatusOK, "index.html", payload)
 }
 
-func getIndexPayload(byThisTime time.Time, contractFilter string, hideSolos bool) *indexPayload {
+func getIndexPayload(byThisTime time.Time, contractFilter string, hideSolos bool, hideFull bool) *indexPayload {
 	errs := make([]error, 0)
 	warnings := make([]template.HTML, 0)
 	timestamp, solos, coops, err := db.GetSoloAndCoopStatusesFromRefresh(byThisTime, true)
@@ -221,6 +223,7 @@ func getIndexPayload(byThisTime time.Time, contractFilter string, hideSolos bool
 		Statuses:             statuses,
 		ContractFilterConfig: filterConfig,
 		HideSolos:            hideSolos,
+		HideFull:             hideFull,
 		Peeker:               peeker,
 	}
 }

@@ -1,0 +1,7 @@
+{{- /* The hide_full_toggle template takes a bool for the checked state. */ -}}
+{{define "hide_full_toggle"}}
+  <div class="flex items-center justify-center mt-2">
+    <span class="mr-2">Hide full coops</span>
+    <input id="hide_full" name="hide_full" type="checkbox" class="focus:ring-green-500 h-4 w-4 text-green-500 border-gray-300 rounded" {{if .}}checked{{end}}>
+  </div>
+{{end}}

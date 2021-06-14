@@ -4,7 +4,7 @@
     {{$coop := .}}
     {{$showoffline := hasactivitystats $coop}}
     {{$contract := .Contract}}
-    <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg" data-contract="{{.ContractId}}" data-type="coop" {{if statusisfiltered .}}style="display:none"{{end}}>
+    <div class="my-4 bg-white shadow overflow-hidden sm:rounded-lg" data-contract="{{.ContractId}}" data-type="coop" data-full="{{if gt $contract.MaxCoopSize (.Members | len)}}0{{else}}1{{end}}" {{if statusisfiltered .}}style="display:none"{{end}}>
       <div class="px-4 py-4 sm:px-6 bg-gray-50">
         <div class="-ml-4 -mt-2 flex items-start justify-between flex-wrap sm:flex-nowrap">
           <div class="flex-grow ml-4 mt-2">
