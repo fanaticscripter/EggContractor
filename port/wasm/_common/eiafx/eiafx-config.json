@@ -354,10 +354,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 8.1,
-      "oddsMultiplier": 0.045000000000000005,
-      "value": 380692.5031577948,
-      "craftingPrice": 107517.68681351424,
-      "craftingPriceLow": 10751.768681351425,
+      "oddsMultiplier": 0.03,
+      "value": 466245.57219795085,
+      "craftingPrice": 118146.71134350491,
+      "craftingPriceLow": 11814.671134350492,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -460,10 +460,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 9.8,
-      "oddsMultiplier": 0.09000000000000001,
-      "value": 495249.57447712607,
-      "craftingPrice": 181122.20222075604,
-      "craftingPriceLow": 18112.220222075604,
+      "oddsMultiplier": 0.022500000000000003,
+      "value": 990474.1489542521,
+      "craftingPrice": 254795.56837754766,
+      "craftingPriceLow": 25479.556837754768,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -474,10 +474,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 9.8,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 1566062.6086354076,
-      "craftingPrice": 303491.014661341,
-      "craftingPriceLow": 30349.1014661341,
+      "oddsMultiplier": 0.0045000000000000005,
+      "value": 2214736.6253185226,
+      "craftingPrice": 340327.69773973676,
+      "craftingPriceLow": 34032.769773973676,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -567,10 +567,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 10.9,
-      "oddsMultiplier": 0.06,
-      "value": 852514.7545295405,
-      "craftingPrice": 296955.71642124397,
-      "craftingPriceLow": 29695.5716421244,
+      "oddsMultiplier": 0.018000000000000002,
+      "value": 1556451.2286595704,
+      "craftingPrice": 390707.63392673945,
+      "craftingPriceLow": 39070.76339267394,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -795,10 +795,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 8.9,
-      "oddsMultiplier": 0.09000000000000001,
-      "value": 363878.6756679044,
-      "craftingPrice": 127210.88825380939,
-      "craftingPriceLow": 12721.088825380939,
+      "oddsMultiplier": 0.022500000000000003,
+      "value": 727732.3513358088,
+      "craftingPrice": 178954.0480237371,
+      "craftingPriceLow": 17895.40480237371,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -809,10 +809,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 8.9,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 1150631.350134765,
-      "craftingPrice": 213154.41633279357,
-      "craftingPriceLow": 21315.44163327936,
+      "oddsMultiplier": 0.0064285714285714285,
+      "value": 1361440.7932676645,
+      "craftingPrice": 225713.175270233,
+      "craftingPriceLow": 22571.317527023304,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -916,10 +916,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 12.5,
-      "oddsMultiplier": 0.09000000000000001,
-      "value": 1078948.8337695273,
-      "craftingPrice": 429312.9978566068,
-      "craftingPriceLow": 42931.29978566068,
+      "oddsMultiplier": 0.022500000000000003,
+      "value": 2157872.6675390545,
+      "craftingPrice": 603946.1620801127,
+      "craftingPriceLow": 60394.61620801128,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1023,10 +1023,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 13.1,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 3964145.900045249,
-      "craftingPrice": 846050.2497839301,
-      "craftingPriceLow": 84605.02497839302,
+      "oddsMultiplier": 0.006,
+      "value": 4855061.741906629,
+      "craftingPrice": 906121.6895966304,
+      "craftingPriceLow": 90612.16895966305,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1144,10 +1144,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 12.5,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 3411881.736552599,
-      "craftingPrice": 719372.4051231784,
-      "craftingPriceLow": 71937.24051231785,
+      "oddsMultiplier": 0.006,
+      "value": 4178679.040015639,
+      "craftingPrice": 770449.3313496936,
+      "craftingPriceLow": 77044.93313496937,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1237,10 +1237,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 16.8,
-      "oddsMultiplier": 0.0018000000000000002,
-      "value": 19649613.00783955,
-      "craftingPrice": 2520239.325981542,
-      "craftingPriceLow": 252023.9325981542,
+      "oddsMultiplier": 0.0012000000000000001,
+      "value": 24065757.137559157,
+      "craftingPrice": 2659838.975924153,
+      "craftingPriceLow": 265983.8975924153,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1330,10 +1330,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 14.6,
-      "oddsMultiplier": 0.09000000000000001,
-      "value": 1773429.8170428008,
-      "craftingPrice": 731589.9350691278,
-      "craftingPriceLow": 73158.99350691278,
+      "oddsMultiplier": 0.022500000000000003,
+      "value": 3546834.6340856017,
+      "craftingPrice": 1029184.2206469376,
+      "craftingPriceLow": 102918.42206469376,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1451,10 +1451,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 11.7,
-      "oddsMultiplier": 0.09000000000000001,
-      "value": 873144.128334915,
-      "craftingPrice": 340804.5608651872,
-      "craftingPriceLow": 34080.45608651872,
+      "oddsMultiplier": 0.022500000000000003,
+      "value": 1746263.25666983,
+      "craftingPrice": 479433.9969771763,
+      "craftingPriceLow": 47943.39969771763,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1558,10 +1558,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 9.8,
-      "oddsMultiplier": 0.09000000000000001,
-      "value": 495249.57447712607,
-      "craftingPrice": 181122.20222075604,
-      "craftingPriceLow": 18112.220222075604,
+      "oddsMultiplier": 0.022500000000000003,
+      "value": 990474.1489542521,
+      "craftingPrice": 254795.56837754766,
+      "craftingPriceLow": 25479.556837754768,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1572,10 +1572,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 9.8,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 1566062.6086354076,
-      "craftingPrice": 303491.014661341,
-      "craftingPriceLow": 30349.1014661341,
+      "oddsMultiplier": 0.005,
+      "value": 2101084.9289379898,
+      "craftingPrice": 334728.4079595657,
+      "craftingPriceLow": 33472.840795956574,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1651,10 +1651,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 13.2,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 4061794.9770130236,
-      "craftingPrice": 868510.3380865735,
-      "craftingPriceLow": 86851.03380865736,
+      "oddsMultiplier": 0.005294117647058823,
+      "value": 5295925.1207046425,
+      "craftingPrice": 949212.2622199913,
+      "craftingPriceLow": 94921.22622199914,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1758,10 +1758,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 11.1,
-      "oddsMultiplier": 0.07200000000000001,
-      "value": 824860.3854252809,
-      "craftingPrice": 301602.45588412683,
-      "craftingPriceLow": 30160.245588412683,
+      "oddsMultiplier": 0.014400000000000001,
+      "value": 1844412.9920581675,
+      "craftingPrice": 435279.79379024333,
+      "craftingPriceLow": 43527.979379024335,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1772,10 +1772,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 11.1,
-      "oddsMultiplier": 0.007200000000000001,
-      "value": 2608383.512646741,
-      "craftingPrice": 492851.4895720635,
-      "craftingPriceLow": 49285.14895720635,
+      "oddsMultiplier": 0.004235294117647059,
+      "value": 3400908.4178554867,
+      "craftingPrice": 536924.6231000856,
+      "craftingPriceLow": 53692.46231000857,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1893,10 +1893,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 14.5,
-      "oddsMultiplier": 0.063,
-      "value": 2073540.7208798307,
-      "craftingPrice": 789508.1521106493,
-      "craftingPriceLow": 78950.81521106494,
+      "oddsMultiplier": 0.01909090909090909,
+      "value": 3766753.3639291213,
+      "craftingPrice": 1039891.8413708396,
+      "craftingPriceLow": 103989.18413708397,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -1907,10 +1907,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 14.5,
-      "oddsMultiplier": 0.006299999999999999,
-      "value": 6557057.442146222,
-      "craftingPrice": 1272395.2454049143,
-      "craftingPriceLow": 127239.52454049143,
+      "oddsMultiplier": 0.0039375,
+      "value": 8294087.883519323,
+      "craftingPrice": 1370962.1505129095,
+      "craftingPriceLow": 137096.21505129096,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2000,20 +2000,6 @@
         "rarity": "RARE"
       },
       "baseQuality": 15.2,
-      "oddsMultiplier": 0.045000000000000005,
-      "value": 2852968.852158766,
-      "craftingPrice": 1009032.6171257024,
-      "craftingPriceLow": 100903.26171257025,
-      "craftingPriceDomain": 300,
-      "craftingPriceCurve": 0.2
-    },
-    {
-      "spec": {
-        "name": "SHIP_IN_A_BOTTLE",
-        "level": "GREATER",
-        "rarity": "EPIC"
-      },
-      "baseQuality": 15.2,
       "oddsMultiplier": 0.0045000000000000005,
       "value": 9021825.609396385,
       "craftingPrice": 1575554.896943225,
@@ -2025,13 +2011,27 @@
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
         "level": "GREATER",
+        "rarity": "EPIC"
+      },
+      "baseQuality": 15.2,
+      "oddsMultiplier": 0.0011250000000000001,
+      "value": 18043626.21879277,
+      "craftingPrice": 1916635.2958172602,
+      "craftingPriceLow": 191663.52958172603,
+      "craftingPriceDomain": 300,
+      "craftingPriceCurve": 0.2
+    },
+    {
+      "spec": {
+        "name": "SHIP_IN_A_BOTTLE",
+        "level": "GREATER",
         "rarity": "LEGENDARY"
       },
       "baseQuality": 15.2,
-      "oddsMultiplier": 0.00045000000000000004,
-      "value": 28529463.521587662,
-      "craftingPrice": 2142077.1767607476,
-      "craftingPriceLow": 214207.71767607477,
+      "oddsMultiplier": 0.000375,
+      "value": 31252459.062460795,
+      "craftingPrice": 2186935.1167904404,
+      "craftingPriceLow": 218693.51167904405,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2107,10 +2107,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 17,
-      "oddsMultiplier": 0.006,
-      "value": 11177943.099465642,
-      "craftingPrice": 2190500.99243116,
-      "craftingPriceLow": 219050.099243116,
+      "oddsMultiplier": 0.00075,
+      "value": 31615951.750720005,
+      "craftingPrice": 2935268.9922836637,
+      "craftingPriceLow": 293526.8992283664,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2121,10 +2121,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 17,
-      "oddsMultiplier": 0.0009000000000000001,
-      "value": 28861285.429667264,
-      "craftingPrice": 2869969.122841922,
-      "craftingPriceLow": 286996.9122841922,
+      "oddsMultiplier": 0.00018,
+      "value": 64535765.237060785,
+      "craftingPrice": 3446401.703852121,
+      "craftingPriceLow": 344640.1703852121,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2135,10 +2135,10 @@
         "rarity": "LEGENDARY"
       },
       "baseQuality": 17,
-      "oddsMultiplier": 0.00009,
-      "value": 91267344.10103843,
-      "craftingPrice": 3694657.703802956,
-      "craftingPriceLow": 369465.7703802956,
+      "oddsMultiplier": 0.00007500000000000001,
+      "value": 99978363.86932172,
+      "craftingPrice": 3759957.573244698,
+      "craftingPriceLow": 375995.7573244698,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2214,10 +2214,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 12.5,
-      "oddsMultiplier": 0.045000000000000005,
-      "value": 1525853.7184844401,
-      "craftingPrice": 516629.5799683598,
-      "craftingPriceLow": 51662.95799683598,
+      "oddsMultiplier": 0.011250000000000001,
+      "value": 3051682.4369688802,
+      "craftingPrice": 691262.7441918658,
+      "craftingPriceLow": 69126.27441918658,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2228,10 +2228,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 12.5,
-      "oddsMultiplier": 0.0045000000000000005,
-      "value": 4825119.069706693,
-      "craftingPrice": 806688.9872349314,
-      "craftingPriceLow": 80668.89872349316,
+      "oddsMultiplier": 0.0022500000000000003,
+      "value": 6823738.473105198,
+      "craftingPrice": 894005.5693466844,
+      "craftingPriceLow": 89400.55693466845,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2307,10 +2307,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 15.2,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 6379401.389417111,
-      "craftingPrice": 1405014.6975062075,
-      "craftingPriceLow": 140501.46975062074,
+      "oddsMultiplier": 0.006,
+      "value": 7813133.515615199,
+      "craftingPrice": 1504774.31904237,
+      "craftingPriceLow": 150477.431904237,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2400,10 +2400,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 14.2,
-      "oddsMultiplier": 0.009000000000000001,
-      "value": 5131018.297020096,
-      "craftingPrice": 1115348.0276652183,
-      "craftingPriceLow": 111534.80276652184,
+      "oddsMultiplier": 0.0045000000000000005,
+      "value": 7256345.309091263,
+      "craftingPrice": 1250728.3363683326,
+      "craftingPriceLow": 125072.83363683327,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2507,10 +2507,10 @@
         "rarity": "RARE"
       },
       "baseQuality": 13.5,
-      "oddsMultiplier": 0.045000000000000005,
-      "value": 1951944.048453407,
-      "craftingPrice": 673832.6687644272,
-      "craftingPriceLow": 67383.26687644272,
+      "oddsMultiplier": 0.011250000000000001,
+      "value": 3903863.096906814,
+      "craftingPrice": 901605.2684383809,
+      "craftingPriceLow": 90160.5268438381,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
@@ -2521,10 +2521,10 @@
         "rarity": "EPIC"
       },
       "baseQuality": 13.5,
-      "oddsMultiplier": 0.0045000000000000005,
-      "value": 6172535.001381329,
-      "craftingPrice": 1052154.7678156467,
-      "craftingPriceLow": 105215.47678156468,
+      "oddsMultiplier": 0.0018000000000000002,
+      "value": 9759620.242267035,
+      "craftingPrice": 1202704.2671929123,
+      "craftingPriceLow": 120270.42671929124,
       "craftingPriceDomain": 300,
       "craftingPriceCurve": 0.2
     },
