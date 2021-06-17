@@ -793,6 +793,8 @@ message InGameMail {
   optional uint32 platform = 7;
   repeated string builds = 9;
   optional uint32 min_client_version = 10;
+  optional uint32 max_client_version = 12;
+  optional double min_soul_eggs = 11;
   optional double gold_tip = 6;
 }
 
@@ -824,6 +826,9 @@ message GetPeriodicalsRequest {
 
 message ConfigRequest {
   optional BasicRequestInfo rinfo = 1;
+  optional double soul_eggs = 2;
+  optional bool artifacts_enabled = 3;
+  optional bool fuel_tank_unlocked = 4;
 }
 
 message ConfigResponse {
