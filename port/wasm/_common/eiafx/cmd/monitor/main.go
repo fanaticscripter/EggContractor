@@ -63,7 +63,9 @@ func main() {
 	// Marshal with protojson first, then marshal with json.MarshalIndent again
 	// to remove protojson-introduced indeterminism (double spaces in some
 	// places).
-	encoded, err := protojson.Marshal(config)
+	encoded, err := protojson.MarshalOptions{
+		EmitUnpopulated: true,
+	}.Marshal(config)
 	if err != nil {
 		log.Fatalf("error marshalling %+v: %s", config, err)
 	}

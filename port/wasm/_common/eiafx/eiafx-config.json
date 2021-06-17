@@ -1,25 +1,33 @@
 {
   "missionParameters": [
     {
+      "ship": "CHICKEN_ONE",
       "durations": [
         {
           "durationType": "TUTORIAL",
           "seconds": 60,
           "quality": 0.9,
+          "minQuality": 0,
           "maxQuality": 1.3,
-          "capacity": 4
+          "capacity": 4,
+          "levelCapacityBump": 0,
+          "levelQualityBump": 0
         },
         {
+          "durationType": "SHORT",
           "seconds": 1200,
           "quality": 1,
+          "minQuality": 0,
           "maxQuality": 1.4,
           "capacity": 4,
+          "levelCapacityBump": 0,
           "levelQualityBump": 0.1
         },
         {
           "durationType": "LONG",
           "seconds": 3600,
           "quality": 1.1,
+          "minQuality": 0,
           "maxQuality": 1.7,
           "capacity": 5,
           "levelCapacityBump": 1,
@@ -29,19 +37,24 @@
           "durationType": "EPIC",
           "seconds": 7200,
           "quality": 1.2,
+          "minQuality": 0,
           "maxQuality": 2.2,
           "capacity": 6,
           "levelCapacityBump": 1,
           "levelQualityBump": 0.17
         }
-      ]
+      ],
+      "levelMissionRequirements": [],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "CHICKEN_NINE",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 1800,
           "quality": 1.4,
+          "minQuality": 0,
           "maxQuality": 1.9,
           "capacity": 7,
           "levelCapacityBump": 1,
@@ -51,6 +64,7 @@
           "durationType": "LONG",
           "seconds": 3600,
           "quality": 1.6,
+          "minQuality": 0,
           "maxQuality": 2.35,
           "capacity": 8,
           "levelCapacityBump": 1,
@@ -60,6 +74,7 @@
           "durationType": "EPIC",
           "seconds": 10800,
           "quality": 1.75,
+          "minQuality": 0,
           "maxQuality": 2.7,
           "capacity": 9,
           "levelCapacityBump": 1,
@@ -69,14 +84,17 @@
       "levelMissionRequirements": [
         4,
         10
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "CHICKEN_HEAVY",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 2700,
           "quality": 1.9,
+          "minQuality": 0,
           "maxQuality": 3.1,
           "capacity": 12,
           "levelCapacityBump": 1,
@@ -86,6 +104,7 @@
           "durationType": "LONG",
           "seconds": 5400,
           "quality": 2.1,
+          "minQuality": 0,
           "maxQuality": 3.3,
           "capacity": 14,
           "levelCapacityBump": 2,
@@ -95,6 +114,7 @@
           "durationType": "EPIC",
           "seconds": 14400,
           "quality": 2.4,
+          "minQuality": 0,
           "maxQuality": 3.6,
           "capacity": 15,
           "levelCapacityBump": 2,
@@ -105,14 +125,17 @@
         5,
         15,
         25
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "BCR",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 5400,
           "quality": 2.5,
+          "minQuality": 0,
           "maxQuality": 3.2,
           "capacity": 18,
           "levelCapacityBump": 2,
@@ -122,6 +145,7 @@
           "durationType": "LONG",
           "seconds": 14400,
           "quality": 2.7,
+          "minQuality": 0,
           "maxQuality": 3.6,
           "capacity": 20,
           "levelCapacityBump": 2,
@@ -131,6 +155,7 @@
           "durationType": "EPIC",
           "seconds": 28800,
           "quality": 2.9,
+          "minQuality": 0,
           "maxQuality": 4.2,
           "capacity": 22,
           "levelCapacityBump": 3,
@@ -142,12 +167,14 @@
         15,
         25,
         40
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "MILLENIUM_CHICKEN",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 10800,
           "quality": 3,
           "minQuality": 0.5,
@@ -182,12 +209,14 @@
         25,
         40,
         50
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "CORELLIHEN_CORVETTE",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 14400,
           "quality": 3.5,
           "minQuality": 1.5,
@@ -222,12 +251,14 @@
         25,
         40,
         50
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "GALEGGTICA",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 21600,
           "quality": 4,
           "minQuality": 2,
@@ -263,12 +294,14 @@
         40,
         50,
         60
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "CHICKFIANT",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 28800,
           "quality": 5,
           "minQuality": 3,
@@ -304,12 +337,14 @@
         40,
         50,
         60
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "VOYEGGER",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 43200,
           "quality": 5.8,
           "minQuality": 3.3,
@@ -346,12 +381,14 @@
         50,
         60,
         70
-      ]
+      ],
+      "capacityDEPRECATED": 0
     },
     {
       "ship": "HENERPRISE",
       "durations": [
         {
+          "durationType": "SHORT",
           "seconds": 86400,
           "quality": 6.6,
           "minQuality": 3.8,
@@ -389,12 +426,18 @@
         60,
         70,
         80
-      ]
+      ],
+      "capacityDEPRECATED": 0
     }
   ],
   "artifactParameters": [
     {
-      "spec": {},
+      "spec": {
+        "name": "LUNAR_TOTEM",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
+      },
       "baseQuality": 0.7,
       "oddsMultiplier": 0.9,
       "value": 58.66607397156087,
@@ -405,7 +448,10 @@
     },
     {
       "spec": {
-        "level": "LESSER"
+        "name": "LUNAR_TOTEM",
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.4,
       "oddsMultiplier": 0.9,
@@ -417,8 +463,10 @@
     },
     {
       "spec": {
+        "name": "LUNAR_TOTEM",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.4,
       "oddsMultiplier": 0.03,
@@ -430,7 +478,10 @@
     },
     {
       "spec": {
-        "level": "NORMAL"
+        "name": "LUNAR_TOTEM",
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.2,
       "oddsMultiplier": 0.9,
@@ -442,8 +493,10 @@
     },
     {
       "spec": {
+        "name": "LUNAR_TOTEM",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.2,
       "oddsMultiplier": 0.045000000000000005,
@@ -455,7 +508,10 @@
     },
     {
       "spec": {
-        "level": "GREATER"
+        "name": "LUNAR_TOTEM",
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.1,
       "oddsMultiplier": 0.9,
@@ -467,8 +523,10 @@
     },
     {
       "spec": {
+        "name": "LUNAR_TOTEM",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.1,
       "oddsMultiplier": 0.03,
@@ -480,8 +538,10 @@
     },
     {
       "spec": {
+        "name": "LUNAR_TOTEM",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.1,
       "oddsMultiplier": 0.0036000000000000003,
@@ -493,7 +553,10 @@
     },
     {
       "spec": {
-        "name": "NEODYMIUM_MEDALLION"
+        "name": "NEODYMIUM_MEDALLION",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3,
       "oddsMultiplier": 0.9,
@@ -506,7 +569,9 @@
     {
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 0.9,
@@ -520,7 +585,8 @@
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 0.075,
@@ -533,7 +599,9 @@
     {
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7,
       "oddsMultiplier": 0.9,
@@ -547,7 +615,8 @@
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7,
       "oddsMultiplier": 0.006,
@@ -560,7 +629,9 @@
     {
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.9,
@@ -574,7 +645,8 @@
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.022500000000000003,
@@ -588,7 +660,8 @@
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.0045000000000000005,
@@ -602,7 +675,8 @@
       "spec": {
         "name": "NEODYMIUM_MEDALLION",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.0009000000000000001,
@@ -614,7 +688,10 @@
     },
     {
       "spec": {
-        "name": "BEAK_OF_MIDAS"
+        "name": "BEAK_OF_MIDAS",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.5,
       "oddsMultiplier": 0.9,
@@ -627,7 +704,9 @@
     {
       "spec": {
         "name": "BEAK_OF_MIDAS",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.5,
       "oddsMultiplier": 0.9,
@@ -640,7 +719,9 @@
     {
       "spec": {
         "name": "BEAK_OF_MIDAS",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.7,
       "oddsMultiplier": 0.9,
@@ -654,7 +735,8 @@
       "spec": {
         "name": "BEAK_OF_MIDAS",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.7,
       "oddsMultiplier": 0.08181818181818182,
@@ -667,7 +749,9 @@
     {
       "spec": {
         "name": "BEAK_OF_MIDAS",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.9,
       "oddsMultiplier": 0.9,
@@ -681,7 +765,8 @@
       "spec": {
         "name": "BEAK_OF_MIDAS",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.9,
       "oddsMultiplier": 0.018000000000000002,
@@ -695,7 +780,8 @@
       "spec": {
         "name": "BEAK_OF_MIDAS",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.9,
       "oddsMultiplier": 0.0006,
@@ -707,7 +793,10 @@
     },
     {
       "spec": {
-        "name": "LIGHT_OF_EGGENDIL"
+        "name": "LIGHT_OF_EGGENDIL",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.2,
       "oddsMultiplier": 0.9,
@@ -720,7 +809,9 @@
     {
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.2,
       "oddsMultiplier": 0.9,
@@ -734,7 +825,8 @@
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.2,
       "oddsMultiplier": 0.06,
@@ -747,7 +839,9 @@
     {
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.2,
       "oddsMultiplier": 0.9,
@@ -761,7 +855,8 @@
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.2,
       "oddsMultiplier": 0.09000000000000001,
@@ -774,7 +869,9 @@
     {
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.1,
       "oddsMultiplier": 0.9,
@@ -788,7 +885,8 @@
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.1,
       "oddsMultiplier": 0.009000000000000001,
@@ -802,7 +900,8 @@
       "spec": {
         "name": "LIGHT_OF_EGGENDIL",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.1,
       "oddsMultiplier": 0.0009000000000000001,
@@ -814,7 +913,10 @@
     },
     {
       "spec": {
-        "name": "DEMETERS_NECKLACE"
+        "name": "DEMETERS_NECKLACE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 1.2,
       "oddsMultiplier": 0.9,
@@ -827,7 +929,9 @@
     {
       "spec": {
         "name": "DEMETERS_NECKLACE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.2,
       "oddsMultiplier": 0.9,
@@ -841,7 +945,8 @@
       "spec": {
         "name": "DEMETERS_NECKLACE",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.2,
       "oddsMultiplier": 0.03,
@@ -854,7 +959,9 @@
     {
       "spec": {
         "name": "DEMETERS_NECKLACE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.8,
       "oddsMultiplier": 0.9,
@@ -868,7 +975,8 @@
       "spec": {
         "name": "DEMETERS_NECKLACE",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.8,
       "oddsMultiplier": 0.045000000000000005,
@@ -882,7 +990,8 @@
       "spec": {
         "name": "DEMETERS_NECKLACE",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.8,
       "oddsMultiplier": 0.009000000000000001,
@@ -895,7 +1004,9 @@
     {
       "spec": {
         "name": "DEMETERS_NECKLACE",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.9,
       "oddsMultiplier": 0.9,
@@ -909,7 +1020,8 @@
       "spec": {
         "name": "DEMETERS_NECKLACE",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.9,
       "oddsMultiplier": 0.022500000000000003,
@@ -923,7 +1035,8 @@
       "spec": {
         "name": "DEMETERS_NECKLACE",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.9,
       "oddsMultiplier": 0.0064285714285714285,
@@ -937,7 +1050,8 @@
       "spec": {
         "name": "DEMETERS_NECKLACE",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.9,
       "oddsMultiplier": 0.0009000000000000001,
@@ -949,7 +1063,10 @@
     },
     {
       "spec": {
-        "name": "VIAL_MARTIAN_DUST"
+        "name": "VIAL_MARTIAN_DUST",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 1.75,
       "oddsMultiplier": 0.9,
@@ -962,7 +1079,9 @@
     {
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4.8,
       "oddsMultiplier": 0.9,
@@ -976,7 +1095,8 @@
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4.8,
       "oddsMultiplier": 0.09000000000000001,
@@ -989,7 +1109,9 @@
     {
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.9,
       "oddsMultiplier": 0.9,
@@ -1003,7 +1125,8 @@
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.9,
       "oddsMultiplier": 0.009000000000000001,
@@ -1016,7 +1139,9 @@
     {
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.9,
@@ -1030,7 +1155,8 @@
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.022500000000000003,
@@ -1044,7 +1170,8 @@
       "spec": {
         "name": "VIAL_MARTIAN_DUST",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1056,7 +1183,10 @@
     },
     {
       "spec": {
-        "name": "ORNATE_GUSSET"
+        "name": "ORNATE_GUSSET",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.5,
       "oddsMultiplier": 0.9,
@@ -1069,7 +1199,9 @@
     {
       "spec": {
         "name": "ORNATE_GUSSET",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.3,
       "oddsMultiplier": 0.9,
@@ -1083,7 +1215,8 @@
       "spec": {
         "name": "ORNATE_GUSSET",
         "level": "LESSER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.3,
       "oddsMultiplier": 0.009000000000000001,
@@ -1096,7 +1229,9 @@
     {
       "spec": {
         "name": "ORNATE_GUSSET",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.1,
       "oddsMultiplier": 0.9,
@@ -1110,7 +1245,8 @@
       "spec": {
         "name": "ORNATE_GUSSET",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.1,
       "oddsMultiplier": 0.09000000000000001,
@@ -1123,7 +1259,9 @@
     {
       "spec": {
         "name": "ORNATE_GUSSET",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.1,
       "oddsMultiplier": 0.9,
@@ -1137,7 +1275,8 @@
       "spec": {
         "name": "ORNATE_GUSSET",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.1,
       "oddsMultiplier": 0.006,
@@ -1151,7 +1290,8 @@
       "spec": {
         "name": "ORNATE_GUSSET",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.1,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1163,7 +1303,10 @@
     },
     {
       "spec": {
-        "name": "THE_CHALICE"
+        "name": "THE_CHALICE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4.5,
       "oddsMultiplier": 0.9,
@@ -1176,7 +1319,9 @@
     {
       "spec": {
         "name": "THE_CHALICE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6,
       "oddsMultiplier": 0.9,
@@ -1190,7 +1335,8 @@
       "spec": {
         "name": "THE_CHALICE",
         "level": "LESSER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6,
       "oddsMultiplier": 0.011250000000000001,
@@ -1203,7 +1349,9 @@
     {
       "spec": {
         "name": "THE_CHALICE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.2,
       "oddsMultiplier": 0.9,
@@ -1217,7 +1365,8 @@
       "spec": {
         "name": "THE_CHALICE",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.2,
       "oddsMultiplier": 0.09000000000000001,
@@ -1231,7 +1380,8 @@
       "spec": {
         "name": "THE_CHALICE",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.2,
       "oddsMultiplier": 0.009000000000000001,
@@ -1244,7 +1394,9 @@
     {
       "spec": {
         "name": "THE_CHALICE",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.9,
@@ -1258,7 +1410,8 @@
       "spec": {
         "name": "THE_CHALICE",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.006,
@@ -1272,7 +1425,8 @@
       "spec": {
         "name": "THE_CHALICE",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1284,7 +1438,10 @@
     },
     {
       "spec": {
-        "name": "BOOK_OF_BASAN"
+        "name": "BOOK_OF_BASAN",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8,
       "oddsMultiplier": 0.9,
@@ -1297,7 +1454,9 @@
     {
       "spec": {
         "name": "BOOK_OF_BASAN",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.3,
       "oddsMultiplier": 0.45,
@@ -1310,7 +1469,9 @@
     {
       "spec": {
         "name": "BOOK_OF_BASAN",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.3,
       "oddsMultiplier": 0.27,
@@ -1324,7 +1485,8 @@
       "spec": {
         "name": "BOOK_OF_BASAN",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.3,
       "oddsMultiplier": 0.0027,
@@ -1337,7 +1499,9 @@
     {
       "spec": {
         "name": "BOOK_OF_BASAN",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.8,
       "oddsMultiplier": 0.18000000000000002,
@@ -1351,7 +1515,8 @@
       "spec": {
         "name": "BOOK_OF_BASAN",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.8,
       "oddsMultiplier": 0.0012000000000000001,
@@ -1365,7 +1530,8 @@
       "spec": {
         "name": "BOOK_OF_BASAN",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.8,
       "oddsMultiplier": 0.00018,
@@ -1377,7 +1543,10 @@
     },
     {
       "spec": {
-        "name": "PHOENIX_FEATHER"
+        "name": "PHOENIX_FEATHER",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 0.9,
@@ -1390,7 +1559,9 @@
     {
       "spec": {
         "name": "PHOENIX_FEATHER",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7,
       "oddsMultiplier": 0.9,
@@ -1403,7 +1574,9 @@
     {
       "spec": {
         "name": "PHOENIX_FEATHER",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.4,
       "oddsMultiplier": 0.9,
@@ -1417,7 +1590,8 @@
       "spec": {
         "name": "PHOENIX_FEATHER",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.4,
       "oddsMultiplier": 0.09000000000000001,
@@ -1430,7 +1604,9 @@
     {
       "spec": {
         "name": "PHOENIX_FEATHER",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.6,
       "oddsMultiplier": 0.9,
@@ -1444,7 +1620,8 @@
       "spec": {
         "name": "PHOENIX_FEATHER",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.6,
       "oddsMultiplier": 0.022500000000000003,
@@ -1458,7 +1635,8 @@
       "spec": {
         "name": "PHOENIX_FEATHER",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.6,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1470,7 +1648,10 @@
     },
     {
       "spec": {
-        "name": "TUNGSTEN_ANKH"
+        "name": "TUNGSTEN_ANKH",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2,
       "oddsMultiplier": 0.9,
@@ -1483,7 +1664,9 @@
     {
       "spec": {
         "name": "TUNGSTEN_ANKH",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 0.9,
@@ -1497,7 +1680,8 @@
       "spec": {
         "name": "TUNGSTEN_ANKH",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 0.036000000000000004,
@@ -1510,7 +1694,9 @@
     {
       "spec": {
         "name": "TUNGSTEN_ANKH",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.8,
       "oddsMultiplier": 0.9,
@@ -1524,7 +1710,8 @@
       "spec": {
         "name": "TUNGSTEN_ANKH",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.8,
       "oddsMultiplier": 0.09000000000000001,
@@ -1538,7 +1725,8 @@
       "spec": {
         "name": "TUNGSTEN_ANKH",
         "level": "NORMAL",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.8,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1551,7 +1739,9 @@
     {
       "spec": {
         "name": "TUNGSTEN_ANKH",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.7,
       "oddsMultiplier": 0.9,
@@ -1565,7 +1755,8 @@
       "spec": {
         "name": "TUNGSTEN_ANKH",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.7,
       "oddsMultiplier": 0.022500000000000003,
@@ -1579,7 +1770,8 @@
       "spec": {
         "name": "TUNGSTEN_ANKH",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.7,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1591,7 +1783,10 @@
     },
     {
       "spec": {
-        "name": "AURELIAN_BROOCH"
+        "name": "AURELIAN_BROOCH",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 1.9,
       "oddsMultiplier": 0.9,
@@ -1604,7 +1799,9 @@
     {
       "spec": {
         "name": "AURELIAN_BROOCH",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.9,
       "oddsMultiplier": 0.9,
@@ -1617,7 +1814,9 @@
     {
       "spec": {
         "name": "AURELIAN_BROOCH",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.7,
       "oddsMultiplier": 0.9,
@@ -1631,7 +1830,8 @@
       "spec": {
         "name": "AURELIAN_BROOCH",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.7,
       "oddsMultiplier": 0.09000000000000001,
@@ -1645,7 +1845,8 @@
       "spec": {
         "name": "AURELIAN_BROOCH",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.7,
       "oddsMultiplier": 0.009000000000000001,
@@ -1658,7 +1859,9 @@
     {
       "spec": {
         "name": "AURELIAN_BROOCH",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.9,
@@ -1672,7 +1875,8 @@
       "spec": {
         "name": "AURELIAN_BROOCH",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.022500000000000003,
@@ -1686,7 +1890,8 @@
       "spec": {
         "name": "AURELIAN_BROOCH",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.005,
@@ -1700,7 +1905,8 @@
       "spec": {
         "name": "AURELIAN_BROOCH",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.8,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1712,7 +1918,10 @@
     },
     {
       "spec": {
-        "name": "CARVED_RAINSTICK"
+        "name": "CARVED_RAINSTICK",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4.2,
       "oddsMultiplier": 0.9,
@@ -1725,7 +1934,9 @@
     {
       "spec": {
         "name": "CARVED_RAINSTICK",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.2,
       "oddsMultiplier": 0.9,
@@ -1738,7 +1949,9 @@
     {
       "spec": {
         "name": "CARVED_RAINSTICK",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.8,
       "oddsMultiplier": 0.9,
@@ -1751,7 +1964,9 @@
     {
       "spec": {
         "name": "CARVED_RAINSTICK",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.2,
       "oddsMultiplier": 0.9,
@@ -1765,7 +1980,8 @@
       "spec": {
         "name": "CARVED_RAINSTICK",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.2,
       "oddsMultiplier": 0.005294117647058823,
@@ -1779,7 +1995,8 @@
       "spec": {
         "name": "CARVED_RAINSTICK",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.2,
       "oddsMultiplier": 0.0009000000000000001,
@@ -1791,7 +2008,10 @@
     },
     {
       "spec": {
-        "name": "PUZZLE_CUBE"
+        "name": "PUZZLE_CUBE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 0.5,
       "oddsMultiplier": 0.9,
@@ -1804,7 +2024,9 @@
     {
       "spec": {
         "name": "PUZZLE_CUBE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.6,
       "oddsMultiplier": 0.9,
@@ -1818,7 +2040,8 @@
       "spec": {
         "name": "PUZZLE_CUBE",
         "level": "LESSER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.6,
       "oddsMultiplier": 0.011250000000000001,
@@ -1831,7 +2054,9 @@
     {
       "spec": {
         "name": "PUZZLE_CUBE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.8,
       "oddsMultiplier": 0.9,
@@ -1845,7 +2070,8 @@
       "spec": {
         "name": "PUZZLE_CUBE",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.8,
       "oddsMultiplier": 0.09000000000000001,
@@ -1858,7 +2084,9 @@
     {
       "spec": {
         "name": "PUZZLE_CUBE",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.1,
       "oddsMultiplier": 0.7200000000000001,
@@ -1872,7 +2100,8 @@
       "spec": {
         "name": "PUZZLE_CUBE",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.1,
       "oddsMultiplier": 0.014400000000000001,
@@ -1886,7 +2115,8 @@
       "spec": {
         "name": "PUZZLE_CUBE",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.1,
       "oddsMultiplier": 0.004235294117647059,
@@ -1900,7 +2130,8 @@
       "spec": {
         "name": "PUZZLE_CUBE",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.1,
       "oddsMultiplier": 0.00072,
@@ -1912,7 +2143,10 @@
     },
     {
       "spec": {
-        "name": "QUANTUM_METRONOME"
+        "name": "QUANTUM_METRONOME",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.3,
       "oddsMultiplier": 0.9,
@@ -1925,7 +2159,9 @@
     {
       "spec": {
         "name": "QUANTUM_METRONOME",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.2,
       "oddsMultiplier": 0.9,
@@ -1939,7 +2175,8 @@
       "spec": {
         "name": "QUANTUM_METRONOME",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.2,
       "oddsMultiplier": 0.06,
@@ -1952,7 +2189,9 @@
     {
       "spec": {
         "name": "QUANTUM_METRONOME",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.2,
       "oddsMultiplier": 0.9,
@@ -1966,7 +2205,8 @@
       "spec": {
         "name": "QUANTUM_METRONOME",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.2,
       "oddsMultiplier": 0.09000000000000001,
@@ -1980,7 +2220,8 @@
       "spec": {
         "name": "QUANTUM_METRONOME",
         "level": "NORMAL",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.2,
       "oddsMultiplier": 0.011250000000000001,
@@ -1993,7 +2234,9 @@
     {
       "spec": {
         "name": "QUANTUM_METRONOME",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.5,
       "oddsMultiplier": 0.63,
@@ -2007,7 +2250,8 @@
       "spec": {
         "name": "QUANTUM_METRONOME",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.5,
       "oddsMultiplier": 0.01909090909090909,
@@ -2021,7 +2265,8 @@
       "spec": {
         "name": "QUANTUM_METRONOME",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.5,
       "oddsMultiplier": 0.0039375,
@@ -2035,7 +2280,8 @@
       "spec": {
         "name": "QUANTUM_METRONOME",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.5,
       "oddsMultiplier": 0.00063,
@@ -2047,7 +2293,10 @@
     },
     {
       "spec": {
-        "name": "SHIP_IN_A_BOTTLE"
+        "name": "SHIP_IN_A_BOTTLE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.2,
       "oddsMultiplier": 0.9,
@@ -2060,7 +2309,9 @@
     {
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.6,
       "oddsMultiplier": 0.9,
@@ -2073,7 +2324,9 @@
     {
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.8,
       "oddsMultiplier": 0.9,
@@ -2087,7 +2340,8 @@
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.8,
       "oddsMultiplier": 0.09000000000000001,
@@ -2100,7 +2354,9 @@
     {
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.45,
@@ -2114,7 +2370,8 @@
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.0045000000000000005,
@@ -2128,7 +2385,8 @@
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.0011250000000000001,
@@ -2142,7 +2400,8 @@
       "spec": {
         "name": "SHIP_IN_A_BOTTLE",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.000375,
@@ -2154,7 +2413,10 @@
     },
     {
       "spec": {
-        "name": "TACHYON_DEFLECTOR"
+        "name": "TACHYON_DEFLECTOR",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.25,
       "oddsMultiplier": 0.63,
@@ -2167,7 +2429,9 @@
     {
       "spec": {
         "name": "TACHYON_DEFLECTOR",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.25,
       "oddsMultiplier": 0.45,
@@ -2180,7 +2444,9 @@
     {
       "spec": {
         "name": "TACHYON_DEFLECTOR",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13,
       "oddsMultiplier": 0.45,
@@ -2194,7 +2460,8 @@
       "spec": {
         "name": "TACHYON_DEFLECTOR",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13,
       "oddsMultiplier": 0.045000000000000005,
@@ -2207,7 +2474,9 @@
     {
       "spec": {
         "name": "TACHYON_DEFLECTOR",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 17,
       "oddsMultiplier": 0.09000000000000001,
@@ -2221,7 +2490,8 @@
       "spec": {
         "name": "TACHYON_DEFLECTOR",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 17,
       "oddsMultiplier": 0.00075,
@@ -2235,7 +2505,8 @@
       "spec": {
         "name": "TACHYON_DEFLECTOR",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 17,
       "oddsMultiplier": 0.00018,
@@ -2249,7 +2520,8 @@
       "spec": {
         "name": "TACHYON_DEFLECTOR",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 17,
       "oddsMultiplier": 0.00007500000000000001,
@@ -2261,7 +2533,10 @@
     },
     {
       "spec": {
-        "name": "INTERSTELLAR_COMPASS"
+        "name": "INTERSTELLAR_COMPASS",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4.32,
       "oddsMultiplier": 0.9,
@@ -2274,7 +2549,9 @@
     {
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.1,
       "oddsMultiplier": 0.9,
@@ -2287,7 +2564,9 @@
     {
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.7,
       "oddsMultiplier": 0.9,
@@ -2301,7 +2580,8 @@
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.7,
       "oddsMultiplier": 0.09000000000000001,
@@ -2314,7 +2594,9 @@
     {
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.45,
@@ -2328,7 +2610,8 @@
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.011250000000000001,
@@ -2342,7 +2625,8 @@
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.0022500000000000003,
@@ -2356,7 +2640,8 @@
       "spec": {
         "name": "INTERSTELLAR_COMPASS",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 0.00045000000000000004,
@@ -2368,7 +2653,10 @@
     },
     {
       "spec": {
-        "name": "DILITHIUM_MONOCLE"
+        "name": "DILITHIUM_MONOCLE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.45,
       "oddsMultiplier": 0.9,
@@ -2381,7 +2669,9 @@
     {
       "spec": {
         "name": "DILITHIUM_MONOCLE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.75,
       "oddsMultiplier": 0.9,
@@ -2394,7 +2684,9 @@
     {
       "spec": {
         "name": "DILITHIUM_MONOCLE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.7,
       "oddsMultiplier": 0.9,
@@ -2407,7 +2699,9 @@
     {
       "spec": {
         "name": "DILITHIUM_MONOCLE",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.9,
@@ -2421,7 +2715,8 @@
       "spec": {
         "name": "DILITHIUM_MONOCLE",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.006,
@@ -2435,7 +2730,8 @@
       "spec": {
         "name": "DILITHIUM_MONOCLE",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.0009000000000000001,
@@ -2447,7 +2743,10 @@
     },
     {
       "spec": {
-        "name": "TITANIUM_ACTUATOR"
+        "name": "TITANIUM_ACTUATOR",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.5,
       "oddsMultiplier": 0.9,
@@ -2460,7 +2759,9 @@
     {
       "spec": {
         "name": "TITANIUM_ACTUATOR",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.9,
       "oddsMultiplier": 0.9,
@@ -2473,7 +2774,9 @@
     {
       "spec": {
         "name": "TITANIUM_ACTUATOR",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11,
       "oddsMultiplier": 0.9,
@@ -2487,7 +2790,8 @@
       "spec": {
         "name": "TITANIUM_ACTUATOR",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11,
       "oddsMultiplier": 0.09000000000000001,
@@ -2500,7 +2804,9 @@
     {
       "spec": {
         "name": "TITANIUM_ACTUATOR",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.2,
       "oddsMultiplier": 0.9,
@@ -2514,7 +2820,8 @@
       "spec": {
         "name": "TITANIUM_ACTUATOR",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.2,
       "oddsMultiplier": 0.0045000000000000005,
@@ -2528,7 +2835,8 @@
       "spec": {
         "name": "TITANIUM_ACTUATOR",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.2,
       "oddsMultiplier": 0.0009000000000000001,
@@ -2540,7 +2848,10 @@
     },
     {
       "spec": {
-        "name": "MERCURYS_LENS"
+        "name": "MERCURYS_LENS",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.3,
       "oddsMultiplier": 0.9,
@@ -2553,7 +2864,9 @@
     {
       "spec": {
         "name": "MERCURYS_LENS",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.7,
       "oddsMultiplier": 0.9,
@@ -2567,7 +2880,8 @@
       "spec": {
         "name": "MERCURYS_LENS",
         "level": "LESSER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.7,
       "oddsMultiplier": 0.09000000000000001,
@@ -2580,7 +2894,9 @@
     {
       "spec": {
         "name": "MERCURYS_LENS",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.2,
       "oddsMultiplier": 0.9,
@@ -2594,7 +2910,8 @@
       "spec": {
         "name": "MERCURYS_LENS",
         "level": "NORMAL",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.2,
       "oddsMultiplier": 0.09000000000000001,
@@ -2607,7 +2924,9 @@
     {
       "spec": {
         "name": "MERCURYS_LENS",
-        "level": "GREATER"
+        "level": "GREATER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.5,
       "oddsMultiplier": 0.45,
@@ -2621,7 +2940,8 @@
       "spec": {
         "name": "MERCURYS_LENS",
         "level": "GREATER",
-        "rarity": "RARE"
+        "rarity": "RARE",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.5,
       "oddsMultiplier": 0.011250000000000001,
@@ -2635,7 +2955,8 @@
       "spec": {
         "name": "MERCURYS_LENS",
         "level": "GREATER",
-        "rarity": "EPIC"
+        "rarity": "EPIC",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.5,
       "oddsMultiplier": 0.0018000000000000002,
@@ -2649,7 +2970,8 @@
       "spec": {
         "name": "MERCURYS_LENS",
         "level": "GREATER",
-        "rarity": "LEGENDARY"
+        "rarity": "LEGENDARY",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.5,
       "oddsMultiplier": 0.00045000000000000004,
@@ -2661,7 +2983,10 @@
     },
     {
       "spec": {
-        "name": "TACHYON_STONE"
+        "name": "TACHYON_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.25,
       "oddsMultiplier": 0.1,
@@ -2674,7 +2999,9 @@
     {
       "spec": {
         "name": "TACHYON_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.85,
       "oddsMultiplier": 0.1,
@@ -2687,7 +3014,9 @@
     {
       "spec": {
         "name": "TACHYON_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.85,
       "oddsMultiplier": 0.1,
@@ -2699,7 +3028,10 @@
     },
     {
       "spec": {
-        "name": "DILITHIUM_STONE"
+        "name": "DILITHIUM_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7,
       "oddsMultiplier": 0.1,
@@ -2712,7 +3044,9 @@
     {
       "spec": {
         "name": "DILITHIUM_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 10.25,
       "oddsMultiplier": 0.1,
@@ -2725,7 +3059,9 @@
     {
       "spec": {
         "name": "DILITHIUM_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 16.85,
       "oddsMultiplier": 0.1,
@@ -2737,7 +3073,10 @@
     },
     {
       "spec": {
-        "name": "SHELL_STONE"
+        "name": "SHELL_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.95,
       "oddsMultiplier": 0.1,
@@ -2750,7 +3089,9 @@
     {
       "spec": {
         "name": "SHELL_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.85,
       "oddsMultiplier": 0.1,
@@ -2763,7 +3104,9 @@
     {
       "spec": {
         "name": "SHELL_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.85,
       "oddsMultiplier": 0.1,
@@ -2775,7 +3118,10 @@
     },
     {
       "spec": {
-        "name": "LUNAR_STONE"
+        "name": "LUNAR_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.15,
       "oddsMultiplier": 0.1,
@@ -2788,7 +3134,9 @@
     {
       "spec": {
         "name": "LUNAR_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.25,
       "oddsMultiplier": 0.1,
@@ -2801,7 +3149,9 @@
     {
       "spec": {
         "name": "LUNAR_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.25,
       "oddsMultiplier": 0.1,
@@ -2813,7 +3163,10 @@
     },
     {
       "spec": {
-        "name": "SOUL_STONE"
+        "name": "SOUL_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.1,
       "oddsMultiplier": 0.1,
@@ -2826,7 +3179,9 @@
     {
       "spec": {
         "name": "SOUL_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.1,
       "oddsMultiplier": 0.05,
@@ -2839,7 +3194,9 @@
     {
       "spec": {
         "name": "SOUL_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.1,
       "oddsMultiplier": 0.04000000000000001,
@@ -2851,7 +3208,10 @@
     },
     {
       "spec": {
-        "name": "PROPHECY_STONE"
+        "name": "PROPHECY_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.5,
       "oddsMultiplier": 0.05,
@@ -2864,7 +3224,9 @@
     {
       "spec": {
         "name": "PROPHECY_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.8,
       "oddsMultiplier": 0.03,
@@ -2877,7 +3239,9 @@
     {
       "spec": {
         "name": "PROPHECY_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 17.2,
       "oddsMultiplier": 0.020000000000000004,
@@ -2889,7 +3253,10 @@
     },
     {
       "spec": {
-        "name": "QUANTUM_STONE"
+        "name": "QUANTUM_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.5,
       "oddsMultiplier": 0.1,
@@ -2902,7 +3269,9 @@
     {
       "spec": {
         "name": "QUANTUM_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.45,
       "oddsMultiplier": 0.1,
@@ -2915,7 +3284,9 @@
     {
       "spec": {
         "name": "QUANTUM_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.7,
       "oddsMultiplier": 0.1,
@@ -2927,7 +3298,10 @@
     },
     {
       "spec": {
-        "name": "TERRA_STONE"
+        "name": "TERRA_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5.1,
       "oddsMultiplier": 0.1,
@@ -2940,7 +3314,9 @@
     {
       "spec": {
         "name": "TERRA_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 7.8,
       "oddsMultiplier": 0.1,
@@ -2953,7 +3329,9 @@
     {
       "spec": {
         "name": "TERRA_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 14.9,
       "oddsMultiplier": 0.1,
@@ -2965,7 +3343,10 @@
     },
     {
       "spec": {
-        "name": "LIFE_STONE"
+        "name": "LIFE_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6,
       "oddsMultiplier": 0.1,
@@ -2978,7 +3359,9 @@
     {
       "spec": {
         "name": "LIFE_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 9.52,
       "oddsMultiplier": 0.1,
@@ -2991,7 +3374,9 @@
     {
       "spec": {
         "name": "LIFE_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 15.2,
       "oddsMultiplier": 0.1,
@@ -3003,7 +3388,10 @@
     },
     {
       "spec": {
-        "name": "CLARITY_STONE"
+        "name": "CLARITY_STONE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8,
       "oddsMultiplier": 0.06999999999999999,
@@ -3016,7 +3404,9 @@
     {
       "spec": {
         "name": "CLARITY_STONE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.2,
       "oddsMultiplier": 0.05,
@@ -3029,7 +3419,9 @@
     {
       "spec": {
         "name": "CLARITY_STONE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 17.5,
       "oddsMultiplier": 0.020000000000000004,
@@ -3041,7 +3433,10 @@
     },
     {
       "spec": {
-        "name": "TACHYON_STONE_FRAGMENT"
+        "name": "TACHYON_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3,
       "oddsMultiplier": 1.3,
@@ -3053,7 +3448,10 @@
     },
     {
       "spec": {
-        "name": "DILITHIUM_STONE_FRAGMENT"
+        "name": "DILITHIUM_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 1.3,
@@ -3065,7 +3463,10 @@
     },
     {
       "spec": {
-        "name": "SHELL_STONE_FRAGMENT"
+        "name": "SHELL_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2,
       "oddsMultiplier": 1.3,
@@ -3077,7 +3478,10 @@
     },
     {
       "spec": {
-        "name": "LUNAR_STONE_FRAGMENT"
+        "name": "LUNAR_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 1.7,
       "oddsMultiplier": 1.9500000000000002,
@@ -3089,7 +3493,10 @@
     },
     {
       "spec": {
-        "name": "SOUL_STONE_FRAGMENT"
+        "name": "SOUL_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4.5,
       "oddsMultiplier": 1.3,
@@ -3101,7 +3508,10 @@
     },
     {
       "spec": {
-        "name": "PROPHECY_STONE_FRAGMENT"
+        "name": "PROPHECY_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.5,
       "oddsMultiplier": 1.3,
@@ -3113,7 +3523,10 @@
     },
     {
       "spec": {
-        "name": "QUANTUM_STONE_FRAGMENT"
+        "name": "QUANTUM_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 1.3,
@@ -3125,7 +3538,10 @@
     },
     {
       "spec": {
-        "name": "TERRA_STONE_FRAGMENT"
+        "name": "TERRA_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 4,
       "oddsMultiplier": 1.3,
@@ -3137,7 +3553,10 @@
     },
     {
       "spec": {
-        "name": "LIFE_STONE_FRAGMENT"
+        "name": "LIFE_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 5,
       "oddsMultiplier": 1.3,
@@ -3149,7 +3568,10 @@
     },
     {
       "spec": {
-        "name": "CLARITY_STONE_FRAGMENT"
+        "name": "CLARITY_STONE_FRAGMENT",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6,
       "oddsMultiplier": 1.3,
@@ -3161,7 +3583,10 @@
     },
     {
       "spec": {
-        "name": "GOLD_METEORITE"
+        "name": "GOLD_METEORITE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 1.8,
       "oddsMultiplier": 6.3,
@@ -3174,7 +3599,9 @@
     {
       "spec": {
         "name": "GOLD_METEORITE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.8,
       "oddsMultiplier": 3.6,
@@ -3187,7 +3614,9 @@
     {
       "spec": {
         "name": "GOLD_METEORITE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 11.85,
       "oddsMultiplier": 2.7,
@@ -3199,7 +3628,10 @@
     },
     {
       "spec": {
-        "name": "TAU_CETI_GEODE"
+        "name": "TAU_CETI_GEODE",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 2.8,
       "oddsMultiplier": 3.6,
@@ -3212,7 +3644,9 @@
     {
       "spec": {
         "name": "TAU_CETI_GEODE",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 8.1,
       "oddsMultiplier": 2.16,
@@ -3225,7 +3659,9 @@
     {
       "spec": {
         "name": "TAU_CETI_GEODE",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 13.8,
       "oddsMultiplier": 2.7,
@@ -3237,7 +3673,10 @@
     },
     {
       "spec": {
-        "name": "SOLAR_TITANIUM"
+        "name": "SOLAR_TITANIUM",
+        "level": "INFERIOR",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 3.2,
       "oddsMultiplier": 3.6,
@@ -3250,7 +3689,9 @@
     {
       "spec": {
         "name": "SOLAR_TITANIUM",
-        "level": "LESSER"
+        "level": "LESSER",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 6.7,
       "oddsMultiplier": 1.9800000000000002,
@@ -3263,7 +3704,9 @@
     {
       "spec": {
         "name": "SOLAR_TITANIUM",
-        "level": "NORMAL"
+        "level": "NORMAL",
+        "rarity": "COMMON",
+        "egg": "INVALID_EGG"
       },
       "baseQuality": 12.5,
       "oddsMultiplier": 3.06,
