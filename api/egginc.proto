@@ -580,8 +580,11 @@ message ArtifactsConfigurationResponse {
       float min_quality = 4;
       float max_quality = 5;
       uint32 capacity = 6;
+      uint32 level_capacity_bump = 7;
+      float level_quality_bump = 8;
     }
 
+    repeated uint32 level_mission_requirements = 4;
     uint32 capacity_DEPRECATED = 2;
   }
 
