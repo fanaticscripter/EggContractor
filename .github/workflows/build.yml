@@ -3,10 +3,6 @@ on:
   push:
   pull_request_target:
   workflow_dispatch:
-  schedule:
-    # Regenerate every day to incorporate updated mission outcome data.
-    # Scheduled after https://github.com/ei-labo/cold-api/blob/f46659b12592200621a2f27adb031e9ed0b87cbf/.github/workflows/build.yml#L5-L6.
-    - cron: "30 3 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,57 +25,6 @@ jobs:
           build-args: |
             BUILD=${{ env.BUILD }}
             GIT_COMMIT=${{ github.sha }}
-
-  # port-wasm:
-  #   runs-on: ubuntu-20.04
-  #   defaults:
-  #     run:
-  #       working-directory: port/wasm
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Set up protoc
-  #       run: |
-  #         sudo apt-get install -y --no-install-recommends protobuf-compiler
-  #         # Install protoc-gen-doc
-  #         basename=protoc-gen-doc-1.4.1.linux-amd64.go1.15.2
-  #         wget https://github.com/pseudomuto/protoc-gen-doc/releases/download/v1.4.1/$basename.tar.gz
-  #         tar xf $basename.tar.gz
-  #         echo "$PWD/$basename" >> $GITHUB_PATH
-  #     - name: Set up Go
-  #       uses: actions/setup-go@v2
-  #       with:
-  #         go-version: "1.16.0"
-  #     - name: Set up Node
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: "14"
-  #     - name: Set up Python
-  #       uses: actions/setup-python@v2
-  #       with:
-  #         python-version: "3.x"
-  #     - name: Initialize dependencies
-  #       run: |
-  #         make init -j1
-  #     - name: Build
-  #       run: |
-  #         make
-  #     - name: Install netlify cli
-  #       run: |
-  #         yarn global add netlify-cli
-  #     - name: Preview
-  #       run: |
-  #         "$(yarn global bin)/netlify" deploy --dir=dist
-  #       env:
-  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WASM_SITE_ID }}
-  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-  #       if: github.ref != 'refs/heads/master'
-  #     - name: Deploy
-  #       run: |
-  #         "$(yarn global bin)/netlify" deploy --dir=dist --prod
-  #       env:
-  #         NETLIFY_SITE_ID: ${{ secrets.NETLIFY_WASM_SITE_ID }}
-  #         NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-  #       if: github.ref == 'refs/heads/master'
 
   ContractAggregator:
     runs-on: ubuntu-latest
