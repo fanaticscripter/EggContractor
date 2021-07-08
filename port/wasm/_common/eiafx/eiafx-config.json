@@ -181,7 +181,7 @@
           "maxQuality": 4.1,
           "capacity": 10,
           "levelCapacityBump": 1,
-          "levelQualityBump": 0.3
+          "levelQualityBump": 0.25
         },
         {
           "durationType": "LONG",
@@ -191,7 +191,7 @@
           "maxQuality": 4.5,
           "capacity": 12,
           "levelCapacityBump": 2,
-          "levelQualityBump": 0.33
+          "levelQualityBump": 0.25
         },
         {
           "durationType": "EPIC",
@@ -201,7 +201,7 @@
           "maxQuality": 5.4,
           "capacity": 14,
           "levelCapacityBump": 2,
-          "levelQualityBump": 0.36
+          "levelQualityBump": 0.25
         }
       ],
       "levelMissionRequirements": [
@@ -222,8 +222,8 @@
           "minQuality": 1.5,
           "maxQuality": 4.3,
           "capacity": 18,
-          "levelCapacityBump": 2,
-          "levelQualityBump": 0.31
+          "levelCapacityBump": 3,
+          "levelQualityBump": 0.27
         },
         {
           "durationType": "LONG",
@@ -232,8 +232,8 @@
           "minQuality": 1.6,
           "maxQuality": 5,
           "capacity": 21,
-          "levelCapacityBump": 2,
-          "levelQualityBump": 0.35
+          "levelCapacityBump": 3,
+          "levelQualityBump": 0.27
         },
         {
           "durationType": "EPIC",
@@ -242,8 +242,8 @@
           "minQuality": 1.75,
           "maxQuality": 5.9,
           "capacity": 24,
-          "levelCapacityBump": 3,
-          "levelQualityBump": 0.37
+          "levelCapacityBump": 4,
+          "levelQualityBump": 0.27
         }
       ],
       "levelMissionRequirements": [
@@ -264,8 +264,8 @@
           "minQuality": 2,
           "maxQuality": 5.2,
           "capacity": 27,
-          "levelCapacityBump": 3,
-          "levelQualityBump": 0.36
+          "levelCapacityBump": 4,
+          "levelQualityBump": 0.28
         },
         {
           "durationType": "LONG",
@@ -274,8 +274,8 @@
           "minQuality": 2.3,
           "maxQuality": 6.1,
           "capacity": 30,
-          "levelCapacityBump": 3,
-          "levelQualityBump": 0.4
+          "levelCapacityBump": 5,
+          "levelQualityBump": 0.28
         },
         {
           "durationType": "EPIC",
@@ -284,8 +284,8 @@
           "minQuality": 2.5,
           "maxQuality": 7.2,
           "capacity": 35,
-          "levelCapacityBump": 4,
-          "levelQualityBump": 0.42
+          "levelCapacityBump": 6,
+          "levelQualityBump": 0.28
         }
       ],
       "levelMissionRequirements": [
@@ -307,8 +307,8 @@
           "minQuality": 3,
           "maxQuality": 7.2,
           "capacity": 20,
-          "levelCapacityBump": 2,
-          "levelQualityBump": 0.4
+          "levelCapacityBump": 3,
+          "levelQualityBump": 0.29
         },
         {
           "durationType": "LONG",
@@ -317,8 +317,8 @@
           "minQuality": 3.2,
           "maxQuality": 8,
           "capacity": 24,
-          "levelCapacityBump": 2,
-          "levelQualityBump": 0.42
+          "levelCapacityBump": 4,
+          "levelQualityBump": 0.29
         },
         {
           "durationType": "EPIC",
@@ -327,8 +327,8 @@
           "minQuality": 3.4,
           "maxQuality": 9.2,
           "capacity": 28,
-          "levelCapacityBump": 3,
-          "levelQualityBump": 0.45
+          "levelCapacityBump": 5,
+          "levelQualityBump": 0.29
         }
       ],
       "levelMissionRequirements": [
@@ -350,8 +350,8 @@
           "minQuality": 3.3,
           "maxQuality": 8.5,
           "capacity": 30,
-          "levelCapacityBump": 3,
-          "levelQualityBump": 0.4
+          "levelCapacityBump": 4,
+          "levelQualityBump": 0.3
         },
         {
           "durationType": "LONG",
@@ -360,8 +360,8 @@
           "minQuality": 3.8,
           "maxQuality": 9.7,
           "capacity": 35,
-          "levelCapacityBump": 4,
-          "levelQualityBump": 0.42
+          "levelCapacityBump": 5,
+          "levelQualityBump": 0.3
         },
         {
           "durationType": "EPIC",
@@ -370,8 +370,8 @@
           "minQuality": 3.9,
           "maxQuality": 12,
           "capacity": 40,
-          "levelCapacityBump": 4,
-          "levelQualityBump": 0.45
+          "levelCapacityBump": 6,
+          "levelQualityBump": 0.3
         }
       ],
       "levelMissionRequirements": [
@@ -394,8 +394,8 @@
           "minQuality": 3.8,
           "maxQuality": 9.5,
           "capacity": 45,
-          "levelCapacityBump": 4,
-          "levelQualityBump": 0.4
+          "levelCapacityBump": 5,
+          "levelQualityBump": 0.31
         },
         {
           "durationType": "LONG",
@@ -404,8 +404,8 @@
           "minQuality": 4.1,
           "maxQuality": 11.5,
           "capacity": 50,
-          "levelCapacityBump": 4,
-          "levelQualityBump": 0.43
+          "levelCapacityBump": 6,
+          "levelQualityBump": 0.31
         },
         {
           "durationType": "EPIC",
@@ -414,8 +414,8 @@
           "minQuality": 4.5,
           "maxQuality": 14,
           "capacity": 56,
-          "levelCapacityBump": 5,
-          "levelQualityBump": 0.47
+          "levelCapacityBump": 7,
+          "levelQualityBump": 0.31
         }
       ],
       "levelMissionRequirements": [
