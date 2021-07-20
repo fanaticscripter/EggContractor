@@ -606,17 +606,45 @@ func InsertEvent(seen time.Time, e *api.Event) error {
 	return transact(
 		action,
 		func(tx *sql.Tx) error {
-			_, err := tx.Exec(`INSERT INTO event(
-				id, event_type, multiplier, message, first_seen_timestamp, last_seen_timestamp, expiry_timestamp
-			) VALUES(?, ?, ?, ?, ?, ?, ?)
-			ON CONFLICT(id) DO UPDATE SET
-				event_type = excluded.event_type,
-				multiplier = excluded.multiplier,
-				message = excluded.message,
-				first_seen_timestamp = min(first_seen_timestamp, excluded.first_seen_timestamp),
-				last_seen_timestamp = max(last_seen_timestamp, excluded.last_seen_timestamp),
-				expiry_timestamp = excluded.expiry_timestamp`,
-				e.Id, e.EventType, e.Multiplier, e.Message, seenTimestamp, seenTimestamp, expiryTimestamp)
+			row := tx.QueryRow(`SELECT rowid, expiry_timestamp FROM event
+				WHERE id = ? AND event_type = ?
+				ORDER BY first_seen_timestamp DESC LIMIT 1`, e.Id, e.EventType)
+			var existingEventRowid int64
+			var existingEventExpiryTimestamp float64
+			var isNewEvent bool
+			err := row.Scan(&existingEventRowid, &existingEventExpiryTimestamp)
+			switch {
+			case err == sql.ErrNoRows:
+				// No event with matching id and event_type exists.
+				isNewEvent = true
+			case err != nil:
+				return err
+			default:
+				// If the recorded event hasn't expired for more than an hour,
+				// consider it the same event. We allow some room in case the
+				// event is extended at the last minute for whatever reason.
+				if existingEventExpiryTimestamp+3600 >= seenTimestamp {
+					isNewEvent = false
+				} else {
+					isNewEvent = true
+				}
+			}
+			if isNewEvent {
+				_, err = tx.Exec(`INSERT INTO event(
+					id, event_type, multiplier, message, first_seen_timestamp, last_seen_timestamp, expiry_timestamp
+				) VALUES(?, ?, ?, ?, ?, ?, ?)`,
+					e.Id, e.EventType, e.Multiplier, e.Message, seenTimestamp, seenTimestamp, expiryTimestamp)
+			} else {
+				_, err = tx.Exec(`UPDATE event
+				SET
+					multiplier = ?,
+					message = ?,
+					first_seen_timestamp = min(first_seen_timestamp, ?),
+					last_seen_timestamp = max(last_seen_timestamp, ?),
+					expiry_timestamp = ?
+				WHERE rowid = ?`,
+					e.Multiplier, e.Message, seenTimestamp, seenTimestamp, expiryTimestamp, existingEventRowid)
+			}
 			if err != nil {
 				return err
 			}
