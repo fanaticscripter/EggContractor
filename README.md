@@ -61,7 +61,7 @@ Disadvantages:
 
 ## Installation & deployment
 
-docker-compose is the recommended method of deployment. Sorry k8s fans.
+docker-compose is the recommended method of deployment. Sorry k8s fans. Currently supported platforms out-of-box: linux/386, linux/amd64,linux/arm/v6, linux/arm/v7, linux/arm64.
 
 `docker-compose.yml`:
 
