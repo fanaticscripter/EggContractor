@@ -1,4 +1,4 @@
-FROM golang:1.16-buster AS builder
+FROM --platform=$BUILDPLATFORM golang:1.16-buster AS builder
 WORKDIR /src
 
 RUN curl -sSL https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
@@ -22,7 +22,7 @@ RUN CGO_ENABLED=1 GOOS=linux go build -a -ldflags "-linkmode external -extldflag
     -X github.com/fanaticscripter/EggContractor/web.AppBuild=$BUILD \
     -X github.com/fanaticscripter/EggContractor/web.GitCommit=$GIT_COMMIT"
 
-FROM scratch
+FROM --platform=$BUILDPLATFORM scratch
 WORKDIR /
 COPY --from=builder /src/EggContractor /
 COPY --from=builder /src/migrations /migrations
