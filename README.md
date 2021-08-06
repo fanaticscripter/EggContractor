@@ -98,13 +98,13 @@ services:
       ofelia.job-exec.refresh.user: 0
       ofelia.job-exec.refresh.command: "/EggContractor refresh --no-display"
       ofelia.job-exec.refresh.save-folder: /logs
-      ofelia.job-exec.refresh.save-only-on-error: true
+      ofelia.job-exec.refresh.save-only-on-error: "true"
       # Scheduling daily database backups.
       ofelia.job-exec.db-backup.schedule: "0 0 0 * * *"
       ofelia.job-exec.db-backup.user: 0
       ofelia.job-exec.db-backup.command: "/EggContractor backup"
       ofelia.job-exec.db-backup.save-folder: /logs
-      ofelia.job-exec.db-backup.save-only-on-error: true
+      ofelia.job-exec.db-backup.save-only-on-error: "true"
 
   ofelia:
     image: mcuadros/ofelia:latest
