@@ -1004,7 +1004,7 @@ func (x *AuthenticatedMessage) GetCode() string {
 	return ""
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/first_contact
+// https://www.auxbrain.com/ei/first_contact
 type FirstContactRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2383,7 +2383,7 @@ func (x *MissionInfo) GetMissionLog() string {
 	return ""
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/coop_status
+// https://www.auxbrain.com/ei/coop_status
 type CoopStatusRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2583,7 +2583,7 @@ func (x *CoopStatus) GetTokenGifts() []*CoopStatus_TokenGift {
 	return nil
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_periodicals
+// https://www.auxbrain.com/ei/get_periodicals
 type GetPeriodicalsRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2917,7 +2917,7 @@ func (x *Event) GetMessage() string {
 	return ""
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei_afx/config
+// https://www.auxbrain.com/ei_afx/config
 type ArtifactsConfigurationRequestPayload struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3028,7 +3028,7 @@ func (x *ArtifactsConfigurationResponse) GetArtifactParameters() []*ArtifactsCon
 	return nil
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_config
+// https://www.auxbrain.com/ei/get_config
 type ConfigRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

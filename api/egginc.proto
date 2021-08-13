@@ -7,7 +7,7 @@ message AuthenticatedMessage {
   string code = 2;
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/first_contact
+// https://www.auxbrain.com/ei/first_contact
 message FirstContactRequestPayload {
   BasicRequestInfo rinfo = 8;
   string ei_user_id = 4;
@@ -465,7 +465,7 @@ message MissionInfo {
   string mission_log = 10;
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/coop_status
+// https://www.auxbrain.com/ei/coop_status
 message CoopStatusRequestPayload {
   string contract_id = 1;
   string code = 2;
@@ -512,7 +512,7 @@ message CoopStatus {
   repeated TokenGift token_gifts = 11;
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_periodicals
+// https://www.auxbrain.com/ei/get_periodicals
 message GetPeriodicalsRequestPayload {
   string user_id = 1;
   bool piggy_full = 2;
@@ -561,7 +561,7 @@ message Event {
   string message = 5;
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei_afx/config
+// https://www.auxbrain.com/ei_afx/config
 message ArtifactsConfigurationRequestPayload {
   BasicRequestInfo rinfo = 2;
   uint32 client_version = 1;
@@ -601,7 +601,7 @@ message ArtifactsConfigurationResponse {
   }
 }
 
-// http://afx-2-dot-auxbrainhome.appspot.com/ei/get_config
+// https://www.auxbrain.com/ei/get_config
 message ConfigRequest {
   BasicRequestInfo rinfo = 1;
 }
