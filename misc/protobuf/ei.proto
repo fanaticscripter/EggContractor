@@ -1149,6 +1149,14 @@ message ConsumeArtifactResponse {
   optional string ei_user_id = 5;
 }
 
+message AuthenticateArtifactResponse {
+  optional bool success = 1;
+  optional uint64 original_item_id = 2;
+  optional bool demote = 3;
+  optional bool delete = 4;
+  optional string ei_user_id = 5;
+}
+
 message SetArtifactRequest {
   optional BasicRequestInfo rinfo = 1;
   optional ArtifactInventoryItem artifact = 2;
