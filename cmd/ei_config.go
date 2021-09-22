@@ -21,7 +21,9 @@ var _eiConfigCommand = &cobra.Command{
 	PreRunE: subcommandPreRunE,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		req := &api.ConfigRequest{
-			Rinfo: api.NewBasicRequestInfo(_config.Players[0].Id),
+			Rinfo:            api.NewBasicRequestInfo(_config.Players[0].Id),
+			ArtifactsEnabled: true,
+			FuelTankUnlocked: true,
 		}
 		config := &api.ConfigResponse{}
 		err := api.RequestAuthenticated("/ei/get_config", req, config)

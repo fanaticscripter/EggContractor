@@ -604,11 +604,15 @@ message ArtifactsConfigurationResponse {
 // https://www.auxbrain.com/ei/get_config
 message ConfigRequest {
   BasicRequestInfo rinfo = 1;
+  double soul_eggs = 2;
+  bool artifacts_enabled = 3;
+  bool fuel_tank_unlocked = 4;
 }
 
 message ConfigResponse {
   LiveConfig live_config = 1;
   MailDB mail_bag = 2;
+  DLCCatalog dlc_catalog = 3;
 }
 
 message LiveConfig {
@@ -668,4 +672,16 @@ message InGameMail {
 
 message MailDB {
   repeated InGameMail mail = 1;
+}
+
+message DLCItem {
+  string name = 1;
+  string directory = 2;
+  string ext = 3;
+  string url = 4;
+  string checksum = 5;
+}
+
+message DLCCatalog {
+  repeated DLCItem items = 1;
 }
