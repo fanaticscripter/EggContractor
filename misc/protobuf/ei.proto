@@ -780,6 +780,7 @@ message LiveConfig {
   optional MiscConfig misc_config = 4;
   message MiscConfig {
     optional bool ask_to_track = 1;
+    optional double ask_to_track_min_soul_eggs = 2;
   }
 }
 
@@ -834,6 +835,7 @@ message ConfigRequest {
 message ConfigResponse {
   optional LiveConfig live_config = 1;
   optional MailDB mail_bag = 2;
+  optional DLCCatalog dlc_catalog = 3;
 }
 
 message AdAttributionRawData {
@@ -1139,6 +1141,7 @@ message ConsumeArtifactRequest {
   optional ArtifactSpec spec = 1;
   optional string artifact_server_id = 5;
   optional uint64 original_item_id = 2;
+  optional uint32 quantity = 6;
 }
 
 message ConsumeArtifactResponse {
@@ -1252,6 +1255,18 @@ message CleanAccountRequest {
 
 message ReturnEDTPayload {
   optional string ei_user_id = 1;
+}
+
+message DLCItem {
+  optional string name = 1;
+  optional string directory = 2;
+  optional string ext = 3;
+  optional string url = 4;
+  optional string checksum = 5;
+}
+
+message DLCCatalog {
+  repeated DLCItem items = 1;
 }
 
 enum Egg {
