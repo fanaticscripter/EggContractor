@@ -781,6 +781,7 @@ message LiveConfig {
   message MiscConfig {
     optional bool ask_to_track = 1;
     optional double ask_to_track_min_soul_eggs = 2;
+    optional string ask_to_track_message = 3;
   }
 }
 
