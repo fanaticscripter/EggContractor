@@ -651,9 +651,18 @@ message LiveConfig {
     double video_offer_interval_contract = 3;
     double video_offer_interval_piggy_full = 4;
     double video_offer_interval_piggy_extra_full = 5;
+    bool video_reset_on_idle = 14;
     double package_interval_contract = 6;
     double package_interval_piggy_full = 7;
     double package_interval_piggy_extra_full = 8;
+    bool package_reset_on_idle = 13;
+  }
+
+  MiscConfig misc_config = 4;
+  message MiscConfig {
+    bool ask_to_track = 1;
+    double ask_to_track_min_soul_eggs = 2;
+    string ask_to_track_message = 3;
   }
 }
 
