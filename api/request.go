@@ -45,6 +45,14 @@ func RequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Messa
 	return doRequestWithContext(ctx, endpoint, reqMsg, respMsg, false)
 }
 
+func RequestRawPayload(endpoint string, reqMsg proto.Message) ([]byte, error) {
+	return RequestRawPayloadWithContext(context.Background(), endpoint, reqMsg)
+}
+
+func RequestRawPayloadWithContext(ctx context.Context, endpoint string, reqMsg proto.Message) ([]byte, error) {
+	return doRequestRawPayloadWithContext(ctx, endpoint, reqMsg)
+}
+
 func RequestAuthenticated(endpoint string, reqMsg proto.Message, respMsg proto.Message) error {
 	return RequestAuthenticatedWithContext(context.Background(), endpoint, reqMsg, respMsg)
 }
@@ -108,11 +116,11 @@ func NewBasicRequestInfo(userId string) *BasicRequestInfo {
 	}
 }
 
-func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message, authenticated bool) error {
+func doRequestRawPayloadWithContext(ctx context.Context, endpoint string, reqMsg proto.Message) ([]byte, error) {
 	apiUrl := _apiPrefix + endpoint
 	reqBin, err := proto.Marshal(reqMsg)
 	if err != nil {
-		return errors.Wrapf(err, "marshaling payload %+v for %s", reqMsg, apiUrl)
+		return nil, errors.Wrapf(err, "marshaling payload %+v for %s", reqMsg, apiUrl)
 	}
 	enc := base64.StdEncoding
 	reqDataEncoded := enc.EncodeToString(reqBin)
@@ -120,17 +128,26 @@ func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Mes
 	log.Debugf("POST %s data=%s", apiUrl, reqDataEncoded)
 	resp, err := ctxhttp.PostForm(ctx, _client, apiUrl, url.Values{"data": {reqDataEncoded}})
 	if err != nil {
-		return errors.Wrapf(err, "POST %s", apiUrl)
+		return nil, errors.Wrapf(err, "POST %s", apiUrl)
 	}
 	defer resp.Body.Close()
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return errors.Wrapf(err, "POST %s", apiUrl)
+		return nil, errors.Wrapf(err, "POST %s", apiUrl)
 	}
 	if !(resp.StatusCode >= 200 && resp.StatusCode < 300) {
-		return errors.Errorf("POST %s: HTTP %d: %#v", apiUrl, resp.StatusCode, string(body))
+		return nil, errors.Errorf("POST %s: HTTP %d: %#v", apiUrl, resp.StatusCode, string(body))
 	}
-	return DecodeAPIResponse(apiUrl, body, respMsg, authenticated)
+	return body, nil
+}
+
+func doRequestWithContext(ctx context.Context, endpoint string, reqMsg proto.Message, respMsg proto.Message, authenticated bool) error {
+	apiUrl := _apiPrefix + endpoint
+	payload, err := doRequestRawPayloadWithContext(ctx, endpoint, reqMsg)
+	if err != nil {
+		return err
+	}
+	return DecodeAPIResponse(apiUrl, payload, respMsg, authenticated)
 }
 
 func DecodeAPIResponse(apiUrl string, payload []byte, msg proto.Message, authenticated bool) error {
