@@ -14,6 +14,7 @@ import (
 )
 
 const (
+	_apiEndpoint      = "/ei_afx/config"
 	_rawDataFilePath  = "eiafx-config.txt"
 	_jsonDataFilePath = "eiafx-config.json"
 )
@@ -31,7 +32,7 @@ func main() {
 		log.Fatalf("error reading cached config: %s", err)
 	}
 	existingConfig := &api.ArtifactsConfigurationResponse{}
-	err = api.DecodeAPIResponse("/ei_afx/config", cachedRaw, existingConfig, true)
+	err = api.DecodeAPIResponse(_apiEndpoint, cachedRaw, existingConfig, true)
 	if err != nil {
 		log.Fatalf("error decoding cached config: %s", err)
 	}
@@ -44,8 +45,12 @@ func main() {
 	req := &api.ArtifactsConfigurationRequestPayload{
 		ClientVersion: api.ClientVersion,
 	}
+	raw, err := api.RequestRawPayload(_apiEndpoint, req)
+	if err != nil {
+		log.Fatal(err)
+	}
 	config := &api.ArtifactsConfigurationResponse{}
-	err = api.RequestAuthenticated("/ei_afx/config", req, config)
+	err = api.DecodeAPIResponse(_apiEndpoint, raw, config, true)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -85,6 +90,11 @@ func main() {
 		return
 	}
 
+	err = ioutil.WriteFile(_rawDataFilePath, raw, 0o644)
+	if err != nil {
+		log.Fatalf("error writing to %s: %s", _rawDataFilePath, err)
+	}
+	log.Infof("raw payload written to %s", _rawDataFilePath)
 	err = ioutil.WriteFile(_jsonDataFilePath, encoded, 0o644)
 	if err != nil {
 		log.Fatalf("error writing to %s: %s", _jsonDataFilePath, err)
