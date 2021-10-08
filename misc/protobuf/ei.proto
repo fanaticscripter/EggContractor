@@ -311,6 +311,8 @@ message EggIncEvent {
   optional string type = 3;
   optional double multiplier = 4;
   optional string subtitle = 5;
+  optional double start_time = 6;
+  optional double duration = 7;
 }
 
 message EggIncCurrentEvents {
@@ -426,6 +428,7 @@ message Contract {
   optional uint32 max_coop_size = 5;
   optional uint32 max_boosts = 12;
   optional double minutes_per_token = 15 [default = 60];
+  optional double start_time = 17;
   optional double expiration_time = 6;
   optional double length_seconds = 7;
   optional double max_soul_eggs = 13;
@@ -782,6 +785,8 @@ message LiveConfig {
     optional bool ask_to_track = 1;
     optional double ask_to_track_min_soul_eggs = 2;
     optional string ask_to_track_message = 3;
+    optional bool ask_to_track_show_pre_dialog = 4;
+    optional bool ask_to_track_after_privacy = 5;
   }
 }
 
@@ -797,6 +802,7 @@ message InGameMail {
   optional uint32 min_client_version = 10;
   optional uint32 max_client_version = 12;
   optional double min_soul_eggs = 11;
+  optional double min_mystical_bonus = 13;
   optional double gold_tip = 6;
 }
 
@@ -822,6 +828,10 @@ message GetPeriodicalsRequest {
   optional double seconds_full_gametime = 5;
   optional uint32 lost_increments = 7;
   optional double soul_eggs = 8;
+  optional double mystical_earnings_mult = 13;
+  optional uint32 eop = 14;
+  optional bool contracts_unlocked = 15;
+  optional bool artifacts_unlocked = 16;
   optional uint32 current_client_version = 10;
   optional bool debug = 11;
 }
