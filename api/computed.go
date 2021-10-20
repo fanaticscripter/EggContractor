@@ -115,6 +115,14 @@ func (c *CoopStatus) DurationUntilCollectionDeadline() time.Duration {
 }
 
 func (c *CoopStatus) IsElite() bool {
+	// EggContractorLeague is 1 for elite, 2 for standard, and 0 for unknown.
+	if c.EggContractorLeague > 0 {
+		return c.EggContractorLeague == 1
+	}
+	// See
+	// https://github.com/fanaticscripter/Egg/blob/58c68ebd66c6b5ffd70fa33373bbabec6fc0e462/eicoop/src/lib/coop.ts#L101-L143
+	// for a more reliable detection algorithm. Can't be bothered to implement
+	// it here though.
 	var belowThresholdCnt, aboveThresholdCnt uint
 	for _, m := range c.Members {
 		if m.EarningBonus() >= EliteEarningBonusThreshold {

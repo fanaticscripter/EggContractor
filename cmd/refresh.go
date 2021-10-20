@@ -289,6 +289,13 @@ func processCoopsFromSaves(refreshId int64, saves []*api.FirstContact_Payload, c
 			if s.DurationUntilCollectionDeadline() < -24*time.Hour {
 				continue
 			}
+			// Store league info in the status.
+			for _, c := range save.Contracts.ActiveContracts {
+				if c.Props.Id == s.ContractId {
+					s.EggContractorLeague = c.League + 1
+					break
+				}
+			}
 			sigs[sig] = struct{}{}
 			savedStatuses = append(savedStatuses, s)
 		}
@@ -318,6 +325,7 @@ func processCoopsFromSaves(refreshId int64, saves []*api.FirstContact_Payload, c
 				log.Errorf("error retrieving status for coop (%s, %s): %s", s.ContractId, s.Code, err)
 				return
 			}
+			status.EggContractorLeague = s.EggContractorLeague
 			resultCh <- result{
 				index:     index,
 				timestamp: now,
