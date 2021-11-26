@@ -218,7 +218,7 @@ func aggregateContractsFromSaves(refreshTime time.Time, saves []*api.FirstContac
 	}
 	existingSigs := make(map[db.ContractSignature]struct{})
 	for _, c := range existingContracts {
-		existingSigs[db.GetContractSignature(c)] = struct{}{}
+		existingSigs[db.GetContractSignature(c.ContractProperties)] = struct{}{}
 	}
 
 	for _, c := range contracts {

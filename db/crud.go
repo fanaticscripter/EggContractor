@@ -21,6 +21,11 @@ type ContractSignature struct {
 	ExpiryMonth int
 }
 
+type Contract struct {
+	*api.ContractProperties
+	RowId int64
+}
+
 func GetContractSignature(c *api.ContractProperties) ContractSignature {
 	expiry := c.ExpiryTime().In(time.UTC)
 	return ContractSignature{
@@ -125,28 +130,32 @@ func GetContract(id string, expiryYear int, expiryMonth int) (*api.ContractPrope
 	return contract, nil
 }
 
-func GetContracts() ([]*api.ContractProperties, error) {
-	contracts := make([]*api.ContractProperties, 0)
+func GetContracts() ([]Contract, error) {
+	contracts := make([]Contract, 0)
 	action := "retrieve contracts"
 	err := transact(
 		action,
 		func(tx *sql.Tx) error {
-			rows, err := tx.Query(`SELECT props FROM contract
+			rows, err := tx.Query(`SELECT id, props FROM contract
 				ORDER BY first_seen_timestamp DESC NULLS LAST, expiry_timestamp DESC, id DESC;`)
 			if err != nil {
 				return err
 			}
 			defer rows.Close()
 			for rows.Next() {
+				var rowid int64
 				var marshalledProps []byte
-				if err := rows.Scan(&marshalledProps); err != nil {
+				if err := rows.Scan(&rowid, &marshalledProps); err != nil {
 					return err
 				}
 				contract := &api.ContractProperties{}
 				if err := proto.Unmarshal(marshalledProps, contract); err != nil {
 					return err
 				}
-				contracts = append(contracts, contract)
+				contracts = append(contracts, Contract{
+					ContractProperties: contract,
+					RowId:              rowid,
+				})
 			}
 			return nil
 		},
@@ -165,7 +174,7 @@ func GetCoopContracts() ([]*api.ContractProperties, error) {
 	coopContracts := make([]*api.ContractProperties, 0)
 	for _, c := range contracts {
 		if c.CoopAllowed {
-			coopContracts = append(coopContracts, c)
+			coopContracts = append(coopContracts, c.ContractProperties)
 		}
 	}
 	return coopContracts, nil
