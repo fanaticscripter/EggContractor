@@ -144,7 +144,10 @@ func getContractsFromDB() ([]*contract, error) {
 		return nil, err
 	}
 	sort.SliceStable(contracts, func(i, j int) bool {
-		return contracts[i].ExpiryTimestamp < contracts[j].ExpiryTimestamp
+		if contracts[i].ExpiryTimestamp != contracts[j].ExpiryTimestamp {
+			return contracts[i].ExpiryTimestamp < contracts[j].ExpiryTimestamp
+		}
+		return contracts[i].RowId < contracts[j].RowId
 	})
 	wrappedContracts := make([]*contract, 0)
 	seenIds := make(map[string]struct{})
@@ -152,7 +155,7 @@ func getContractsFromDB() ([]*contract, error) {
 	for _, c := range contracts {
 		_, isLeggacy := seenIds[c.Id]
 		wrappedContracts = append(wrappedContracts, &contract{
-			ContractProperties: c,
+			ContractProperties: c.ContractProperties,
 			IsLeggacy:          isLeggacy,
 		})
 		seenIds[c.Id] = struct{}{}
