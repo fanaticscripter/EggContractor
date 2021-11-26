@@ -92,7 +92,7 @@ func GetContract(id string, expiryYear int, expiryMonth int) (*api.ContractPrope
 			var row *sql.Row
 			if expiryYear == 0 {
 				row = tx.QueryRow(`SELECT props FROM contract
-					WHERE text_id = ? ORDER BY expiry_year DESC, expiry_month DESC LIMIT 1`,
+					WHERE text_id = ? ORDER BY expiry_year DESC, expiry_month DESC, id DESC LIMIT 1`,
 					id)
 			} else {
 				row = tx.QueryRow(`SELECT props FROM contract
@@ -132,7 +132,7 @@ func GetContracts() ([]*api.ContractProperties, error) {
 		action,
 		func(tx *sql.Tx) error {
 			rows, err := tx.Query(`SELECT props FROM contract
-				ORDER BY first_seen_timestamp DESC NULLS LAST, expiry_timestamp DESC;`)
+				ORDER BY first_seen_timestamp DESC NULLS LAST, expiry_timestamp DESC, id DESC;`)
 			if err != nil {
 				return err
 			}

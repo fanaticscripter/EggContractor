@@ -143,7 +143,7 @@ func getContractsFromDB() ([]*contract, error) {
 	if err != nil {
 		return nil, err
 	}
-	sort.Slice(contracts, func(i, j int) bool {
+	sort.SliceStable(contracts, func(i, j int) bool {
 		return contracts[i].ExpiryTimestamp < contracts[j].ExpiryTimestamp
 	})
 	wrappedContracts := make([]*contract, 0)
@@ -166,7 +166,7 @@ func getContractsFromDB() ([]*contract, error) {
 			c.HasLeggacy = true
 		}
 	}
-	sort.Slice(wrappedContracts, func(i, j int) bool {
+	sort.SliceStable(wrappedContracts, func(i, j int) bool {
 		return wrappedContracts[i].EstimatedOfferingTime().Before(wrappedContracts[j].EstimatedOfferingTime())
 	})
 	return wrappedContracts, nil
