@@ -62,16 +62,16 @@ func init() {
 }
 
 func Numfmt(x float64) string {
-	return numfmt(x, 3, false)
+	return NumfmtFlexible(x, 3, false)
 }
 
 func NumfmtWhole(x float64) string {
-	return numfmt(x, 2, true)
+	return NumfmtFlexible(x, 2, true)
 }
 
-func numfmt(x float64, decimalDigits uint, trimTrailingZeros bool) string {
+func NumfmtFlexible(x float64, decimalDigits uint, trimTrailingZeros bool) string {
 	if x < 0 {
-		return "-" + numfmt(-x, decimalDigits, trimTrailingZeros)
+		return "-" + NumfmtFlexible(-x, decimalDigits, trimTrailingZeros)
 	}
 	if x == 0 {
 		return "0"
