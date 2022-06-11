@@ -23,6 +23,9 @@ const (
 	PlatformString = "IOS"
 )
 
+// Can be overridden.
+var BotName = "EggContractor"
+
 var _apiPrefix = "https://www.auxbrain.com"
 
 var _client *http.Client
@@ -66,11 +69,14 @@ func RequestFirstContact(payload *FirstContactRequestPayload) (*FirstContact, er
 }
 
 func RequestFirstContactWithContext(ctx context.Context, payload *FirstContactRequestPayload) (*FirstContact, error) {
+	// The device_id field is actually bot_name for /ei/bot_first_contact. Bots
+	// self-identify on an honor system.
+	payload.DeviceId = BotName
 	if payload.ClientVersion == 0 {
 		payload.ClientVersion = ClientVersion
 	}
 	resp := &FirstContact{}
-	err := RequestAuthenticatedWithContext(ctx, "/ei/first_contact", payload, resp)
+	err := RequestWithContext(ctx, "/ei/bot_first_contact", payload, resp)
 	if err != nil {
 		return nil, err
 	}
