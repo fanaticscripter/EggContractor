@@ -2,8 +2,6 @@ syntax = "proto2";
 
 package ei;
 
-import "common.proto";
-
 message Backup {
   optional string user_id = 1;
   optional string ei_user_id = 18;
@@ -199,6 +197,7 @@ message Backup {
     optional uint64 friend_rank_pop = 7;
     optional uint64 global_rank = 8;
     optional uint64 global_rank_pop = 9;
+    optional bool challenges_alert = 20;
     optional bool trophy_alert = 11;
     optional bool ar_alert = 12;
     optional bool contracts_alert = 13;
@@ -212,6 +211,7 @@ message Backup {
 
   optional MyContracts contracts = 13;
   optional ArtifactsDB artifacts_db = 15;
+  optional ShellDB shell_db = 24;
   repeated string read_mail_ids = 23;
   optional uint64 checksum = 100;
   optional string signature = 101;
@@ -257,7 +257,7 @@ message EggIncFirstContactRequest {
   optional string device_id = 5;
   optional string username = 6;
   optional uint32 client_version = 2;
-  optional aux.Platform platform = 3;
+  optional Platform platform = 3;
 }
 
 message EggIncFirstContactResponse {
@@ -276,7 +276,7 @@ message EggIncFirstContactResponse {
 }
 
 message EggIncAdConfig {
-  repeated aux.AdNetwork network_priority = 1;
+  repeated AdNetwork network_priority = 1;
 }
 
 message DailyGiftInfo {
@@ -492,7 +492,7 @@ message ContractCoopStatusResponse {
     optional bool active = 4;
     optional bool leech = 16;
     optional bool time_cheat_detected = 7;
-    optional aux.Platform platform = 5;
+    optional Platform platform = 5;
     optional string push_id = 9;
     optional uint32 ban_votes = 10;
     optional bool autojoined = 17;
@@ -578,7 +578,7 @@ message CreateCoopRequest {
   optional double soul_power = 8;
   optional double eop = 11;
   optional uint32 league = 9;
-  optional aux.Platform platform = 6;
+  optional Platform platform = 6;
   optional uint32 client_version = 7;
 }
 
@@ -596,7 +596,7 @@ message JoinCoopRequest {
   optional double soul_power = 8;
   optional double eop = 12;
   optional uint32 league = 9;
-  optional aux.Platform platform = 5;
+  optional Platform platform = 5;
   optional double seconds_remaining = 11;
   optional uint32 client_version = 7;
 }
@@ -620,7 +620,7 @@ message AutoJoinCoopRequest {
   optional double eop = 10;
   optional uint32 league = 8;
   optional double seconds_remaining = 5;
-  optional aux.Platform platform = 6;
+  optional Platform platform = 6;
   optional uint32 client_version = 7;
 }
 
@@ -768,6 +768,15 @@ message LiveConfig {
     optional double gift_mu_min_spent = 10;
     optional double gift_mu_max_spent = 11;
     optional double gift_mu_overall_mult = 12;
+
+    optional GiftMuConfig random_gift_mu_config = 15;
+    message GiftMuConfig {
+      optional double min_spent = 1;
+      optional double max_spent = 2;
+      optional double overall_mult = 3;
+    }
+
+    optional GiftMuConfig video_gift_mu_config = 16;
     optional double package_interval = 1;
     optional double video_offer_interval = 2;
     optional double video_offer_interval_contract = 3;
@@ -1276,8 +1285,148 @@ message DLCItem {
   optional string checksum = 5;
 }
 
+message ShellSpec {
+  optional string identifier = 1;
+
+  optional ShellPiece primary_piece = 12;
+  message ShellPiece {
+    optional AssetType asset_type = 1;
+    optional DLCItem dlc = 2;
+  }
+
+  repeated ShellPiece pieces = 11;
+  optional string name = 3;
+  optional string set_identifier = 13;
+  optional uint32 price = 4;
+  optional uint32 required_eop = 5;
+  optional double required_soul_eggs = 6;
+  optional bool default_appearance = 8;
+
+  enum AssetType {
+    COOP = 1;
+    SHACK = 2;
+    SUPER_SHACK = 3;
+    SHORT_HOUSE = 4;
+    THE_STANDARD = 5;
+    LONG_HOUSE = 6;
+    DOUBLE_DECKER = 7;
+    WAREHOUSE = 8;
+    CENTER = 9;
+    BUNKER = 10;
+    EGGKEA = 11;
+    HAB_1K = 12;
+    HANGAR = 13;
+    TOWER = 14;
+    HAB_10K = 15;
+    EGGTOPIA = 16;
+    MONOLITH = 17;
+    PLANET_PORTAL = 18;
+    CHICKEN_UNIVERSE = 19;
+    SILO_0_SMALL = 50;
+    SILO_0_MED = 51;
+    SILO_0_LARGE = 52;
+    SILO_1_SMALL = 53;
+    SILO_1_MED = 54;
+    SILO_1_LARGE = 55;
+    SILO_ALL = 59;
+    MAILBOX = 70;
+    TROPHY_CASE = 71;
+    GROUND = 72;
+    HARDSCAPE = 73;
+    HYPERLOOP = 74;
+    DEPOT_1 = 100;
+    DEPOT_2 = 101;
+    DEPOT_3 = 102;
+    DEPOT_4 = 103;
+    DEPOT_5 = 104;
+    DEPOT_6 = 105;
+    DEPOT_7 = 106;
+    LAB_1 = 110;
+    LAB_2 = 111;
+    LAB_3 = 112;
+    LAB_4 = 113;
+    LAB_5 = 114;
+    LAB_6 = 115;
+    HATCHERY_EDIBLE = 120;
+    HATCHERY_SUPERFOOD = 121;
+    HATCHERY_MEDICAL = 122;
+    HATCHERY_ROCKET_FUEL = 123;
+    HATCHERY_SUPERMATERIAL = 124;
+    HATCHERY_FUSION = 125;
+    HATCHERY_QUANTUM = 126;
+    HATCHERY_IMMORTALITY = 127;
+    HATCHERY_TACHYON = 128;
+    HATCHERY_GRAVITON = 129;
+    HATCHERY_DILITHIUM = 130;
+    HATCHERY_PRODIGY = 131;
+    HATCHERY_TERRAFORM = 132;
+    HATCHERY_ANTIMATTER = 133;
+    HATCHERY_DARK_MATTER = 134;
+    HATCHERY_AI = 135;
+    HATCHERY_NEBULA = 136;
+    HATCHERY_UNIVERSE = 137;
+    HATCHERY_ENLIGHTENMENT = 138;
+    HATCHERY_CHOCOLATE = 139;
+    HATCHERY_EASTER = 140;
+    HATCHERY_WATERBALLOON = 141;
+    HATCHERY_FIREWORK = 142;
+    HATCHERY_PUMPKIN = 143;
+    HOA_1 = 170;
+    HOA_2 = 171;
+    HOA_3 = 172;
+    MISSION_CONTROL_1 = 180;
+    MISSION_CONTROL_2 = 181;
+    MISSION_CONTROL_3 = 182;
+    HATCHERY_GRAVITON_TOP = 500;
+    HATCHERY_NEBULA_MIDDLE = 501;
+    HATCHERY_NEBULA_TOP = 502;
+    HATCHERY_DARK_MATTER_RING_1 = 505;
+    HATCHERY_DARK_MATTER_RING_2 = 506;
+    HATCHERY_DARK_MATTER_RING_3 = 507;
+    HATCHERY_AI_TOP_1 = 510;
+    HATCHERY_AI_TOP_2 = 511;
+    HATCHERY_AI_TOP_3 = 512;
+    HATCHERY_AI_TOP_4 = 513;
+    HATCHERY_UNIVERSE_PROBE = 515;
+    HATCHERY_UNIVERSE_BOLT = 516;
+    HATCHERY_ENLIGHTENMENT_ORB = 520;
+    HYPERLOOP_TRACK = 570;
+    MAILBOX_FULL = 600;
+    UNKNOWN = 9999;
+  }
+}
+
+message ShellSetSpec {
+  optional string identifier = 1;
+  optional string name = 2;
+  optional uint32 price = 3;
+  optional uint32 required_eop = 4;
+  optional double required_soul_eggs = 5;
+}
+
 message DLCCatalog {
   repeated DLCItem items = 1;
+  repeated ShellSpec shells = 2;
+  repeated ShellSetSpec shell_sets = 3;
+}
+
+message ShellDB {
+  repeated ShellStatus shell_inventory = 1;
+  message ShellStatus {
+    optional string shell_identifier = 1;
+    optional bool owned = 2;
+  }
+
+  repeated FarmConfiguration farm_configs = 3;
+  message FarmConfiguration {
+    repeated ShellConfiguration shell_configs = 1;
+  }
+
+  message ShellConfiguration {
+    optional ShellSpec.AssetType asset_type = 1;
+    optional uint32 index = 2;
+    optional string shell_identifier = 3;
+  }
 }
 
 enum Egg {
@@ -1333,4 +1482,36 @@ enum RewardType {
   ARTIFACT = 11;
   ARTIFACT_CASE = 12;
   UNKNOWN_REWARD = 100;
+}
+
+enum Platform {
+  IOS = 1;
+  DROID = 2;
+}
+
+enum DeviceFormFactor {
+  PHONE = 1;
+  TABLET = 2;
+}
+
+enum AdNetwork {
+  VUNGLE = 0;
+  CHARTBOOST = 1;
+  AD_COLONY = 2;
+  HYPER_MX = 3;
+  UNITY = 4;
+  FACEBOOK = 5;
+  APPLOVIN = 6;
+}
+
+message ABBEntry {
+  optional string filename = 1;
+  optional uint64 offset = 2;
+  optional uint64 size = 3;
+  optional bool compressed = 4;
+  optional uint64 uncompressed_size = 5;
+}
+
+message ABBIndex {
+  repeated ABBEntry entries = 1;
 }
