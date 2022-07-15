@@ -17,9 +17,9 @@ import (
 )
 
 const (
-	AppVersion     = "1.22.9"
-	AppBuild       = "1.22.9.0"
-	ClientVersion  = 37
+	AppVersion     = "1.23.1"
+	AppBuild       = "1.23.1.0"
+	ClientVersion  = 38
 	PlatformString = "IOS"
 )
 
