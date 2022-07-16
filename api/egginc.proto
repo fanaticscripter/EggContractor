@@ -702,4 +702,187 @@ message DLCItem {
 
 message DLCCatalog {
   repeated DLCItem items = 1;
+  repeated ShellSpec shells = 2;
+  repeated ShellSetSpec shell_sets = 3;
+  repeated ShellObjectSpec shell_objects = 4;
+  repeated ShellGroupSpec shell_groups = 5;
+}
+
+message ShellSpec {
+  string identifier = 1;
+
+  ShellPiece primary_piece = 12;
+  message ShellPiece {
+    AssetType asset_type = 1;
+    DLCItem dlc = 2;
+  }
+
+  repeated ShellPiece pieces = 11;
+  string name = 3;
+  string set_identifier = 13;
+  uint32 price = 4;
+  uint32 required_eop = 5;
+  double required_soul_eggs = 6;
+  bool is_new = 14;
+  bool expires = 15;
+  double seconds_remaining = 16;
+  bool default_appearance = 8;
+
+  enum AssetType {
+    INVALID_ASSET_TYPE = 0;  // proto3 requires first enum value to be 0.
+    COOP = 1;
+    SHACK = 2;
+    SUPER_SHACK = 3;
+    SHORT_HOUSE = 4;
+    THE_STANDARD = 5;
+    LONG_HOUSE = 6;
+    DOUBLE_DECKER = 7;
+    WAREHOUSE = 8;
+    CENTER = 9;
+    BUNKER = 10;
+    EGGKEA = 11;
+    HAB_1K = 12;
+    HANGAR = 13;
+    TOWER = 14;
+    HAB_10K = 15;
+    EGGTOPIA = 16;
+    MONOLITH = 17;
+    PLANET_PORTAL = 18;
+    CHICKEN_UNIVERSE = 19;
+    SILO_0_SMALL = 50;
+    SILO_0_MED = 51;
+    SILO_0_LARGE = 52;
+    SILO_1_SMALL = 53;
+    SILO_1_MED = 54;
+    SILO_1_LARGE = 55;
+    SILO_ALL = 59;
+    MAILBOX = 70;
+    TROPHY_CASE = 71;
+    GROUND = 72;
+    HARDSCAPE = 73;
+    HYPERLOOP = 74;
+    DEPOT_1 = 100;
+    DEPOT_2 = 101;
+    DEPOT_3 = 102;
+    DEPOT_4 = 103;
+    DEPOT_5 = 104;
+    DEPOT_6 = 105;
+    DEPOT_7 = 106;
+    LAB_1 = 110;
+    LAB_2 = 111;
+    LAB_3 = 112;
+    LAB_4 = 113;
+    LAB_5 = 114;
+    LAB_6 = 115;
+    HATCHERY_EDIBLE = 120;
+    HATCHERY_SUPERFOOD = 121;
+    HATCHERY_MEDICAL = 122;
+    HATCHERY_ROCKET_FUEL = 123;
+    HATCHERY_SUPERMATERIAL = 124;
+    HATCHERY_FUSION = 125;
+    HATCHERY_QUANTUM = 126;
+    HATCHERY_IMMORTALITY = 127;
+    HATCHERY_TACHYON = 128;
+    HATCHERY_GRAVITON = 129;
+    HATCHERY_DILITHIUM = 130;
+    HATCHERY_PRODIGY = 131;
+    HATCHERY_TERRAFORM = 132;
+    HATCHERY_ANTIMATTER = 133;
+    HATCHERY_DARK_MATTER = 134;
+    HATCHERY_AI = 135;
+    HATCHERY_NEBULA = 136;
+    HATCHERY_UNIVERSE = 137;
+    HATCHERY_ENLIGHTENMENT = 138;
+    HATCHERY_CHOCOLATE = 139;
+    HATCHERY_EASTER = 140;
+    HATCHERY_WATERBALLOON = 141;
+    HATCHERY_FIREWORK = 142;
+    HATCHERY_PUMPKIN = 143;
+    HOA_1 = 170;
+    HOA_2 = 171;
+    HOA_3 = 172;
+    MISSION_CONTROL_1 = 180;
+    MISSION_CONTROL_2 = 181;
+    MISSION_CONTROL_3 = 182;
+    FUEL_TANK_1 = 200;
+    FUEL_TANK_2 = 201;
+    FUEL_TANK_3 = 202;
+    FUEL_TANK_4 = 203;
+    HATCHERY_GRAVITON_TOP = 500;
+    HATCHERY_NEBULA_MIDDLE = 501;
+    HATCHERY_NEBULA_TOP = 502;
+    HATCHERY_DARK_MATTER_RING_1 = 505;
+    HATCHERY_DARK_MATTER_RING_2 = 506;
+    HATCHERY_DARK_MATTER_RING_3 = 507;
+    HATCHERY_AI_TOP_1 = 510;
+    HATCHERY_AI_TOP_2 = 511;
+    HATCHERY_AI_TOP_3 = 512;
+    HATCHERY_AI_TOP_4 = 513;
+    HATCHERY_UNIVERSE_PROBE = 515;
+    HATCHERY_UNIVERSE_BOLT = 516;
+    HATCHERY_ENLIGHTENMENT_ORB = 520;
+    HYPERLOOP_TRACK = 570;
+    MAILBOX_FULL = 600;
+    CHICKEN = 1000;
+    HAT = 1010;
+    UNKNOWN = 9999;
+  }
+}
+
+message ShellSetSpec {
+  string identifier = 1;
+  string name = 2;
+  uint32 price = 3;
+  double price_mult_DEPRECATED = 8;
+  double discount = 17;
+  uint32 required_eop = 4;
+  double required_soul_eggs = 5;
+  bool is_new = 9;
+  bool expires = 10;
+  double seconds_remaining = 11;
+  bool decorator = 14;
+  bool modified_geometry = 13;
+  bool element_set = 7;
+  string hex_base_color = 16;
+
+  repeated VariationInfo variations = 15;
+  message VariationInfo {
+    string identifier = 1;
+    string hex_color = 2;
+    uint32 price = 3;
+  }
+
+  bool default_appearance = 6;
+  bool custom_appearance = 12;
+}
+
+message ShellObjectSpec {
+  string identifier = 1;
+  string name = 2;
+  ShellSpec.AssetType asset_type = 3;
+  string object_class = 14;
+  uint32 price = 4;
+  uint32 required_eop = 5;
+  double required_soul_eggs = 6;
+  bool is_new = 10;
+  bool expires = 11;
+  double seconds_remaining = 12;
+  repeated double metadata = 7;
+  bool no_hats = 13;
+
+  repeated LODPiece pieces = 8;
+  message LODPiece {
+    DLCItem dlc = 1;
+    uint32 lod = 2;
+  }
+
+  bool default_appearance = 9;
+}
+
+message ShellGroupSpec {
+  string identifier = 1;
+  string name = 2;
+  ShellSpec.AssetType asset_type = 5;
+  repeated string member_ids = 3;
+  double price_mult_DEPRECATED = 4;
 }
