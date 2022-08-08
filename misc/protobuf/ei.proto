@@ -137,6 +137,7 @@ message Backup {
     repeated double tank_fuels = 16;
     optional ei.MissionInfo.Spaceship last_fueled_ship = 9;
     optional double inventory_score = 10;
+    optional double crafting_xp = 17;
     optional bool enabled = 11;
     optional bool intro_shown = 12;
     optional bool infusing_enabled_DEPRECATED = 8 [default = true];
@@ -421,6 +422,9 @@ message CurrencyFlowLog {
   optional string location = 5;
   optional string version = 6;
   optional string platform = 7;
+  optional double soul_eggs = 8;
+  optional uint64 tickets_spent = 9;
+  optional uint64 gold_spent = 10;
 }
 
 message CurrencyFlowBatchRequest {
@@ -465,6 +469,7 @@ message Contract {
   optional double length_seconds = 7;
   optional double max_soul_eggs = 13;
   optional uint32 min_client_version = 14;
+  optional bool leggacy = 19;
   optional bool debug = 11;
 }
 
@@ -530,6 +535,7 @@ message PlayerFarmInfo {
   repeated CompleteArtifact equipped_artifacts = 17;
   optional uint64 artifact_inventory_score = 18;
   optional ShellDB.FarmConfiguration farm_appearance = 19;
+  optional double timestamp = 22;
 }
 
 message ContractCoopStatusResponse {
@@ -1193,6 +1199,13 @@ message ArtifactsConfigurationResponse {
     optional double crafting_price_low = 6;
     optional uint32 crafting_price_domain = 7;
     optional double crafting_price_curve = 8;
+    optional uint64 crafting_xp = 9;
+  }
+
+  repeated CraftingLevelInfo crafting_level_infos = 3;
+  message CraftingLevelInfo {
+    optional double xp_required = 1;
+    optional float rarity_mult = 2;
   }
 }
 
@@ -1238,6 +1251,7 @@ message CraftArtifactRequest {
   optional uint64 item_id = 3;
   optional double gold_price_paid = 6;
   optional uint32 crafting_count = 7;
+  optional double crafting_xp = 8;
   repeated ArtifactInventoryItem ingredients = 4;
 }
 
@@ -1254,12 +1268,15 @@ message ConsumeArtifactRequest {
   optional ArtifactSpec spec = 1;
   optional string artifact_server_id = 5;
   optional uint64 original_item_id = 2;
+  repeated string additional_server_ids = 7;
+  repeated uint64 additional_item_ids = 8;
   optional uint32 quantity = 6;
 }
 
 message ConsumeArtifactResponse {
   optional bool success = 1;
   optional uint64 original_item_id = 2;
+  repeated uint64 additional_item_ids = 6;
   repeated ArtifactSpec byproducts = 3;
   repeated Reward other_rewards = 4;
   optional string ei_user_id = 5;
@@ -1302,18 +1319,21 @@ message ArtifactsDB {
     repeated ActiveArtifactSlot slots = 1;
   }
 
-  repeated ArtifactSpec discovered_artifacts = 8;
-
-  repeated CraftableArtifact craftable_artifacts = 9;
+  repeated CraftableArtifact artifact_status = 12;
   message CraftableArtifact {
     optional ArtifactSpec spec = 1;
+    optional bool discovered = 6;
+    optional bool craftable = 4;
+    optional bool recipe_discovered = 5;
     optional bool seen = 2;
     optional uint32 count = 3;
   }
 
-  repeated CraftableArtifact crafting_counts = 10;
   repeated MissionInfo mission_infos = 4;
   repeated MissionInfo mission_archive = 5;
+  repeated ArtifactSpec discovered_artifacts_DEPRECATED = 8;
+  repeated CraftableArtifact craftable_artifacts_DEPRECATED = 9;
+  repeated CraftableArtifact crafting_counts_DEPRECATED = 10;
 }
 
 message AuthenticatedMessage {
@@ -1517,11 +1537,14 @@ message ShellSetSpec {
   optional bool element_set = 7;
   optional string hex_base_color = 16;
 
-  repeated VariationInfo variations = 15;
-  message VariationInfo {
+  repeated VariationSpec variations = 15;
+  message VariationSpec {
     optional string identifier = 1;
     optional string hex_color = 2;
     optional uint32 price = 3;
+    optional int32 sort_priority = 6;
+    optional bool default_appearance = 4;
+    optional bool custom_appearance = 5;
   }
 
   optional bool default_appearance = 6;
@@ -1533,6 +1556,7 @@ message ShellObjectSpec {
   optional string name = 2;
   optional ShellSpec.AssetType asset_type = 3;
   optional string object_class = 14;
+  repeated string icon_colors = 15;
   optional uint32 price = 4;
   optional uint32 required_eop = 5;
   optional double required_soul_eggs = 6;
@@ -1541,6 +1565,21 @@ message ShellObjectSpec {
   optional double seconds_remaining = 12;
   repeated double metadata = 7;
   optional bool no_hats = 13;
+
+  optional ChickenAnimation chicken_animation = 16;
+  enum ChickenAnimation {
+    STANDARD_RUN = 0;
+    SLOWMO = 7;
+    WOBBLE = 1;
+    WOBBLE_LEAN = 5;
+    SMOOTH = 2;
+    SMOOTH_LEAN = 6;
+    HOVER = 3;
+    SIDEWAYS_SMOOTH = 4;
+    SIDEWAYS_LEAN = 8;
+  }
+
+  optional int32 sort_priority = 17;
 
   repeated LODPiece pieces = 8;
   message LODPiece {
@@ -1655,6 +1694,9 @@ message ShellsActionLog {
   optional double approx_time = 5;
   optional string version = 6;
   optional int32 farm_index = 7;
+  optional double soul_eggs = 10;
+  optional uint64 tickets_spent = 11;
+  optional uint64 gold_spent = 12;
 }
 
 enum Egg {
